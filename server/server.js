@@ -1,14 +1,13 @@
 import express from 'express';
 var bodyParser = require('body-parser');
 var webpack = require('webpack');
-
-import Hello from './app/components/Hello';
+var path = require('path');
 
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
-import { RouterContext, match } from 'react-router'
+import { RouterContext, match } from 'react-router';
 
-var config = require('./webpack.config');
+var config = require('../webpack.config');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 
@@ -19,7 +18,7 @@ app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output
 app.use(webpackHotMiddleware(compiler));
 
 app.get('/', (req, res) => {
-  res.send('hello world! Here\'s MERN');
+  res.sendFile(path.resolve('./index.html'));
 });
 
 app.get('/react', (req, res) => {

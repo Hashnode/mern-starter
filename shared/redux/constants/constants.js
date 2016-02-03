@@ -1,1 +1,2 @@
 export const ADD_POST = 'ADD_POST';
+export const CHANGE_SELECTED_POST = 'CHANGE_SELECTED_POST';

@@ -4,3 +4,4 @@ npm-debug.log
 .idea/
 dump.rdb
 .vscode/
+public/*

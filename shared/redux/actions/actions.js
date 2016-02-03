@@ -9,3 +9,10 @@ export function addPost(name, title, content) {
     content,
   };
 }
+
+export function changeSelectedPost(title) {
+  return {
+    type: ActionTypes.CHANGE_SELECTED_POST,
+    title,
+  };
+}

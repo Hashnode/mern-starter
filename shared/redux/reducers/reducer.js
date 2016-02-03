@@ -1,6 +1,6 @@
 import * as ActionTypes from '../constants/constants';
 
-const initialState = { posts: [] };
+const initialState = { posts: [], selectedPost: null };
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,6 +11,12 @@ const postReducer = (state = initialState, action) => {
           title: action.title,
           content: action.content,
         }) };
+
+    case ActionTypes.CHANGE_SELECTED_POST :
+      return {
+        posts: state.posts,
+        selectedPost: action.title,
+      };
     default:
       return state;
   }
