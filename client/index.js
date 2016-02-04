@@ -1,5 +1,5 @@
 /* eslint no-unused-vars: 0 */
-import { createStore } from 'redux';
+import { configureStore } from '../shared/redux/store/configureStore';
 import { Provider } from 'react-redux';
 import postReducer from '../shared/redux/reducers/reducer';
 import { render } from 'react-dom';
@@ -10,7 +10,7 @@ import PostDetailView from '../shared/container/PostDetailView/PostDetailView';
 import { Router, browserHistory, Route, IndexRoute } from 'react-router';
 import routes from '../shared/routes';
 
-const store = createStore(postReducer);
+const store = configureStore(window.__INITIAL_STATE__);
 
 
 render((

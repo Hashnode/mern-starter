@@ -27,7 +27,7 @@ class PostListItem extends Component {
    return (
       <div>
         <span>Name: {this.props.post.name}</span>
-        <Link to={'/' + this.props.post.title} onClick={this.handleClick}> <span>Title: {this.props.post.title}</span></Link>
+        <Link to={'/post/' + this.props.post.title} onClick={this.handleClick}> <span>Title: {this.props.post.title}</span></Link>
         <span>Content: {this.props.post.content}</span>
       </div>
     );

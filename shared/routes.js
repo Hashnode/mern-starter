@@ -8,7 +8,7 @@ import PostDetailView from './container/PostDetailView/PostDetailView';
 const routes = (
   <Route path="/" component={App} >
     <IndexRoute component={PostListView} />
-    <Route path="/:title" component={PostDetailView}/>
+    <Route path="/post/:title" component={PostDetailView}/>
   </Route>
 );
 

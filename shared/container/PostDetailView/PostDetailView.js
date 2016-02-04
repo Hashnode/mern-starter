@@ -1,16 +1,28 @@
 /* eslint no-unused-vars: 0 */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import * as Actions from '../../redux/actions/actions';
 
-function PostDetailView(props, context) {
-  return (
-      <div>
-        <span>Name: {props.post.name}</span>
-        <span>Title: {props.post.title}</span>
-        <span>Content: {props.post.content}</span>
-      </div>
-    );
+class PostDetailView extends Component {
+
+  constructor(props, context) {
+    super(props, context);
+  }
+
+  render() {
+    return (
+        <div>
+          <span>Name: {this.props.post.name}</span>
+          <span>Title: {this.props.post.title}</span>
+          <span>Content: {this.props.post.content}</span>
+        </div>
+      );
+  }
 }
+
+PostDetailView.need = [function (params) {
+  return Actions.changeSelectedPost.bind(null, params.title)();
+}];
 
 PostDetailView.propTypes = {
   post: PropTypes.shape({
@@ -21,7 +33,6 @@ PostDetailView.propTypes = {
 };
 
 function mapStateToProps(store) {
-  console.log(store);
   return {
     post: (store.posts.filter((post) => post.title === store.selectedPost))[0],
   };

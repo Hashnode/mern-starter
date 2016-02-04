@@ -10,7 +10,8 @@ const postReducer = (state = initialState, action) => {
           name: action.name,
           title: action.title,
           content: action.content,
-        }) };
+        }),
+        selectedPost: state.selectedPost };
 
     case ActionTypes.CHANGE_SELECTED_POST :
       return {

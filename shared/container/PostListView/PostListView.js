@@ -5,14 +5,15 @@ import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 
 function PostListView(props, context) {
-  return <div>
+  return (<div>
           {props.posts.map((post, i, arr) =>
             (<PostListItem post={post} key={i}
               onClick={function handleClick(title) {
-                 console.log('Clicked!')
-                 props.dispatch(Actions.changeSelectedPost(title));
-               }}
-         />))} </div>;
+                props.dispatch(Actions.changeSelectedPost(title));
+              }}
+            />))
+          }
+         </div>);
 }
 
 PostListView.propTypes = {
