@@ -11,8 +11,10 @@
   "dependencies": {
     "babel": "^6.3.26",
     "body-parser": "^1.14.2",
+    "es6-promise": "^3.0.2",
     "express": "^4.13.4",
     "history": "^1.17.0",
+    "isomorphic-fetch": "^2.2.1",
     "kerberos": "0.0.18",
     "mongoose": "^4.3.7",
     "react": "^0.14.7",

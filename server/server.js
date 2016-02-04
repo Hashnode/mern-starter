@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var React = require('react');
 import { configureStore } from '../shared/redux/store/configureStore';
+import * as Actions from '../shared/redux/actions/actions';
 import { Provider } from 'react-redux';
 
 import { renderToString } from 'react-dom/server'
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.post('/api/addPost', function(req, res, next){
+  console.log(req.body, 'bofy');
   var newPost = new Post(req.body.post);
   newPost.save(function(err, saved){
   	res.json({post: saved});
@@ -114,22 +116,22 @@ app.use(function(req, res){
     //       <RouterContext {...renderProps} />
     //   </Provider>
     // );
+    store.dispatch(Actions.fetchPosts()).then(() =>fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
+          .then(html => {
+            const initialView = renderToString(
+                <Provider store={store}>
+                    <RouterContext {...renderProps} />
+                </Provider>
+            );
 
-    fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
-      .then(html => {
-        const initialView = renderToString(
-            <Provider store={store}>
-                <RouterContext {...renderProps} />
-            </Provider>
-        );
+            const finalState = store.getState();
+            res.status(200).end(renderFullPage(initialView, finalState))
+          })
+          .catch(err => {
+            console.log(err)
+            res.end(renderFullPage("",{}))
+          }));
 
-        const finalState = store.getState();
-        res.status(200).end(renderFullPage(initialView, finalState))
-      })
-      .catch(err => {
-        console.log(err)
-        res.end(renderFullPage("",{}))
-      });
 
     //res.status(200).end(renderFullPage(InitialView, initialState));
 

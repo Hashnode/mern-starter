@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <div>
         <PostCreateView addPost={function add(name, title, content) {
-          dispatch(Actions.addPost(name, title, content));
+          dispatch(Actions.addPostRequest({ name, title, content }));
         }}
         />
       { this.props.children }
