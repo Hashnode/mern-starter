@@ -21,7 +21,7 @@ class PostDetailView extends Component {
 }
 
 PostDetailView.need = [function (params) {
-  return Actions.changeSelectedPost.bind(null, params.title)();
+  return Actions.getPostRequest.bind(null, params.title)();
 }];
 
 PostDetailView.propTypes = {
@@ -34,7 +34,7 @@ PostDetailView.propTypes = {
 
 function mapStateToProps(store) {
   return {
-    post: (store.posts.filter((post) => post.title === store.selectedPost))[0],
+    post: (store.post),
   };
 }
 

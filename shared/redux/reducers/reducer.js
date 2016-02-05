@@ -25,6 +25,11 @@ const postReducer = (state = initialState, action) => {
         selectedPost: state.selectedPost,
       };
 
+    case ActionTypes.ADD_SELECTED_POST :
+      return {
+        post: action.post,
+      };
+
     default:
       return state;
   }

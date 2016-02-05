@@ -8,13 +8,15 @@ function PostListView(props, context) {
   return (<div>
           {props.posts.map((post, i, arr) =>
             (<PostListItem post={post} key={i}
-              onClick={function handleClick(title) {
-                props.dispatch(Actions.changeSelectedPost(title));
+              onClick={function handleClick() {
+                props.dispatch(Actions.addSelectedPost(post));
               }}
             />))
           }
          </div>);
 }
+
+PostListView.need = [function () { return Actions.fetchPosts(); }];
 
 PostListView.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.shape({

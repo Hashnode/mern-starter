@@ -37,6 +37,24 @@ export function addPostRequest(post) {
   };
 }
 
+export function addSelectedPost(post) {
+  return {
+    type: ActionTypes.ADD_SELECTED_POST,
+    post,
+  };
+}
+
+export function getPostRequest(post) {
+  return function (dispatch) {
+    return fetch(`http://localhost:8000/api/getPost?title=${post}`, {
+      method: 'get',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }).then((response) => response.json()).then(res => dispatch(addSelectedPost(res.post)));
+  };
+}
+
 export function addPosts(posts) {
   return {
     type: ActionTypes.ADD_POSTS,

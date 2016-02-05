@@ -20,7 +20,7 @@ class PostListItem extends Component {
  }
 
  handleClick(e) {
-   this.props.onClick(this.props.post.title);
+   this.props.onClick();
  }
 
  render() {
