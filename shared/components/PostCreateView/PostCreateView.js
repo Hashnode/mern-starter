@@ -1,6 +1,10 @@
 /* eslint no-unused-vars: 0 */
 import React, { Component, PropTypes } from 'react';
 
+if (typeof window !== 'undefined') {
+  require('./PostCreateView.css');
+}
+
 class PostCreateView extends Component {
   constructor(props, context) {
     super(props, context);
@@ -15,10 +19,10 @@ class PostCreateView extends Component {
 
   render() {
     return (
-      <div>
-        <input placeholder="Name" ref="name"/>
-        <input placeholder="Title" ref="title"/>
-        <textarea placeholder="Content" ref="content"></textarea>
+      <div className="form">
+        <input placeholder="Name" ref="name"/><br/>
+        <input placeholder="Title" ref="title"/><br/>
+        <textarea placeholder="Content" ref="content"></textarea><br/>
         <button onClick={this.addPost}>Submit</button>
       </div>);
   }

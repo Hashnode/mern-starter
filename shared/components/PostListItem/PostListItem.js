@@ -2,6 +2,11 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 
+if (typeof window !== 'undefined') {
+  require('./PostListItem.css');
+}
+
+
 // function PostListItem(props, context) {
 //   return (
 //       <div>
@@ -25,10 +30,10 @@ class PostListItem extends Component {
 
  render() {
    return (
-      <div>
-        <span>Name: {this.props.post.name}</span>
-        <Link to={'/post/' + this.props.post.title} onClick={this.handleClick}> <span>Title: {this.props.post.title}</span></Link>
-        <span>Content: {this.props.post.content}</span>
+      <div className="main">
+        <span className="name">Name: {this.props.post.name}</span>
+        <Link to={'/post/' + this.props.post.title} onClick={this.handleClick}> <span className="title">Title: {this.props.post.title}</span></Link>
+        <span className="content">Content: {this.props.post.content}</span>
       </div>
     );
  }

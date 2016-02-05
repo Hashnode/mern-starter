@@ -1,0 +1,15 @@
+form {
+  text-align: center;
+}
+
+input {
+	margin: auto;
+	width: 90%;
+	height: 2em;
+}
+
+textarea {
+	margin: auto;
+	width: 90%;
+	height: 5em;
+}

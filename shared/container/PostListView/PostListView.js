@@ -4,8 +4,13 @@ import PostListItem from '../../components/PostListItem/PostListItem';
 import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 
+if (typeof window !== 'undefined') {
+  require('./PostListView.css');
+}
+
+
 function PostListView(props, context) {
-  return (<div>
+  return (<div className="listView">
           {props.posts.map((post, i, arr) =>
             (<PostListItem post={post} key={i}
               onClick={function handleClick() {
