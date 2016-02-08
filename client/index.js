@@ -7,7 +7,7 @@ import React from 'react';
 import App from '../shared/container/App';
 import PostListView from '../shared/container/PostListView/PostListView';
 import PostDetailView from '../shared/container/PostDetailView/PostDetailView';
-import { Router, browserHistory, Route, IndexRoute } from 'react-router';
+import { Router, browserHistory, Route, IndexRoute, match } from 'react-router';
 import routes from '../shared/routes';
 
 const store = configureStore(window.__INITIAL_STATE__);
@@ -15,7 +15,11 @@ const store = configureStore(window.__INITIAL_STATE__);
 
 render((
       <Provider store={store}>
-      <Router routes={routes} history={browserHistory} />
+
+      	match({ history, routes }, (error, redirectLocation, renderProps) => {
+		  render(<Router {...renderProps} />)
+		});
+
       </Provider>
         )
      , document.getElementById('root'));
