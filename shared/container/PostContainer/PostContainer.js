@@ -9,13 +9,12 @@ function PostContainer(props, context) {
 	return (
 		<div>
 			<PostCreateView addPost={function add(name, title, content) {
-	          dispatch(Actions.addPostRequest({ name, title, content }));
+	          props.dispatch(Actions.addPostRequest({ name, title, content }));
 	        }}
 	        />
 	        <PostListView posts={props.posts}/>
 		</div>
 	);
-	
 }
 
 PostContainer.need = [function () { return Actions.fetchPosts(); }];

@@ -5,9 +5,23 @@ import path from 'path';
 
 // Webpack Requirements
 import webpack from 'webpack';
-import config from '../webpack.dev.config';
+import config from '../webpack.config.dev';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+
+// Initialize the Express App
+const app = new Express();
+
+console.log(process.env.NODE_ENV);
+
+if(process.env.NODE_ENV !== 'production'){
+  const compiler = webpack(config);
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+  app.use(webpackHotMiddleware(compiler));
+}
+
+app.use('/', Express.static(__dirname + '../static'));
+
 
 // React And Redux Setup
 import { configureStore } from '../shared/redux/store/configureStore';
@@ -20,14 +34,6 @@ import { match, RouterContext } from 'react-router';
 import routes from '../shared/routes';
 import { fetchComponentDataBeforeRender } from './lib/fetchData';
 const Post = require('./models/post');
-
-// Initialize the Express App
-const app = new Express();
-
-// Webpack Setup
-const compiler = webpack(config);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-app.use(webpackHotMiddleware(compiler));
 
 // MongoDB Connection
 mongoose.connect('mongodb://localhost:27017/mern-starter');
@@ -82,7 +88,7 @@ const renderFullPage = (html, initialState) => {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
         </script>
-        <script src="/bundle.js"></script>
+        <script src="/dist/bundle.js"></script>
       </body>
     </html>
   `;
