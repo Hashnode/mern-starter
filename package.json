@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha shared/tests/*.spec.js --compilers js:babel-register",
-    "start:dev": "NODE_ENV=development node index.js",
+    "start": "NODE_ENV=development node index.js",
     "start:prod": "NODE_ENV=production node index.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "clean": "rimraf dist",

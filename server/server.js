@@ -12,16 +12,13 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 // Initialize the Express App
 const app = new Express();
 
-console.log(process.env.NODE_ENV);
-
-if(process.env.NODE_ENV !== 'production'){
+if (process.env.NODE_ENV !== 'production') {
   const compiler = webpack(config);
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
 }
 
 app.use('/', Express.static(__dirname + '../static'));
-
 
 // React And Redux Setup
 import { configureStore } from '../shared/redux/store/configureStore';
@@ -32,7 +29,7 @@ import { match, RouterContext } from 'react-router';
 
 // Import required modules
 import routes from '../shared/routes';
-import { fetchComponentDataBeforeRender } from './lib/fetchData';
+import { fetchComponentData } from './util/fetchData';
 const Post = require('./models/post');
 
 // MongoDB Connection
@@ -109,7 +106,7 @@ app.use((req, res) => {
 
     const store = configureStore(initialState);
 
-    fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
+    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(
           <Provider store={store}>
@@ -127,5 +124,7 @@ app.use((req, res) => {
 
 // start app
 app.listen(8000, (error) => {
-  console.log(error);
+  if(!error){
+    console.log("Ready to go! Build something amazing!");
+  }
 });
