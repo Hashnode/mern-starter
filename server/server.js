@@ -5,7 +5,7 @@ import path from 'path';
 
 // Webpack Requirements
 import webpack from 'webpack';
-import config from '../webpack.config';
+import config from '../webpack.dev.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
@@ -35,7 +35,7 @@ mongoose.connect('mongodb://localhost:27017/mern-starter');
 // Apply Body Parser and server public assets
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
-app.use(Express.static(path.join(__dirname, 'public')));
+app.use(Express.static(path.resolve(__dirname, '../static')));
 
 /* *************
 API EndPoints
@@ -74,6 +74,7 @@ const renderFullPage = (html, initialState) => {
     <html>
       <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/app.css" type="text/css" />
         <title>Isomorphic Redux Example</title>
       </head>
       <body>

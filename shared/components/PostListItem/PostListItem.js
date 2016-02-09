@@ -2,11 +2,6 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 
-if (typeof window !== 'undefined') {
-  require('./PostListItem.css');
-}
-
-
 // function PostListItem(props, context) {
 //   return (
 //       <div>

@@ -4,11 +4,6 @@ import PostListItem from '../../components/PostListItem/PostListItem';
 import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 
-if (typeof window !== 'undefined') {
-  require('./PostListView.css');
-}
-
-
 function PostListView(props, context) {
   return (<div className="listView">
           {props.posts.map((post, i, arr) =>
@@ -21,8 +16,6 @@ function PostListView(props, context) {
          </div>);
 }
 
-PostListView.need = [function () { return Actions.fetchPosts(); }];
-
 PostListView.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -32,10 +25,4 @@ PostListView.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(store) {
-  return {
-    posts: store.posts,
-  };
-}
-
-export default connect(mapStateToProps)(PostListView);
+export default connect()(PostListView);

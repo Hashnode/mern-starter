@@ -1,15 +1,23 @@
+body {
+	margin: 0px;
+}
+
+.container {
+	text-align: center;
+}
+
 form {
   text-align: center;
 }
 
 input {
 	margin: auto;
-	width: 90%;
+	width: 60%;
 	height: 2em;
 }
 
 textarea {
 	margin: auto;
-	width: 90%;
+	width: 60%;
 	height: 5em;
 }

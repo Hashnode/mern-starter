@@ -1,10 +1,6 @@
 /* eslint no-unused-vars: 0 */
 import React, { Component, PropTypes } from 'react';
 
-if (typeof window !== 'undefined') {
-  require('./PostCreateView.css');
-}
-
 class PostCreateView extends Component {
   constructor(props, context) {
     super(props, context);

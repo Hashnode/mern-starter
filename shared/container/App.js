@@ -5,11 +5,6 @@ import PostCreateView from '../components/PostCreateView/PostCreateView';
 import { connect } from 'react-redux';
 import * as Actions from '../redux/actions/actions';
 
-if (typeof window !== 'undefined') {
-  require('./App.css');
-}
-
-
 class App extends Component {
   constructor(props, context) {
     super(props, context);
@@ -19,11 +14,7 @@ class App extends Component {
     const { dispatch } = this.props;
     return (
       <div className="container">
-        <PostCreateView addPost={function add(name, title, content) {
-          dispatch(Actions.addPostRequest({ name, title, content }));
-        }}
-        />
-      { this.props.children }
+        { this.props.children }
       </div>
     );
   }
