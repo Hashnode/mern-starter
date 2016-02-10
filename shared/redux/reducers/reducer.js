@@ -11,18 +11,18 @@ const postReducer = (state = initialState, action) => {
           title: action.title,
           content: action.content,
         }),
-        selectedPost: state.selectedPost };
+        post: state.post };
 
     case ActionTypes.CHANGE_SELECTED_POST :
       return {
         posts: state.posts,
-        selectedPost: action.title,
+        post: action.title,
       };
 
     case ActionTypes.ADD_POSTS :
       return {
         posts: action.posts,
-        selectedPost: state.selectedPost,
+        post: state.post,
       };
 
     case ActionTypes.ADD_SELECTED_POST :

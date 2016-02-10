@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 
 function PostContainer(props, context) {
-	return (
+  return (
 		<div>
 			<PostCreateView addPost={function add(name, title, content) {
-	          props.dispatch(Actions.addPostRequest({ name, title, content }));
-	        }}
-	        />
-	        <PostListView posts={props.posts}/>
+  props.dispatch(Actions.addPostRequest({ name, title, content }));
+				}}
+   />
+  <PostListView posts={props.posts}/>
 		</div>
 	);
 }
@@ -24,5 +24,13 @@ function mapStateToProps(store) {
     posts: store.posts,
   };
 }
+
+PostContainer.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+  })).isRequired,
+};
 
 export default connect(mapStateToProps)(PostContainer);
