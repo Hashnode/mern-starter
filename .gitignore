@@ -5,3 +5,4 @@ npm-debug.log
 dump.rdb
 .vscode/
 public/*
+static/dist

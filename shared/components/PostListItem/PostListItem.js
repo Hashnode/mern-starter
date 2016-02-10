@@ -6,7 +6,7 @@ function PostListItem(props, context) {
   return (
      <div className="main">
        <span className="name">Name: {props.post.name}</span>
-       <Link to={'/post/'+props.post.title} onClick={props.onClick}>
+       <Link to={'/post/' + props.post.title} onClick={props.onClick}>
          <span className="title">Title: {props.post.title}</span></Link>
        <span className="content">Content: {props.post.content}</span>
      </div>
