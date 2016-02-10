@@ -8,8 +8,12 @@ class PostCreateView extends Component {
   }
 
   addPost() {
-    if (this.refs.name.value && this.refs.title.value && this.refs.content.value) {
-      this.props.addPost(this.refs.name.value, this.refs.title.value, this.refs.content.value);
+    const nameRef = this.refs.name;
+    const titleRef = this.refs.title;
+    const contentRef = this.refs.content;
+    if (nameRef.value && titleRef.value && contentRef.value) {
+      this.props.addPost(nameRef.value, titleRef.value, contentRef.value);
+      nameRef.value = titleRef.value = contentRef.value = '';
     }
   }
 

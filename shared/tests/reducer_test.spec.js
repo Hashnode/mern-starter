@@ -6,12 +6,12 @@ import * as ActionTypes from '../redux/constants/constants';
 
 describe('reducer tests', () => {
   it('action ADD_POST is working', () => {
-    const stateBefore = { posts: [] };
+    const stateBefore = { posts: [], selectedPost: null };
     const stateAfter = { posts: [{
       name: 'prank',
       title: 'first post',
       content: 'Hello world!',
-    }] };
+    }], selectedPost: null };
 
     const action = {
       type: ActionTypes.ADD_POST,
