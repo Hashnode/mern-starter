@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha shared/tests/*.spec.js --compilers js:babel-register",
+    "test:server": "NODE_ENV=development MONGO_URL=mongodb://localhost:27017/mern-test mocha --compilers js:babel-core/register --recursive server/tests/**/*.spec.js",
     "start": "NODE_ENV=development node index.js",
     "start:prod": "NODE_ENV=production node index.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
@@ -39,6 +40,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.4.3",
+    "chai": "^3.5.0",
     "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
     "deep-freeze": "0.0.1",
@@ -53,6 +55,7 @@
     "react-transform-hmr": "^1.0.1",
     "rimraf": "^2.5.1",
     "style-loader": "^0.13.0",
+    "supertest": "^1.1.0",
     "webpack": "^1.12.12",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-dev-server": "^1.14.1",

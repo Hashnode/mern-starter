@@ -93,8 +93,10 @@ app.use((req, res) => {
 });
 
 // start app
-app.listen(8000, (error) => {
+app.listen(serverConfig.port, (error) => {
   if (!error) {
-    console.log('Ready to go! Build something amazing!');
+    console.log('MERN is running at port: '+serverConfig.port+'! Build something amazing!');
   }
 });
+
+module.exports = app;
