@@ -13,7 +13,7 @@ class PostDetailView extends Component {
     return (
         <div>
           <span>Name: {this.props.post.name}</span>
-          <span>Title: {this.props.post.title}</span>
+          <span>Titles: {this.props.post.title}</span>
           <span>Content: {this.props.post.content}</span>
         </div>
       );
