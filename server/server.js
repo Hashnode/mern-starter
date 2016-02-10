@@ -18,8 +18,6 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(webpackHotMiddleware(compiler));
 }
 
-app.use('/', Express.static(__dirname + '../static'));
-
 // React And Redux Setup
 import { configureStore } from '../shared/redux/store/configureStore';
 import { Provider } from 'react-redux';
@@ -30,45 +28,17 @@ import { match, RouterContext } from 'react-router';
 // Import required modules
 import routes from '../shared/routes';
 import { fetchComponentData } from './util/fetchData';
-const Post = require('./models/post');
+import posts from './routes/post.routes';
+import serverConfig from './config';
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/mern-starter');
+mongoose.connect(serverConfig.mongoURL);
 
-// Apply Body Parser and server public assets
+// Apply body Parser and server public assets and routes
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../static')));
-
-/* *************
-API EndPoints
-**************** */
-
-/* Add a new Post
-  @body post
-*/
-app.post('/api/addPost', (req, res) => {
-  const newPost = new Post(req.body.post);
-  newPost.save((err, saved) => {
-    return res.json({ post: saved });
-  });
-});
-
-/* Get all Posts */
-app.get('/api/getPosts', (req, res) => {
-  Post.find().exec((err, posts) => {
-    res.json({ posts });
-  });
-});
-
-/* Add a new Post
-  @query title
-*/
-app.get('/api/getPost', (req, res) => {
-  Post.findOne({ title: req.query.title }).exec((err, post) => {
-    res.json({ post });
-  });
-});
+app.use('/api', posts);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -124,7 +94,7 @@ app.use((req, res) => {
 
 // start app
 app.listen(8000, (error) => {
-  if(!error){
-    console.log("Ready to go! Build something amazing!");
+  if (!error) {
+    console.log('Ready to go! Build something amazing!');
   }
 });
