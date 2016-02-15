@@ -14,7 +14,7 @@ Create a new app
 mern my_app
 ```
 
-Install Dependcies
+Install Dependencies
 ```
 cd my_app && npm install
 ```
