@@ -11,10 +11,12 @@ class PostDetailView extends Component {
 
   render() {
     return (
-        <div>
-          <span>Name: {this.props.post.name}</span>
-          <span>Titles: {this.props.post.title}</span>
-          <span>Content: {this.props.post.content}</span>
+        <div className="container">
+          <div className="main">
+            <h3 className="title">{this.props.post.title}</h3>
+            <p className="subtitle name">{this.props.post.name}</p>
+            <p className="content">{this.props.post.content}</p>
+          </div>
         </div>
       );
   }

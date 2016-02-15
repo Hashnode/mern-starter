@@ -13,7 +13,13 @@ class App extends Component {
   render() {
     const { dispatch } = this.props;
     return (
-      <div className="container">
+      <div>
+        <div className="blog-header">
+          <div className="top-bar">
+            <h2 className="feed-title">MERN Blog</h2>
+            <a className="add-post" href="#">Add Post</a>
+          </div>
+        </div>
         { this.props.children }
       </div>
     );

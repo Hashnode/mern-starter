@@ -20,10 +20,11 @@ class PostCreateView extends Component {
   render() {
     return (
       <div className="form">
-        <input placeholder="Name" className="input" ref="name"/><br/>
-        <input placeholder="Title" ref="title"/><br/>
-        <textarea placeholder="Content" ref="content"></textarea><br/>
-        <button onClick={this.addPost}>Submit</button>
+        <h2 className="new-post">Add a new post</h2>
+        <input placeholder="Name" className="input" ref="name"/>
+        <input placeholder="Title" ref="title"/>
+        <textarea placeholder="Content" ref="content"></textarea>
+        <a className="button align-right" onClick={this.addPost}>Submit</a>
       </div>);
   }
 }

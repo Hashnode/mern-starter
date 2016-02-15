@@ -1,23 +1,126 @@
 body {
 	margin: 0px;
+	min-height: 100vh;
+	background: #F5F5F5;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
 }
-
+h1, h2, h3 {
+	color: #212121;
+	font-weight: 700;
+	margin: 0 0 8px;
+}
+h2 {
+	font-size: 32px;
+}
+h3 {
+	font-size: 24px;
+}
+a {
+	text-decoration: none;
+}
+p {
+	margin: 8px 0;
+	font-size: 14px;
+}
+.subtitle {
+	margin-top: 0;
+	margin-left: 0;
+	color: #9E9E9E;
+}
+.button {
+	padding: 6px 12px;
+	background: #EEE;
+	border: 1px solid #E0E0E0;
+	font-size: 14px;
+	cursor: pointer;
+}
 .container {
-	text-align: center;
+	max-width: 980px;
+	width: 100%;
+	padding: 15px;
+	margin: 0 auto;
 }
-
-form {
-  text-align: center;
+.form {
+	width: 100%;
+	max-width: 600px;
+	margin: auto;
+	display: none;
+	font-size: 14px;
 }
-
+.form.appear {
+	display: block;
+}
+input, textarea {
+	width: calc(100% - 10px);
+    border: 1px solid #EEE;
+    padding: 4px;
+    margin: 0px 0 8px;
+    outline: none;
+}
 input {
-	margin: auto;
-	width: 60%;
-	height: 2em;
+	height: 24px;
 }
-
 textarea {
-	margin: auto;
-	width: 60%;
-	height: 5em;
+	height: 120px;
+}
+.main {
+	margin: 40px 0 0;
+	padding: 15px;
+	box-shadow: 1px 1px 2px #E0E0E0;
+	background: #FAFAFA;
+	border-radius: 2px;
+}
+.main .title {
+	margin-bottom: 0;
+	display: inline-block;
+}
+.blog-header {
+	height: 50vh;
+	max-height: 230px;
+	text-align: center;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	box-shadow: 1px 2px 2px #eee;
+    background: url(https://res.cloudinary.com/hashnode/image/upload/w_1769,h_464,c_fill,g_north/v1447878634/static_imgs/snow-mountains-sky-night.jpg);
+    background-size: cover;
+}
+.blog-header .top-bar {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-align-self: center;
+	-ms-flex-item-align: center;
+	align-self: center;
+	width: 100%;
+	max-width: 980px;
+}
+.feed-title {
+	color: #FFF;
+	font-weight: 300;
+	font-size: 42px;
+}
+.add-post {
+	font-weight: 700;
+    color: #212121;
+    background: #EEE;
+    border: 1px solid #BDBDBD;
+    padding: 8px 16px;
+    margin: auto 0;
 }

@@ -48,6 +48,8 @@ const renderFullPage = (html, initialState) => {
       <head>
         <meta charset="utf-8">
         <title>Isomorphic Redux Example</title>
+        <link rel="stylesheet" href="/css/app.css" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css' />
       </head>
       <body>
         <div id="root">${html}</div>

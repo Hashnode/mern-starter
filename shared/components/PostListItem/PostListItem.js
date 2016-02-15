@@ -6,10 +6,11 @@ import { Link } from 'react-router';
 function PostListItem(props, context) {
   return (
      <div className="main">
-       <span className="name">Name: {props.post.name}</span>
-       <Link to={'/post/' + props.post.title} onClick={props.onClick}>
-         <span className="title">Title: {props.post.title}</span></Link>
-       <span className="content">Content: {props.post.content}</span>
+      <Link to={'/post/' + props.post.title} onClick={props.onClick}>
+        <h3 className="title">{props.post.title}</h3>
+      </Link>
+      <p className="subtitle name">- {props.post.name}</p>
+      <p className="content">{props.post.content}</p>
      </div>
    );
 }

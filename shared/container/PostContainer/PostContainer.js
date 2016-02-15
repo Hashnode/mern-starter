@@ -7,12 +7,12 @@ import * as Actions from '../../redux/actions/actions';
 
 function PostContainer(props, context) {
   return (
-		<div>
+		<div className="container">
 			<PostCreateView addPost={function add(name, title, content) {
-  props.dispatch(Actions.addPostRequest({ name, title, content }));
+          props.dispatch(Actions.addPostRequest({ name, title, content }));
 				}}
-   />
-  <PostListView posts={props.posts}/>
+      />
+      <PostListView posts={props.posts}/>
 		</div>
 	);
 }
