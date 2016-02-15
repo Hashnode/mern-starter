@@ -18,8 +18,10 @@ class PostCreateView extends Component {
   }
 
   render() {
+    console.log(this.props.showAddPost);
+    const cls = 'form' + (this.props.showAddPost ? 'appear' : '');
     return (
-      <div className="form">
+      <div className={cls}>
         <h2 className="new-post">Add a new post</h2>
         <input placeholder="Name" className="input" ref="name"/>
         <input placeholder="Title" ref="title"/>
@@ -31,6 +33,7 @@ class PostCreateView extends Component {
 
 PostCreateView.propTypes = {
   addPost: PropTypes.func.isRequired,
+  showAddPost: PropTypes.bool.isRequired,
 };
 
 export default PostCreateView;

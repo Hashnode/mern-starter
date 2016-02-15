@@ -14,12 +14,6 @@ class App extends Component {
     const { dispatch } = this.props;
     return (
       <div>
-        <div className="blog-header">
-          <div className="top-bar">
-            <h2 className="feed-title">MERN Blog</h2>
-            <a className="add-post" href="#">Add Post</a>
-          </div>
-        </div>
         { this.props.children }
       </div>
     );
@@ -28,11 +22,6 @@ class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  // posts: PropTypes.arrayOf(PropTypes.shape({
-  //   name: PropTypes.string.isRequired,
-  //   title: PropTypes.string.isRequired,
-  //   content: PropTypes.string.isRequired,
-  // })).isRequired,
   children: PropTypes.object.isRequired,
 };
 
