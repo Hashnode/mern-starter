@@ -1,4 +1,6 @@
 /* eslint no-unused-vars: 0 */
+/* eslint-disable prefer-template*/
+
 import expect from 'expect';
 import TestUtils from 'react-addons-test-utils';
 import PostListItem from '../components/PostListItem/PostListItem';

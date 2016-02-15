@@ -1,4 +1,5 @@
 /* eslint no-unused-vars: 0 */
+/* eslint-disable prefer-template*/
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 
