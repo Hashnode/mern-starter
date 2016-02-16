@@ -1,3 +1,5 @@
+![](http://res.cloudinary.com/hashnode/image/upload/w_200/v1455647564/static_imgs/mern/imgs/favicon-mern.png)
+
 # mern-starter
 ![title](https://travis-ci.org/Hashnode/mern-starter.svg?branch=master)
 
