@@ -6,17 +6,18 @@ const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.ADD_POST :
       return {
-        posts: state.posts.concat({
+        posts: [{
           name: action.name,
           title: action.title,
           content: action.content,
-        }),
+          slug: action.slug,
+        }].concat(state.posts),
         post: state.post };
 
     case ActionTypes.CHANGE_SELECTED_POST :
       return {
         posts: state.posts,
-        post: action.title,
+        post: action.slug,
       };
 
     case ActionTypes.ADD_POSTS :
