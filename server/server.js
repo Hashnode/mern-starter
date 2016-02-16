@@ -30,7 +30,7 @@ import routes from '../shared/routes';
 import { fetchComponentData } from './util/fetchData';
 import posts from './routes/post.routes';
 import dummyData from './dummyData';
-import serverConfig from './config';
+import serverConfig from './configs/server.config';
 
 // MongoDB Connection
 mongoose.connect(serverConfig.mongoURL, function (err, connection) {

@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /.+\.config.js/],
         loader: 'babel',
         query: {
           presets: ['react-hmre']
