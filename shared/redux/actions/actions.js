@@ -1,7 +1,6 @@
 /* eslint no-unused-vars: 0 */
 import * as ActionTypes from '../constants/constants';
 import fetch from 'isomorphic-fetch';
-require('es6-promise').polyfill();
 
 export function addPost(post) {
   return {

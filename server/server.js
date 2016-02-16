@@ -35,7 +35,7 @@ import serverConfig from './config';
 // MongoDB Connection
 mongoose.connect(serverConfig.mongoURL, function (err, connection) {
   if (err) {
-    throw 'Please make sure Mongo is installed and running on port 27017.';
+    throw err;
   }
 
   // feed some dummy data in DB.
