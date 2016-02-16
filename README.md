@@ -3,6 +3,9 @@
 
 MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mongo, Express, React and NodeJS. It minimizes the setup time and gets you up to speed using proven technologies.
 
+- [Website](http://mern.io)
+- [Documentation](http://mern.io/documentaion.html)
+
 ##Quickstart
 
 ```
