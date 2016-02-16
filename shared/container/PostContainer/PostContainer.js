@@ -28,10 +28,10 @@ class PostContainer extends Component {
   render() {
     return (
         <div>
-          <div className="blog-header">
-            <div className="top-bar">
-              <h2 className="feed-title">MERN Blog</h2>
-              <a className="add-post" onClick={this.handleClick}>Add Post</a>
+          <div className="header">
+            <div className="header-content">
+              <a className="add-post-button" href="#" onClick={this.handleClick}>Add Post</a>
+              <h1 className="site-title"><a href="/">MERN Starter Blog</a></h1>
             </div>
           </div>
           <div className="container">

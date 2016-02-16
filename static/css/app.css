@@ -1,69 +1,107 @@
+*{
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	line-height: normal;
+}
+
+::-webkit-input-placeholder { 
+	color:#aaa;
+	font-weight: 300;
+}
+::-moz-placeholder {
+	color:#aaa; 
+	font-weight: 300;
+} 
+:-ms-input-placeholder { 
+	color:#aaa; 
+	font-weight: 300;
+}
+input:-moz-placeholder { 
+	color:#aaa; 
+	font-weight: 300;
+}
+
 body {
-	margin: 0px;
-	min-height: 100vh;
-	background: #F5F5F5;
-	font-family: 'Open Sans', sans-serif;
+	background: #FFF;
+	font-family: 'Lato', sans-serif;
 	font-size: 16px;
 }
-h1, h2, h3 {
-	color: #212121;
-	font-weight: 700;
-	margin: 0 0 8px;
-}
-h2 {
-	font-size: 32px;
-}
-h3 {
-	font-size: 24px;
-}
-a {
-	text-decoration: none;
-}
-p {
-	margin: 8px 0;
-	font-size: 14px;
-}
+
 .subtitle {
 	margin-top: 0;
 	margin-left: 0;
 	color: #9E9E9E;
 }
-.button {
-	padding: 6px 12px;
-	background: #EEE;
-	border: 1px solid #E0E0E0;
-	font-size: 14px;
-	cursor: pointer;
-}
+
 .container {
 	max-width: 980px;
 	width: 100%;
 	padding: 15px;
 	margin: 0 auto;
 }
+
 .form {
+	display: none;
+	background: #FAFAFA;
+	padding: 32px 0;
+	border: 1px solid #eee;
+	border-radius: 4px;
+}
+
+.form-content{
 	width: 100%;
 	max-width: 600px;
 	margin: auto;
-	display: none;
 	font-size: 14px;
 }
+
+.form .form-title{
+	font-size: 16px;
+	font-weight: 700;
+	margin-bottom: 16px;
+	color: #757575;
+}
+
+.form .form-field{
+	width: 100%;
+	margin-bottom: 16px;
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+	line-height: 1;
+	padding: 20px 16px;
+	border-radius: 4px;
+	border: 1px solid #ddd;
+	outline: none;
+	color: #212121;
+}
+
+.form .post-submit-button{
+	display: inline-block;
+	padding: 8px 16px;
+	font-size: 18px;
+	color: #FFF;
+	background: #03A9F4;
+	text-decoration: none;
+	border-radius: 4px;
+}
+
+
+
 .form.appear {
 	display: block;
 }
-input, textarea {
-	width: calc(100% - 10px);
-    border: 1px solid #EEE;
-    padding: 4px;
-    margin: 0px 0 8px;
-    outline: none;
-}
+
 input {
 	height: 24px;
 }
+
 textarea {
 	height: 120px;
 }
+
 .main {
 	margin: 40px 0 0;
 	padding: 15px;
@@ -71,56 +109,43 @@ textarea {
 	background: #FAFAFA;
 	border-radius: 2px;
 }
+
 .main .title {
 	margin-bottom: 0;
 	display: inline-block;
 }
-.blog-header {
-	height: 50vh;
-	max-height: 230px;
-	text-align: center;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-	box-shadow: 1px 2px 2px #eee;
-    background: url(https://res.cloudinary.com/hashnode/image/upload/w_1769,h_464,c_fill,g_north/v1447878634/static_imgs/snow-mountains-sky-night.jpg);
-    background-size: cover;
+
+.header {
+	background-color: #eee;
+	background-image: url('http://res.cloudinary.com/hashnode/image/upload/v1455610145/static_imgs/mern/header-bk.png');
+	background-position: center;
+	background-size: cover;
+	border-bottom: 1px solid #ccc;
 }
-.blog-header .top-bar {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: justify;
-	-webkit-justify-content: space-between;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: row;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	-webkit-align-self: center;
-	-ms-flex-item-align: center;
-	align-self: center;
+
+.header .header-content {
 	width: 100%;
 	max-width: 980px;
+	margin: auto;
+	padding: 64px 16px;
 }
-.feed-title {
-	color: #FFF;
+
+.site-title {
 	font-weight: 300;
 	font-size: 42px;
 }
-.add-post {
-	font-weight: 700;
-    color: #212121;
-    background: #EEE;
-    border: 1px solid #BDBDBD;
+
+.site-title a{
+	text-decoration: none;
+	color: #FFF;
+}
+
+.add-post-button {
+	display: inline-block;
+    color: #FFF;
+    background: #03A9F4;
     padding: 8px 16px;
-    margin: auto 0;
+    text-decoration: none;
+    border-radius: 1000px;
+    float: right;
 }

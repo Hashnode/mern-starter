@@ -19,14 +19,16 @@ class PostCreateView extends Component {
 
   render() {
     console.log(this.props.showAddPost);
-    const cls = 'form' + (this.props.showAddPost ? 'appear' : '');
+    const cls = 'form ' + (this.props.showAddPost ? 'appear' : '');
     return (
       <div className={cls}>
-        <h2 className="new-post">Add a new post</h2>
-        <input placeholder="Name" className="input" ref="name"/>
-        <input placeholder="Title" ref="title"/>
-        <textarea placeholder="Content" ref="content"></textarea>
-        <a className="button align-right" onClick={this.addPost}>Submit</a>
+        <div className="form-content">
+          <h2 className="form-title">Add a new post</h2>
+          <input placeholder="Author's Name" className="form-field" ref="name"/>
+          <input placeholder="Post Title" className="form-field" ref="title"/>
+          <textarea placeholder="Post Content" className="form-field" ref="content"></textarea>
+          <a className="post-submit-button align-right" href="#" onClick={this.addPost}>Submit</a>
+        </div>
       </div>);
   }
 }
