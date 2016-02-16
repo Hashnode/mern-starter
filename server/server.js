@@ -104,7 +104,7 @@ app.use((req, res) => {
 // start app
 app.listen(serverConfig.port, (error) => {
   if (!error) {
-    console.log('MERN is running at port: '+serverConfig.port+'! Build something amazing!');
+    console.log('MERN is running on port: '+serverConfig.port+'! Build something amazing!');
   }
 });
 
