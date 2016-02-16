@@ -4,11 +4,13 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 
 ##Quickstart
 
+```
   npm install -g mern-cli
   mern your_new_app
   cd your_new_app
   npm install
   npm start
+```
 
 ##File Structure
 
