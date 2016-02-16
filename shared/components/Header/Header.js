@@ -7,9 +7,9 @@ function Header(props, context) {
   return (
     <div className="header">
       <div className="header-content">
+        <h1 className="site-title"><a href="/">MERN Starter Blog</a></h1>
         {context.router.isActive('/', true) ?
           <a className="add-post-button" href="#" onClick={props.onClick}>Add Post</a> : null }
-        <h1 className="site-title"><a href="/">MERN Starter Blog</a></h1>
       </div>
     </div>
   );

@@ -22,10 +22,10 @@ class PostDetailView extends Component {
       <div>
         <Header onClick={function noop() {}}/>
         <div className="container">
-          <div className="main">
-            <h3 className="title">{this.props.post.title}</h3>
-            <p className="subtitle name">{this.props.post.name}</p>
-            <p className="content">{this.props.post.content}</p>
+          <div className="single-post post-detail">
+            <h3 className="post-title">{this.props.post.title}</h3>
+            <p className="author-name">By {this.props.post.name}</p>
+            <p className="post-desc">{this.props.post.content}</p>
           </div>
         </div>
       </div>
