@@ -10,6 +10,7 @@ class PostDetailView extends Component {
   constructor(props, context) {
     super(props, context);
     this.handleClick = this.handleClick.bind(this);
+    this.handleLogoClick = this.handleLogoClick.bind(this);
   }
 
   handleClick() {
@@ -18,10 +19,14 @@ class PostDetailView extends Component {
     });
   }
 
+  handleLogoClick() {
+    this.props.dispatch(Actions.fetchPosts());
+  }
+
   render() {
     return (
       <div>
-        <Header onClick={function noop() {}}/>
+        <Header onClick={function noop() {}} handleLogoClick={this.handleLogoClick}/>
         <div className="container">
           <div className="single-post post-detail">
             <h3 className="post-title">{this.props.post.title}</h3>
@@ -50,6 +55,7 @@ PostDetailView.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(store) {
