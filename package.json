@@ -17,9 +17,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel": "^6.3.26",
+    "babel-core": "^6.4.5",
     "body-parser": "^1.14.2",
-    "es6-promise": "^3.0.2",
     "express": "^4.13.4",
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.1",
@@ -33,7 +32,6 @@
     "redux-thunk": "^1.0.3"
   },
   "devDependencies": {
-    "babel-core": "^6.4.5",
     "babel-eslint": "^5.0.0-beta6",
     "babel-loader": "^6.2.1",
     "babel-plugin-react-transform": "^2.0.0",
