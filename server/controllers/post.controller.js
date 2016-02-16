@@ -21,7 +21,7 @@ export function addPost(req, res) {
 }
 
 export function getPost(req, res) {
-  Post.findOne({ title: req.query.title }).exec((err, post) => {
+  Post.findOne({ slug: req.query.slug }).exec((err, post) => {
     if (err) {
       return res.status(500).send(err);
     }

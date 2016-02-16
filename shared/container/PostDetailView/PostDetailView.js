@@ -38,7 +38,7 @@ class PostDetailView extends Component {
 }
 
 PostDetailView.need = [function (params) {
-  return Actions.getPostRequest.bind(null, params.title)();
+  return Actions.getPostRequest.bind(null, params.slug)();
 }];
 
 PostDetailView.propTypes = {
