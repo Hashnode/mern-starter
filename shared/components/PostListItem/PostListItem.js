@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 function PostListItem(props, context) {
   return (
      <div className="main">
-      <Link to={'/post/' + props.post.title} onClick={props.onClick}>
+      <Link to={'/post/' + props.post.slug} onClick={props.onClick}>
         <h3 className="title">{props.post.title}</h3>
       </Link>
       <p className="subtitle name">- {props.post.name}</p>
