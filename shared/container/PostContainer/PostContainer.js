@@ -2,6 +2,7 @@
 import React, { PropTypes, Component } from 'react';
 import PostListView from '../PostListView/PostListView';
 import PostCreateView from '../../components/PostCreateView/PostCreateView';
+import Header from '../../components/Header/Header';
 import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 
@@ -27,25 +28,23 @@ class PostContainer extends Component {
 
   render() {
     return (
-        <div>
-          <div className="blog-header">
-            <div className="top-bar">
-              <h2 className="feed-title">MERN Blog</h2>
-              <a className="add-post" onClick={this.handleClick}>Add Post</a>
-            </div>
-          </div>
-          <div className="container">
-            <PostCreateView addPost={this.add}
-              showAddPost={this.state.showAddPost}
-            />
-          <PostListView posts={this.props.posts}/>
-          </div>
+      <div>
+        <Header onClick={this.handleClick} />
+        <div className="container">
+          <PostCreateView addPost={this.add}
+            showAddPost={this.state.showAddPost}
+          />
+        <PostListView posts={this.props.posts}/>
         </div>
-      );
+      </div>
+    );
   }
 }
 
 PostContainer.need = [function () { return Actions.fetchPosts(); }];
+PostContainer.contextTypes = {
+  router: React.PropTypes.object,
+};
 
 function mapStateToProps(store) {
   return {

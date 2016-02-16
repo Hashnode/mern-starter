@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
+import Header from '../../components/Header/Header';
 
 class PostDetailView extends Component {
 
@@ -19,12 +20,7 @@ class PostDetailView extends Component {
   render() {
     return (
       <div>
-        <div className="blog-header">
-          <div className="top-bar">
-            <h2 className="feed-title">MERN Blog</h2>
-            <a className="add-post" onClick={this.handleClick}>Add Post</a>
-          </div>
-        </div>
+        <Header onClick={function(){}} />
         <div className="container">
           <div className="main">
             <h3 className="title">{this.props.post.title}</h3>
@@ -40,6 +36,10 @@ class PostDetailView extends Component {
 PostDetailView.need = [function (params) {
   return Actions.getPostRequest.bind(null, params.title)();
 }];
+
+PostDetailView.contextTypes = {
+  router: React.PropTypes.object,
+};
 
 PostDetailView.propTypes = {
   post: PropTypes.shape({

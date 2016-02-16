@@ -8,6 +8,7 @@
    },
    "ecmaFeatures": {
     "jsx": true,
-    "es6": true
+    "es6": true,
+    "classes": true
    },
 }
