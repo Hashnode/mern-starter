@@ -10,7 +10,7 @@ export function getPosts(req, res) {
 }
 
 export function addPost(req, res) {
-  const newPost = new Post(req.body.post);
+  var newPost = new Post(req.body.post);
   newPost.slug = newPost.title.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
   newPost.save((err, saved) => {
     if (err) {
@@ -31,15 +31,13 @@ export function getPost(req, res) {
 
 export function deletePost(req, res) {
   var postId = req.body.postId;
-  
   Post.findById(postId).exec((err, post) => {
     if (err) {
       return res.status(500).send(err);
     }
-    
-    post.remove(function(){
-       res.status(200).end(); 
+
+    post.remove(function () {
+      res.status(200).end();
     });
-    
   });
 }

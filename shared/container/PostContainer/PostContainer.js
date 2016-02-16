@@ -16,10 +16,12 @@ class PostContainer extends Component {
     this.add = this.add.bind(this);
   }
 
-  handleClick() {
+  handleClick(e) {
     this.setState({
       showAddPost: !this.state.showAddPost,
     });
+
+    e.preventDefault();
   }
 
   add(name, title, content) {
