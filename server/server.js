@@ -60,6 +60,7 @@ const renderFullPage = (html, initialState) => {
         <title>Isomorphic Redux Example</title>
         <link rel="stylesheet" href="/css/app.css" />
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
+        <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
       </head>
       <body>
         <div id="root">${html}</div>
