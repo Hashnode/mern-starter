@@ -1,4 +1,5 @@
-/* eslint no-unused-vars: 0 */
+/* eslint-disable no-unused-vars*/
+/* eslint-disable prefer-template*/
 import React, { Component, PropTypes } from 'react';
 
 class PostCreateView extends Component {
@@ -18,7 +19,6 @@ class PostCreateView extends Component {
   }
 
   render() {
-    console.log(this.props.showAddPost);
     const cls = 'form' + (this.props.showAddPost ? 'appear' : '');
     return (
       <div className={cls}>
