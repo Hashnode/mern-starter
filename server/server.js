@@ -29,10 +29,18 @@ import { match, RouterContext } from 'react-router';
 import routes from '../shared/routes';
 import { fetchComponentData } from './util/fetchData';
 import posts from './routes/post.routes';
+import dummyData from './dummyData';
 import serverConfig from './config';
 
 // MongoDB Connection
-mongoose.connect(serverConfig.mongoURL);
+mongoose.connect(serverConfig.mongoURL, function (err, connection) {
+  if (err) {
+    throw 'Please make sure Mongo is installed and running on port 27017.';
+  }
+
+  // feed some dummy data in DB.
+  dummyData();
+});
 
 // Apply body Parser and server public assets and routes
 app.use(bodyParser.json({ limit: '20mb' }));
@@ -96,7 +104,7 @@ app.use((req, res) => {
 // start app
 app.listen(serverConfig.port, (error) => {
   if (!error) {
-    console.log('MERN is running at port: '+serverConfig.port+'! Build something amazing!');
+    console.log('MERN is running on port: '+serverConfig.port+'! Build something amazing!');
   }
 });
 
