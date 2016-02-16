@@ -40,9 +40,9 @@ All the routes are defined in shared/routes.js. React router renders components 
   // Server Side Rendering based on routes matched by React-router.
   app.use((req, res) => {
   	match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
-    	if (err) {
-    		return res.status(500).end('Internal server error');
-    	}
+    if (err) {
+    	return res.status(500).end('Internal server error');
+    }
   
     	if (!renderProps) {
     		return res.status(404).end('Not found!');
