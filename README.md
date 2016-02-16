@@ -1,4 +1,5 @@
 # mern-starter
+![title](https://travis-ci.org/Hashnode/mern-starter.svg?branch=master)
 
 MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mongo, Express, React and NodeJS. It minimizes the setup time and gets you up to speed using proven technologies.
 
