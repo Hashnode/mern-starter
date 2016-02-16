@@ -70,12 +70,16 @@ body {
 	margin-bottom: 16px;
 	font-family: 'Lato', sans-serif;
 	font-size: 16px;
-	line-height: 1;
-	padding: 20px 16px;
+	line-height: normal;
+	padding: 12px 16px;
 	border-radius: 4px;
 	border: 1px solid #ddd;
 	outline: none;
 	color: #212121;
+}
+
+.form textarea.form-field{
+	min-height: 200px;
 }
 
 .form .post-submit-button{
@@ -88,18 +92,8 @@ body {
 	border-radius: 4px;
 }
 
-
-
 .form.appear {
 	display: block;
-}
-
-input {
-	height: 24px;
-}
-
-textarea {
-	height: 120px;
 }
 
 .single-post {
@@ -128,6 +122,18 @@ textarea {
 .single-post .post-desc{
 	font-size: 14px;
 	color: #888;
+	margin-bottom: 8px;
+}
+
+.single-post .post-action a{
+	color: #555;
+	text-decoration: none;
+	font-size: 14px;
+	font-style: italic;	
+}
+
+.single-post .post-action a:hover{
+	color: #EF5350;
 }
 
 .single-post .divider{
@@ -171,4 +177,8 @@ textarea {
     text-decoration: none;
     border-radius: 1000px;
     float: right;
+}
+
+@media (max-width: 767px) { 
+	
 }
