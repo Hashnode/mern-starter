@@ -11,6 +11,9 @@ function PostListView(props, context) {
               onClick={function handleClick() {
                 props.dispatch(Actions.addSelectedPost(post));
               }}
+              onDelete={function handleDelete() {
+                props.dispatch(Actions.deletePostRequest(post));
+              }}
             />))
           }
          </div>);

@@ -33,7 +33,6 @@ export function deletePost(req, res) {
   var postId = req.body.postId;
   
   Post.findById(postId).exec((err, post) => {
-    
     if (err) {
       return res.status(500).send(err);
     }
