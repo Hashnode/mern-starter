@@ -13,7 +13,7 @@ function PostListItem(props, context) {
         </h3>
       <p className="author-name">By {props.post.name}</p>
       <p className="post-desc">{props.post.content}</p>
-      <p className="post-action"><a onClick={props.onDelete}>Delete Post</a></p>
+      <p className="post-action"><a href="#" onClick={props.onDelete}>Delete Post</a></p>
       <hr className="divider"/>
      </div>
    );

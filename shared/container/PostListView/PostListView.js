@@ -12,7 +12,9 @@ function PostListView(props, context) {
                 props.dispatch(Actions.addSelectedPost(post));
               }}
               onDelete={function handleDelete() {
-                props.dispatch(Actions.deletePostRequest(post));
+                if (confirm('Do you want to delete this post')) {
+                  props.dispatch(Actions.deletePostRequest(post));
+                }
               }}
             />))
           }

@@ -3,6 +3,7 @@ import React, { PropTypes, Component } from 'react';
 import PostListView from '../PostListView/PostListView';
 import PostCreateView from '../../components/PostCreateView/PostCreateView';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 
@@ -41,6 +42,7 @@ class PostContainer extends Component {
           />
           <PostListView posts={this.props.posts}/>
         </div>
+        <Footer />
       </div>
     );
   }
