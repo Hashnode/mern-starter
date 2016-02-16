@@ -37,35 +37,43 @@ We use react-router's match function for handling all page requests so that brow
 All the routes are defined in shared/routes.js. React router renders components according to route requested.
 
 ```
-  // Server Side Rendering based on routes matched by React-router.
-  app.use((req, res) => {
-  	match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
-    if (err) {
-    	return res.status(500).end('Internal server error');
-    }
-  
-    	if (!renderProps) {
-    		return res.status(404).end('Not found!');
-    	}
-  
-  		const initialState = { posts: [], post: {} };
-  
-  	  const store = configureStore(initialState);
-  
-  	  fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then(() => {
-  	    const initialView = renderToString(
-  	        <Provider store={store}>
-  		          <RouterContext {...renderProps} />
-  			    </Provider>
-  		  );
-  		  
-  		  const finalState = store.getState();
-  			res.status(200).end(renderFullPage(initialView, finalState));
-  		}).catch(() => {
-  			res.end(renderFullPage('Error', {}));
-  		});
-  	});
-  });
+// Server Side Rendering based on routes matched by React-router.
+app.use((req, res) => {
+    match({
+        routes,
+        location: req.url
+    }, (err, redirectLocation, renderProps) => {
+        if (err) {
+            return res.status(500).end('Internal server error');
+        }
+
+        if (!renderProps) {
+            return res.status(404).end('Not found!');
+        }
+
+        const initialState = {
+            posts: [],
+            post: {}
+        };
+
+        const store = configureStore(initialState);
+
+        fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then(() => {
+            const initialView = renderToString( < Provider store = {
+                    store
+                } >
+                < RouterContext {...renderProps
+                }
+                /> < /Provider>
+            );
+
+            const finalState = store.getState();
+            res.status(200).end(renderFullPage(initialView, finalState));
+        }).catch(() => {
+            res.end(renderFullPage('Error', {}));
+        });
+    });
+});
 ```
 
 `match` takes two parameters, first is an object that contains routes, location and history and second is a callback function which is called when routes have been matched to a location.
