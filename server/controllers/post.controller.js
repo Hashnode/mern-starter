@@ -1,7 +1,7 @@
 import Post from '../models/post';
 
 export function getPosts(req, res) {
-  Post.find().exec((err, posts) => {
+  Post.find().sort('-dateAdded').exec((err, posts) => {
     if (err) {
       return res.status(500).send(err);
     }
@@ -11,6 +11,7 @@ export function getPosts(req, res) {
 
 export function addPost(req, res) {
   const newPost = new Post(req.body.post);
+  newPost.slug = newPost.title.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
   newPost.save((err, saved) => {
     if (err) {
       return res.status(500).send(err);

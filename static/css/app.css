@@ -102,17 +102,40 @@ textarea {
 	height: 120px;
 }
 
-.main {
-	margin: 40px 0 0;
+.single-post {
+	margin: 20px 0;
 	padding: 15px;
-	box-shadow: 1px 1px 2px #E0E0E0;
-	background: #FAFAFA;
 	border-radius: 2px;
 }
 
-.main .title {
-	margin-bottom: 0;
-	display: inline-block;
+.single-post .post-title{
+	font-size: 28px;
+	margin-bottom: 16px;
+	font-weight: 400;
+}
+
+.single-post .post-title a{
+	text-decoration: none;
+	color: #616161;
+}
+
+.single-post .author-name{
+	font-size: 16px;
+	margin-bottom: 16px;
+	color: #757575;
+}
+
+.single-post .post-desc{
+	font-size: 14px;
+	color: #888;
+}
+
+.single-post .divider{
+	border: 0;
+    height: 1px;
+    background: #ccc;
+    width: 250px;
+    margin: 32px auto 0;
 }
 
 .header {

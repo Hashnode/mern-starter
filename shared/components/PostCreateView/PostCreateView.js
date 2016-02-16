@@ -1,4 +1,5 @@
-/* eslint no-unused-vars: 0 */
+/* eslint-disable no-unused-vars*/
+/* eslint-disable prefer-template*/
 import React, { Component, PropTypes } from 'react';
 
 class PostCreateView extends Component {
@@ -18,16 +19,15 @@ class PostCreateView extends Component {
   }
 
   render() {
-    console.log(this.props.showAddPost);
     const cls = 'form ' + (this.props.showAddPost ? 'appear' : '');
     return (
       <div className={cls}>
         <div className="form-content">
-          <h2 className="form-title">Add a new post</h2>
+          <h2 className="form-title">Create new post</h2>
           <input placeholder="Author's Name" className="form-field" ref="name"/>
           <input placeholder="Post Title" className="form-field" ref="title"/>
           <textarea placeholder="Post Content" className="form-field" ref="content"></textarea>
-          <a className="post-submit-button align-right" href="#" onClick={this.addPost}>Submit</a>
+          <a className="post-submit-button align-right" href="#" onClick={this.addPost}>Submit</a>          
         </div>
       </div>);
   }

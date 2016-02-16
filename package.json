@@ -1,7 +1,7 @@
 {
   "name": "mern-starter",
   "version": "1.0.0",
-  "description": "",
+  "description": "Boilerplate project for building Iosmorphic apps using React and Redux",
   "main": "index.js",
   "scripts": {
     "test": "mocha shared/tests/*.spec.js --compilers js:babel-register",
