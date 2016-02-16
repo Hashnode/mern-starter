@@ -11,6 +11,8 @@ describe('reducer tests', () => {
       name: 'prank',
       title: 'first post',
       content: 'Hello world!',
+      _id: null,
+      slug: 'first-post',
     }], post: null };
 
     const action = {
@@ -18,6 +20,8 @@ describe('reducer tests', () => {
       name: 'prank',
       title: 'first post',
       content: 'Hello world!',
+      _id: null,
+      slug: 'first-post',
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
@@ -30,6 +34,9 @@ describe('reducer tests', () => {
         name: 'prank',
         title: 'first post',
         content: 'Hello world!',
+        _id: null,
+        slug: 'first-post', 
+
       }],
       selectedPost: null,
     };
@@ -39,11 +46,15 @@ describe('reducer tests', () => {
         name: 'prank',
         title: 'first post',
         content: 'Hello world!',
+        _id: null,
+        slug: 'first-post',
       }],
       post: {
         name: 'prank',
         title: 'first post',
         content: 'Hello world!',
+        _id: null,
+        slug: 'first-post',
       },
     };
 
@@ -53,6 +64,8 @@ describe('reducer tests', () => {
         name: 'prank',
         title: 'first post',
         content: 'Hello world!',
+        _id: null,
+        slug: 'first-post',
       },
     };
 
