@@ -66,6 +66,7 @@ app.use((req, res) => {
             );
 
             const finalState = store.getState();
+            
             res.status(200).end(renderFullPage(initialView, finalState));
         }).catch(() => {
             res.end(renderFullPage('Error', {}));
