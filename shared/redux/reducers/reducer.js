@@ -11,6 +11,7 @@ const postReducer = (state = initialState, action) => {
           title: action.title,
           content: action.content,
           slug: action.slug,
+          _id: action._id,
         }].concat(state.posts),
         post: state.post };
 
@@ -30,6 +31,11 @@ const postReducer = (state = initialState, action) => {
       return {
         post: action.post,
         posts: state.posts,
+      };
+
+    case ActionTypes.DELETE_POST :
+      return {
+        posts: state.posts.filter((post) => post._id !== action.post._id),
       };
 
     default:

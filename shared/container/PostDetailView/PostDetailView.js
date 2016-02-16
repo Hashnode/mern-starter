@@ -20,7 +20,7 @@ class PostDetailView extends Component {
   render() {
     return (
       <div>
-        <Header onClick={function(){}} />
+        <Header onClick={function noop() {}}/>
         <div className="container">
           <div className="main">
             <h3 className="title">{this.props.post.title}</h3>

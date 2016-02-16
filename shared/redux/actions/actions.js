@@ -10,6 +10,7 @@ export function addPost(post) {
     title: post.post.title,
     content: post.post.content,
     slug: post.post.slug,
+    _id: post.post._id,
   };
 }
 
@@ -39,7 +40,6 @@ export function addPostRequest(post) {
 }
 
 export function addSelectedPost(post) {
-  console.log(post);
   return {
     type: ActionTypes.ADD_SELECTED_POST,
     post,
@@ -57,6 +57,13 @@ export function getPostRequest(post) {
   };
 }
 
+export function deletePost(post) {
+  return {
+    type: ActionTypes.DELETE_POST,
+    post,
+  };
+}
+
 export function addPosts(posts) {
   return {
     type: ActionTypes.ADD_POSTS,
@@ -69,5 +76,19 @@ export function fetchPosts() {
     return fetch('http://localhost:8000/api/getPosts').
       then((response) => response.json()).
       then((response) => dispatch(addPosts(response.posts)));
+  };
+}
+
+export function deletePostRequest(post) {
+  return function (dispatch) {
+    fetch('http://localhost:8000/api/deletePost', {
+      method: 'post',
+      body: JSON.stringify({
+        postId: post._id,
+      }),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }).then(() => dispatch(deletePost(post)));
   };
 }
