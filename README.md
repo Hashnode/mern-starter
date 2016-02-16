@@ -40,28 +40,28 @@ All the routes are defined in shared/routes.js. React router renders components 
   // Server Side Rendering based on routes matched by React-router.
   app.use((req, res) => {
   	match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
-  	if (err) {
-  		return res.status(500).end('Internal server error');
-  	}
+    	if (err) {
+    		return res.status(500).end('Internal server error');
+    	}
   
-  	if (!renderProps) {
-  		return res.status(404).end('Not found!');
-  	}
+    	if (!renderProps) {
+    		return res.status(404).end('Not found!');
+    	}
   
   		const initialState = { posts: [], post: {} };
   
-  	const store = configureStore(initialState);
+  	  const store = configureStore(initialState);
   
-  	fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
-  		.then(() => {
-  	const initialView = renderToString(&lt;Provider store={store}&gt;
-  		&lt;RouterContext {...renderProps} /&gt;
-  			&lt;/Provider&gt;
-  		);
-  		const finalState = store.getState();
+  	  fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then(() => {
+  	    const initialView = renderToString(
+  	        <Provider store={store}>
+  		          <RouterContext {...renderProps} />
+  			    </Provider>
+  		  );
+  		  
+  		  const finalState = store.getState();
   			res.status(200).end(renderFullPage(initialView, finalState));
-  		})
-  		.catch(() => {
+  		}).catch(() => {
   			res.end(renderFullPage('Error', {}));
   		});
   	});
@@ -70,11 +70,11 @@ All the routes are defined in shared/routes.js. React router renders components 
 
 `match` takes two parameters, first is an object that contains routes, location and history and second is a callback function which is called when routes have been matched to a location.
 
-If there's a error in matching we return 500 status code, if no matches are found we return 404 status code. If a match is found then we need to create a new redux store instance.
+If there's an error in matching we return 500 status code, if no matches are found we return 404 status code. If a match is found then we need to create a new redux store instance.
 
 **Note:** A new Redux Store is populated afresh on every request.
 
-`fetchComponentData` is the key function. It takes three params first is a dispatch function of redux store, second is an array of components that should be rendered in current route and third is the route params. `fetchComponentData` collects all the needs (need is an array of actions that are required to be dispatched before rendering the component) of components in the current route. It returns a promise when all the required actions are dispatched. We render the page and send data to client for clinet-side rendering in `window.__INITIAL_STATE__`.
+`fetchComponentData` is the key function. It takes three params : first is a dispatch function of redux store, second is an array of components that should be rendered in current route and third is the route params. `fetchComponentData` collects all the needs (need is an array of actions that are required to be dispatched before rendering the component) of components in the current route. It returns a promise when all the required actions are dispatched. We render the page and send data to client for clinet-side rendering in `window.__INITIAL_STATE__`.
 
 
 ###Shared
