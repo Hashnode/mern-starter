@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 class PostDetailView extends Component {
 
@@ -28,6 +29,7 @@ class PostDetailView extends Component {
             <p className="post-desc">{this.props.post.content}</p>
           </div>
         </div>
+        <Footer />
       </div>
       );
   }

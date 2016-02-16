@@ -32,7 +32,7 @@ describe('component tests', () => {
             </h3>
           <p className="author-name">By {post.name}</p>
           <p className="post-desc">{post.content}</p>
-          <p className="post-action"><a onClick={function noop() {}}>Delete Post</a></p>
+          <p className="post-action"><a href="#" onClick={function noop() {}}>Delete Post</a></p>
           <hr className="divider"/>
          </div>);
   });
