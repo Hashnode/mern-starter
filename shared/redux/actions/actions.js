@@ -6,16 +6,17 @@ require('es6-promise').polyfill();
 export function addPost(post) {
   return {
     type: ActionTypes.ADD_POST,
-    name: post.name,
-    title: post.title,
-    content: post.content,
+    name: post.post.name,
+    title: post.post.title,
+    content: post.post.content,
+    slug: post.post.slug,
   };
 }
 
-export function changeSelectedPost(title) {
+export function changeSelectedPost(slug) {
   return {
     type: ActionTypes.CHANGE_SELECTED_POST,
-    title,
+    slug,
   };
 }
 
@@ -33,11 +34,12 @@ export function addPostRequest(post) {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-    }).then(() => dispatch(addPost(post)));
+    }).then((res) => res.json()).then(res => dispatch(addPost(res)));
   };
 }
 
 export function addSelectedPost(post) {
+  console.log(post);
   return {
     type: ActionTypes.ADD_SELECTED_POST,
     post,
@@ -46,7 +48,7 @@ export function addSelectedPost(post) {
 
 export function getPostRequest(post) {
   return function (dispatch) {
-    return fetch(`http://localhost:8000/api/getPost?title=${post}`, {
+    return fetch(`http://localhost:8000/api/getPost?slug=${post}`, {
       method: 'get',
       headers: new Headers({
         'Content-Type': 'application/json',

@@ -18,12 +18,15 @@ class PostContainer extends Component {
 
   handleClick() {
     this.setState({
-      showAddPost: true,
+      showAddPost: !this.state.showAddPost,
     });
   }
 
   add(name, title, content) {
     this.props.dispatch(Actions.addPostRequest({ name, title, content }));
+    this.setState({
+      showAddPost: false,
+    });
   }
 
   render() {
@@ -34,7 +37,7 @@ class PostContainer extends Component {
           <PostCreateView addPost={this.add}
             showAddPost={this.state.showAddPost}
           />
-        <PostListView posts={this.props.posts}/>
+          <PostListView posts={this.props.posts}/>
         </div>
       </div>
     );

@@ -5,6 +5,8 @@ var postSchema = new Schema({
   name: "String",
   title: "String",
   content: "String",
+  slug : "String",
+  dateAdded : "Date"
 });
 
 var Post = mongoose.model('Post', postSchema);
