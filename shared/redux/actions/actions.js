@@ -13,10 +13,10 @@ export function addPost(post) {
   };
 }
 
-export function changeSelectedPost(title) {
+export function changeSelectedPost(slug) {
   return {
     type: ActionTypes.CHANGE_SELECTED_POST,
-    title,
+    slug,
   };
 }
 
@@ -39,6 +39,7 @@ export function addPostRequest(post) {
 }
 
 export function addSelectedPost(post) {
+  console.log(post);
   return {
     type: ActionTypes.ADD_SELECTED_POST,
     post,
@@ -47,7 +48,7 @@ export function addSelectedPost(post) {
 
 export function getPostRequest(post) {
   return function (dispatch) {
-    return fetch(`http://localhost:8000/api/getPost?title=${post}`, {
+    return fetch(`http://localhost:8000/api/getPost?slug=${post}`, {
       method: 'get',
       headers: new Headers({
         'Content-Type': 'application/json',
