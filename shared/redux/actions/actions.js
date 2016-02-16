@@ -6,9 +6,10 @@ require('es6-promise').polyfill();
 export function addPost(post) {
   return {
     type: ActionTypes.ADD_POST,
-    name: post.name,
-    title: post.title,
-    content: post.content,
+    name: post.post.name,
+    title: post.post.title,
+    content: post.post.content,
+    slug: post.post.slug,
   };
 }
 
@@ -33,7 +34,7 @@ export function addPostRequest(post) {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-    }).then(() => dispatch(addPost(post)));
+    }).then((res) => res.json()).then(res => dispatch(addPost(res)));
   };
 }
 
