@@ -1,5 +1,6 @@
 import Post from '../models/post';
 import cuid from 'cuid';
+import slug from 'slug';
 
 export function getPosts(req, res) {
   Post.find().sort('-dateAdded').exec((err, posts) => {
@@ -16,7 +17,7 @@ export function addPost(req, res) {
   }
 
   var newPost = new Post(req.body.post);
-  newPost.slug = newPost.title.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+  newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
   newPost.cuid = cuid();
   newPost.save((err, saved) => {
     if (err) {

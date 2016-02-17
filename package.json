@@ -30,7 +30,8 @@
     "react-redux": "^4.1.2",
     "react-router": "^2.0.0-rc5",
     "redux": "^3.1.5",
-    "redux-thunk": "^1.0.3"
+    "redux-thunk": "^1.0.3",
+    "slug": "^0.9.1"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
