@@ -19,6 +19,7 @@ describe('component tests', () => {
       title: 'first post',
       content: 'hello world!',
       slug: 'first-post',
+      cuid: 'cikpdcdn60000zjxom3dmavzq',
     };
     renderer.render(<PostListItem post={post}
       onClick={function click() {}} onDelete={function noop() {}}
@@ -26,7 +27,7 @@ describe('component tests', () => {
     const output = renderer.getRenderOutput();
     expect(output).toEqualJSX(<div className="single-post">
             <h3 className="post-title ">
-              <Link to={'/post/' + post.slug} onClick={function noop() {}}>
+              <Link to={'/post/' + post.slug + '-' + post.cuid} onClick={function noop() {}}>
                 {post.title}
               </Link>
             </h3>

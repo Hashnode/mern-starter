@@ -12,6 +12,7 @@ describe('reducer tests', () => {
       title: 'first post',
       content: 'Hello world!',
       _id: null,
+      cuid: null,
       slug: 'first-post',
     }], post: null };
 
@@ -21,6 +22,7 @@ describe('reducer tests', () => {
       title: 'first post',
       content: 'Hello world!',
       _id: null,
+      cuid: null,
       slug: 'first-post',
     };
     deepFreeze(stateBefore);
@@ -35,7 +37,7 @@ describe('reducer tests', () => {
         title: 'first post',
         content: 'Hello world!',
         _id: null,
-        slug: 'first-post', 
+        slug: 'first-post',
 
       }],
       selectedPost: null,
