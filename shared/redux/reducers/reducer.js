@@ -11,6 +11,7 @@ const postReducer = (state = initialState, action) => {
           title: action.title,
           content: action.content,
           slug: action.slug,
+          cuid: action.cuid,
           _id: action._id,
         }].concat(state.posts),
         post: state.post };

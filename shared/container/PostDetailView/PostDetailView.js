@@ -54,6 +54,7 @@ PostDetailView.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
+    cuid: PropTypes.string.isRequired,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };

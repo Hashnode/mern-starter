@@ -7,7 +7,7 @@ function PostListItem(props, context) {
   return (
      <div className="single-post">
         <h3 className="post-title ">
-          <Link to={'/post/' + props.post.slug} onClick={props.onClick}>
+          <Link to={'/post/' + props.post.slug + '-' + props.post.cuid} onClick={props.onClick}>
             {props.post.title}
           </Link>
         </h3>
@@ -25,6 +25,7 @@ PostListItem.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
+    cuid: PropTypes.string.isRequired,
   }).isRequired,
 
   onClick: PropTypes.func.isRequired,

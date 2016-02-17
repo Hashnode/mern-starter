@@ -7,11 +7,12 @@ const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || ('http:/
 export function addPost(post) {
   return {
     type: ActionTypes.ADD_POST,
-    name: post.post.name,
-    title: post.post.title,
-    content: post.post.content,
-    slug: post.post.slug,
-    _id: post.post._id,
+    name: post.name,
+    title: post.title,
+    content: post.content,
+    slug: post.slug,
+    cuid: post.cuid,
+    _id: post._id,
   };
 }
 
@@ -36,7 +37,7 @@ export function addPostRequest(post) {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-    }).then((res) => res.json()).then(res => dispatch(addPost(res)));
+    }).then((res) => res.json()).then(res => dispatch(addPost(res.post)));
   };
 }
 

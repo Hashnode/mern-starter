@@ -1,4 +1,5 @@
 import Post from '../models/post';
+import cuid from 'cuid';
 
 export function getPosts(req, res) {
   Post.find().sort('-dateAdded').exec((err, posts) => {
@@ -10,8 +11,13 @@ export function getPosts(req, res) {
 }
 
 export function addPost(req, res) {
+  if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
+    return res.status(403).end();
+  }
+
   var newPost = new Post(req.body.post);
   newPost.slug = newPost.title.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+  newPost.cuid = cuid();
   newPost.save((err, saved) => {
     if (err) {
       return res.status(500).send(err);
@@ -21,7 +27,9 @@ export function addPost(req, res) {
 }
 
 export function getPost(req, res) {
-  Post.findOne({ slug: req.query.slug }).exec((err, post) => {
+  var slug = req.query.slug.split('-');
+  var cuid = slug[slug.length - 1];
+  Post.findOne({ cuid: cuid }).exec((err, post) => {
     if (err) {
       return res.status(500).send(err);
     }
