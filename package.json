@@ -9,7 +9,8 @@
     "start": "NODE_ENV=development node index.js",
     "start:prod": "NODE_ENV=production node index.js",
     "bs": "npm run clean && npm run build && npm run start:prod",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "minify": "cleancss -o static/css/app.min.css static/css/app.css",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && npm run minify",
     "clean": "rimraf static/dist",
     "slate": "rimraf node_modules && npm install",
     "lint": "eslint shared client"
@@ -41,6 +42,7 @@
     "babel-preset-react-hmre": "^1.1.0",
     "babel-register": "^6.4.3",
     "chai": "^3.5.0",
+    "clean-css": "^3.4.9",
     "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
     "css-modules-require-hook": "^2.1.0",
