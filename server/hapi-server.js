@@ -84,8 +84,6 @@ const renderFullPage = (html, initialState) => {
 };
 server.register([
   Inert
-  // Vision,
-  // Scooter,
   ], (err) => {
     if (err) {
       return console.error("PLUGIN REGISTER ERROR: \n", err, err.stack);
