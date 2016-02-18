@@ -14,8 +14,16 @@
     "slate": "rimraf node_modules && npm install",
     "lint": "eslint shared client"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hashnode/mern-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hashnode/mern-starter/issues"
+  },
+  "homepage": "https://github.com/Hashnode/mern-starter#readme",
   "author": "Prashant Abhishek <prashant.abhishek7g@gmail.com>, Mayank Chandola <imayankchd@gmail.com>, Sandeep Panda <sandeep@hashnode.com>, Syed Fazle Rahman <fazle@hashnode.com>, Alkshendra Maurya <alkshendra@hashnode.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "babel-core": "^6.4.5",
     "body-parser": "^1.14.2",
