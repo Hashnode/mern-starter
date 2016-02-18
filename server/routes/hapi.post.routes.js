@@ -85,19 +85,19 @@ const routes = [{
       });
   })
 }, {
-  path: "/getPosts",
+  path: "/api/getPosts",
   method: "GET",
   handler: PostController.getPosts
 }, {
-  path: "/getPost",
+  path: "/api/getPost",
   method: "GET",
   handler: PostController.getPost
 }, {
-  path: "/addPost",
+  path: "/api/addPost",
   method: "POST",
   handler: PostController.addPost
 }, {
-  path: "/deletePost",
+  path: "/api/deletePost",
   method: "POST",
   handler: PostController.deletePost
 }]
