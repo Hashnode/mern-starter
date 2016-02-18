@@ -98,9 +98,9 @@ Shared directory contains all the components, routes, actions and reducers.
 Index.js simply does client side rendering using the data provided from window.__INITIAL_STATE__.
 
 ## Roadmap
-1. Add Security measures like CSRF etc.
-2. Add Auth flow and handle sessions.
-3. Add option to generate controllers and models through [CLI](https://github.com/Hashnode/mern-cli). (Basically anything that reduces writing boilerplate code)
+- [ ] Add Security measures like CSRF etc.
+- [ ] Add Auth flow and handle sessions.
+- [ ] Add option to generate controllers and models through [CLI](https://github.com/Hashnode/mern-cli). (Basically anything that reduces writing boilerplate code)
 
 ## License
 MERN is released under the [MIT License](http://www.opensource.org/licenses/MIT).
