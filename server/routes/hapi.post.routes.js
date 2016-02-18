@@ -38,12 +38,18 @@ const renderFullPage = (html, initialState) => {
 };
 
 const routes = [{
-  path: "/static/{param*}",
+  path: "/{param*}",
   method: "GET",
   handler: {
     directory: {
-      path: "."
+      path: "../static/"
     }
+  }
+}, {
+  path: "/dist/bundle.js",
+  method: "GET",
+  handler: (req, reply) => {
+    reply.file("../dist/bundle.js")
   }
 }, {
   path: '/',
