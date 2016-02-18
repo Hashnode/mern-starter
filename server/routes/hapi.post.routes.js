@@ -50,12 +50,12 @@ const routes = [{
   method: 'GET',
   handler: (req, reply) => match({ routes: componentRoutes, location: req.url }, (err, redirectLocation, renderProps) => {
     if (err) {
-      reply("500").statusCode = 500;
-    }
-    if (!renderProps) {
-      reply("404").statusCode = 404;
+      return reply("500").statusCode = 500;
     }
     console.log("RENDER PROPS", renderProps);
+    if (!renderProps) {
+      return reply("404").statusCode = 404;
+    }
     const initialState = { posts: [], post: {} };
 
     const store = configureStore(initialState);
@@ -69,27 +69,27 @@ const routes = [{
         );
         const finalState = store.getState();
 
-        reply(renderFullPage(initialView, finalState));
+        return reply(renderFullPage(initialView, finalState));
       })
       .catch(() => {
-        reply(renderFullPage("Error", {}));
+        return reply(renderFullPage("Error", {}));
       });
   })
 }, {
   path: "/getPosts",
   method: "GET",
-  handler: (req, reply) => reply([])
+  handler: PostController.getPosts
 }, {
   path: "/getPost",
   method: "GET",
-  handler: (req, reply) => reply({})
+  handler: PostController.getPost
 }, {
   path: "/addPost",
   method: "POST",
-  handler: (req, reply) => reply("Ok, I did nothing.")
+  handler: PostController.addPost
 }, {
   path: "/deletePost",
   method: "POST",
-  handler: (req, reply) => reply("Ok, I did nothing.")
+  handler: PostController.deletePost
 }]
 module.exports = routes;
