@@ -68,7 +68,7 @@ describe('GET /api/getPost', function () {
   beforeEach('connect and add one Post entry', function(done){
 
     connectDB(function () {
-      var post = new Post({ name: 'Foo', title: 'bar', content: 'Hello Mern says Foo' });
+      var post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
 
       post.save(function (err, saved) {
         done();
@@ -85,10 +85,10 @@ describe('GET /api/getPost', function () {
   it('Should send correct data when queried against a title', function (done) {
 
     request(app)
-      .get('/api/getPost?title=bar')
+      .get('/api/getPost?slug=bar-f34gb2bh24b24b2')
       .set('Accept', 'application/json')
       .end(function (err, res) {
-        Post.findOne({ title: 'bar' }).exec(function (err, post) {
+        Post.findOne({ cuid: 'f34gb2bh24b24b2' }).exec(function (err, post) {
           expect(post.name).to.equal('Foo');
           done();
         });
