@@ -87,7 +87,7 @@ If there's an error in matching we return 500 status code, if no matches are fou
 
 **Note:** A new Redux Store is populated afresh on every request.
 
-`fetchComponentData` is the key function. It takes three params : first is a dispatch function of redux store, second is an array of components that should be rendered in current route and third is the route params. `fetchComponentData` collects all the needs (need is an array of actions that are required to be dispatched before rendering the component) of components in the current route. It returns a promise when all the required actions are dispatched. We render the page and send data to client for clinet-side rendering in `window.__INITIAL_STATE__`.
+`fetchComponentData` is the key function. It takes three params : first is a dispatch function of redux store, second is an array of components that should be rendered in current route and third is the route params. `fetchComponentData` collects all the needs (need is an array of actions that are required to be dispatched before rendering the component) of components in the current route. It returns a promise when all the required actions are dispatched. We render the page and send data to client for client-side rendering in `window.__INITIAL_STATE__`.
 
 
 ###Shared
