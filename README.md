@@ -94,3 +94,6 @@ Shared directory contains all the components, routes, actions and reducers.
 ###Client
 
 Index.js simply does client side rendering using the data provided from window.__INITIAL_STATE__.
+
+## License
+MERN is released under the [MIT License](http://www.opensource.org/licenses/MIT).
