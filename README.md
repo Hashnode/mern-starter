@@ -7,7 +7,6 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 
 - [Website](http://mern.io)
 - [Documentation](http://mern.io/documentation.html)
-- [Demo](http://mern-starter.mern.io)
 
 ##Quickstart
 
