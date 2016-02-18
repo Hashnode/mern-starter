@@ -4,13 +4,12 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
+// Import controllers
+import * as PostController from '../controllers/hapi.post.controller';
 
 //Required modules
 import componentRoutes from '../../shared/routes';
 import { fetchComponentData } from '../util/fetchData';
-import posts from '../routes/hapi.post.routes';
-import dummyData from '../dummyData';
-import serverConfig from '../config';
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
