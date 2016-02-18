@@ -68,24 +68,24 @@ describe('GET /api/getPost', function () {
   beforeEach('connect and add one Post entry', function(done){
 
     connectDB(function () {
-      var post = new Post({ name: 'Foo', title: 'bar', content: 'Hello Mern says Foo' });
+      var post = new Post({ name: 'Foo', title: 'bar', content: 'Hello Mern says Foo', slug: 'bar', cuid: 'baz' });
 
       post.save(function (err, saved) {
         done();
       });
 
     });
-    
+
   });
 
   afterEach(function (done) {
     dropDB(done);
   });
-  
+
   it('Should send correct data when queried against a title', function (done) {
 
     request(app)
-      .get('/api/getPost?title=bar')
+      .get('/api/getPost?slug=bar-baz')
       .set('Accept', 'application/json')
       .end(function (err, res) {
         Post.findOne({ title: 'bar' }).exec(function (err, post) {
