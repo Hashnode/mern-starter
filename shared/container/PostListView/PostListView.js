@@ -5,20 +5,24 @@ import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 
 function PostListView(props, context) {
-  return (<div className="listView">
-          {props.posts.map((post, i, arr) =>
-            (<PostListItem post={post} key={i}
-              onClick={function handleClick() {
-                props.dispatch(Actions.addSelectedPost(post));
-              }}
-              onDelete={function handleDelete() {
-                if (confirm('Do you want to delete this post')) {
-                  props.dispatch(Actions.deletePostRequest(post));
-                }
-              }}
-            />))
-          }
-         </div>);
+  return (
+    <div className="listView">
+      {
+        props.posts.map((post, i, arr) => (
+          <PostListItem post={post} key={i}
+            onClick={function handleClick() {
+              props.dispatch(Actions.addSelectedPost(post));
+            }}
+            onDelete={function handleDelete() {
+              if (confirm('Do you want to delete this post')) { // eslint-disable-line
+                props.dispatch(Actions.deletePostRequest(post));
+              }
+            }}
+          />
+        ))
+      }
+    </div>
+  );
 }
 
 PostListView.propTypes = {
