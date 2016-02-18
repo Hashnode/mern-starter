@@ -46,16 +46,18 @@ const routes = [{
     }
   }
 }, {
-  path: '/{param*}',
+  path: '/',
   method: 'GET',
-  handler: (req, reply) => match({ routes: componentRoutes, location: req.url }, (err, redirectLocation, renderProps) => {
+  handler: (req, reply) =>
+    match({ routes: componentRoutes, location: req.url }, (err, redirectLocation, renderProps) => {
     if (err) {
       return reply("500").statusCode = 500;
     }
-    console.log("RENDER PROPS", renderProps);
     if (!renderProps) {
+      console.log("NO PROPS!", renderProps);
       return reply("404").statusCode = 404;
     }
+    console.log("RENDER PROPS", renderProps);
     const initialState = { posts: [], post: {} };
 
     const store = configureStore(initialState);
@@ -71,7 +73,8 @@ const routes = [{
 
         return reply(renderFullPage(initialView, finalState));
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log("ERROR", err, err.stack);
         return reply(renderFullPage("Error", {}));
       });
   })
