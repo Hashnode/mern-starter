@@ -48,7 +48,7 @@ class PostContainer extends Component {
   }
 }
 
-PostContainer.need = [function () { return Actions.fetchPosts(); }];
+PostContainer.need = [() => { return Actions.fetchPosts(); }];
 PostContainer.contextTypes = {
   router: React.PropTypes.object,
 };
