@@ -4,18 +4,19 @@ import slug from 'slug';
 
 var sanitizeHtml = require('sanitize-html');
 
-export function getPosts(req, reply) {
+export function getPosts(req, res) {
   Post.find().sort('-dateAdded').exec((err, posts) => {
     if (err) {
-      return reply(err).statusCode = 500;
+      return res.status(500).send(err);
     }
-    reply({ posts });
+    console.log("GET POSTS", posts);
+    res.json({ posts });
   });
 }
 
-export function addPost(req, reply) {
+export function addPost(req, res) {
   if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
-    return reply(err).statusCode = 403;
+    return res.status(403).end();
   }
 
   var newPost = new Post(req.body.post);
@@ -29,32 +30,33 @@ export function addPost(req, reply) {
   newPost.cuid = cuid();
   newPost.save((err, saved) => {
     if (err) {
-      return reply(err).statusCode = 500;
+      return res.status(500).send(err);
     }
-    return reply({ post: saved });
+    return res.json({ post: saved });
   });
 }
 
-export function getPost(req, reply) {
+export function getPost(req, res) {
   var slug = req.query.slug.split('-');
   var cuid = slug[slug.length - 1];
   Post.findOne({ cuid: cuid }).exec((err, post) => {
     if (err) {
-      return reply(err).statusCode = 500;
+      return res.status(500).send(err);
     }
-    reply({ post });
+    console.log("GET POST", post);
+    res.json({ post });
   });
 }
 
-export function deletePost(req, reply) {
+export function deletePost(req, res) {
   var postId = req.body.postId;
   Post.findById(postId).exec((err, post) => {
     if (err) {
-      return reply.statusCode = 500;
+      return res.status(500).send(err);
     }
 
     post.remove(function () {
-      reply.statusCode = 200;
+      res.status(200).end();
     });
   });
 }
