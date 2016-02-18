@@ -15,11 +15,11 @@ export function getPosts(req, reply) {
 }
 
 export function addPost(req, reply) {
-  if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
+  if (!req.payload.post.name || !req.payload.post.title || !req.payload.post.content) {
     return reply(err).statusCode = 403;
   }
 
-  var newPost = new Post(req.body.post);
+  var newPost = new Post(req.payload.post);
 
   //Let's sanitize inputs
   newPost.title = sanitizeHtml(newPost.title);
@@ -48,7 +48,7 @@ export function getPost(req, reply) {
 }
 
 export function deletePost(req, reply) {
-  var postId = req.body.postId;
+  var postId = req.payload.postId;
   Post.findById(postId).exec((err, post) => {
     if (err) {
       return reply.statusCode = 500;
