@@ -97,6 +97,7 @@ app.use((req, res) => {
           </Provider>
         );
         const finalState = store.getState();
+        
         res.status(200).end(renderFullPage(initialView, finalState));
       })
       .catch(() => {

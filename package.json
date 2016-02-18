@@ -38,6 +38,7 @@
     "react-router": "^2.0.0-rc5",
     "redux": "^3.1.5",
     "redux-thunk": "^1.0.3",
+    "sanitize-html": "^1.11.3",
     "slug": "^0.9.1"
   },
   "devDependencies": {

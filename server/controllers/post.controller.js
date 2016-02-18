@@ -2,6 +2,8 @@ import Post from '../models/post';
 import cuid from 'cuid';
 import slug from 'slug';
 
+var sanitizeHtml = require('sanitize-html');
+
 export function getPosts(req, res) {
   Post.find().sort('-dateAdded').exec((err, posts) => {
     if (err) {
@@ -17,6 +19,12 @@ export function addPost(req, res) {
   }
 
   var newPost = new Post(req.body.post);
+  
+  //Let's sanitize inputs
+  newPost.title = sanitizeHtml(newPost.title);
+  newPost.name = sanitizeHtml(newPost.name);
+  newPost.content = sanitizeHtml(newPost.content);
+  
   newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
   newPost.cuid = cuid();
   newPost.save((err, saved) => {
