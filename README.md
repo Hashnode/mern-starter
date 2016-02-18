@@ -18,7 +18,8 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
   npm install
   npm start
 ```
-**Note : ** Please start your MongoDB server before running `npm start`.
+
+Note : Please start your MongoDB server before running `npm start`.
 
 ##File Structure
 
