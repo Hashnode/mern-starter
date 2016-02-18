@@ -4,7 +4,7 @@
   "description": "Boilerplate project for building Iosmorphic apps using React and Redux",
   "scripts": {
     "test": "mocha shared/tests/*.spec.js --compilers js:babel-register",
-    "test:server": "cross-env NODE_ENV=development MONGO_URL=mongodb://localhost:27017/mern-test mocha --compilers js:babel-core/register --recursive server/tests/**/*.spec.js",
+    "test:server": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/mern-test mocha --compilers js:babel-core/register --recursive server/tests/**/*.spec.js",
     "start": "cross-env NODE_ENV=development node index.js",
     "start:prod": "cross-env NODE_ENV=production node index.js",
     "bs": "npm run clean && npm run build && npm run start:prod",
