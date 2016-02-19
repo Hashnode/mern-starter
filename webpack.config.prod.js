@@ -9,7 +9,7 @@ module.exports = {
 
   output: {
     path: __dirname + '/static/dist/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
 
   module: {
@@ -22,9 +22,6 @@ module.exports = {
         test: /\.jsx*$/,
         exclude: 'node_modules',
         loader: 'babel',
-        query: {
-          presets: ['react', 'es2015'],
-        },
       }
     ],
   },
@@ -33,14 +30,14 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+        'NODE_ENV': JSON.stringify('production'),
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
-        warnings: false
+        warnings: false,
       }
     }),
     new ExtractTextPlugin("app.css"),
-  ]
-}
+  ],
+};
