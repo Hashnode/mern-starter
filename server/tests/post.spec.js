@@ -73,15 +73,13 @@ describe('GET /api/getPost', function () {
       post.save(function (err, saved) {
         done();
       });
-
     });
-    
   });
 
   afterEach(function (done) {
     dropDB(done);
   });
-  
+
   it('Should send correct data when queried against a title', function (done) {
 
     request(app)
