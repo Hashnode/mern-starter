@@ -35,6 +35,7 @@ import serverConfig from './config';
 // MongoDB Connection
 mongoose.connect(serverConfig.mongoURL, (error, connection) => {
   if (error) {
+    console.error('Please make sure Mongodb is installed and running!')
     throw error;
   }
 
