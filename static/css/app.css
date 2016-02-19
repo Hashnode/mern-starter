@@ -7,20 +7,20 @@
 	line-height: normal;
 }
 
-::-webkit-input-placeholder { 
+::-webkit-input-placeholder {
 	color:#aaa;
 	font-weight: 300;
 }
 ::-moz-placeholder {
-	color:#aaa; 
+	color:#aaa;
 	font-weight: 300;
 } 
-:-ms-input-placeholder { 
-	color:#aaa; 
+:-ms-input-placeholder {
+	color:#aaa;
 	font-weight: 300;
 }
-input:-moz-placeholder { 
-	color:#aaa; 
+input:-moz-placeholder {
+	color:#aaa;
 	font-weight: 300;
 }
 
@@ -140,7 +140,7 @@ body {
 	color: #555;
 	text-decoration: none;
 	font-size: 14px;
-	font-style: italic;	
+	font-style: italic;
 }
 
 .single-post .post-action a:hover{

@@ -2,7 +2,7 @@
 import * as ActionTypes from '../constants/constants';
 import fetch from 'isomorphic-fetch';
 
-const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || ('http://localhost:' + (process.env.PORT || 8000)) : '';
+const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || (`http://localhost:${(process.env.PORT || 8000)}`) : '';
 
 export function addPost(post) {
   return {
@@ -24,8 +24,8 @@ export function changeSelectedPost(slug) {
 }
 
 export function addPostRequest(post) {
-  return function (dispatch) {
-    fetch(baseURL + '/api/addPost', {
+  return (dispatch) => {
+    fetch(`${baseURL}/api/addPost`, {
       method: 'post',
       body: JSON.stringify({
         post: {
@@ -49,8 +49,8 @@ export function addSelectedPost(post) {
 }
 
 export function getPostRequest(post) {
-  return function (dispatch) {
-    return fetch(baseURL + `/api/getPost?slug=${post}`, {
+  return (dispatch) => {
+    return fetch(`${baseURL}/api/getPost?slug=${post}`, {
       method: 'get',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -74,16 +74,16 @@ export function addPosts(posts) {
 }
 
 export function fetchPosts() {
-  return function (dispatch) {
-    return fetch(baseURL + '/api/getPosts').
+  return (dispatch) => {
+    return fetch(`${baseURL}/api/getPosts`).
       then((response) => response.json()).
       then((response) => dispatch(addPosts(response.posts)));
   };
 }
 
 export function deletePostRequest(post) {
-  return function (dispatch) {
-    fetch(baseURL + '/api/deletePost', {
+  return (dispatch) => {
+    fetch(`${baseURL}/api/deletePost`, {
       method: 'post',
       body: JSON.stringify({
         postId: post._id,
