@@ -8,7 +8,7 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 - [Website](http://mern.io)
 - [Documentation](http://mern.io/documentation.html)
 
-##Quickstart
+## Quickstart
 
 ```
   npm install -g mern-cli
@@ -21,27 +21,27 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 
 **Note : Please make sure your MongoDB is running and install cross-env globally before running `npm start`.**
 
-##File Structure
+## File Structure
 
-###Webpack Configs
+### Webpack Configs
 
 MERN uses Webpack for bundling modules. There are two types of webpack configs provided `webpack.config.dev.js` (for development) and `webpack.config.prod.js` (for production).
 
 The webpack configuration is minimal and beginner-friendly. You can customize and add more features to it for production build.
 
-###Server
+### Server
 
 MERN uses express web framework. Our app sits in server.js where we check for NODE_ENV.
 
 If NODE_ENV is development we apply webpack middlewares for bundling and Hot Module Replacement.
 
-####Server Side Rendering
+#### Server Side Rendering
 
 We use react-router's match function for handling all page requests so that browser history works.
 
-All the routes are defined in shared/routes.js. React router renders components according to route requested.
+All the routes are defined in `shared/routes.js`. React router renders components according to route requested.
 
-```
+```js
 // Server Side Rendering based on routes matched by React-router.
 app.use((req, res) => {
     match({
@@ -88,12 +88,11 @@ If there's an error in matching we return 500 status code, if no matches are fou
 
 `fetchComponentData` is the key function. It takes three params : first is a dispatch function of redux store, second is an array of components that should be rendered in current route and third is the route params. `fetchComponentData` collects all the needs (need is an array of actions that are required to be dispatched before rendering the component) of components in the current route. It returns a promise when all the required actions are dispatched. We render the page and send data to client for client-side rendering in `window.__INITIAL_STATE__`.
 
-
-###Shared
+### Shared
 
 Shared directory contains all the components, routes, actions and reducers.
 
-###Client
+### Client
 
 Index.js simply does client side rendering using the data provided from window.__INITIAL_STATE__.
 
