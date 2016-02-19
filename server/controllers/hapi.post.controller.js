@@ -1,25 +1,25 @@
+
 import Post from '../models/post';
 import cuid from 'cuid';
 import slug from 'slug';
 
 var sanitizeHtml = require('sanitize-html');
 
-export function getPosts(req, res) {
+export function getPosts(req, reply) {
   Post.find().sort('-dateAdded').exec((err, posts) => {
     if (err) {
-      return res.status(500).send(err);
+      return reply(err).statusCode = 500;
     }
-    console.log("GET POSTS", posts);
-    res.json({ posts });
+    reply({ posts });
   });
 }
 
-export function addPost(req, res) {
-  if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
-    return res.status(403).end();
+export function addPost(req, reply) {
+  if (!req.payload.post.name || !req.payload.post.title || !req.payload.post.content) {
+    return reply(err).statusCode = 403;
   }
 
-  var newPost = new Post(req.body.post);
+  var newPost = new Post(req.payload.post);
 
   //Let's sanitize inputs
   newPost.title = sanitizeHtml(newPost.title);
@@ -30,33 +30,32 @@ export function addPost(req, res) {
   newPost.cuid = cuid();
   newPost.save((err, saved) => {
     if (err) {
-      return res.status(500).send(err);
+      return reply(err).statusCode = 500;
     }
-    return res.json({ post: saved });
+    return reply({ post: saved });
   });
 }
 
-export function getPost(req, res) {
+export function getPost(req, reply) {
   var slug = req.query.slug.split('-');
   var cuid = slug[slug.length - 1];
   Post.findOne({ cuid: cuid }).exec((err, post) => {
     if (err) {
-      return res.status(500).send(err);
+      return reply(err).statusCode = 500;
     }
-    console.log("GET POST", post);
-    res.json({ post });
+    reply({ post });
   });
 }
 
-export function deletePost(req, res) {
-  var postId = req.body.postId;
+export function deletePost(req, reply) {
+  var postId = req.payload.postId;
   Post.findById(postId).exec((err, post) => {
     if (err) {
-      return res.status(500).send(err);
+      return reply.statusCode = 500;
     }
 
     post.remove(function () {
-      res.status(200).end();
+      reply.statusCode = 200;
     });
   });
 }
