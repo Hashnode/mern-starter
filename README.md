@@ -94,7 +94,7 @@ Shared directory contains all the components, routes, actions and reducers.
 
 ### Client
 
-Index.js simply does client side rendering using the data provided from window.__INITIAL_STATE__.
+Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
 
 ## Roadmap
 - [ ] Add Security measures like CSRF etc.
