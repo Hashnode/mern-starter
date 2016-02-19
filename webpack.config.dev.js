@@ -37,10 +37,5 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin()
-<<<<<<< HEAD
   ],
 };
-=======
-  ]
-}
->>>>>>> Hashnode/master
