@@ -1,5 +1,4 @@
 import Express from 'express';
-import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
 
@@ -32,15 +31,8 @@ import posts from './routes/post.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 
-// MongoDB Connection
-mongoose.connect(serverConfig.mongoURL, function (err, connection) {
-  if (err) {
-    throw err;
-  }
-
-  // feed some dummy data in DB.
-  dummyData();
-});
+// Feed some dummy data in DB.
+dummyData();
 
 // Apply body Parser and server public assets and routes
 app.use(bodyParser.json({ limit: '20mb' }));

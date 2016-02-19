@@ -1,15 +1,14 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var thinky = require('./thinky');
+var type = thinky.type;
 
-var postSchema = new Schema({
-  name: { type: 'String', required: true },
-  title: { type: 'String', required: true },
-  content: { type: 'String', required: true },
-  slug : { type: 'String', required: true },
-  cuid: { type: 'String', required: true },
-  dateAdded : { type: 'Date', default: Date.now, required: true },
+var Post = thinky.createModel('post', {
+  id: type.string(),
+  name: type.string().required(),
+  title: type.string().required(),
+  content: type.string().required(),
+  slug: type.string().required(),
+  cuid: type.string().required(),
+  dateAdded: type.date().default(Date.now)
 });
-
-var Post = mongoose.model('Post', postSchema);
 
 module.exports = Post;

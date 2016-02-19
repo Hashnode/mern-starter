@@ -12,7 +12,7 @@ export function addPost(post) {
     content: post.content,
     slug: post.slug,
     cuid: post.cuid,
-    _id: post._id,
+    id: post.id,
   };
 }
 
@@ -86,7 +86,7 @@ export function deletePostRequest(post) {
     fetch(baseURL + '/api/deletePost', {
       method: 'post',
       body: JSON.stringify({
-        postId: post._id,
+        postId: post.id,
       }),
       headers: new Headers({
         'Content-Type': 'application/json',

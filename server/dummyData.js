@@ -1,9 +1,7 @@
 import Post from './models/post';
 
 export default function () {
-
-  Post.count().exec(function (err, count) {
-
+  Post.count().execute().then(function (count) {
     if (count > 0) {
       return;
     }
@@ -39,11 +37,8 @@ export default function () {
     var post1 = new Post({ name: 'Admin', title: 'Hello MERN', slug: 'hello-mern', cuid: 'cikqgkv4q01ck7453ualdn3hd', content: content1 });
     var post2 = new Post({ name: 'Admin', title: 'Lorem Ipsum', slug: 'lorem-ipsum', cuid: 'cikqgkv4q01ck7453ualdn3hf', content: content2 });
 
-    Post.create([post1, post2], function (err, saved) {
-      if (!err) {
-        //console.log('ready to go....');
-      }
-    });
+    post1.save();
+    post2.save();
   });
 	
 }
