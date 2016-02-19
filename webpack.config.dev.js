@@ -5,33 +5,37 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
 
   entry: ['webpack-hot-middleware/client',
-          './client/index.js'
+          './client/index.js',
   ],
 
   output: {
     path: __dirname + '/dist/',
     filename: 'bundle.js',
-    publicPath: '/dist/'
+    publicPath: '/dist/',
+  },
+
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
   },
 
   module: {
     loaders: [
       {
         test: /\.css$/,
-        loader: 'style!css?modules'
+        loader: 'style!css?modules',
       },
       {
-        test: /\.js$/,
+        test: /\.jsx*$/,
         exclude: [/node_modules/, /.+\.config.js/],
         loader: 'babel',
         query: {
-          presets: ['react-hmre']
-        }
-      }
-    ]
+          presets: ['react-hmre'],
+        },
+      },
+    ],
   },
 
   plugins: [
     new webpack.HotModuleReplacementPlugin()
-  ]
-}
+  ],
+};
