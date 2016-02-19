@@ -3,7 +3,7 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: 'source-map',       
+  devtool: 'source-map',
 
   entry: __dirname + "/client/index.js",
 
@@ -19,9 +19,12 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style','css?modules'),
       },
       {
-        test: /\.js$/,
+        test: /\.jsx*$/,
         exclude: 'node_modules',
-        loader: 'babel'
+        loader: 'babel',
+        query: {
+          presets: ['react', 'es2015'],
+        },
       }
     ],
   },

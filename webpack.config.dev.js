@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map', 
+  devtool: 'cheap-module-eval-source-map',
 
   entry: ['webpack-hot-middleware/client',
           './client/index.js'
@@ -14,6 +14,10 @@ module.exports = {
     publicPath: '/dist/'
   },
 
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
+
   module: {
     loaders: [
       {
@@ -21,12 +25,12 @@ module.exports = {
         loader: 'style!css?modules'
       },
       {
-        test: /\.js$/,
+        test: /\.jsx*$/,
         exclude: [/node_modules/, /.+\.config.js/],
         loader: 'babel',
         query: {
-          presets: ['react-hmre']
-        }
+          presets: ['react', 'es2015', 'react-hmre'],
+        },
       }
     ]
   },
