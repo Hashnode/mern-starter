@@ -39,5 +39,10 @@ module.exports = {
       }
     }),
     new ExtractTextPlugin("app.css"),
+<<<<<<< HEAD
   ],
 };
+=======
+  ]
+}
+>>>>>>> Hashnode/master

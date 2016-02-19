@@ -33,9 +33,9 @@ import dummyData from './dummyData';
 import serverConfig from './config';
 
 // MongoDB Connection
-mongoose.connect(serverConfig.mongoURL, function (err, connection) {
-  if (err) {
-    throw err;
+mongoose.connect(serverConfig.mongoURL, (error, connection) => {
+  if (error) {
+    throw error;
   }
 
   // feed some dummy data in DB.
@@ -93,11 +93,11 @@ app.use((req, res) => {
       .then(() => {
         const initialView = renderToString(
           <Provider store={store}>
-              <RouterContext {...renderProps} />
+            <RouterContext {...renderProps} />
           </Provider>
         );
         const finalState = store.getState();
-        
+
         res.status(200).end(renderFullPage(initialView, finalState));
       })
       .catch(() => {
@@ -109,7 +109,7 @@ app.use((req, res) => {
 // start app
 app.listen(serverConfig.port, (error) => {
   if (!error) {
-    console.log('MERN is running on port: '+serverConfig.port+'! Build something amazing!');
+    console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
   }
 });
 

@@ -36,11 +36,11 @@ class PostDetailView extends Component {
         </div>
         <Footer />
       </div>
-      );
+    );
   }
 }
 
-PostDetailView.need = [function (params) {
+PostDetailView.need = [(params) => {
   return Actions.getPostRequest.bind(null, params.slug)();
 }];
 

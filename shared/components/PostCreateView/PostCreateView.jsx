@@ -29,7 +29,8 @@ class PostCreateView extends Component {
           <textarea placeholder="Post Content" className="form-field" ref="content"></textarea>
           <a className="post-submit-button align-right" href="#" onClick={this.addPost}>Submit</a>
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 
