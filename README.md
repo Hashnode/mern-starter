@@ -1,5 +1,8 @@
 ![](http://res.cloudinary.com/hashnode/image/upload/w_200/v1455647564/static_imgs/mern/imgs/favicon-mern.png)
 
+# rern-starter
+This is a fork of the Hashnode/mern-starter project that uses RethinkDB + Thinky instead of MongoDB + Mongoose. Below you will find their original documentation, I will update this soon and make the tests pass.
+
 # mern-starter
 ![title](https://travis-ci.org/Hashnode/mern-starter.svg?branch=master)
 
