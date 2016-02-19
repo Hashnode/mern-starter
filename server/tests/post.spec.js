@@ -1,14 +1,13 @@
 /* eslint-disable */
 
-var mocha = require('mocha');
-var app = require('../server');
-var chai = require('chai');
-var request = require('supertest');
-var mongoose = require('mongoose');
-var Post = require('../models/post');
-var expect = chai.expect;
+import mocha from 'mocha';
+import app from '../server';
+import chai from 'chai';
+import request from 'supertest';
+import mongoose from 'mongoose';
+import Post from '../models/post';
 
-// request = request(app);
+const expect = chai.expect;
 
 function connectDB(done) {
   if (mongoose.connection.name !== 'mern-test') {

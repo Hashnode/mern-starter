@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
@@ -10,6 +10,4 @@ const postSchema = new Schema({
   dateAdded: { type: 'Date', default: Date.now, required: true },
 });
 
-const Post = mongoose.model('Post', postSchema);
-
-module.exports = Post;
+export default mongoose.model('Post', postSchema); 

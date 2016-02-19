@@ -114,4 +114,4 @@ app.listen(serverConfig.port, (error) => {
   }
 });
 
-module.exports = app;
+export default app;

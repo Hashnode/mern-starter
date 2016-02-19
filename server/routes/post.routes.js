@@ -14,4 +14,4 @@ router.route('/addPost').post(PostController.addPost);
 // Delete a Post
 router.route('/deletePost').post(PostController.deletePost);
 
-module.exports = router;
+export default router;

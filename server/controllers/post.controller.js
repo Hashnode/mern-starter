@@ -1,8 +1,7 @@
 import Post from '../models/post';
 import cuid from 'cuid';
 import slug from 'slug';
-
-const sanitizeHtml = require('sanitize-html');
+import sanitizeHtml from 'sanitize-html';
 
 export function getPosts(req, res) {
   Post.find().sort('-dateAdded').exec((err, posts) => {
