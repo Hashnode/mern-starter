@@ -4,6 +4,7 @@ import PostListView from '../container/PostListView/PostListView';
 import PostCreateView from '../components/PostCreateView/PostCreateView';
 import { connect } from 'react-redux';
 import * as Actions from '../redux/actions/actions';
+import Helmet from 'react-helmet';
 
 class App extends Component {
   constructor(props, context) {
@@ -14,6 +15,21 @@ class App extends Component {
     const { dispatch } = this.props;
     return (
       <div>
+        <Helmet
+          title="MERN Starter - Blog App"
+          meta={[
+            { charset: 'utf-8' },
+            {
+              'http-equiv': 'X-UA-Compatible',
+              content: 'IE=edge',
+            },
+            {
+              name: 'viewport',
+              content: 'width=device-width, initial-scale=1',
+            },
+          ]}
+        />
+
         { this.props.children }
       </div>
     );
