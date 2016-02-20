@@ -51,7 +51,9 @@ app.use('/api', posts);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
-  const cssPath = process.env.NODE_ENV === 'production' ? '/css/app.min.css' : '/css/app.css';
+  var cssPath = '';
+  if (process.env.NODE_ENV === 'production')
+    cssPath = '/css/app.min.css';
   return `
     <!doctype html>
     <html>

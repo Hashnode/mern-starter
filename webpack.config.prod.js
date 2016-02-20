@@ -11,16 +11,16 @@ module.exports = {
     path: __dirname + '/static/dist/',
     filename: 'bundle.js',
   },
-  
+
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
-  
+
   module: {
     loaders: [
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style','css?modules'),
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass'],
       },
       {
         test: /\.jsx*$/,
@@ -42,6 +42,5 @@ module.exports = {
         warnings: false,
       }
     }),
-    new ExtractTextPlugin("app.css"),
   ],
 };
