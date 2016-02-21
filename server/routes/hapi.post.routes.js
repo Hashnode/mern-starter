@@ -45,13 +45,15 @@ const routes = [{
       path: "../static/"
     }
   }
-}, {
+},
+{
   path: "/dist/bundle.js",
   method: "GET",
   handler: (req, reply) => {
     reply.file("../dist/bundle.js")
   }
-}, {
+},
+{
   path: '/',
   method: 'GET',
   handler: (req, reply) =>
@@ -60,10 +62,10 @@ const routes = [{
       return reply("500").statusCode = 500;
     }
     if (!renderProps) {
-      console.log("NO PROPS!", renderProps);
+
       return reply("404").statusCode = 404;
     }
-    console.log("RENDER PROPS", renderProps);
+
     const initialState = { posts: [], post: {} };
 
     const store = configureStore(initialState);
@@ -80,23 +82,26 @@ const routes = [{
         return reply(renderFullPage(initialView, finalState));
       })
       .catch((err) => {
-        console.log("ERROR", err, err.stack);
         return reply(renderFullPage("Error", {}));
       });
   })
-}, {
+},
+{
   path: "/api/getPosts",
   method: "GET",
   handler: PostController.getPosts
-}, {
+},
+{
   path: "/api/getPost",
   method: "GET",
   handler: PostController.getPost
-}, {
+},
+{
   path: "/api/addPost",
   method: "POST",
   handler: PostController.addPost
-}, {
+},
+{
   path: "/api/deletePost",
   method: "POST",
   handler: PostController.deletePost
