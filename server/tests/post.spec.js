@@ -35,8 +35,8 @@ describe('GET /api/getPosts', function () {
   beforeEach('connect and add two post entries', function (done) {
 
     connectDB(function () {
-      var post1 = new Post({name: 'Prashant', title: 'Hello Mern', content: "All cats meow 'mern!'"});
-      var post2 = new Post({name: 'Mayank', title: 'Hi Mern', content: "All dogs bark 'mern!'"});
+      var post1 = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
+      var post2 = new Post({ name: 'Bar', title: 'foo', slug: 'foo', cuid: 'iom123490k0werk', content: 'Hello Mern says Bar' });
 
       Post.create([post1, post2], function (err, saved) {
         done();
