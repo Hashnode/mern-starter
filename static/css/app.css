@@ -14,7 +14,7 @@
 ::-moz-placeholder {
 	color:#aaa;
 	font-weight: 300;
-} 
+}
 :-ms-input-placeholder {
 	color:#aaa;
 	font-weight: 300;
@@ -157,7 +157,7 @@ body {
 
 .header {
 	background-color: #eee;
-	background-image: url('http://res.cloudinary.com/hashnode/image/upload/v1455610145/static_imgs/mern/header-bk.png');
+	background-image: url('/img/header-bk.png');
 	background-position: center;
 	background-size: cover;
 	border-bottom: 1px solid #ccc;
@@ -196,7 +196,7 @@ body {
 	text-align: center;
 	padding: 56px 0;
 	background-color: #FFF;
-	background-image: url('http://res.cloudinary.com/hashnode/image/upload/v1455610145/static_imgs/mern/header-bk.png');
+	background-image: url('/img/header-bk.png');
 	background-position: center;
 	background-size: cover;
 }
