@@ -1,6 +1,6 @@
-import Express from 'express';
+import { Router } from 'express';
 import * as PostController from '../controllers/post.controller';
-const router = Express.Router(); // eslint-disable-line new-cap
+const router = new Router();
 
 // Get all Posts
 router.route('/getPosts').get(PostController.getPosts);
