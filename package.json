@@ -12,7 +12,7 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && npm run minify",
     "clean": "rimraf static/dist",
     "slate": "rimraf node_modules && npm install",
-    "lint": "eslint shared client"
+    "lint": "eslint client server shared"
   },
   "repository": {
     "type": "git",
