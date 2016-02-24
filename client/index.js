@@ -10,8 +10,6 @@ import PostDetailView from '../shared/container/PostDetailView/PostDetailView';
 import { Router, browserHistory, Route, IndexRoute, match } from 'react-router';
 import routes from '../shared/routes';
 
-import createBrowserHistory from 'history/lib/createBrowserHistory';
-
 const store = configureStore(window.__INITIAL_STATE__);
 const history = browserHistory;
 
