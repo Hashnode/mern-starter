@@ -10,7 +10,7 @@ import PostDetailView from '../shared/container/PostDetailView/PostDetailView';
 import { Router, browserHistory, Route, IndexRoute, match } from 'react-router';
 import routes from '../shared/routes';
 
-import '../styles/main.scss';
+import '../static/css/main.scss';
 
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 

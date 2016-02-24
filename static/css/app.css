@@ -87,7 +87,6 @@ body {
 	padding: 8px 16px;
 	font-size: 18px;
 	color: #FFF;
-	background: #03A9F4;
 	text-decoration: none;
 	border-radius: 4px;
 }
@@ -185,7 +184,6 @@ body {
 .add-post-button {
 	display: inline-block;
     color: #FFF;
-    background: #03A9F4;
     padding: 8px 16px;
     text-decoration: none;
     border-radius: 1000px;

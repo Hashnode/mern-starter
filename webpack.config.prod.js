@@ -19,6 +19,10 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style','css?modules'),
+      },
+      {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass'],
       },
@@ -42,5 +46,6 @@ module.exports = {
         warnings: false,
       }
     }),
+    new ExtractTextPlugin("app.css"),
   ],
 };
