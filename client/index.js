@@ -7,7 +7,7 @@ import React from 'react';
 import App from '../shared/container/App';
 import PostListView from '../shared/container/PostListView/PostListView';
 import PostDetailView from '../shared/container/PostDetailView/PostDetailView';
-import { Router, browserHistory, Route, IndexRoute, match } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import routes from '../shared/routes';
 
 const store = configureStore(window.__INITIAL_STATE__);
