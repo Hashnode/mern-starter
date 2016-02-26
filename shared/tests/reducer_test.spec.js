@@ -1,4 +1,3 @@
-/* eslint no-unused-vars: 0 */
 import expect from 'expect';
 import postReducer from '../redux/reducers/reducer';
 import deepFreeze from 'deep-freeze';

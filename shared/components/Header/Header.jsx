@@ -1,6 +1,4 @@
-/* eslint no-unused-vars: 0 */
-/* eslint-disable prefer-template*/
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 function Header(props, context) {

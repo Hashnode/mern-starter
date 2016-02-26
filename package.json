@@ -14,6 +14,11 @@
     "slate": "rimraf node_modules && npm install",
     "lint": "eslint client server shared"
   },
+  "pre-commit": [
+    "lint",
+    "test",
+    "test:server"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hashnode/mern-starter.git"
@@ -63,8 +68,12 @@
     "expect-jsx": "^2.2.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "mocha": "^2.4.5",
+    "pre-commit": "^1.1.2",
     "react-addons-test-utils": "^0.14.7",
     "react-transform-hmr": "^1.0.1",
+    "redux-devtools": "^3.1.1",
+    "redux-devtools-dock-monitor": "^1.1.0",
+    "redux-devtools-log-monitor": "^1.0.4",
     "rimraf": "^2.5.1",
     "style-loader": "^0.13.0",
     "supertest": "^1.1.0",
