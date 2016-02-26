@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 
-function Footer(props, context) {
+function Footer() {
   return (
    <div className="footer">
      <p>&copy; 2016 &middot; Hashnode &middot; LinearBytes Inc.</p>
