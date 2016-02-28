@@ -13,7 +13,7 @@ const postReducer = (state = initialState, action) => {
           slug: action.slug,
           cuid: action.cuid,
           _id: action._id,
-        }].concat(state.posts),
+        }, ...state.posts],
         post: state.post };
 
     case ActionTypes.CHANGE_SELECTED_POST :
