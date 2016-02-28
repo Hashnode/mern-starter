@@ -24,7 +24,7 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-if (process.env.CLIENT && !window.devTooolsExtension) {
+if (process.env.CLIENT && !window.devToolsExtension) {
   render(
     <Provider store={store} key="provider">
       <div>
