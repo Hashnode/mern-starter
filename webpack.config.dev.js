@@ -18,11 +18,11 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    loaders: [  
       {
-        test: /\.css$/,
-        loader: 'style!css?modules',
-      },
+        test: /\.scss$/,
+        loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+      },    
       {
         test: /\.jsx*$/,
         exclude: [/node_modules/, /.+\.config.js/],
@@ -30,7 +30,7 @@ module.exports = {
         query: {
           presets: ['react-hmre'],
         },
-      },
+      }
     ],
   },
 

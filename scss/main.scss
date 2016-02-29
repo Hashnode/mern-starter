@@ -1,0 +1,13 @@
+$badass: #bada55;
+
+body {
+  background-color: $badass; 
+
+  ul {
+    li {
+      a {
+        color: red;        
+      }
+    }
+  }
+}
