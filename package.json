@@ -9,10 +9,11 @@
     "start:prod": "cross-env NODE_ENV=production node index.js",
     "bs": "npm run clean && npm run build && npm run start:prod",
     "minify": "cleancss -o static/css/app.min.css static/css/app.css",
+    "minify-sass": "npm run build-css && cleancss -o static/css/public.min.css static/css/public.css",
     "build-css": "node-sass --include-path scss scss/main.scss static/css/public.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && npm run minify",
-    "clean": "rimraf static/dist",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && npm run minify && npm run minify-sass",
+    "clean": "rimraf static/dist && rm static/css/*.min.css",
     "slate": "rimraf node_modules && npm install",
     "lint": "eslint client server shared"
   },
