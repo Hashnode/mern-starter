@@ -1,6 +1,3 @@
-/* eslint no-unused-vars: 0 */
-/* eslint-disable prefer-template*/
-
 import expect from 'expect';
 import TestUtils from 'react-addons-test-utils';
 import PostListItem from '../components/PostListItem/PostListItem';
@@ -32,7 +29,7 @@ describe('component tests', () => {
     expect(output).toEqualJSX(
       <div className="single-post">
         <h3 className="post-title ">
-          <Link to={'/post/' + post.slug + '-' + post.cuid} onClick={function noop() {}}>
+          <Link to={`/post/${post.slug}-${post.cuid}`} onClick={function noop() {}}>
             {post.title}
           </Link>
         </h3>

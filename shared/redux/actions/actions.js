@@ -1,4 +1,3 @@
-/* eslint no-unused-vars: 0 */
 import * as ActionTypes from '../constants/constants';
 import fetch from 'isomorphic-fetch';
 
