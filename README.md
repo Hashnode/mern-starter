@@ -98,6 +98,12 @@ Shared directory contains all the components, routes, actions and reducers.
 
 Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
 
+### Sass
+
+You can use css or sass in this project. For sass, use `npm run watch-css`.
+
+This does not override your current css if you want to use that!
+
 ## Roadmap
 - [ ] Add Security measures like CSRF etc.
 - [ ] Add Auth flow and handle sessions.

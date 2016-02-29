@@ -7,3 +7,4 @@ dump.rdb
 public/*
 static/dist
 static/css/app.min.css
+.sass-cache
