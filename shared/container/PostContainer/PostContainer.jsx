@@ -4,7 +4,7 @@ import PostCreateView from '../../components/PostCreateView/PostCreateView';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { connect } from 'react-redux';
-import * as Actions from '../../redux/actions/actions';
+import { addPostRequest, fetchPosts } from '../../redux/actions/actions';
 
 class PostContainer extends Component {
   constructor(props, context) {
@@ -16,6 +16,12 @@ class PostContainer extends Component {
     this.add = this.add.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.posts.length === 0) {
+      this.props.fetchPosts();
+    }
+  }
+
   handleClick(e) {
     this.setState({
       showAddPost: !this.state.showAddPost,
@@ -25,16 +31,10 @@ class PostContainer extends Component {
   }
 
   add(name, title, content) {
-    this.props.dispatch(Actions.addPostRequest({ name, title, content }));
+    this.props.addPostRequest({ name, title, content });
     this.setState({
       showAddPost: false,
     });
-  }
-
-  componentDidMount() {
-    if(this.props.posts.length === 0) {
-      this.props.dispatch(Actions.fetchPosts());
-    }
   }
 
   render() {
@@ -43,7 +43,8 @@ class PostContainer extends Component {
         <Header onClick={this.handleClick} />
         <div className="container">
           <PostCreateView addPost={this.add}
-            showAddPost={this.state.showAddPost}/>
+            showAddPost={this.state.showAddPost}
+          />
           <PostListView posts={this.props.posts}/>
         </div>
         <Footer />
@@ -52,14 +53,18 @@ class PostContainer extends Component {
   }
 }
 
-PostContainer.need = [() => { return Actions.fetchPosts(); }];
+PostContainer.need = [() => { return fetchPosts(); }];
 PostContainer.contextTypes = {
   router: React.PropTypes.object,
 };
 
-function mapStateToProps(store) {
+function mapStateToProps(state) {
+  const {
+    blog: { posts },
+  } = state;
+
   return {
-    posts: store.posts,
+    posts,
   };
 }
 
@@ -69,7 +74,11 @@ PostContainer.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
   })).isRequired,
-  dispatch: PropTypes.func.isRequired,
+  addPostRequest: PropTypes.func.isRequired,
+  fetchPosts: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(PostContainer);
+export default connect(mapStateToProps, {
+  addPostRequest,
+  fetchPosts,
+})(PostContainer);

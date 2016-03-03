@@ -23,7 +23,8 @@ import { configureStore } from '../shared/redux/store/configureStore';
 import { Provider } from 'react-redux';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { match, RouterContext } from 'react-router';
+import { createMemoryHistory, match, RouterContext } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 // Import required modules
 import routes from '../shared/routes';
@@ -77,7 +78,11 @@ const renderFullPage = (html, initialState) => {
 
 // Server Side Rendering based on routes matched by React-router.
 app.use((req, res) => {
-  match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
+  const memoryHistory = createMemoryHistory(req.url);
+  const store = configureStore(memoryHistory);
+  const history = syncHistoryWithStore(memoryHistory, store);
+
+  match({ history, routes, location: req.url }, (err, redirectLocation, renderProps) => {
     if (err) {
       return res.status(500).end('Internal server error');
     }
@@ -86,10 +91,6 @@ app.use((req, res) => {
       return res.status(404).end('Not found!');
     }
 
-    const initialState = { posts: [], post: {} };
-
-    const store = configureStore(initialState);
-
     fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(
@@ -97,6 +98,7 @@ app.use((req, res) => {
             <RouterContext {...renderProps} />
           </Provider>
         );
+
         const finalState = store.getState();
 
         res.status(200).end(renderFullPage(initialView, finalState));
