@@ -22,7 +22,9 @@ describe('component tests', () => {
       <PostListItem
         post={post}
         onClick={function click() {}}
+
         onDelete={function noop() {}}
+
       />
     );
     const output = renderer.getRenderOutput();
@@ -44,6 +46,7 @@ describe('component tests', () => {
   it('should render PostCreateView properly', () => {
     const renderer = TestUtils.createRenderer();
     renderer.render(<PostCreateView showAddPost={false} addPost={function noop() {}}/>);
+
     const output = renderer.getRenderOutput();
     expect(output).toEqualJSX(
       <div className="form ">
@@ -58,9 +61,10 @@ describe('component tests', () => {
     );
   });
 
-  it('should show post creame form in  PostCreateView if showAddPost is true', () => {
+  it('should show post create form in  PostCreateView if showAddPost is true', () => {
     const renderer = TestUtils.createRenderer();
     renderer.render(<PostCreateView showAddPost addPost={function noop() {}}/>);
+
     const output = renderer.getRenderOutput();
     expect(output).toEqualJSX(
       <div className="form appear">
