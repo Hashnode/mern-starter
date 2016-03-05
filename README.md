@@ -30,15 +30,10 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
   - index.js
 |- server
   |- controllers
-    - post.controller.js
   |- models
-    - post.js
   |- routes
-    - post.routes.js
   |- tests
-    - post.spec.js
   |- util
-    - fetchData.js
   - config.js
   - dummyData.js
   - server.js
