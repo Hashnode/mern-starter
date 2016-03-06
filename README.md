@@ -131,6 +131,16 @@ Shared directory contains all the components, routes, actions and reducers.
 
 Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
 
+
+## Devtools
+
+MERN automatically ships with devtools that appear in the browser.
+
+* hide redux-devtools `ctrl + h`
+* move redux-devtools `ctrl + w`
+ 
+ ![](https://camo.githubusercontent.com/c4c2fffb4a8d60c351692540743e88000044a734/687474703a2f2f672e7265636f726469742e636f2f4d687271344e437857442e676966)
+
 ## Roadmap
 ####MERN Starter
 - [ ] Add GraphQL to mern-starter
