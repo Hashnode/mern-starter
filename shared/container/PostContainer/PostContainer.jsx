@@ -43,8 +43,7 @@ class PostContainer extends Component {
         <Header onClick={this.handleClick} />
         <div className="container">
           <PostCreateView addPost={this.add}
-            showAddPost={this.state.showAddPost}
-          />
+            showAddPost={this.state.showAddPost}/>
           <PostListView posts={this.props.posts}/>
         </div>
         <Footer />
@@ -60,7 +59,7 @@ PostContainer.contextTypes = {
 
 function mapStateToProps(state) {
   const {
-    blog: { posts },
+    post: { posts },
   } = state;
 
   return {

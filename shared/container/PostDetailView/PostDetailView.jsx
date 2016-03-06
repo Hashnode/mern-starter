@@ -60,7 +60,7 @@ PostDetailView.propTypes = {
 
 function mapStateToProps(state) {
   const {
-    blog: { post },
+    post: { post },
   } = state;
 
   return {

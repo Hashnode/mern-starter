@@ -5,9 +5,9 @@ import * as ActionTypes from '../redux/constants/constants';
 
 describe('reducer tests', () => {
   it('action ADD_POST is working', () => {
-    const stateBefore = { blog: { posts: ['foo'], post: null } };
+    const stateBefore = { post: { posts: ['foo'], post: null } };
     const stateAfter = {
-      blog: {
+      post: {
         posts: [{
           name: 'prank',
           title: 'first post',
@@ -41,7 +41,7 @@ describe('reducer tests', () => {
 
   it('action ADD_SELECTED_POST is working', () => {
     const stateBefore = {
-      blog: {
+      post: {
         posts: [{
           name: 'prank',
           title: 'first post',
@@ -55,7 +55,7 @@ describe('reducer tests', () => {
     };
 
     const stateAfter = {
-      blog: {
+      post: {
         posts: [{
           name: 'prank',
           title: 'first post',
