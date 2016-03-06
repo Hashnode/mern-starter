@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import DevTools from '../../container/DevTools/DevTools';
 
-export function configureStore(history, initialState = {}) {
+export function configureStore(history, initialState) {
   let finalCreateStore;
 
   if (process.env.CLIENT) {
