@@ -1,19 +1,29 @@
 import expect from 'expect';
-import postReducer from '../redux/reducers/reducer';
+import postReducer from '../redux/reducers';
 import deepFreeze from 'deep-freeze';
 import * as ActionTypes from '../redux/constants/constants';
 
 describe('reducer tests', () => {
   it('action ADD_POST is working', () => {
-    const stateBefore = { posts: ['foo'], post: null };
-    const stateAfter = { posts: [{
-      name: 'prank',
-      title: 'first post',
-      content: 'Hello world!',
-      _id: null,
-      cuid: null,
-      slug: 'first-post',
-    }, 'foo'], post: null };
+    const stateBefore = { post: { posts: ['foo'], post: null } };
+    const stateAfter = {
+      post: {
+        posts: [{
+          name: 'prank',
+          title: 'first post',
+          content: 'Hello world!',
+          _id: null,
+          cuid: null,
+          slug: 'first-post',
+        },
+        'foo'],
+        post: null,
+      },
+
+      routing: {
+        locationBeforeTransitions: null,
+      },
+    };
 
     const action = {
       type: ActionTypes.ADD_POST,
@@ -31,31 +41,39 @@ describe('reducer tests', () => {
 
   it('action ADD_SELECTED_POST is working', () => {
     const stateBefore = {
-      posts: [{
-        name: 'prank',
-        title: 'first post',
-        content: 'Hello world!',
-        _id: null,
-        slug: 'first-post',
+      post: {
+        posts: [{
+          name: 'prank',
+          title: 'first post',
+          content: 'Hello world!',
+          _id: null,
+          slug: 'first-post',
 
-      }],
-      selectedPost: null,
+        }],
+        selectedPost: null,
+      },
     };
 
     const stateAfter = {
-      posts: [{
-        name: 'prank',
-        title: 'first post',
-        content: 'Hello world!',
-        _id: null,
-        slug: 'first-post',
-      }],
       post: {
-        name: 'prank',
-        title: 'first post',
-        content: 'Hello world!',
-        _id: null,
-        slug: 'first-post',
+        posts: [{
+          name: 'prank',
+          title: 'first post',
+          content: 'Hello world!',
+          _id: null,
+          slug: 'first-post',
+        }],
+        post: {
+          name: 'prank',
+          title: 'first post',
+          content: 'Hello world!',
+          _id: null,
+          slug: 'first-post',
+        },
+      },
+
+      routing: {
+        locationBeforeTransitions: null,
       },
     };
 

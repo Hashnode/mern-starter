@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as Actions from '../../redux/actions/actions';
+import { fetchPosts, getPostRequest }from '../../redux/actions/actions';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
@@ -19,7 +19,7 @@ class PostDetailView extends Component {
   }
 
   handleLogoClick() {
-    this.props.dispatch(Actions.fetchPosts());
+    this.props.fetchPosts();
   }
 
   render() {
@@ -40,7 +40,7 @@ class PostDetailView extends Component {
 }
 
 PostDetailView.need = [(params) => {
-  return Actions.getPostRequest.bind(null, params.slug)();
+  return getPostRequest.bind(null, params.slug)();
 }];
 
 PostDetailView.contextTypes = {
@@ -55,13 +55,20 @@ PostDetailView.propTypes = {
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   }).isRequired,
-  dispatch: PropTypes.func.isRequired,
+  fetchPosts: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(store) {
+function mapStateToProps(state) {
+  const {
+    post: { post },
+  } = state;
+
   return {
-    post: (store.post),
+    post,
   };
 }
 
-export default connect(mapStateToProps)(PostDetailView);
+export default connect(mapStateToProps, {
+  fetchPosts,
+  getPostRequest,
+})(PostDetailView);
