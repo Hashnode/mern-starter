@@ -75,17 +75,24 @@ const renderFullPage = (html, initialState) => {
   `;
 };
 
+const renderError = err => {
+  const softTab = '&#32;&#32;&#32;&#32;';
+  const errTrace = process.env.NODE_ENV !== 'production' ?
+    ':<br><br><pre style="color:red">' + softTab + err.stack.replace(/\n/g, '<br>' + softTab) + '</pre>' : '';
+  return renderFullPage(`Server Error${errTrace}`, {});
+};
+
 // Server Side Rendering based on routes matched by React-router.
 app.use((req, res, next) => {
   match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
     if (err) {
-      return res.status(500).end('Internal server error');
+      return res.status(500).end(renderError(err));
     }
-    
+
     if (redirectLocation) {
       return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     }
-    
+
     if (!renderProps) {
       return next();
     }
@@ -105,9 +112,7 @@ app.use((req, res, next) => {
 
         res.status(200).end(renderFullPage(initialView, finalState));
       })
-      .catch(() => {
-        res.end(renderFullPage('Error', {}));
-      });
+      .catch(err => res.status(500).end(renderError(err)));
   });
 });
 
