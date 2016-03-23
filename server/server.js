@@ -101,7 +101,7 @@ app.use((req, res, next) => {
 
     const store = configureStore(initialState);
 
-    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+    fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(
           <Provider store={store}>
