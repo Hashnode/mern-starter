@@ -1,7 +1,8 @@
 import * as ActionTypes from '../constants/constants';
 import fetch from 'isomorphic-fetch';
+import config from '../../../server/config';
 
-const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || (`http://localhost:${(process.env.PORT || 8000)}`) : '';
+const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || (`http://localhost:${config.port}`) : '';
 
 export function addPost(post) {
   return {
