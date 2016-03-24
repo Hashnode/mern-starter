@@ -1,7 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
+import sagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers/reducer';
+import sagas from '../sagas';
 import DevTools from '../../container/DevTools/DevTools';
 
 export function configureStore(initialState = {}) {
@@ -9,12 +11,12 @@ export function configureStore(initialState = {}) {
 
   if (process.env.CLIENT) {
     finalCreateStore = compose(
-      applyMiddleware(thunk),
+      applyMiddleware(thunk, sagaMiddleware(...sagas)),
       DevTools.instrument(),
       persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
     )(createStore);
   } else {
-    finalCreateStore = applyMiddleware(thunk)(createStore);
+    finalCreateStore = applyMiddleware(thunk, sagaMiddleware(...sagas))(createStore);
   }
 
   const store = finalCreateStore(rootReducer, initialState);
