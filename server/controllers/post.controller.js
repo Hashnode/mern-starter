@@ -53,7 +53,8 @@ export function deletePost(req, res) {
     }
 
     post.remove(() => {
-      res.status(200).end();
+      // Sending empty response breaks json parsing, so for now sending empty object. Will remove it as soon as that problem is fixed.
+      return res.json({});
     });
   });
 }

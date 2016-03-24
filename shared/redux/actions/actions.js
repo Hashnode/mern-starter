@@ -1,7 +1,6 @@
 import * as ActionTypes from '../constants/constants';
-import fetch from 'isomorphic-fetch';
 
-const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || (`http://localhost:${(process.env.PORT || 8000)}`) : '';
+export const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || (`http://localhost:${(process.env.PORT || 8000)}`) : '';
 
 export function addPost(post) {
   return {
@@ -23,20 +22,9 @@ export function changeSelectedPost(slug) {
 }
 
 export function addPostRequest(post) {
-  return (dispatch) => {
-    fetch(`${baseURL}/api/addPost`, {
-      method: 'post',
-      body: JSON.stringify({
-        post: {
-          name: post.name,
-          title: post.title,
-          content: post.content,
-        },
-      }),
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    }).then((res) => res.json()).then(res => dispatch(addPost(res.post)));
+  return {
+    type: ActionTypes.ADD_POST_REQUEST,
+    post,
   };
 }
 
@@ -48,13 +36,9 @@ export function addSelectedPost(post) {
 }
 
 export function getPostRequest(post) {
-  return (dispatch) => {
-    return fetch(`${baseURL}/api/getPost?slug=${post}`, {
-      method: 'get',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    }).then((response) => response.json()).then(res => dispatch(addSelectedPost(res.post)));
+  return {
+    type: ActionTypes.FETCH_POST,
+    post,
   };
 }
 
@@ -73,23 +57,14 @@ export function addPosts(posts) {
 }
 
 export function fetchPosts() {
-  return (dispatch) => {
-    return fetch(`${baseURL}/api/getPosts`).
-      then((response) => response.json()).
-      then((response) => dispatch(addPosts(response.posts)));
+  return {
+    type: ActionTypes.FETCH_POSTS,
   };
 }
 
 export function deletePostRequest(post) {
-  return (dispatch) => {
-    fetch(`${baseURL}/api/deletePost`, {
-      method: 'post',
-      body: JSON.stringify({
-        postId: post._id,
-      }),
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    }).then(() => dispatch(deletePost(post)));
+  return {
+    type: ActionTypes.DELETE_POST_REQUEST,
+    post,
   };
 }
