@@ -89,17 +89,14 @@ const renderError = err => {
 // Server Side Rendering based on routes matched by React-router.
 app.use((req, res, next) => {
   match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
-    if (err) {
+    if (err)
       return res.status(500).end(renderError(err));
-    }
 
-    if (redirectLocation) {
+    if (redirectLocation)
       return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-    }
 
-    if (!renderProps) {
+    if (!renderProps)
       return next();
-    }
 
     const initialState = { posts: [], post: {} };
 
@@ -115,7 +112,8 @@ app.use((req, res, next) => {
         const finalState = store.getState();
 
         res.status(200).end(renderFullPage(initialView, finalState));
-      });
+      })
+      .catch(serverError => res.status(500).end(renderError(serverError)));
   });
 });
 
