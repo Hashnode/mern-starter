@@ -39,6 +39,7 @@
     "mongoose": "^4.3.7",
     "morgan": "^1.7.0",
     "react": "^0.14.7",
+    "react-bootstrap": "^0.28.4",
     "react-dom": "^0.14.7",
     "react-redux": "^4.1.2",
     "react-router": "^2.0.0-rc5",
