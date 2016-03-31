@@ -142,7 +142,7 @@ describe('POST /api/deletePost', function () {
     dropDB(done);
   });
 
-  it('Should connect and delete a post', function () {
+  it('Should connect and delete a post', function (done) {
 
     // Check if post is saved in DB
     Post.findById(postId).exec(function (err, post) {
