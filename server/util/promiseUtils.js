@@ -5,12 +5,11 @@
 export function sequence(items, consumer) {
   const results = [];
   const runner = () => {
-    const item = items.shift();
+    const item = items.pop();
     if (item) {
       return consumer(item)
-        .then((result) => {
-          results.push(result);
-        })
+        .then(result =>
+          results.unshift(result))
         .then(runner);
     }
 

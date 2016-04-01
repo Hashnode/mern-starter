@@ -9,8 +9,10 @@ export function fetchComponentData(store, components, params) {
       .concat(prev);
   }, []);
 
-  // Test if component "needs" (with comments removed) contain the string "state", if so they are assumed state dependent and must be fetched synchronously with "sequence"
-  const needsAreStateDependent = stripComments(needs.toString()).indexOf('state') > -1;
+  // Test if component "needs" (with comments removed) contain the string "state"
+  // if so they are assumed state dependent and must be fetched synchronously with "sequence"
+  // Note that we do not need to include last "need" as it will not have anything run before it with "synchronous" fetching
+  const needsAreStateDependent = needs.length > 1 && stripComments(needs.slice(0, -1).toString().toLowerCase()).indexOf('state') > -1;
 
   return needsAreStateDependent ?
          sequence(needs, need => store.dispatch(need(params, store.getState()))) :  // fetch synchronously
