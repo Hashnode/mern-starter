@@ -1,0 +1,14 @@
+// example usage of scss
+@import 'colors';
+
+.form .post-submit-button {
+  background: $light-blue;
+}
+
+.add-post-button {
+  background: $light-blue;
+}
+
+p {
+  color: blue !important;
+}
