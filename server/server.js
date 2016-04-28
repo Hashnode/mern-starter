@@ -2,7 +2,6 @@ import Express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
-import logger from 'morgan';
 
 // Webpack Requirements
 import webpack from 'webpack';
@@ -17,7 +16,6 @@ if (process.env.NODE_ENV !== 'production') {
   const compiler = webpack(config);
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
-  app.use(logger('dev'));
 }
 
 // React And Redux Setup
