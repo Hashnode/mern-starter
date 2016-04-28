@@ -12,20 +12,17 @@ const dest = document.getElementById('root');
 
 let toRender;
 
-if(process.env.CLIENT && !window.devToolsExtension) {
-  toRender =   <Provider store={store}>
+if (process.env.CLIENT && !window.devToolsExtension) {
+  toRender = (<Provider store={store}>
                 <div>
                   <Router history={history} routes={routes} />
                   <DevTools />
                 </div>
-              </Provider> ;
-}
-
-else {
-  toRender =   <Provider store={store}>
+              </Provider>);
+} else {
+  toRender = (<Provider store={store}>
                 <Router history={history} routes={routes} />
-              </Provider> ;
+              </Provider>);
 }
 
 render(toRender, dest);
-

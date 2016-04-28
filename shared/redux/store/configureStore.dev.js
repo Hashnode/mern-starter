@@ -1,22 +1,20 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { persistState } from 'redux-devtools';
 import DevTools from '../../container/DevTools/DevTools';
 import rootReducer from '../reducers/reducer';
 
 export function configureStore(initialState = {}) {
-  
   let enhancerClient;
-  if(process.env.CLIENT) {
+  if (process.env.CLIENT) {
     enhancerClient = compose(
       applyMiddleware(thunk),
       window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument()
-    );    
+    );
   }
 
-  
+
   const enhancerServer = applyMiddleware(thunk);
-  
+
   let store;
 
   if (process.env.CLIENT) {
