@@ -104,10 +104,5 @@ Index.js simply does client side rendering using the data provided from `window.
 - [ ] Add SCSS support
 - [ ] Improve file structure (needs discussion)
 
-####[MERN CLI](https://github.com/Hashnode/mern-cli)
-- [ ] Generators for Containers, Components, Routes, Reducers, Actions
-- [ ] Generators for Models, Router, Controllers
-- [ ] Add flags to CLI e.g. for adding lifecycle
-
 ## License
 MERN is released under the [MIT License](http://www.opensource.org/licenses/MIT).
