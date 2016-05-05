@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React from 'react';
 import routes from '../shared/routes';
 import DevTools from '../shared/container/DevTools/DevTools';
