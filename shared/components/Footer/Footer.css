@@ -1,0 +1,20 @@
+.footer{
+	text-align: center;
+	padding: 56px 0;
+	background-color: #FFF;
+	background-image: url('/img/header-bk.png');
+	background-position: center;
+	background-size: cover;
+}
+
+.footer p{
+	margin: 0 0 8px 0;
+	font-size: 14px;
+	color: #FFF;
+}
+
+.footer a{
+	color: #FFF;
+	text-decoration: none;
+	font-weight: 700;
+}

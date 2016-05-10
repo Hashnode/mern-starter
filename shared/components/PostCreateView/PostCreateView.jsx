@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import styles from './PostCreateView.css';
+import cssModules from 'react-css-modules';
 
 class PostCreateView extends Component {
   constructor(props, context) {
@@ -19,13 +21,13 @@ class PostCreateView extends Component {
   render() {
     const cls = `form ${(this.props.showAddPost ? 'appear' : '')}`;
     return (
-      <div className={cls}>
-        <div className="form-content">
-          <h2 className="form-title">Create new post</h2>
-          <input placeholder="Author's Name" className="form-field" ref="name"/>
-          <input placeholder="Post Title" className="form-field" ref="title"/>
-          <textarea placeholder="Post Content" className="form-field" ref="content"></textarea>
-          <a className="post-submit-button align-right" href="#" onClick={this.addPost}>Submit</a>
+      <div styleName={cls}>
+        <div styleName="form-content">
+          <h2 styleName="form-title">Create new post</h2>
+          <input placeholder="Author's Name" styleName="form-field" ref="name"/>
+          <input placeholder="Post Title" styleName="form-field" ref="title"/>
+          <textarea placeholder="Post Content" styleName="form-field" ref="content"></textarea>
+          <a className="align-right" styleName="post-submit-button" href="#" onClick={this.addPost}>Submit</a>
         </div>
       </div>
     );
@@ -37,4 +39,4 @@ PostCreateView.propTypes = {
   showAddPost: PropTypes.bool.isRequired,
 };
 
-export default PostCreateView;
+export default cssModules(PostCreateView, styles, { allowMultiple: true });

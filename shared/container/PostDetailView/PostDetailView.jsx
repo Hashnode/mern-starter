@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import styles from '../../components/PostListItem/PostListItem.css';
+import cssModules from 'react-css-modules';
 
 class PostDetailView extends Component {
 
@@ -26,11 +28,11 @@ class PostDetailView extends Component {
     return (
       <div>
         <Header onClick={function noop() {}} handleLogoClick={this.handleLogoClick}/>
-        <div className="container">
-          <div className="single-post post-detail">
-            <h3 className="post-title">{this.props.post.title}</h3>
-            <p className="author-name">By {this.props.post.name}</p>
-            <p className="post-desc">{this.props.post.content}</p>
+        <div styleName="container">
+          <div styleName="single-post post-detail">
+            <h3 styleName="post-title">{this.props.post.title}</h3>
+            <p styleName="author-name">By {this.props.post.name}</p>
+            <p styleName="post-desc">{this.props.post.content}</p>
           </div>
         </div>
         <Footer />
@@ -64,4 +66,4 @@ function mapStateToProps(store) {
   };
 }
 
-export default connect(mapStateToProps)(PostDetailView);
+export default connect(mapStateToProps)(cssModules(PostDetailView, styles, { allowMultiple: true }));
