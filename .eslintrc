@@ -12,8 +12,10 @@
     "classes": true,
    },
    "rules": {
+     "no-shadow": [1, { "allow": ["done", "resolve", "reject", "done", "cb", "err", "error"] }],
      "comma-dangle": [1, "always-multiline"],
      "max-len": [1, 180, 4],
      "arrow-body-style": [0],
+     "curly": [0]
    },
 }
