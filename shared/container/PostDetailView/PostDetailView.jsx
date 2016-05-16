@@ -4,7 +4,31 @@ import * as Actions from '../../redux/actions/actions';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
-class PostDetailView extends Component {
+@connect(function (store) {
+  return {
+    posts: store.posts
+  };
+})
+export default class PostDetailView extends Component {
+
+  static propTypes = {
+    post: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired,
+      cuid: PropTypes.string.isRequired,
+    }).isRequired,
+    dispatch: PropTypes.func.isRequired,
+  };
+
+  static need = [(params) => {
+    return Actions.getPostRequest.bind(null, params.slug)();
+  }];
+
+  static contextTypes = {
+    router: React.PropTypes.object,
+  };
 
   constructor(props, context) {
     super(props, context);
@@ -38,30 +62,3 @@ class PostDetailView extends Component {
     );
   }
 }
-
-PostDetailView.need = [(params) => {
-  return Actions.getPostRequest.bind(null, params.slug)();
-}];
-
-PostDetailView.contextTypes = {
-  router: React.PropTypes.object,
-};
-
-PostDetailView.propTypes = {
-  post: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
-  }).isRequired,
-  dispatch: PropTypes.func.isRequired,
-};
-
-function mapStateToProps(store) {
-  return {
-    post: (store.post),
-  };
-}
-
-export default connect(mapStateToProps)(PostDetailView);

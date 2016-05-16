@@ -1,12 +1,35 @@
-import React, { PropTypes, Component } from 'react';
+import React, {PropTypes, Component} from 'react';
 import PostListView from '../PostListView/PostListView';
 import PostCreateView from '../../components/PostCreateView/PostCreateView';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 
-class PostContainer extends Component {
+@connect(function (store) {
+  return {
+    posts: store.posts
+  };
+})
+export default class PostContainer extends Component {
+
+  static propTypes = {
+    posts: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+    })).isRequired,
+    dispatch: PropTypes.func.isRequired,
+  };
+
+  static need = [() => {
+    return Actions.fetchPosts();
+  }];
+
+  static contextTypes = {
+    router: React.PropTypes.object,
+  };
+
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -25,14 +48,14 @@ class PostContainer extends Component {
   }
 
   add(name, title, content) {
-    this.props.dispatch(Actions.addPostRequest({ name, title, content }));
+    this.props.dispatch(Actions.addPostRequest({name, title, content}));
     this.setState({
       showAddPost: false,
     });
   }
 
   componentDidMount() {
-    if(this.props.posts.length === 0) {
+    if (this.props.posts.length === 0) {
       this.props.dispatch(Actions.fetchPosts());
     }
   }
@@ -40,10 +63,10 @@ class PostContainer extends Component {
   render() {
     return (
       <div>
-        <Header onClick={this.handleClick} />
+        <Header onClick={this.handleClick}/>
         <div className="container">
           <PostCreateView addPost={this.add}
-            showAddPost={this.state.showAddPost}/>
+                          showAddPost={this.state.showAddPost}/>
           <PostListView posts={this.props.posts}/>
         </div>
         <Footer />
@@ -51,25 +74,3 @@ class PostContainer extends Component {
     );
   }
 }
-
-PostContainer.need = [() => { return Actions.fetchPosts(); }];
-PostContainer.contextTypes = {
-  router: React.PropTypes.object,
-};
-
-function mapStateToProps(store) {
-  return {
-    posts: store.posts,
-  };
-}
-
-PostContainer.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-  })).isRequired,
-  dispatch: PropTypes.func.isRequired,
-};
-
-export default connect(mapStateToProps)(PostContainer);

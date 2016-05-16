@@ -1,6 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 
-class PostCreateView extends Component {
+export default class PostCreateView extends Component {
+
+  static propTypes = {
+    addPost: PropTypes.func.isRequired,
+    showAddPost: PropTypes.bool.isRequired
+  };
+
   constructor(props, context) {
     super(props, context);
     this.addPost = this.addPost.bind(this);
@@ -31,10 +37,3 @@ class PostCreateView extends Component {
     );
   }
 }
-
-PostCreateView.propTypes = {
-  addPost: PropTypes.func.isRequired,
-  showAddPost: PropTypes.bool.isRequired,
-};
-
-export default PostCreateView;
