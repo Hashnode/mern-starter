@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
 import { configureStore } from '../shared/redux/store/configureStore';
 import { Provider } from 'react-redux';
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 
 // Import required modules
@@ -103,7 +103,7 @@ app.use((req, res, next) => {
 
     return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
-        const initialView = renderToString(
+        const initialView = renderToStaticMarkup(
           <Provider store={store}>
             <RouterContext {...renderProps} />
           </Provider>

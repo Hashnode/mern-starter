@@ -37,7 +37,9 @@ export function addPostRequest(post) {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-    }).then((res) => res.json()).then(res => dispatch(addPost(res.post)));
+    })
+      .then((response) => response.json())
+      .then(response => dispatch(addPost(response.post)));
   };
 }
 
@@ -55,7 +57,9 @@ export function getPostRequest(post) {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-    }).then((response) => response.json()).then(res => dispatch(addSelectedPost(res.post)));
+    })
+      .then((response) => response.json())
+      .then(response => dispatch(addSelectedPost(response.post)));
   };
 }
 
@@ -75,9 +79,9 @@ export function addPosts(posts) {
 
 export function fetchPosts() {
   return (dispatch) => {
-    return fetch(`${baseURL}/api/getPosts`).
-      then((response) => response.json()).
-      then((response) => dispatch(addPosts(response.posts)));
+    return fetch(`${baseURL}/api/getPosts`)
+      .then((response) => response.json())
+      .then((response) => dispatch(addPosts(response.posts)));
   };
 }
 
@@ -91,6 +95,7 @@ export function deletePostRequest(post) {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-    }).then(() => dispatch(deletePost(post)));
+    })
+      .then(() => dispatch(deletePost(post)));
   };
 }

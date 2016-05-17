@@ -7,11 +7,6 @@ export default class PostCreateView extends Component {
     showAddPost: PropTypes.bool.isRequired
   };
 
-  constructor(props, context) {
-    super(props, context);
-    this.addPost = this.addPost.bind(this);
-  }
-
   addPost() {
     const nameRef = this.refs.name;
     const titleRef = this.refs.title;
@@ -31,7 +26,7 @@ export default class PostCreateView extends Component {
           <input placeholder="Author's Name" className="form-field" ref="name"/>
           <input placeholder="Post Title" className="form-field" ref="title"/>
           <textarea placeholder="Post Content" className="form-field" ref="content"></textarea>
-          <a className="post-submit-button align-right" href="#" onClick={this.addPost}>Submit</a>
+          <a className="post-submit-button align-right" href="#" onClick={::this.addPost}>Submit</a>
         </div>
       </div>
     );

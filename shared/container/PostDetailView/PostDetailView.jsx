@@ -1,12 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
-@connect(function (store) {
+@connect(store => {
   return {
-    posts: store.posts
+    post: store.post
   };
 })
 export default class PostDetailView extends Component {
@@ -18,28 +18,16 @@ export default class PostDetailView extends Component {
       content: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,
       cuid: PropTypes.string.isRequired,
-    }).isRequired,
+    }),
     dispatch: PropTypes.func.isRequired,
   };
-
-  static need = [(params) => {
-    return Actions.getPostRequest.bind(null, params.slug)();
-  }];
 
   static contextTypes = {
     router: React.PropTypes.object,
   };
 
-  constructor(props, context) {
-    super(props, context);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleLogoClick = this.handleLogoClick.bind(this);
-  }
-
-  handleClick() {
-    this.setState({
-      showAddPost: true,
-    });
+  componentDidMount() {
+    this.props.dispatch(Actions.getPostRequest(this.props.params.slug));
   }
 
   handleLogoClick() {
@@ -47,16 +35,21 @@ export default class PostDetailView extends Component {
   }
 
   render() {
+    var {post} = this.props;
     return (
       <div>
-        <Header onClick={function noop() {}} handleLogoClick={this.handleLogoClick}/>
-        <div className="container">
-          <div className="single-post post-detail">
-            <h3 className="post-title">{this.props.post.title}</h3>
-            <p className="author-name">By {this.props.post.name}</p>
-            <p className="post-desc">{this.props.post.content}</p>
-          </div>
-        </div>
+        <Header onClick={() => {}} handleLogoClick={::this.handleLogoClick}/>
+        {
+          post ?
+            <div className="container">
+              <div className="single-post post-detail">
+                <h3 className="post-title">{post.title}</h3>
+                <p className="author-name">By {post.name}</p>
+                <p className="post-desc">{post.content}</p>
+              </div>
+            </div> :
+            <span></span>
+        }
         <Footer />
       </div>
     );
