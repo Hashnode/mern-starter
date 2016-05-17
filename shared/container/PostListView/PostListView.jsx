@@ -1,6 +1,6 @@
-import React, {PropTypes, Component} from 'react';
+import React, { PropTypes, Component } from 'react';
 import PostListItem from '../../components/PostListItem/PostListItem';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 
 @connect()
@@ -18,7 +18,7 @@ export default class PostListView extends Component {
   };
 
   render() {
-    var {props} = this;
+    var { props } = this;
     return (
       <div className="listView">
         {

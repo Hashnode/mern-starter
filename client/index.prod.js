@@ -11,5 +11,5 @@ const history = browserHistory;
 const dest = document.getElementById('root');
 
 render(<Provider store={store}>
-        <Router history={history} routes={routes} />
-       </Provider>, dest);
+  <Router history={history} routes={routes}/>
+</Provider>, dest);

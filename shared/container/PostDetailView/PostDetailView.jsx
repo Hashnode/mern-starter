@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -35,7 +35,7 @@ export default class PostDetailView extends Component {
   }
 
   render() {
-    var {post} = this.props;
+    var { post } = this.props;
     return (
       <div>
         <Header onClick={() => {}} handleLogoClick={::this.handleLogoClick}/>

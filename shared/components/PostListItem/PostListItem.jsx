@@ -1,5 +1,5 @@
-import React, {PropTypes, Component} from 'react';
-import {Link} from 'react-router';
+import React, { PropTypes, Component } from 'react';
+import { Link } from 'react-router';
 
 export default class Footer extends Component {
 
@@ -17,7 +17,7 @@ export default class Footer extends Component {
   };
 
   render() {
-    var {props} = this;
+    var { props } = this;
     return (
       <div className="single-post">
         <h3 className="post-title ">

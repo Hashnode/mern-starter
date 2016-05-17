@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 export default class App extends Component {
 
   static propTypes = {
-    children: PropTypes.object.isRequired,
+    children: PropTypes.object.isRequired
   };
 
   constructor(props, context) {

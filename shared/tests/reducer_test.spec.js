@@ -6,14 +6,16 @@ import * as ActionTypes from '../redux/constants/constants';
 describe('reducer tests', () => {
   it('action ADD_POST is working', () => {
     const stateBefore = { posts: ['foo'], post: null };
-    const stateAfter = { posts: [{
-      name: 'prank',
-      title: 'first post',
-      content: 'Hello world!',
-      _id: null,
-      cuid: null,
-      slug: 'first-post',
-    }, 'foo'], post: null };
+    const stateAfter = {
+      posts: [{
+        name: 'prank',
+        title: 'first post',
+        content: 'Hello world!',
+        _id: null,
+        cuid: null,
+        slug: 'first-post'
+      }, 'foo'], post: null
+    };
 
     const action = {
       type: ActionTypes.ADD_POST,
@@ -22,7 +24,7 @@ describe('reducer tests', () => {
       content: 'Hello world!',
       _id: null,
       cuid: null,
-      slug: 'first-post',
+      slug: 'first-post'
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
@@ -36,10 +38,10 @@ describe('reducer tests', () => {
         title: 'first post',
         content: 'Hello world!',
         _id: null,
-        slug: 'first-post',
+        slug: 'first-post'
 
       }],
-      selectedPost: null,
+      selectedPost: null
     };
 
     const stateAfter = {
@@ -48,15 +50,15 @@ describe('reducer tests', () => {
         title: 'first post',
         content: 'Hello world!',
         _id: null,
-        slug: 'first-post',
+        slug: 'first-post'
       }],
       post: {
         name: 'prank',
         title: 'first post',
         content: 'Hello world!',
         _id: null,
-        slug: 'first-post',
-      },
+        slug: 'first-post'
+      }
     };
 
     const action = {
@@ -66,8 +68,8 @@ describe('reducer tests', () => {
         title: 'first post',
         content: 'Hello world!',
         _id: null,
-        slug: 'first-post',
-      },
+        slug: 'first-post'
+      }
     };
 
     deepFreeze(stateBefore);

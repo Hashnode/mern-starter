@@ -1,5 +1,5 @@
-import React, {PropTypes, Component} from 'react';
-import {Link} from 'react-router';
+import React, { PropTypes, Component } from 'react';
+import { Link } from 'react-router';
 
 export default class Header extends Component {
 
@@ -13,7 +13,7 @@ export default class Header extends Component {
   };
 
   render() {
-    var {props, context} = this;
+    var { props, context } = this;
     return (
       <div className="header">
         <div className="header-content">
