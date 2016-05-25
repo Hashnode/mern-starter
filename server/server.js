@@ -34,9 +34,9 @@ import dummyData from './dummyData';
 import serverConfig from './config';
 
 // MongoDB Connection
-mongoose.connect(serverConfig.mongoURL, (error, connection) => {
+mongoose.connect(serverConfig.mongoURL, (error) => {
   if (error) {
-    console.error('Please make sure Mongodb is installed and running!')
+    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
     throw error;
   }
 
@@ -80,22 +80,33 @@ const renderFullPage = (html, initialState) => {
   `;
 };
 
+const renderError = err => {
+  const softTab = '&#32;&#32;&#32;&#32;';
+  const errTrace = process.env.NODE_ENV !== 'production' ?
+    `:<br><br><pre style="color:red">${softTab}${err.stack.replace(/\n/g, `<br>${softTab}`)}</pre>` : '';
+  return renderFullPage(`Server Error${errTrace}`, {});
+};
+
 // Server Side Rendering based on routes matched by React-router.
-app.use((req, res) => {
+app.use((req, res, next) => {
   match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
     if (err) {
-      return res.status(500).end('Internal server error');
+      return res.status(500).end(renderError(err));
+    }
+
+    if (redirectLocation) {
+      return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     }
 
     if (!renderProps) {
-      return res.status(404).end('Not found!');
+      return next();
     }
 
     const initialState = { posts: [], post: {} };
 
     const store = configureStore(initialState);
 
-    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+    return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(
           <Provider store={store}>
@@ -106,9 +117,7 @@ app.use((req, res) => {
 
         res.status(200).end(renderFullPage(initialView, finalState));
       })
-      .catch(() => {
-        res.end(renderFullPage('Error', {}));
-      });
+      .catch((err) => next(err));
   });
 });
 

@@ -18,11 +18,10 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
   mern your_new_app
   cd your_new_app
   npm install
-  npm install -g cross-env
   npm start
 ```
 
-**Note : Please make sure your MongoDB is running and cross-env is installed globally before running `npm start`.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/).
+**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/).
 
 ## File Structure
 
@@ -100,9 +99,10 @@ Shared directory contains all the components, routes, actions and reducers.
 Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
 
 ## Roadmap
-- [ ] Add Security measures like CSRF etc.
-- [ ] Add Auth flow and handle sessions.
-- [ ] Add option to generate controllers and models through [CLI](https://github.com/Hashnode/mern-cli). (Basically anything that reduces writing boilerplate code)
+####MERN Starter
+- [ ] Add GraphQL to mern-starter
+- [ ] Add SCSS support
+- [ ] Improve file structure (needs discussion)
 
 ## License
 MERN is released under the [MIT License](http://www.opensource.org/licenses/MIT).

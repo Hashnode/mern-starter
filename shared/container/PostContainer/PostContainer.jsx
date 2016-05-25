@@ -1,4 +1,3 @@
-/* eslint no-unused-vars:0 */
 import React, { PropTypes, Component } from 'react';
 import PostListView from '../PostListView/PostListView';
 import PostCreateView from '../../components/PostCreateView/PostCreateView';
@@ -32,14 +31,19 @@ class PostContainer extends Component {
     });
   }
 
+  componentDidMount() {
+    if(this.props.posts.length === 0) {
+      this.props.dispatch(Actions.fetchPosts());
+    }
+  }
+
   render() {
     return (
       <div>
         <Header onClick={this.handleClick} />
         <div className="container">
           <PostCreateView addPost={this.add}
-            showAddPost={this.state.showAddPost}
-          />
+            showAddPost={this.state.showAddPost}/>
           <PostListView posts={this.props.posts}/>
         </div>
         <Footer />

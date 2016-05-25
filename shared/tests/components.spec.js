@@ -1,6 +1,3 @@
-/* eslint no-unused-vars: 0 */
-/* eslint-disable prefer-template*/
-
 import expect from 'expect';
 import TestUtils from 'react-addons-test-utils';
 import PostListItem from '../components/PostListItem/PostListItem';
@@ -25,14 +22,16 @@ describe('component tests', () => {
       <PostListItem
         post={post}
         onClick={function click() {}}
+
         onDelete={function noop() {}}
+
       />
     );
     const output = renderer.getRenderOutput();
     expect(output).toEqualJSX(
       <div className="single-post">
         <h3 className="post-title ">
-          <Link to={'/post/' + post.slug + '-' + post.cuid} onClick={function noop() {}}>
+          <Link to={`/post/${post.slug}-${post.cuid}`} onClick={function noop() {}}>
             {post.title}
           </Link>
         </h3>
@@ -47,6 +46,7 @@ describe('component tests', () => {
   it('should render PostCreateView properly', () => {
     const renderer = TestUtils.createRenderer();
     renderer.render(<PostCreateView showAddPost={false} addPost={function noop() {}}/>);
+
     const output = renderer.getRenderOutput();
     expect(output).toEqualJSX(
       <div className="form ">
@@ -61,9 +61,10 @@ describe('component tests', () => {
     );
   });
 
-  it('should show post creame form in  PostCreateView if showAddPost is true', () => {
+  it('should show post create form in  PostCreateView if showAddPost is true', () => {
     const renderer = TestUtils.createRenderer();
     renderer.render(<PostCreateView showAddPost addPost={function noop() {}}/>);
+
     const output = renderer.getRenderOutput();
     expect(output).toEqualJSX(
       <div className="form appear">

@@ -1,0 +1,8 @@
+{
+  "container": "/shared/container",
+  "dumb": "/shared/components",
+  "functional": "/shared/components",
+  "model": "/server/models",
+  "route": "/server/routes",
+  "controller": "/server/controllers"
+}

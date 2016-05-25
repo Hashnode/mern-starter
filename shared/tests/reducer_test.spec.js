@@ -1,4 +1,3 @@
-/* eslint no-unused-vars: 0 */
 import expect from 'expect';
 import postReducer from '../redux/reducers/reducer';
 import deepFreeze from 'deep-freeze';
@@ -6,7 +5,7 @@ import * as ActionTypes from '../redux/constants/constants';
 
 describe('reducer tests', () => {
   it('action ADD_POST is working', () => {
-    const stateBefore = { posts: [], post: null };
+    const stateBefore = { posts: ['foo'], post: null };
     const stateAfter = { posts: [{
       name: 'prank',
       title: 'first post',
@@ -14,7 +13,7 @@ describe('reducer tests', () => {
       _id: null,
       cuid: null,
       slug: 'first-post',
-    }], post: null };
+    }, 'foo'], post: null };
 
     const action = {
       type: ActionTypes.ADD_POST,

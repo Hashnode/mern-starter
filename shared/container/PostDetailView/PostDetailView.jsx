@@ -1,4 +1,3 @@
-/* eslint no-unused-vars: 0 */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
