@@ -6,15 +6,29 @@ import Footer from '../../components/Footer/Footer';
 import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
 
-class PostContainer extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      showAddPost: false,
-    };
-    this.handleClick = this.handleClick.bind(this);
-    this.add = this.add.bind(this);
-  }
+@connect(store => {
+  return {
+    posts: store.posts
+  };
+})
+export default class PostContainer extends Component {
+
+  static propTypes = {
+    posts: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+    })).isRequired,
+    dispatch: PropTypes.func.isRequired,
+  };
+
+  static contextTypes = {
+    router: React.PropTypes.object,
+  };
+
+  state = {
+    showAddPost: false,
+  };
 
   handleClick(e) {
     this.setState({
@@ -32,7 +46,7 @@ class PostContainer extends Component {
   }
 
   componentDidMount() {
-    if(this.props.posts.length === 0) {
+    if (this.props.posts.length === 0) {
       this.props.dispatch(Actions.fetchPosts());
     }
   }
@@ -40,10 +54,10 @@ class PostContainer extends Component {
   render() {
     return (
       <div>
-        <Header onClick={this.handleClick} />
+        <Header onClick={::this.handleClick}/>
         <div className="container">
-          <PostCreateView addPost={this.add}
-            showAddPost={this.state.showAddPost}/>
+          <PostCreateView addPost={::this.add}
+                          showAddPost={this.state.showAddPost}/>
           <PostListView posts={this.props.posts}/>
         </div>
         <Footer />
@@ -51,25 +65,3 @@ class PostContainer extends Component {
     );
   }
 }
-
-PostContainer.need = [() => { return Actions.fetchPosts(); }];
-PostContainer.contextTypes = {
-  router: React.PropTypes.object,
-};
-
-function mapStateToProps(store) {
-  return {
-    posts: store.posts,
-  };
-}
-
-PostContainer.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-  })).isRequired,
-  dispatch: PropTypes.func.isRequired,
-};
-
-export default connect(mapStateToProps)(PostContainer);

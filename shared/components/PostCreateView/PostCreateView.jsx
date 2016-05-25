@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
-class PostCreateView extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.addPost = this.addPost.bind(this);
-  }
+export default class PostCreateView extends Component {
+
+  static propTypes = {
+    addPost: PropTypes.func.isRequired,
+    showAddPost: PropTypes.bool.isRequired
+  };
 
   addPost() {
     const nameRef = this.refs.name;
@@ -25,16 +26,9 @@ class PostCreateView extends Component {
           <input placeholder="Author's Name" className="form-field" ref="name"/>
           <input placeholder="Post Title" className="form-field" ref="title"/>
           <textarea placeholder="Post Content" className="form-field" ref="content"></textarea>
-          <a className="post-submit-button align-right" href="#" onClick={this.addPost}>Submit</a>
+          <a className="post-submit-button align-right" href="#" onClick={::this.addPost}>Submit</a>
         </div>
       </div>
     );
   }
 }
-
-PostCreateView.propTypes = {
-  addPost: PropTypes.func.isRequired,
-  showAddPost: PropTypes.bool.isRequired,
-};
-
-export default PostCreateView;

@@ -12,14 +12,14 @@ export function addPost(post) {
     content: post.content,
     slug: post.slug,
     cuid: post.cuid,
-    _id: post._id,
+    _id: post._id
   };
 }
 
 export function changeSelectedPost(slug) {
   return {
     type: ActionTypes.CHANGE_SELECTED_POST,
-    slug,
+    slug
   };
 }
 
@@ -31,20 +31,22 @@ export function addPostRequest(post) {
         post: {
           name: post.name,
           title: post.title,
-          content: post.content,
-        },
+          content: post.content
+        }
       }),
       headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    }).then((res) => res.json()).then(res => dispatch(addPost(res.post)));
+        'Content-Type': 'application/json'
+      })
+    })
+      .then((response) => response.json())
+      .then(response => dispatch(addPost(response.post)));
   };
 }
 
 export function addSelectedPost(post) {
   return {
     type: ActionTypes.ADD_SELECTED_POST,
-    post,
+    post
   };
 }
 
@@ -53,31 +55,33 @@ export function getPostRequest(post) {
     return fetch(`${baseURL}/api/getPost?slug=${post}`, {
       method: 'get',
       headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    }).then((response) => response.json()).then(res => dispatch(addSelectedPost(res.post)));
+        'Content-Type': 'application/json'
+      })
+    })
+      .then((response) => response.json())
+      .then(response => dispatch(addSelectedPost(response.post)));
   };
 }
 
 export function deletePost(post) {
   return {
     type: ActionTypes.DELETE_POST,
-    post,
+    post
   };
 }
 
 export function addPosts(posts) {
   return {
     type: ActionTypes.ADD_POSTS,
-    posts,
+    posts
   };
 }
 
 export function fetchPosts() {
   return (dispatch) => {
-    return fetch(`${baseURL}/api/getPosts`).
-      then((response) => response.json()).
-      then((response) => dispatch(addPosts(response.posts)));
+    return fetch(`${baseURL}/api/getPosts`)
+      .then((response) => response.json())
+      .then((response) => dispatch(addPosts(response.posts)));
   };
 }
 
@@ -86,11 +90,12 @@ export function deletePostRequest(post) {
     fetch(`${baseURL}/api/deletePost`, {
       method: 'post',
       body: JSON.stringify({
-        postId: post._id,
+        postId: post._id
       }),
       headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    }).then(() => dispatch(deletePost(post)));
+        'Content-Type': 'application/json'
+      })
+    })
+      .then(() => dispatch(deletePost(post)));
   };
 }

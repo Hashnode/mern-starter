@@ -1,7 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-class App extends Component {
+@connect()
+export default class App extends Component {
+
+  static propTypes = {
+    children: PropTypes.object.isRequired
+  };
+
   constructor(props, context) {
     super(props, context);
   }
@@ -14,9 +20,3 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  children: PropTypes.object.isRequired,
-};
-
-export default connect()(App);

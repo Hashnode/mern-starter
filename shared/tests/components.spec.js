@@ -16,7 +16,7 @@ describe('component tests', () => {
       title: 'first post',
       content: 'hello world!',
       slug: 'first-post',
-      cuid: 'cikpdcdn60000zjxom3dmavzq',
+      cuid: 'cikpdcdn60000zjxom3dmavzq'
     };
     renderer.render(
       <PostListItem
