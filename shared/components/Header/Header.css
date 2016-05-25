@@ -1,0 +1,32 @@
+.header {
+  background-color: #eee;
+  background-image: url('/img/header-bk.png');
+  background-position: center;
+  background-size: cover;
+  border-bottom: 1px solid #ccc;
+}
+.header-content {
+  width: 100%;
+  max-width: 980px;
+  margin: auto;
+  padding: 64px 16px;
+  overflow: auto;
+}
+.site-title {
+  font-weight: 300;
+  font-size: 42px;
+  float: left;
+}
+.site-title a {
+  text-decoration: none;
+  color: #FFF;
+}
+.add-post-button {
+  display: inline-block;
+  color: #FFF;
+  background: #03A9F4;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 1000px;
+  float: right;
+}

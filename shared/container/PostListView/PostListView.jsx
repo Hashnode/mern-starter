@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import PostListItem from '../../components/PostListItem/PostListItem';
 import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
+import styles from './PostListView.css';
+import cssModules from 'react-css-modules';
 
 function PostListView(props) {
   return (
@@ -9,15 +11,15 @@ function PostListView(props) {
       {
         props.posts.map((post, i) => (
           <PostListItem post={post} key={i}
-          onClick={function handleClick() {
-            props.dispatch(Actions.addSelectedPost(post));
-          }}
-          onDelete={function handleDelete() {
-            if (confirm('Do you want to delete this post')) { // eslint-disable-line
-              props.dispatch(Actions.deletePostRequest(post));
-            }
-          }}
-        />
+            onClick={function handleClick() {
+              props.dispatch(Actions.addSelectedPost(post));
+            }}
+            onDelete={function handleDelete() {
+              if (confirm('Do you want to delete this post')) { // eslint-disable-line
+                props.dispatch(Actions.deletePostRequest(post));
+              }
+            }}
+          />
         ))
       }
     </div>
@@ -35,4 +37,4 @@ PostListView.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect()(PostListView);
+export default connect()(cssModules(PostListView, styles));

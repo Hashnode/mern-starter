@@ -5,6 +5,8 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { connect } from 'react-redux';
 import * as Actions from '../../redux/actions/actions';
+import styles from './PostContainer.css';
+import cssModules from 'react-css-modules';
 
 class PostContainer extends Component {
   constructor(props, context) {
@@ -41,7 +43,7 @@ class PostContainer extends Component {
     return (
       <div>
         <Header onClick={this.handleClick} />
-        <div className="container">
+        <div styleName="container">
           <PostCreateView addPost={this.add}
             showAddPost={this.state.showAddPost}/>
           <PostListView posts={this.props.posts}/>
@@ -72,4 +74,4 @@ PostContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(PostContainer);
+export default connect(mapStateToProps)(cssModules(PostContainer, styles));

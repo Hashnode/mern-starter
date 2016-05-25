@@ -1,16 +1,18 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import styles from './Header.css';
+import cssModules from 'react-css-modules';
 
 function Header(props, context) {
   return (
-    <div className="header">
-      <div className="header-content">
-        <h1 className="site-title">
+    <div styleName="header">
+      <div styleName="header-content">
+        <h1 styleName="site-title">
           <Link to="/" onClick={props.handleLogoClick}>MERN Starter Blog</Link>
         </h1>
         {
           context.router.isActive('/', true)
-            ? <a className="add-post-button" href="#" onClick={props.onClick}>Add Post</a>
+            ? <a styleName="add-post-button" href="#" onClick={props.onClick}>Add Post</a>
             : null
         }
       </div>
@@ -27,4 +29,4 @@ Header.propTypes = {
   handleLogoClick: PropTypes.func,
 };
 
-export default Header;
+export default cssModules(Header, styles);
