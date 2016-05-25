@@ -7,6 +7,8 @@
 
 MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mongo, Express, React and NodeJS. It minimizes the setup time and gets you up to speed using proven technologies.
 
+**Note:** All the new development is done on v2.0.0 branch. Please send your PRs against that branch. The roadmap discussion thread for v2.0.0 can be found [here](https://github.com/Hashnode/mern-starter/issues/146).
+
 - [Website](http://mern.io)
 - [Documentation](http://mern.io/documentation.html)
 - [Discussions](https://hashnode.com/n/mern)
@@ -99,10 +101,8 @@ Shared directory contains all the components, routes, actions and reducers.
 Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
 
 ## Roadmap
-####MERN Starter
-- [ ] Add GraphQL to mern-starter
-- [ ] Add SCSS support
-- [ ] Improve file structure (needs discussion)
+
+The roadmap discussion thread for v2.0.0 can be found [here](https://github.com/Hashnode/mern-starter/issues/146).
 
 ## License
 MERN is released under the [MIT License](http://www.opensource.org/licenses/MIT).
