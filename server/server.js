@@ -24,6 +24,7 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
+import Helmet from 'react-helmet';
 
 // Import required modules
 import routes from '../shared/routes';
@@ -52,14 +53,18 @@ app.use('/api', posts);
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
   const cssPath = process.env.NODE_ENV === 'production' ? '/css/app.min.css' : '/css/app.css';
+  const head = Helmet.rewind();
+
   return `
     <!doctype html>
     <html>
       <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MERN Starter - Blog App</title>
+        ${head.base.toString()}
+        ${head.title.toString()}
+        ${head.meta.toString()}
+        ${head.link.toString()}
+        ${head.script.toString()}
+
         <link rel="stylesheet" href=${cssPath} />
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
         <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
