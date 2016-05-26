@@ -115,7 +115,10 @@ app.use((req, res, next) => {
         );
         const finalState = store.getState();
 
-        res.status(200).end(renderFullPage(initialView, finalState));
+        res
+          .set('Content-Type', 'text/html')
+          .status(200)
+          .end(renderFullPage(initialView, finalState));
       })
       .catch((err) => next(err));
   });
