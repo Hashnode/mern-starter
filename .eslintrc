@@ -14,6 +14,8 @@
    "rules": {
      "comma-dangle": [1, "always-multiline"],
      "max-len": [1, 180, 4],
+     "no-param-reassign": [0],
      "arrow-body-style": [0],
+     "curly": [0],
    },
 }
