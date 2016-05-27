@@ -99,10 +99,8 @@ Shared directory contains all the components, routes, actions and reducers.
 Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
 
 ## Roadmap
-####MERN Starter
-- [ ] Add GraphQL to mern-starter
-- [ ] Add SCSS support
-- [ ] Improve file structure (needs discussion)
+
+The roadmap discussion thread for v2.0.0 can be found [here](https://github.com/Hashnode/mern-starter/issues/146).
 
 ## License
 MERN is released under the [MIT License](http://www.opensource.org/licenses/MIT).
