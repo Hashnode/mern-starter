@@ -1,12 +1,20 @@
-import * as ActionTypes from '../constants/constants';
 import Config from '../../../server/config';
 import fetch from 'isomorphic-fetch';
 
 const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || (`http://localhost:${Config.port}`) : '';
 
+// Export Constants
+export const ADD_POST = 'ADD_POST';
+export const CHANGE_SELECTED_POST = 'CHANGE_SELECTED_POST';
+export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
+export const ADD_POSTS = 'ADD_POSTS';
+export const ADD_SELECTED_POST = 'ADD_SELECTED_POST';
+export const DELETE_POST = 'DELETE_POST';
+
+// Export Actions
 export function addPost(post) {
   return {
-    type: ActionTypes.ADD_POST,
+    type: ADD_POST,
     name: post.name,
     title: post.title,
     content: post.content,
@@ -18,7 +26,7 @@ export function addPost(post) {
 
 export function changeSelectedPost(slug) {
   return {
-    type: ActionTypes.CHANGE_SELECTED_POST,
+    type: CHANGE_SELECTED_POST,
     slug,
   };
 }
@@ -43,7 +51,7 @@ export function addPostRequest(post) {
 
 export function addSelectedPost(post) {
   return {
-    type: ActionTypes.ADD_SELECTED_POST,
+    type: ADD_SELECTED_POST,
     post,
   };
 }
@@ -61,14 +69,14 @@ export function getPostRequest(post) {
 
 export function deletePost(post) {
   return {
-    type: ActionTypes.DELETE_POST,
+    type: DELETE_POST,
     post,
   };
 }
 
 export function addPosts(posts) {
   return {
-    type: ActionTypes.ADD_POSTS,
+    type: ADD_POSTS,
     posts,
   };
 }
@@ -76,8 +84,8 @@ export function addPosts(posts) {
 export function fetchPosts() {
   return (dispatch) => {
     return fetch(`${baseURL}/api/getPosts`).
-      then((response) => response.json()).
-      then((response) => dispatch(addPosts(response.posts)));
+    then((response) => response.json()).
+    then((response) => dispatch(addPosts(response.posts)));
   };
 }
 

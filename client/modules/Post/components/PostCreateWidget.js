@@ -1,12 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
-class PostCreateView extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.addPost = this.addPost.bind(this);
-  }
-
-  addPost() {
+class PostCreateWidget extends Component {
+  addPost = () => {
     const nameRef = this.refs.name;
     const titleRef = this.refs.title;
     const contentRef = this.refs.content;
@@ -14,7 +9,7 @@ class PostCreateView extends Component {
       this.props.addPost(nameRef.value, titleRef.value, contentRef.value);
       nameRef.value = titleRef.value = contentRef.value = '';
     }
-  }
+  };
 
   render() {
     const cls = `form ${(this.props.showAddPost ? 'appear' : '')}`;
@@ -24,7 +19,7 @@ class PostCreateView extends Component {
           <h2 className="form-title">Create new post</h2>
           <input placeholder="Author's Name" className="form-field" ref="name"/>
           <input placeholder="Post Title" className="form-field" ref="title"/>
-          <textarea placeholder="Post Content" className="form-field" ref="content"></textarea>
+          <textarea placeholder="Post Content" className="form-field" ref="content" />
           <a className="post-submit-button align-right" href="#" onClick={this.addPost}>Submit</a>
         </div>
       </div>
@@ -32,9 +27,9 @@ class PostCreateView extends Component {
   }
 }
 
-PostCreateView.propTypes = {
+PostCreateWidget.propTypes = {
   addPost: PropTypes.func.isRequired,
   showAddPost: PropTypes.bool.isRequired,
 };
 
-export default PostCreateView;
+export default PostCreateWidget;

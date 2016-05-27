@@ -1,9 +1,9 @@
 import expect from 'expect';
-import postReducer from '../redux/reducers/reducer';
+import postReducer from '../PostReducer';
 import deepFreeze from 'deep-freeze';
-import * as ActionTypes from '../redux/constants/constants';
+import { ADD_POST, ADD_SELECTED_POST } from '../PostActions';
 
-describe('reducer tests', () => {
+describe('post reducer tests', () => {
   it('action ADD_POST is working', () => {
     const stateBefore = { posts: ['foo'], post: null };
     const stateAfter = { posts: [{
@@ -16,7 +16,7 @@ describe('reducer tests', () => {
     }, 'foo'], post: null };
 
     const action = {
-      type: ActionTypes.ADD_POST,
+      type: ADD_POST,
       name: 'prank',
       title: 'first post',
       content: 'Hello world!',
@@ -60,7 +60,7 @@ describe('reducer tests', () => {
     };
 
     const action = {
-      type: ActionTypes.ADD_SELECTED_POST,
+      type: ADD_SELECTED_POST,
       post: {
         name: 'prank',
         title: 'first post',

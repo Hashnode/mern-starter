@@ -15,5 +15,6 @@
      "comma-dangle": [1, "always-multiline"],
      "max-len": [1, 180, 4],
      "arrow-body-style": [0],
-   },
+     "react/jsx-no-bind": [0]
+   }
 }

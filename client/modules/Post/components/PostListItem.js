@@ -25,7 +25,6 @@ PostListItem.propTypes = {
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   }).isRequired,
-
   onClick: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };

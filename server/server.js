@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // React And Redux Setup
-import { configureStore } from '../shared/redux/store/configureStore';
+import { configureStore } from '../client/store';
 import { Provider } from 'react-redux';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -27,7 +27,7 @@ import { match, RouterContext } from 'react-router';
 import Helmet from 'react-helmet';
 
 // Import required modules
-import routes from '../shared/routes';
+import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 import posts from './routes/post.routes';
 import dummyData from './dummyData';
@@ -102,9 +102,7 @@ app.use((req, res, next) => {
       return next();
     }
 
-    const initialState = { posts: [], post: {} };
-
-    const store = configureStore(initialState);
+    const store = configureStore();
 
     return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
@@ -117,7 +115,7 @@ app.use((req, res, next) => {
 
         res.status(200).end(renderFullPage(initialView, finalState));
       })
-      .catch((err) => next(err));
+      .catch((error) => next(error));
   });
 });
 

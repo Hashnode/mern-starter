@@ -6,11 +6,11 @@ function Header(props, context) {
     <div className="header">
       <div className="header-content">
         <h1 className="site-title">
-          <Link to="/" onClick={props.handleLogoClick}>MERN Starter Blog</Link>
+          <Link to="/" >MERN Starter Blog</Link>
         </h1>
         {
           context.router.isActive('/', true)
-            ? <a className="add-post-button" href="#" onClick={props.onClick}>Add Post</a>
+            ? <a className="add-post-button" href="#" onClick={props.toggleAddPost}>Add Post</a>
             : null
         }
       </div>
@@ -23,8 +23,7 @@ Header.contextTypes = {
 };
 
 Header.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  handleLogoClick: PropTypes.func,
+  toggleAddPost: PropTypes.func.isRequired,
 };
 
 export default Header;
