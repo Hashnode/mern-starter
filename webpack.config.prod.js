@@ -10,11 +10,11 @@ module.exports = {
     path: __dirname + '/static/dist/',
     filename: 'bundle.js',
   },
-  
+
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
-  
+
   module: {
     loaders: [
       {
@@ -30,7 +30,6 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
