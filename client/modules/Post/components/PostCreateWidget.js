@@ -17,8 +17,8 @@ class PostCreateWidget extends Component {
       <div className={cls}>
         <div className="form-content">
           <h2 className="form-title">Create new post</h2>
-          <input placeholder="Author's Name" className="form-field" ref="name"/>
-          <input placeholder="Post Title" className="form-field" ref="title"/>
+          <input placeholder="Author's Name" className="form-field" ref="name" />
+          <input placeholder="Post Title" className="form-field" ref="title" />
           <textarea placeholder="Post Content" className="form-field" ref="content" />
           <a className="post-submit-button align-right" href="#" onClick={this.addPost}>Submit</a>
         </div>

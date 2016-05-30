@@ -7,11 +7,11 @@ function PostDetailPage(props) {
   return (
     <div>
       <Helmet title={props.post.title} />
-        <div className="single-post post-detail">
-          <h3 className="post-title">{props.post.title}</h3>
-          <p className="author-name">By {props.post.name}</p>
-          <p className="post-desc">{props.post.content}</p>
-        </div>
+      <div className="single-post post-detail">
+        <h3 className="post-title">{props.post.title}</h3>
+        <p className="author-name">By {props.post.name}</p>
+        <p className="post-desc">{props.post.content}</p>
+      </div>
     </div>
   );
 }

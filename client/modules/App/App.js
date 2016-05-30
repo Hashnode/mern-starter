@@ -44,9 +44,9 @@ class App extends Component {
               },
             ]}
           />
-          <Header toggleAddPost={this.toggleAddPostSection}/>
+          <Header toggleAddPost={this.toggleAddPostSection} />
           <div className="container">
-            { this.props.children }
+            {this.props.children}
           </div>
           <Footer />
         </div>

@@ -6,7 +6,9 @@ function PostList(props) {
     <div className="listView">
       {
         props.posts.map((post, i) => (
-          <PostListItem post={post} key={i}
+          <PostListItem
+            post={post}
+            key={i}
             onClick={() => props.handleShowPost(post)}
             onDelete={() => props.handleDeletePost(post)}
           />

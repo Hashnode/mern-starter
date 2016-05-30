@@ -7,7 +7,7 @@ import PostDetailPage from './modules/Post/pages/PostDetailPage/PostDetailPage';
 const routes = (
   <Route path="/" component={App} >
     <IndexRoute component={PostListPage} />
-    <Route path="/post/:slug" component={PostDetailPage}/>
+    <Route path="/post/:slug" component={PostDetailPage} />
   </Route>
 );
 

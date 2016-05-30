@@ -8,11 +8,11 @@ export function getPosts(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-    res.json({ posts });
+    return res.json({ posts });
   });
 }
 
-export function addPost(req, res) {
+export function addPost(req, res) { // eslint-disable-line consistent-return
   if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
     return res.status(403).end();
   }
@@ -41,19 +41,19 @@ export function getPost(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-    res.json({ post });
+    return res.json({ post });
   });
 }
 
 export function deletePost(req, res) {
   const postId = req.body.postId;
-  Post.findById(postId).exec((err, post) => {
+  Post.findById(postId).exec((err, post) => { // eslint-disable-line consistent-return
     if (err) {
       return res.status(500).send(err);
     }
 
     post.remove(() => {
-      res.status(200).end();
+      return res.status(200).end();
     });
   });
 }

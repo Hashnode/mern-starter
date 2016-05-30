@@ -6,10 +6,6 @@ import { addPostRequest, fetchPosts, addSelectedPost, deletePostRequest } from '
 import { toggleAddPost } from '../../../App/AppActions';
 
 class PostListPage extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   componentDidMount() {
     if (this.props.posts.length === 0) {
       this.props.dispatch(fetchPosts());
@@ -34,8 +30,8 @@ class PostListPage extends Component {
   render() {
     return (
       <div>
-        <PostCreateView addPost={this.handleAddPost} showAddPost={this.props.showAddPost}/>
-        <PostListView handleShowPost={this.handleShowPost} handleDeletePost={this.handleDeletePost} posts={this.props.posts}/>
+        <PostCreateView addPost={this.handleAddPost} showAddPost={this.props.showAddPost} />
+        <PostListView handleShowPost={this.handleShowPost} handleDeletePost={this.handleDeletePost} posts={this.props.posts} />
       </div>
     );
   }

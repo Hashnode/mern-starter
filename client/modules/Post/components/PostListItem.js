@@ -12,7 +12,7 @@ function PostListItem(props) {
       <p className="author-name">By {props.post.name}</p>
       <p className="post-desc">{props.post.content}</p>
       <p className="post-action"><a href="#" onClick={props.onDelete}>Delete Post</a></p>
-      <hr className="divider"/>
+      <hr className="divider" />
     </div>
   );
 }
