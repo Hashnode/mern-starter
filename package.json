@@ -9,7 +9,8 @@
     "start:prod": "cross-env NODE_ENV=production node index.js",
     "bs": "npm run clean && npm run build && npm run start:prod",
     "minify": "cleancss -o static/css/app.min.css static/css/app.css",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && npm run minify",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && npm run build:server && npm run minify",
+    "build:server": "webpack --config webpack.server.js",
     "clean": "rimraf static/dist",
     "slate": "rimraf node_modules && npm install",
     "lint": "eslint client server"
