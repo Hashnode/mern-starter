@@ -27,6 +27,39 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 
 ## File Structure
 
+```
+|- client
+  - index.js
+|- server
+  |- controllers
+  |- models
+  |- routes
+  |- tests
+  |- util
+  - config.js
+  - dummyData.js
+  - server.js
+|- shared
+  |- components
+    |- ...
+  |- container
+    |- ...
+  |- redux
+    |- actions
+    |- constants
+    |- reducers
+    |- store
+  |- tests
+  - routes.js
+|- static
+  |- css
+  |- img
+- webpack.config.dev.js
+- webpack.config.prod.js
+- index.js
+- package.json
+```
+
 ### Webpack Configs
 
 MERN uses Webpack for bundling modules. There are two types of Webpack configs provided `webpack.config.dev.js` (for development) and `webpack.config.prod.js` (for production).
@@ -99,6 +132,16 @@ Shared directory contains all the components, routes, actions and reducers.
 ### Client
 
 Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
+
+
+## Devtools
+
+MERN automatically ships with devtools that appear in the browser.
+
+* hide redux-devtools `ctrl + h`
+* move redux-devtools `ctrl + w`
+ 
+ ![](https://camo.githubusercontent.com/c4c2fffb4a8d60c351692540743e88000044a734/687474703a2f2f672e7265636f726469742e636f2f4d687271344e437857442e676966)
 
 ## Roadmap
 
