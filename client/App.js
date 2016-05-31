@@ -8,7 +8,9 @@ const history = browserHistory;
 export default function App(props) {
   return (
     <Provider store={props.store}>
-      <Router history={history} routes={routes} />
+      <Router history={history}>
+        {routes}
+      </Router>
     </Provider>
   );
 }

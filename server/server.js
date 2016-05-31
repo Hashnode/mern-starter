@@ -33,10 +33,6 @@ import posts from './routes/post.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 
-// Import Manifests
-const assetsManifest = require('../static/dist/manifest.json'); // eslint-disable-line import/no-unresolved
-const chunkManifest = require('../static/dist/chunk-manifest.json'); // eslint-disable-line import/no-unresolved
-
 // MongoDB Connection
 mongoose.connect(serverConfig.mongoURL, (error) => {
   if (error) {
@@ -59,6 +55,10 @@ const renderFullPage = (html, initialState) => {
   const cssPath = process.env.NODE_ENV === 'production' ? '/css/app.min.css' : '/css/app.css';
   const head = Helmet.rewind();
 
+  // Import Manifests
+  const assetsManifest = process.env.NODE_ENV === 'production' ? require('../static/dist/manifest.json') : {}; // eslint-disable-line
+  const chunkManifest = process.env.NODE_ENV === 'production' ? require('../static/dist/chunk-manifest.json') : {}; // eslint-disable-line
+
   return `
     <!doctype html>
     <html>
@@ -69,7 +69,7 @@ const renderFullPage = (html, initialState) => {
         ${head.link.toString()}
         ${head.script.toString()}
 
-        <link rel="stylesheet" href=${cssPath} />
+        <link rel="stylesheet" href='${cssPath}' />
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
         <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
       </head>
@@ -77,12 +77,13 @@ const renderFullPage = (html, initialState) => {
         <div id="root">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
-          //<![CDATA[
+          ${process.env.NODE_ENV === 'production' ?
+    `//<![CDATA[
           window.webpackManifest = ${JSON.stringify(chunkManifest)};
-          //]]>
+          //]]>` : ''}
         </script>
-        ${process.env.NODE_ENV === 'production' ? `<script src='${assetsManifest['/dist/vendor.js']}'></script>` : ''}
-        <script src="${assetsManifest['/dist/app.js']}"></script>
+        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/dist/vendor.js'] : '/dist/vendor.js'}'></script>
+        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/dist/app.js'] : '/dist/app.js'}'></script>
       </body>
     </html>
   `;
