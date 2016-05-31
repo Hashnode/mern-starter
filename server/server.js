@@ -33,6 +33,10 @@ import posts from './routes/post.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 
+// Import Manifests
+const assetsManifest = require('../static/dist/manifest.json'); // eslint-disable-line import/no-unresolved
+const chunkManifest = require('../static/dist/chunk-manifest.json'); // eslint-disable-line import/no-unresolved
+
 // MongoDB Connection
 mongoose.connect(serverConfig.mongoURL, (error) => {
   if (error) {
@@ -73,8 +77,12 @@ const renderFullPage = (html, initialState) => {
         <div id="root">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+          //<![CDATA[
+          window.webpackManifest = ${JSON.stringify(chunkManifest)};
+          //]]>
         </script>
-        <script src="/dist/bundle.js"></script>
+        ${process.env.NODE_ENV === 'production' ? `<script src='${assetsManifest['/dist/vendor.js']}'></script>` : ''}
+        <script src="${assetsManifest['/dist/app.js']}"></script>
       </body>
     </html>
   `;

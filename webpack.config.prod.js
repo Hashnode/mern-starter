@@ -1,14 +1,25 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ManifestPlugin = require('webpack-manifest-plugin');
+var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
 
-  entry: __dirname + "/client/index.js",
+  entry: {
+    app: [
+      './client/index.js',
+    ],
+    vendor: [
+      'react',
+      'react-dom',
+    ]
+  },
 
   output: {
     path: __dirname + '/static/dist/',
-    filename: 'bundle.js',
+    filename: '[name].[chunkhash].js',
+    publicPath: '/dist/',
   },
 
   resolve: {
@@ -34,6 +45,18 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
       }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: 'vendor.js'
+    }),
+    new ManifestPlugin({
+      basePath: '/dist/'
+    }),
+    new ChunkManifestPlugin({
+      filename: "chunk-manifest.json",
+      manifestVariable: "webpackManifest"
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
