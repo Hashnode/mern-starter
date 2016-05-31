@@ -1,0 +1,41 @@
+.header {
+  background: #eee url('/img/header-bk.png') center;
+  background-size: cover;
+  border-bottom: 1px solid #ccc;
+}
+
+.content {
+  width: 100%;
+  max-width: 980px;
+  margin: auto;
+  padding: 64px 16px;
+  overflow: auto;
+}
+
+.site-title {
+  font-weight: 300;
+  font-size: 42px;
+  float: left;
+}
+
+.site-title a {
+  text-decoration: none;
+  color: #FFF;
+}
+
+.add-post-button {
+  display: inline-block;
+  color: #FFF;
+  background: #03A9F4;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 1000px;
+  float: right;
+}
+
+@media (max-width: 767px){
+  .add-post-button{
+    float: left;
+    margin-top: 16px;
+  }
+}

@@ -39,10 +39,15 @@ module.exports = {
             'stage-0',
           ],
         },
-      },
-      {
+      }, {
         test: /\.json$/,
         loader: 'json-loader',
+      }, {
+        test: /\.css$/,
+        loader: 'null-loader',
+      }, {
+        test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
+        loader: 'null-loader',
       },
     ],
   },

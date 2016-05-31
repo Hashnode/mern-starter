@@ -3,6 +3,9 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 
+// Base stylesheet
+require('./main.css');
+
 const history = browserHistory;
 
 export default function App(props) {

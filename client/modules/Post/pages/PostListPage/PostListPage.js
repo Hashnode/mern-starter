@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import PostListView from '../../components/PostList';
-import PostCreateView from '../../components/PostCreateWidget';
+import PostCreateView from '../../components/PostCreateWidget/PostCreateWidget';
 import { connect } from 'react-redux';
 import { addPostRequest, fetchPosts, addSelectedPost, deletePostRequest } from '../../PostActions';
 import { toggleAddPost } from '../../../App/AppActions';

@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
+// Import Style
+import styles from './PostCreateWidget.css';
+
 class PostCreateWidget extends Component {
   addPost = () => {
     const nameRef = this.refs.name;
@@ -12,15 +15,15 @@ class PostCreateWidget extends Component {
   };
 
   render() {
-    const cls = `form ${(this.props.showAddPost ? 'appear' : '')}`;
+    const cls = `${styles.form} ${(this.props.showAddPost ? styles.appear : '')}`;
     return (
       <div className={cls}>
-        <div className="form-content">
-          <h2 className="form-title">Create new post</h2>
-          <input placeholder="Author's Name" className="form-field" ref="name" />
-          <input placeholder="Post Title" className="form-field" ref="title" />
-          <textarea placeholder="Post Content" className="form-field" ref="content" />
-          <a className="post-submit-button align-right" href="#" onClick={this.addPost}>Submit</a>
+        <div className={styles['form-content']}>
+          <h2 className={styles['form-title']}>Create new post</h2>
+          <input placeholder="Author's Name" className={styles['form-field']} ref="name" />
+          <input placeholder="Post Title" className={styles['form-field']} ref="title" />
+          <textarea placeholder="Post Content" className={styles['form-field']} ref="content" />
+          <a className={styles['post-submit-button']} href="#" onClick={this.addPost}>Submit</a>
         </div>
       </div>
     );
