@@ -12,7 +12,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 // Initialize the Express App
 const app = new Express();
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(config);
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
@@ -47,7 +47,7 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
 // Apply body Parser and server public assets and routes
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
-app.use(Express.static(path.resolve(__dirname, '../static')));
+app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use('/api', posts);
 
 // Render Initial HTML
@@ -55,8 +55,8 @@ const renderFullPage = (html, initialState) => {
   const head = Helmet.rewind();
 
   // Import Manifests
-  const assetsManifest = process.env.NODE_ENV === 'production' ? require('../static/dist/manifest.json') : {}; // eslint-disable-line
-  const chunkManifest = process.env.NODE_ENV === 'production' ? require('../static/dist/chunk-manifest.json') : {}; // eslint-disable-line
+  const assetsManifest = process.env.NODE_ENV === 'production' ? require('../dist/manifest.json') : {}; // eslint-disable-line
+  const chunkManifest = process.env.NODE_ENV === 'production' ? require('../dist/chunk-manifest.json') : {}; // eslint-disable-line
 
   return `
     <!doctype html>
@@ -68,7 +68,7 @@ const renderFullPage = (html, initialState) => {
         ${head.link.toString()}
         ${head.script.toString()}
 
-        <link rel="stylesheet" href='/dist/app.css' />
+        ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
         <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
       </head>
@@ -77,12 +77,12 @@ const renderFullPage = (html, initialState) => {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           ${process.env.NODE_ENV === 'production' ?
-    `//<![CDATA[
+          `//<![CDATA[
           window.webpackManifest = ${JSON.stringify(chunkManifest)};
           //]]>` : ''}
         </script>
-        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/dist/vendor.js'] : '/dist/vendor.js'}'></script>
-        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/dist/app.js'] : '/dist/app.js'}'></script>
+        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/vendor.js'] : '/vendor.js'}'></script>
+        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
       </body>
     </html>
   `;

@@ -1,8 +1,7 @@
 var webpack = require('webpack');
-const cssnext = require('postcss-cssnext');
-const postcssFocus = require('postcss-focus');
-const postcssReporter = require('postcss-reporter');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var cssnext = require('postcss-cssnext');
+var postcssFocus = require('postcss-focus');
+var postcssReporter = require('postcss-reporter');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -21,13 +20,19 @@ module.exports = {
   },
 
   output: {
-    path: __dirname + '/dist/',
+    path: __dirname,
     filename: 'app.js',
-    publicPath: '/dist/',
+    publicPath: 'http://0.0.0.0:8000/',
   },
 
   resolve: {
     extensions: ['', '.js', '.jsx'],
+    modules: [
+      'assets',
+      'components',
+      'modules',
+      'node_modules',
+    ],
   },
 
   module: {
@@ -35,7 +40,7 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader'),
+        loader: 'style-loader!css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader',
       }, {
         test: /\.css$/,
         include: /node_modules/,
@@ -56,18 +61,17 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('app.css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
-      filename: 'vendor.js'
+      filename: 'vendor.js',
     }),
     new webpack.DefinePlugin({
       'process.env': {
         CLIENT: JSON.stringify(true),
         'NODE_ENV': JSON.stringify('development'),
       }
-    })
+    }),
   ],
 
   postcss: () => [

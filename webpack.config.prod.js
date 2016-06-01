@@ -2,9 +2,10 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-const cssnext = require('postcss-cssnext');
-const postcssFocus = require('postcss-focus');
-const postcssReporter = require('postcss-reporter');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var cssnext = require('postcss-cssnext');
+var postcssFocus = require('postcss-focus');
+var postcssReporter = require('postcss-reporter');
 var cssnano = require('cssnano');
 
 module.exports = {
@@ -21,13 +22,19 @@ module.exports = {
   },
 
   output: {
-    path: __dirname + '/static/dist/',
+    path: __dirname + '/dist/',
     filename: '[name].[chunkhash].js',
-    publicPath: '/dist/',
+    publicPath: '/',
   },
 
   resolve: {
     extensions: ['', '.js', '.jsx'],
+    modules: [
+      'assets',
+      'components',
+      'modules',
+      'node_modules',
+    ],
   },
 
   module: {
@@ -46,7 +53,7 @@ module.exports = {
         loader: 'babel',
       }, {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
-        loader: 'url-loader?limit=10000',
+        loader: 'url-loader?limit=10000&name=assets/[name].[ext]',
       }, {
         test: /\.json$/,
         loader: 'json-loader',
@@ -63,15 +70,22 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
-      filename: 'vendor.js'
+      filename: 'vendor.js',
     }),
-    new ExtractTextPlugin('app.css'),
+    new ExtractTextPlugin('app.[chunkhash].css', { allChunks: true }),
     new ManifestPlugin({
-      basePath: '/dist/'
+      basePath: '/',
     }),
+    new CopyWebpackPlugin([
+      {
+        context: __dirname + '/client/assets',
+        from: '**/*',
+        to: __dirname + '/dist/assets',
+      },
+    ]),
     new ChunkManifestPlugin({
       filename: "chunk-manifest.json",
-      manifestVariable: "webpackManifest"
+      manifestVariable: "webpackManifest",
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
