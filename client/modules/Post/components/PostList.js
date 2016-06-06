@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+
+// Import Components
 import PostListItem from './PostListItem/PostListItem';
 
 function PostList(props) {

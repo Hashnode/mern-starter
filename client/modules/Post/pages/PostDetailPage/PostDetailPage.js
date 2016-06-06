@@ -19,9 +19,17 @@ function PostDetailPage(props) {
   );
 }
 
+// Actions required to provide data for this component to render in sever side.
 PostDetailPage.need = [(params) => {
   return getPostRequest.bind(null, params.slug)();
 }];
+
+// Retrieve data from store as props
+function mapStateToProps(store) {
+  return {
+    post: store.posts.post,
+  };
+}
 
 PostDetailPage.propTypes = {
   post: PropTypes.shape({
@@ -33,11 +41,5 @@ PostDetailPage.propTypes = {
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
-
-function mapStateToProps(store) {
-  return {
-    post: store.posts.post,
-  };
-}
 
 export default connect(mapStateToProps)(PostDetailPage);

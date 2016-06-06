@@ -1,7 +1,11 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
+
+// Import Components
 import PostListView from '../../components/PostList';
 import PostCreateView from '../../components/PostCreateWidget/PostCreateWidget';
-import { connect } from 'react-redux';
+
+// Import Actions
 import { addPostRequest, fetchPosts, addSelectedPost, deletePostRequest } from '../../PostActions';
 import { toggleAddPost } from '../../../App/AppActions';
 
@@ -37,12 +41,10 @@ class PostListPage extends Component {
   }
 }
 
+// Actions required to provide data for this component to render in sever side.
 PostListPage.need = [() => { return fetchPosts(); }];
 
-PostListPage.contextTypes = {
-  router: React.PropTypes.object,
-};
-
+// Retrieve data from store as props
 function mapStateToProps(store) {
   return {
     showAddPost: store.app.showAddPost,
@@ -58,6 +60,10 @@ PostListPage.propTypes = {
   })).isRequired,
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
+};
+
+PostListPage.contextTypes = {
+  router: React.PropTypes.object,
 };
 
 export default connect(mapStateToProps)(PostListPage);
