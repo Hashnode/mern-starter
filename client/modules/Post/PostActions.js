@@ -24,13 +24,6 @@ export function addPost(post) {
   };
 }
 
-export function changeSelectedPost(slug) {
-  return {
-    type: CHANGE_SELECTED_POST,
-    slug,
-  };
-}
-
 export function addPostRequest(post) {
   return (dispatch) => {
     fetch(`${baseURL}/api/addPost`, {
