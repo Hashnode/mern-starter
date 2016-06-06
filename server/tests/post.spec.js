@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import mocha from 'mocha';
 import app from '../server';
 import chai from 'chai';
