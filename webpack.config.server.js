@@ -37,6 +37,13 @@ module.exports = {
             'es2015',
             'stage-0',
           ],
+          plugins: [
+            [
+              'css-modules-transform', {
+                generateScopedName: '[hash:base64]',
+              }
+            ]
+          ]
         },
       }, {
         test: /\.json$/,
