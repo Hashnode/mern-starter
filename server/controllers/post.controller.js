@@ -1,6 +1,6 @@
 import Post from '../models/post';
 import cuid from 'cuid';
-import slug from 'slug';
+import slug from 'limax';
 import sanitizeHtml from 'sanitize-html';
 
 export function getPosts(req, res) {
