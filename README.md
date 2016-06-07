@@ -5,7 +5,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 
-MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mongo, Express, React and NodeJS. It minimizes the setup time and gets you up to speed using proven technologies.
+MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mongo, Express, React and NodeJS. It minimises the setup time and gets you up to speed using proven technologies.
 
 - [Website](http://mern.io)
 - [Documentation](http://mern.io/documentation.html)
@@ -29,13 +29,13 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 
 MERN uses Webpack for bundling modules. There are three types of Webpack configs provided `webpack.config.dev.js` (for development), `webpack.config.prod.js` (for production) and `webpack.config.server.js` (for bundling server in production).
 
-The Webpack configuration is minimal and beginner-friendly. You can customize and add more features to it for production build.
+The Webpack configuration is minimal and beginner-friendly. You can customise and add more features to it for production build.
 
 ### Server
 
 MERN uses express web framework. Our app sits in server.js where we check for NODE_ENV.
 
-If NODE_ENV is development we apply Webpack middlewares for bundling and Hot Module Replacement.
+If NODE_ENV is development, we apply Webpack middlewares for bundling and Hot Module Replacement.
 
 #### Server Side Rendering
 
@@ -84,18 +84,18 @@ app.use((req, res) => {
 
 `match` takes two parameters, first is an object that contains routes, location and history and second is a callback function which is called when routes have been matched to a location.
 
-If there's an error in matching we return 500 status code, if no matches are found we return 404 status code. If a match is found then we need to create a new Redux Store instance.
+If there's an error in matching we return 500 status code, if no matches are found we return 404 status code. If a match is found then, we need to create a new Redux Store instance.
 
-**Note:** A new Redux Store is populated afresh on every request.
+**Note:** A new Redux Store has populated afresh on every request.
 
-`fetchComponentData` is the key function. It takes three params : first is a dispatch function of Redux store, second is an array of components that should be rendered in current route and third is the route params. `fetchComponentData` collects all the needs (need is an array of actions that are required to be dispatched before rendering the component) of components in the current route. It returns a promise when all the required actions are dispatched. We render the page and send data to client for client-side rendering in `window.__INITIAL_STATE__`.
+`fetchComponentData` is the essential function. It takes three params: first is a dispatch function of Redux store, the second is an array of components that should be rendered in current route and third is the route params. `fetchComponentData` collects all the needs (need is an array of actions that are required to be dispatched before rendering the component) of components in the current route. It returns a promise when all the required actions are dispatched. We render the page and send data to the client for client-side rendering in `window.__INITIAL_STATE__`.
 
 ### Client
 
-Client directory contains all the  shared components, routes, modules.
+Client directory contains all the shared components, routes, modules.
 
 #### components
-This folder contains all the shared components which is used throughout the project.
+This folder contains all the common components which are used throughout the project.
 
 #### index.js
 Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
@@ -104,7 +104,7 @@ Index.js simply does client side rendering using the data provided from `window.
 All the assets images, fonts goes here. All of these will be copied to `dist` folder while running in production and served from there.
 
 #### modules
-Modules are way of organising different domain specific modules in the project. A typical module contains the following
+Modules are the way of organising different domain-specific modules in the project. A typical module contains the following
 ```
 | - Post
   | - __tests__ // all the tests for this module goes here
@@ -138,6 +138,66 @@ Modules are way of organising different domain specific modules in the project. 
 
 ### ES6 support
 We use babel to transpile code in both server and client with `stage-0` plugin. So, you can use both ES6 and experimental ES7 features.
+
+### Make your MERN
+In this version, we enabled the `mern-cli` to clone not only this project but also the variants of `mern-starter` like one project with MaterialUI or JWT auth. To make your version of MERN, follow these steps
+1) Clone this project
+    ```
+    git clone https://github.com/Hashnode/mern-starter
+    ```
+2) Make your changes. Add a package, add authentication, modify the file structure, replace Redux with MobX or anything else.
+3) In this version, we also added code generators. Blueprints for those generators are located at `config/blueprints`, and config is located at `mern.json`. Make sure to edit them if necessary after your made modifications in the previous step. There is a section below which explains how to modify generators.
+4) Next clone `mern-cli` project
+    ```
+    git clone https://github.com/Hashnode/mern-cli
+    ```
+5) Add your project details to `variants.json` in the cloned project and send a pull request.
+
+### Modifying Generators
+
+#### mern.json
+It contains a blueprints array. Each object in it is the config for a generator. A blueprint config contains the name, description, usage, and files array. An example blueprint config
+```
+{
+  "name": "dumb-s",
+  "description": "Generates a dumb react component in shared components",
+  "usage": "dumb-s [component-name]",
+  "files": [
+    {
+      "blueprint-path": "config/blueprints/dumb-component.ejs",
+      "target-path": "client/components/<%= helpers.capitalize(name) %>.js"
+    }
+  ]
+}
+```
+
+A file object contains
+1) `blueprint-path` - location of the blueprint file
+2) `target-path` - location where the file should be generated
+3) `parent-path` - optional parameter, used if you want to generate the file inside an already existing folder in your project.
+
+`target-path` supports [ejs](https://github.com/mde/ejs) and the following variables will be passed while rendering,
+1) `name` - `<component-name>` input from user
+2) `parent` - in particular special cases where you need to generate files inside an already existing folder, you can obtain this parent variable from the user. A config using that will look like,
+    ```
+    {
+      "name": "dumb-m",
+      "description": "Generates a dumb react component in a module directory",
+      "usage": "dumb-m <module-name>/<component-name>",
+      "files": [
+        {
+          "blueprint-path": "config/blueprints/dumb-component.ejs",
+          "parent-path": "client/modules/<%= helpers.capitalize(parent) %>",
+          "target-path": "components/<%= helpers.capitalize(name) %>/<%= helpers.capitalize(name) %>.js"
+        }
+      ]
+    }
+    ```
+    Here, notice the usage. In `<module-name>/<component-name>`, `<module-name>` will be passed as `parent` and `<component-name>` will be passed as `<name>`.
+3) `helpers` - an helper object is passed which include common utility functions. For now, it contains `capitalize`. If you want to add more, send a PR to [mern-cli](https://github.com/Hashnode/mern-cli).
+
+#### Blueprint files
+Blueprints are basically [ejs](https://github.com/mde/ejs) templates which are rendered with the same three variables(`name`, optional `parent` and `helpers` object) as above.
 
 ## Roadmap
 
