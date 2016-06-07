@@ -141,17 +141,17 @@ We use babel to transpile code in both server and client with `stage-0` plugin. 
 
 ### Make your MERN
 In this version, we enabled the `mern-cli` to clone not only this project but also the variants of `mern-starter` like one project with MaterialUI or JWT auth. To make your version of MERN, follow these steps
-1) Clone this project
+1. Clone this project
     ```
     git clone https://github.com/Hashnode/mern-starter
     ```
-2) Make your changes. Add a package, add authentication, modify the file structure, replace Redux with MobX or anything else.
-3) In this version, we also added code generators. Blueprints for those generators are located at `config/blueprints`, and config is located at `mern.json`. Make sure to edit them if necessary after your made modifications in the previous step. There is a section below which explains how to modify generators.
-4) Next clone `mern-cli` project
+2. Make your changes. Add a package, add authentication, modify the file structure, replace Redux with MobX or anything else.
+3. In this version, we also added code generators. Blueprints for those generators are located at `config/blueprints`, and config is located at `mern.json`. Make sure to edit them if necessary after your made modifications in the previous step. There is a section below which explains how to modify generators.
+4. Next clone `mern-cli` project
     ```
     git clone https://github.com/Hashnode/mern-cli
     ```
-5) Add your project details to `variants.json` in the cloned project and send a pull request.
+5. Add your project details to `variants.json` in the cloned project and send a pull request.
 
 ### Modifying Generators
 
@@ -172,13 +172,13 @@ It contains a blueprints array. Each object in it is the config for a generator.
 ```
 
 A file object contains
-1) `blueprint-path` - location of the blueprint file
-2) `target-path` - location where the file should be generated
-3) `parent-path` - optional parameter, used if you want to generate the file inside an already existing folder in your project.
+1. `blueprint-path` - location of the blueprint file
+2. `target-path` - location where the file should be generated
+3. `parent-path` - optional parameter, used if you want to generate the file inside an already existing folder in your project.
 
 `target-path` supports [ejs](https://github.com/mde/ejs) and the following variables will be passed while rendering,
-1) `name` - `<component-name>` input from user
-2) `parent` - in particular special cases where you need to generate files inside an already existing folder, you can obtain this parent variable from the user. A config using that will look like,
+1. `name` - `<component-name>` input from user
+2. `parent` - in particular special cases where you need to generate files inside an already existing folder, you can obtain this parent variable from the user. A config using that will look like,
     ```
     {
       "name": "dumb-m",
@@ -194,7 +194,7 @@ A file object contains
     }
     ```
     Here, notice the usage. In `<module-name>/<component-name>`, `<module-name>` will be passed as `parent` and `<component-name>` will be passed as `<name>`.
-3) `helpers` - an helper object is passed which include common utility functions. For now, it contains `capitalize`. If you want to add more, send a PR to [mern-cli](https://github.com/Hashnode/mern-cli).
+3. `helpers` - an helper object is passed which include common utility functions. For now, it contains `capitalize`. If you want to add more, send a PR to [mern-cli](https://github.com/Hashnode/mern-cli).
 
 #### Blueprint files
 Blueprints are basically [ejs](https://github.com/mde/ejs) templates which are rendered with the same three variables(`name`, optional `parent` and `helpers` object) as above.
