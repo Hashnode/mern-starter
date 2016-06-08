@@ -1,4 +1,5 @@
 import Express from 'express';
+import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
@@ -12,14 +13,15 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 // Initialize the Express App
 const app = new Express();
 
-if (process.env.NODE_ENV !== 'production') {
+// Run Webpack dev server in development mode
+if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(config);
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
 }
 
 // React And Redux Setup
-import { configureStore } from '../shared/redux/store/configureStore';
+import { configureStore } from '../client/store';
 import { Provider } from 'react-redux';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -27,7 +29,7 @@ import { match, RouterContext } from 'react-router';
 import Helmet from 'react-helmet';
 
 // Import required modules
-import routes from '../shared/routes';
+import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 import posts from './routes/post.routes';
 import dummyData from './dummyData';
@@ -45,15 +47,19 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
 });
 
 // Apply body Parser and server public assets and routes
+app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
-app.use(Express.static(path.resolve(__dirname, '../static')));
+app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use('/api', posts);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
-  const cssPath = process.env.NODE_ENV === 'production' ? '/css/app.min.css' : '/css/app.css';
   const head = Helmet.rewind();
+
+  // Import Manifests
+  const assetsManifest = process.env.NODE_ENV === 'production' ? require('../dist/manifest.json') : {}; // eslint-disable-line
+  const chunkManifest = process.env.NODE_ENV === 'production' ? require('../dist/chunk-manifest.json') : {}; // eslint-disable-line
 
   return `
     <!doctype html>
@@ -65,7 +71,7 @@ const renderFullPage = (html, initialState) => {
         ${head.link.toString()}
         ${head.script.toString()}
 
-        <link rel="stylesheet" href=${cssPath} />
+        ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
         <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
       </head>
@@ -73,8 +79,13 @@ const renderFullPage = (html, initialState) => {
         <div id="root">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+          ${process.env.NODE_ENV === 'production' ?
+          `//<![CDATA[
+          window.webpackManifest = ${JSON.stringify(chunkManifest)};
+          //]]>` : ''}
         </script>
-        <script src="/dist/bundle.js"></script>
+        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/vendor.js'] : '/vendor.js'}'></script>
+        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
       </body>
     </html>
   `;
@@ -102,9 +113,7 @@ app.use((req, res, next) => {
       return next();
     }
 
-    const initialState = { posts: [], post: {} };
-
-    const store = configureStore(initialState);
+    const store = configureStore();
 
     return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
@@ -115,9 +124,12 @@ app.use((req, res, next) => {
         );
         const finalState = store.getState();
 
-        res.status(200).end(renderFullPage(initialView, finalState));
+        res
+          .set('Content-Type', 'text/html')
+          .status(200)
+          .end(renderFullPage(initialView, finalState));
       })
-      .catch((err) => next(err));
+      .catch((error) => next(error));
   });
 });
 

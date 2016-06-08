@@ -5,5 +5,4 @@ npm-debug.log
 dump.rdb
 .vscode/
 public/*
-static/dist
-static/css/app.min.css
+dist
