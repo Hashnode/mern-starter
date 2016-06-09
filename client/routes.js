@@ -32,7 +32,7 @@ export default (
       }}
     />
     <Route
-      path="/post/:slug"
+      path="/posts/:slug"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Post/pages/PostDetailPage/PostDetailPage').default);

@@ -51,7 +51,7 @@ export function addPost(req, res) { // eslint-disable-line consistent-return
  * @param res
  */
 export function getPost(req, res) {
-  const newSlug = req.query.slug.split('-');
+  const newSlug = req.params.slug.split('-');
   const newCuid = newSlug[newSlug.length - 1];
   Post.findOne({ cuid: newCuid }).exec((err, post) => {
     if (err) {
@@ -67,7 +67,7 @@ export function getPost(req, res) {
  * @param res
  */
 export function deletePost(req, res) {
-  const postId = req.body.postId;
+  const postId = req.body.id;
   Post.findById(postId).exec((err, post) => { // eslint-disable-line consistent-return
     if (err) {
       return res.status(500).send(err);
