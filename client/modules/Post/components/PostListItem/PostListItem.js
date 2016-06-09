@@ -8,7 +8,7 @@ function PostListItem(props) {
   return (
     <div className={styles['single-post']}>
       <h3 className={styles['post-title']}>
-        <Link to={`/post/${props.post.slug}-${props.post.cuid}`} onClick={props.onClick}>
+        <Link to={`/posts/${props.post.slug}-${props.post.cuid}`} onClick={props.onClick}>
           {props.post.title}
         </Link>
       </h3>

@@ -26,7 +26,7 @@ export function addPost(post) {
 
 export function addPostRequest(post) {
   return (dispatch) => {
-    fetch(`${baseURL}/api/addPost`, {
+    fetch(`${baseURL}/api/posts`, {
       method: 'post',
       body: JSON.stringify({
         post: {
@@ -51,7 +51,7 @@ export function addSelectedPost(post) {
 
 export function getPostRequest(post) {
   return (dispatch) => {
-    return fetch(`${baseURL}/api/getPost?slug=${post}`, {
+    return fetch(`${baseURL}/api/posts/${post}`, {
       method: 'get',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export function addPosts(posts) {
 
 export function fetchPosts() {
   return (dispatch) => {
-    return fetch(`${baseURL}/api/getPosts`).
+    return fetch(`${baseURL}/api/posts`).
     then((response) => response.json()).
     then((response) => dispatch(addPosts(response.posts)));
   };
@@ -84,10 +84,10 @@ export function fetchPosts() {
 
 export function deletePostRequest(post) {
   return (dispatch) => {
-    fetch(`${baseURL}/api/deletePost`, {
-      method: 'post',
+    fetch(`${baseURL}/api/posts`, {
+      method: 'delete',
       body: JSON.stringify({
-        postId: post._id,
+        id: post._id,
       }),
       headers: new Headers({
         'Content-Type': 'application/json',

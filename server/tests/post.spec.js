@@ -28,7 +28,7 @@ function dropDB(done) {
   });
 }
 
-describe('GET /api/getPosts', function () {
+describe('GET /api/posts', function () {
 
   beforeEach('connect and add two post entries', function (done) {
 
@@ -49,7 +49,7 @@ describe('GET /api/getPosts', function () {
   it('Should correctly give number of Posts', function (done) {
 
     request(app)
-      .get('/api/getPosts')
+      .get('/api/posts')
       .set('Accept', 'application/json')
       .end(function (err, res) {
         Post.find().exec(function (err, posts) {
@@ -60,7 +60,7 @@ describe('GET /api/getPosts', function () {
   });
 });
 
-describe('GET /api/getPost', function () {
+describe('GET /api/posts/:slug', function () {
 
   beforeEach('connect and add one Post entry', function(done){
 
@@ -80,7 +80,7 @@ describe('GET /api/getPost', function () {
   it('Should send correct data when queried against a title', function (done) {
 
     request(app)
-      .get('/api/getPost?slug=bar-f34gb2bh24b24b2')
+      .get('/api/posts/bar-f34gb2bh24b24b2')
       .set('Accept', 'application/json')
       .end(function (err, res) {
         Post.findOne({ cuid: 'f34gb2bh24b24b2' }).exec(function (err, post) {
@@ -92,7 +92,7 @@ describe('GET /api/getPost', function () {
 
 });
 
-describe('POST /api/addPost', function () {
+describe('POST /api/posts', function () {
 
   beforeEach('connect and add a post', function (done) {
 
@@ -108,7 +108,7 @@ describe('POST /api/addPost', function () {
   it('Should send correctly add a post', function (done) {
 
     request(app)
-      .post('/api/addPost')
+      .post('/api/posts')
       .send({ post: { name: 'Foo', title: 'bar', content: 'Hello Mern says Foo' } })
       .set('Accept', 'application/json')
       .end(function (err, res) {
@@ -121,7 +121,7 @@ describe('POST /api/addPost', function () {
 
 });
 
-describe('POST /api/deletePost', function () {
+describe('POST /api/posts', function () {
   var postId;
 
   beforeEach('connect and add one Post entry', function(done){
@@ -148,8 +148,8 @@ describe('POST /api/deletePost', function () {
     });
 
     request(app)
-      .post('/api/deletePost')
-      .send({ postId: postId})
+      .delete('/api/posts')
+      .send({ id: postId})
       .set('Accept', 'application/json')
       .end(function () {
 
