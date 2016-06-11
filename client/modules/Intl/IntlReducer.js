@@ -1,10 +1,10 @@
-import { SWITCH_LANGUAGES } from './IntlActions';
+import { SWITCH_LANGUAGES, enabledLanguages } from './IntlActions';
 
 const initialState = {
   locale: 'en',
   messages: {},
   fields: {},
-  enabledLanguages: ['en', 'fr'],
+  enabledLanguages,
 };
 
 const IntlReducer = (state = initialState, { type, ...action }) => {

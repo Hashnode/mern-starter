@@ -51,14 +51,13 @@ export default injectIntl(connect(store => ({
       <div className="Language-Examples">
         <header className="Language-Toggles">
           {this.props.intl.enabledLanguages.map((languageOption, i) =>
-            <a
-              href="#"
+            <button
               key={i}
               style={{ padding: '1px 5px', marginLeft: '5px' }}
               onClick={this.changeLanguage}
             >
               {languageOption}
-            </a>
+            </button>
           )}
         </header>
 
