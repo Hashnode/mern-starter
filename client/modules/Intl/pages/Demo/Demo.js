@@ -65,8 +65,11 @@ export default injectIntl(connect(store => ({
           Formatted Date
         </h2>
           {
-            dateArr.map((date) =>
-              <div className="FormattedDate">
+            dateArr.map((date, i) =>
+              <div
+                className="FormattedDate"
+                key={i}
+              >
                 <FormattedDate
                   value={date}
                   day="numeric"
@@ -81,8 +84,11 @@ export default injectIntl(connect(store => ({
           Formatted Time
         </h2>
           {
-            timeArr.map((time) =>
-              <div className="FormattedTime">
+            timeArr.map((time, i) =>
+              <div
+                className="FormattedTime"
+                key={i}
+              >
                 <FormattedTime
                   value={time}
                   hour12
@@ -97,8 +103,11 @@ export default injectIntl(connect(store => ({
           Formatted Relative Date
         </h2>
           {
-            dateArr.map((date) =>
-              <div className="FormattedRelativeDate">
+            dateArr.map((date, i) =>
+              <div
+                className="FormattedRelativeDate"
+                key={i}
+              >
                 <FormattedRelative value={date} />
               </div>
             )
@@ -108,8 +117,11 @@ export default injectIntl(connect(store => ({
           Formatted Number
         </h2>
           {
-            numberArr.map((number) =>
-              <div className="FormattedNumber">
+            numberArr.map((number, i) =>
+              <div
+                className="FormattedNumber"
+                key={i}
+              >
                 <FormattedNumber value={number} /> {' '}
               </div>
             )
@@ -123,7 +135,10 @@ export default injectIntl(connect(store => ({
         </h2>
           {
             numberArr.map((_, i) =>
-              <div className="FormattedPlural">
+              <div
+                className="FormattedPlural"
+                key={i}
+              >
                 You have {' '}
                 <FormattedPlural
                   value={i + 1}
@@ -139,7 +154,10 @@ export default injectIntl(connect(store => ({
         </h2>
           {
             numberArr.map((_, i) =>
-              <div className="FormattedMessage">
+              <div
+                className="FormattedMessage"
+                key={i}
+              >
                 <FormattedMessage
                   id="comment"
                   defaultMessage="Hello, {name}"
@@ -159,7 +177,10 @@ export default injectIntl(connect(store => ({
         </h2>
           {
             numberArr.map((_, i) =>
-              <div className="FormattedHTMLMessage">
+              <div
+                className="FormattedHTMLMessage"
+                key={i}
+              >
                 <FormattedHTMLMessage
                   id="HTMLComment"
                   defaultMessage="Hello, {name}"
@@ -178,7 +199,10 @@ export default injectIntl(connect(store => ({
         </h2>
           {
             numberArr.map((_, i) =>
-              <div className="NestedFormattedMessage">
+              <div
+                className="NestedFormattedMessage"
+                key={i}
+              >
                 <FormattedMessage
                   id="nestedDateComment"
                   defaultMessage="Hello, {name}"

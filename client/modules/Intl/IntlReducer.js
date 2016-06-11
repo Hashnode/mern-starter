@@ -1,10 +1,12 @@
-import { SWITCH_LANGUAGES, enabledLanguages } from './IntlActions';
+import { enabledLanguages, localizationData } from './setup/setup';
+import { SWITCH_LANGUAGES } from './IntlActions';
+
+const initLocale = global.navigator && global.navigator.language || 'en';
 
 const initialState = {
-  locale: 'en',
-  messages: {},
-  fields: {},
+  locale: initLocale,
   enabledLanguages,
+  ...(localizationData[initLocale] || {}),
 };
 
 const IntlReducer = (state = initialState, { type, ...action }) => {
