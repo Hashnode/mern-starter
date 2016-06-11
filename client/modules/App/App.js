@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { IntlProvider } from 'react-intl';
 
 // Import Style
 import styles from './App.css';
@@ -29,31 +30,33 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.isMounted && !window.devToolsExtension && <DevTools />}
+      <IntlProvider {...this.props.intl}>
         <div>
-          <Helmet
-            title="MERN Starter - Blog App"
-            titleTemplate="%s - Blog App"
-            meta={[
-              { charset: 'utf-8' },
-              {
-                'http-equiv': 'X-UA-Compatible',
-                content: 'IE=edge',
-              },
-              {
-                name: 'viewport',
-                content: 'width=device-width, initial-scale=1',
-              },
-            ]}
-          />
-          <Header toggleAddPost={this.toggleAddPostSection} />
-          <div className={styles.container}>
-            {this.props.children}
+          {this.state.isMounted && !window.devToolsExtension && <DevTools />}
+          <div>
+            <Helmet
+              title="MERN Starter - Blog App"
+              titleTemplate="%s - Blog App"
+              meta={[
+                { charset: 'utf-8' },
+                {
+                  'http-equiv': 'X-UA-Compatible',
+                  content: 'IE=edge',
+                },
+                {
+                  name: 'viewport',
+                  content: 'width=device-width, initial-scale=1',
+                },
+              ]}
+            />
+            <Header toggleAddPost={this.toggleAddPostSection} />
+            <div className={styles.container}>
+              {this.props.children}
+            </div>
+            <Footer />
           </div>
-          <Footer />
         </div>
-      </div>
+      </IntlProvider>
     );
   }
 }
@@ -61,6 +64,9 @@ class App extends Component {
 App.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
-export default connect()(App);
+export default connect(store => ({
+  intl: store.intl,
+}))(App);
