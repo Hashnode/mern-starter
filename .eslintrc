@@ -1,6 +1,12 @@
 {
-  "extends": "airbnb",
+  "extends": [
+    "airbnb",
+    "plugin:ava/recommended"
+  ],
   "parser": "babel-eslint",
+  "plugins": [
+    "ava"
+  ],
   "env": {
     "browser": true,
     "node": true,
@@ -18,7 +24,11 @@
      "arrow-body-style": [0],
      "react/jsx-no-bind": [0]
   },
-  "globals": {
-    "webpackIsomorphicTools": true
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack.config.dev.js"
+      }
+    }
   }
 }
