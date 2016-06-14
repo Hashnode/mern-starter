@@ -3,7 +3,7 @@ web:
   links:
    - db
   ports:
-   - "8080:8000"
+   - "80:8000"
   volumes:
    - .:/usr/src/app/
   environment:
