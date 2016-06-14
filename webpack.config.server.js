@@ -18,6 +18,14 @@ module.exports = {
     __dirname: true,
   },
 
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+    modules: [
+      'client',
+      'node_modules',
+    ],
+  },
+
   module: {
     loaders: [
       {
@@ -46,7 +54,7 @@ module.exports = {
         loader: 'null-loader',
       }, {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
-        loader: 'null-loader',
+        loader: 'fake-url-loader?limit=10000&name=assets/[name].[ext]',
       },
     ],
   },
