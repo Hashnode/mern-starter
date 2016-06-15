@@ -139,6 +139,21 @@ Assets can be kept where you want and can be imported into your js files or css 
 ### ES6 support
 We use babel to transpile code in both server and client with `stage-0` plugin. So, you can use both ES6 and experimental ES7 features.
 
+### Docker
+There are docker configurations for both development and production.
+
+To run docker for development,
+```
+docker-compose -f docker-compose-development.yml build
+docker-compose -f docker-compose-development.yml up
+```
+
+To run docker for production,
+```
+docker-compose build
+docker-compose up
+```
+
 ### Make your MERN
 In this version, we enabled the `mern-cli` to clone not only this project but also the variants of `mern-starter` like one project with MaterialUI or JWT auth. To make your version of MERN, follow these steps
 
