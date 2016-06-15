@@ -58,8 +58,8 @@ const renderFullPage = (html, initialState) => {
   const head = Helmet.rewind();
 
   // Import Manifests
-  const assetsManifest = process.env.NODE_ENV === 'production' ? require('../dist/manifest.json') : {}; // eslint-disable-line
-  const chunkManifest = process.env.NODE_ENV === 'production' ? require('../dist/chunk-manifest.json') : {}; // eslint-disable-line
+  const assetsManifest = JSON.parse(process.env.webpackAssets);
+  const chunkManifest = JSON.parse(process.env.webpackChunkAssets);
 
   return `
     <!doctype html>

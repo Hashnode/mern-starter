@@ -5,17 +5,6 @@
     "production": {
       "presets": ["es2015", "react", "react-optimize", "es2015-native-modules", "stage-0"]
     },
-    "development": {
-      "plugins": [
-        [
-          "babel-plugin-webpack-loaders",
-          {
-            "config": "./webpack.config.babel.js",
-            "verbose": false
-          }
-        ]
-      ]
-    },
     "test": {
       "plugins": [
         [
