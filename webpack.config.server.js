@@ -18,6 +18,14 @@ module.exports = {
     __dirname: true,
   },
 
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+    modules: [
+      'client',
+      'node_modules',
+    ],
+  },
+
   module: {
     loaders: [
       {
@@ -32,8 +40,9 @@ module.exports = {
           ],
           plugins: [
             [
-              'css-modules-transform', {
-                generateScopedName: '[hash:base64]',
+              'babel-plugin-webpack-loaders', {
+                'config': './webpack.config.babel.js',
+                "verbose": false
               }
             ]
           ]
@@ -41,12 +50,6 @@ module.exports = {
       }, {
         test: /\.json$/,
         loader: 'json-loader',
-      }, {
-        test: /\.css$/,
-        loader: 'null-loader',
-      }, {
-        test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
-        loader: 'null-loader',
       },
     ],
   },

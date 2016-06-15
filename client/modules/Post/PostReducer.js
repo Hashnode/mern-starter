@@ -1,4 +1,4 @@
-import { ADD_POST, CHANGE_SELECTED_POST, ADD_POSTS, ADD_SELECTED_POST, DELETE_POST } from './PostActions';
+import { ADD_POST, ADD_POSTS, ADD_SELECTED_POST, DELETE_POST } from './PostActions';
 
 const initialState = { posts: [], post: null };
 
@@ -15,12 +15,6 @@ const PostReducer = (state = initialState, action) => {
           _id: action._id,
         }, ...state.posts],
         post: state.post };
-
-    case CHANGE_SELECTED_POST :
-      return {
-        posts: state.posts,
-        post: action.slug,
-      };
 
     case ADD_POSTS :
       return {

@@ -30,9 +30,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     modules: [
-      'assets',
-      'components',
-      'modules',
+      'client',
       'node_modules',
     ],
   },
@@ -53,7 +51,7 @@ module.exports = {
         loader: 'babel',
       }, {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
-        loader: 'url-loader?limit=10000&name=assets/[name].[ext]',
+        loader: 'url-loader?limit=10000',
       }, {
         test: /\.json$/,
         loader: 'json-loader',
@@ -76,13 +74,6 @@ module.exports = {
     new ManifestPlugin({
       basePath: '/',
     }),
-    new CopyWebpackPlugin([
-      {
-        context: __dirname + '/client/assets',
-        from: '**/*',
-        to: __dirname + '/dist/assets',
-      },
-    ]),
     new ChunkManifestPlugin({
       filename: "chunk-manifest.json",
       manifestVariable: "webpackManifest",

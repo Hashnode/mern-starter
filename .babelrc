@@ -4,6 +4,17 @@
   "env": {
     "production": {
       "presets": ["es2015", "react", "react-optimize", "es2015-native-modules", "stage-0"]
+    },
+    "test": {
+      "plugins": [
+        [
+          "babel-plugin-webpack-loaders",
+          {
+            "config": "${CONFIG}",
+            "verbose": false
+          }
+        ]
+      ]
     }
   }
 }

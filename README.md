@@ -27,7 +27,7 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 
 ### Webpack Configs
 
-MERN uses Webpack for bundling modules. There are three types of Webpack configs provided `webpack.config.dev.js` (for development), `webpack.config.prod.js` (for production) and `webpack.config.server.js` (for bundling server in production).
+MERN uses Webpack for bundling modules. There are four types of Webpack configs provided `webpack.config.dev.js` (for development), `webpack.config.prod.js` (for production), `webpack.config.server.js` (for bundling server in production) and `webpack.config.babel.js` (for [babel-plugin-webpack-loaders](https://github.com/istarkov/babel-plugin-webpack-loaders) for server rendering of assets included through webpack).
 
 The Webpack configuration is minimal and beginner-friendly. You can customise and add more features to it for production build.
 
@@ -100,9 +100,6 @@ This folder contains all the common components which are used throughout the pro
 #### index.js
 Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
 
-#### assets
-All the assets images, fonts goes here. All of these will be copied to `dist` folder while running in production and served from there.
-
 #### modules
 Modules are the way of organising different domain-specific modules in the project. A typical module contains the following
 ```
@@ -136,8 +133,26 @@ Modules are the way of organising different domain-specific modules in the proje
 
 ## Misc
 
+### Importing Assets
+Assets can be kept where you want and can be imported into your js files or css files. Those fill be served by webpack in development mode and copied to the dist folder during production.
+
 ### ES6 support
 We use babel to transpile code in both server and client with `stage-0` plugin. So, you can use both ES6 and experimental ES7 features.
+
+### Docker
+There are docker configurations for both development and production.
+
+To run docker for development,
+```
+docker-compose -f docker-compose-development.yml build
+docker-compose -f docker-compose-development.yml up
+```
+
+To run docker for production,
+```
+docker-compose build
+docker-compose up
+```
 
 ### Make your MERN
 In this version, we enabled the `mern-cli` to clone not only this project but also the variants of `mern-starter` like one project with MaterialUI or JWT auth. To make your version of MERN, follow these steps
@@ -209,6 +224,13 @@ Also, `target-path` supports [ejs](https://github.com/mde/ejs) and the following
 
 #### Blueprint files
 Blueprints are basically [ejs](https://github.com/mde/ejs) templates which are rendered with the same three variables(`name`, optional `parent` and `helpers` object) as above.
+
+### Caveats
+
+#### FOUC (Flash of Unstyled Content)
+To make the hot reloading of CSS work, we are not extracting CSS in development. Ideally, during server rendering, we will be extracting CSS, and we will get a .css file, and we can use it in the html template. That's what we are doing in production.
+
+In development, after all scripts get loaded, react loads the CSS as BLOBs. That's why there is a second of FOUC in development.
 
 ## Roadmap
 

@@ -12,5 +12,5 @@ import intl from './modules/Intl/IntlReducer';
 export default combineReducers({
   app,
   posts,
-  intl
+  intl,
 });

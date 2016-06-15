@@ -14,7 +14,7 @@ import Footer from './components/Footer/Footer';
 // Import Actions
 import { toggleAddPost } from './AppActions';
 
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.state = { isMounted: false };
@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <IntlProvider {...this.props.intl}>
         <div>
-          {this.state.isMounted && !window.devToolsExtension && <DevTools />}
+          {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
           <div>
             <Helmet
               title="MERN Starter - Blog App"
@@ -67,6 +67,11 @@ App.propTypes = {
   intl: PropTypes.object.isRequired,
 };
 
-export default connect(store => ({
-  intl: store.intl,
-}))(App);
+// Retrieve data from store as props
+function mapStateToProps(store) {
+  return {
+    intl: store.intl,
+  };
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,163 +1,82 @@
-import mocha from 'mocha';
-import app from '../server';
-import chai from 'chai';
+import test from 'ava';
+import { expect } from 'chai';
 import request from 'supertest';
-import mongoose from 'mongoose';
+import app from '../server';
 import Post from '../models/post';
+import { connectDB, dropDB } from '../util/test-helpers';
 
-const expect = chai.expect;
+// Initial posts added into test db
+const posts = [
+  new Post({name: 'Prashant', title: 'Hello Mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'"}),
+  new Post({name: 'Mayank', title: 'Hi Mern', cuid: 'f34gb2bh24b24b3', content: "All dogs bark 'mern!'"})
+];
 
-function connectDB(done) {
-  if (mongoose.connection.name !== 'mern-test') {
-    return done();
-  }
+test.beforeEach('connect and add two post entries', t => {
 
-  mongoose.connect((process.env.MONGO_URL || 'mongodb://localhost:27017/mern-test'), function (err) {
-    if (err) return done(err);
-    done();
-  });
-}
-
-function dropDB(done) {
-  if (mongoose.connection.name !== 'mern-test') {
-    return done();
-  }
-
-  mongoose.connection.db.dropDatabase(function (err) {
-    mongoose.connection.close(done);
-  });
-}
-
-describe('GET /api/posts', function () {
-
-  beforeEach('connect and add two post entries', function (done) {
-
-    connectDB(function () {
-      var post1 = new Post({name: 'Prashant', title: 'Hello Mern', content: "All cats meow 'mern!'"});
-      var post2 = new Post({name: 'Mayank', title: 'Hi Mern', content: "All dogs bark 'mern!'"});
-
-      Post.create([post1, post2], function (err, saved) {
-        done();
-      });
+  connectDB(t, () => {
+    Post.create(posts, err => {
+      if(err) t.fail('Unable to create posts');
     });
-  });
-
-  afterEach(function (done) {
-    dropDB(done);
-  });
-
-  it('Should correctly give number of Posts', function (done) {
-
-    request(app)
-      .get('/api/posts')
-      .set('Accept', 'application/json')
-      .end(function (err, res) {
-        Post.find().exec(function (err, posts) {
-          expect(posts.length).to.equal(res.body.posts.length);
-          done();
-        });
-      });
   });
 });
 
-describe('GET /api/posts/:slug', function () {
-
-  beforeEach('connect and add one Post entry', function(done){
-
-    connectDB(function () {
-      var post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
-
-      post.save(function (err, saved) {
-        done();
-      });
-    });
-  });
-
-  afterEach(function (done) {
-    dropDB(done);
-  });
-
-  it('Should send correct data when queried against a title', function (done) {
-
-    request(app)
-      .get('/api/posts/bar-f34gb2bh24b24b2')
-      .set('Accept', 'application/json')
-      .end(function (err, res) {
-        Post.findOne({ cuid: 'f34gb2bh24b24b2' }).exec(function (err, post) {
-          expect(post.name).to.equal('Foo');
-          done();
-        });
-      });
-  });
-
+test.afterEach.always(t => {
+  dropDB(t);
 });
 
-describe('POST /api/posts', function () {
+test.serial('Should correctly give number of Posts', async t => {
+  t.plan(2);
 
-  beforeEach('connect and add a post', function (done) {
+  const res = await request(app)
+    .get('/api/posts')
+    .set('Accept', 'application/json');
 
-    connectDB(function () {
-      done();
-    });
-  });
-
-  afterEach(function (done) {
-    dropDB(done);
-  });
-
-  it('Should send correctly add a post', function (done) {
-
-    request(app)
-      .post('/api/posts')
-      .send({ post: { name: 'Foo', title: 'bar', content: 'Hello Mern says Foo' } })
-      .set('Accept', 'application/json')
-      .end(function (err, res) {
-        Post.findOne({ title: 'bar' }).exec(function (err, post) {
-          expect(post.name).to.equal('Foo');
-          done();
-        });
-      });
-  });
-
+  t.is(res.status, 200);
+  t.deepEqual(posts.length, res.body.posts.length);
 });
 
-describe('POST /api/posts', function () {
-  var postId;
+test.serial('Should send correct data when queried against a title', async t => {
+  t.plan(2);
 
-  beforeEach('connect and add one Post entry', function(done){
+  var post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
+  post.save();
 
-    connectDB(function () {
-      var post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
+  const res = await request(app)
+    .get('/api/posts/foo-f34gb2bh24b24b2')
+    .set('Accept', 'application/json');
 
-      post.save(function (err, saved) {
-        postId = saved._id;
-        done();
-      });
-    });
-  });
-
-  afterEach(function (done) {
-    dropDB(done);
-  });
-
-  it('Should connect and delete a post', function (done) {
-
-    // Check if post is saved in DB
-    Post.findById(postId).exec(function (err, post) {
-      expect(post.name).to.equal('Foo')
-    });
-
-    request(app)
-      .delete('/api/posts')
-      .send({ id: postId})
-      .set('Accept', 'application/json')
-      .end(function () {
-
-        // Check if post is removed from DB
-        Post.findById(postId).exec(function (err, post) {
-          expect(post).to.equal(null);
-          done();
-        });
-      });
-  })
+  t.is(res.status, 200);
+  t.is(res.body.post.name, post.name);
 });
+
+test.serial('Should correctly add a post', async t => {
+  t.plan(2);
+
+  const res = await request(app)
+    .post('/api/posts')
+    .send({ post: { name: 'Foo', title: 'bar', content: 'Hello Mern says Foo' } })
+    .set('Accept', 'application/json');
+
+  t.is(res.status, 200);
+
+  const savedPost = await Post.findOne({ title: 'bar' }).exec();
+  t.is(savedPost.name, 'Foo');
+});
+
+test.serial('Should correctly delete a post', async t => {
+  t.plan(2);
+
+  const post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
+  post.save();
+
+  const res = await request(app)
+    .delete('/api/posts')
+    .send({ id: post.id})
+    .set('Accept', 'application/json');
+
+  t.is(res.status, 200);
+
+  const queriedPost = await Post.findById(post.id).exec();
+  t.is(queriedPost, null);
+});
+
