@@ -27,7 +27,7 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 
 ### Webpack Configs
 
-MERN uses Webpack for bundling modules. There are three types of Webpack configs provided `webpack.config.dev.js` (for development), `webpack.config.prod.js` (for production) and `webpack.config.server.js` (for bundling server in production).
+MERN uses Webpack for bundling modules. There are four types of Webpack configs provided `webpack.config.dev.js` (for development), `webpack.config.prod.js` (for production), `webpack.config.server.js` (for bundling server in production) and `webpack.config.babel.js` (for [babel-plugin-webpack-loaders](https://github.com/istarkov/babel-plugin-webpack-loaders) for server rendering of assets included through webpack).
 
 The Webpack configuration is minimal and beginner-friendly. You can customise and add more features to it for production build.
 
@@ -100,9 +100,6 @@ This folder contains all the common components which are used throughout the pro
 #### index.js
 Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
 
-#### assets
-All the assets images, fonts goes here. All of these will be copied to `dist` folder while running in production and served from there.
-
 #### modules
 Modules are the way of organising different domain-specific modules in the project. A typical module contains the following
 ```
@@ -135,6 +132,9 @@ Modules are the way of organising different domain-specific modules in the proje
 ```
 
 ## Misc
+
+### Importing Assets
+Assets can be kept where you want and can be imported into your js files or css files. Those fill be served by webpack in development mode and copied to the dist folder during production.
 
 ### ES6 support
 We use babel to transpile code in both server and client with `stage-0` plugin. So, you can use both ES6 and experimental ES7 features.

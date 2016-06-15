@@ -40,8 +40,9 @@ module.exports = {
           ],
           plugins: [
             [
-              'css-modules-transform', {
-                generateScopedName: '[hash:base64]',
+              'babel-plugin-webpack-loaders', {
+                'config': './webpack.config.babel.js',
+                "verbose": false
               }
             ]
           ]
@@ -49,12 +50,6 @@ module.exports = {
       }, {
         test: /\.json$/,
         loader: 'json-loader',
-      }, {
-        test: /\.css$/,
-        loader: 'null-loader',
-      }, {
-        test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
-        loader: 'fake-url-loader?limit=10000&name=assets/[name].[ext]',
       },
     ],
   },

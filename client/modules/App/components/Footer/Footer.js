@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './Footer.css';
 
 // Import Images
-import bg from 'assets/header-bk.png';
+import bg from '../../header-bk.png';
 
 function Footer() {
   return (

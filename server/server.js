@@ -58,8 +58,8 @@ const renderFullPage = (html, initialState) => {
   const head = Helmet.rewind();
 
   // Import Manifests
-  const assetsManifest = JSON.parse(process.env.webpackAssets);
-  const chunkManifest = JSON.parse(process.env.webpackChunkAssets);
+  const assetsManifest = process.env.webpackAssets && JSON.parse(process.env.webpackAssets);
+  const chunkManifest = process.env.webpackChunkAssets && JSON.parse(process.env.webpackChunkAssets);
 
   return `
     <!doctype html>

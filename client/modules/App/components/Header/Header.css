@@ -1,5 +1,5 @@
 .header {
-  background: #eee url('assets/header-bk.png') center;
+  background: #eee url('../../header-bk.png') center;
   background-size: cover;
   border-bottom: 1px solid #ccc;
 }
