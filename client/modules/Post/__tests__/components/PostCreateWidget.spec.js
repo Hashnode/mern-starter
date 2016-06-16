@@ -1,9 +1,9 @@
 import React from 'react';
 import test from 'ava';
 import sinon from 'sinon';
-import { shallow, mount } from 'enzyme';
-import PostCreateWidget from '../../components/PostCreateWidget/PostCreateWidget';
-import styles from '../../components/PostCreateWidget/PostCreateWidget.css';
+import { FormattedMessage } from 'react-intl';
+import { PostCreateWidget } from '../../components/PostCreateWidget/PostCreateWidget';
+import { mountWithIntl, shallowWithIntl } from '../../../../util/react-intl-test-helper';
 
 const props = {
   addPost: () => {},
@@ -11,28 +11,28 @@ const props = {
 };
 
 test('renders properly', t => {
-  const wrapper = shallow(
+  const wrapper = shallowWithIntl(
     <PostCreateWidget {...props} />
   );
 
-  t.truthy(wrapper.hasClass(styles.form));
-  t.truthy(wrapper.hasClass(styles.appear));
-  t.is(wrapper.find('h2').first().text(), 'Create new post');
+  t.truthy(wrapper.hasClass('form'));
+  t.truthy(wrapper.hasClass('appear'));
+  t.truthy(wrapper.find('h2').first().containsMatchingElement(<FormattedMessage id="createNewPost" />));
   t.is(wrapper.find('input').length, 2);
   t.is(wrapper.find('textarea').length, 1);
 });
 
 test('hide when showAddPost is false', t => {
-  const wrapper = mount(
+  const wrapper = mountWithIntl(
     <PostCreateWidget {...props} />
   );
 
   wrapper.setProps({ showAddPost: false });
-  t.falsy(wrapper.hasClass(styles.appear));
+  t.falsy(wrapper.hasClass('appear'));
 });
 
 test('has correct props', t => {
-  const wrapper = mount(
+  const wrapper = mountWithIntl(
     <PostCreateWidget {...props} />
   );
 
@@ -42,7 +42,7 @@ test('has correct props', t => {
 
 test('calls addPost', t => {
   const addPost = sinon.spy();
-  const wrapper = mount(
+  const wrapper = mountWithIntl(
     <PostCreateWidget addPost={addPost} showAddPost />
   );
 
@@ -57,7 +57,7 @@ test('calls addPost', t => {
 
 test('empty form doesn\'t call addPost', t => {
   const addPost = sinon.spy();
-  const wrapper = mount(
+  const wrapper = mountWithIntl(
     <PostCreateWidget addPost={addPost} showAddPost />
   );
 

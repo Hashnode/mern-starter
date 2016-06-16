@@ -1,8 +1,11 @@
-// CSS modules hook to inject css-modules classes in the final html.
-require('css-modules-require-hook')({
-  generateScopedName: '[name]__[local]__[hash:base64:5]',
-  devMode: true,
-});
+// To get normal classnames instead of CSS Modules classnames for testing
+require('mock-css-modules');
+
+// Ignore assets
+require.extensions['.jpg'] = noop => noop;
+require.extensions['.jpeg'] = noop => noop;
+require.extensions['.png'] = noop => noop;
+require.extensions['.gif'] = noop => noop;
 
 require('babel-register');
 require('babel-polyfill');

@@ -3,6 +3,7 @@ import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
+import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
 // Webpack Requirements
 import webpack from 'webpack';
@@ -119,7 +120,9 @@ app.use((req, res, next) => {
       .then(() => {
         const initialView = renderToString(
           <Provider store={store}>
-            <RouterContext {...renderProps} />
+            <IntlWrapper>
+              <RouterContext {...renderProps} />
+            </IntlWrapper>
           </Provider>
         );
         const finalState = store.getState();
