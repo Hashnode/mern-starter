@@ -65,7 +65,6 @@
     "babel-register": "^6.9.0",
     "chai": "^3.5.0",
     "chunk-manifest-webpack-plugin": "0.1.0",
-    "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
     "css-modules-require-hook": "^4.0.1",
     "cssnano": "^3.7.0",
