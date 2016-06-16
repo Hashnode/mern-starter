@@ -1,9 +1,8 @@
 import React from 'react';
 import test from 'ava';
 import sinon from 'sinon';
-import { shallow, mount } from 'enzyme';
 import PostListItem from '../../components/PostListItem/PostListItem';
-import styles from '../../components/PostListItem/PostListItem.css';
+import { mountWithIntl, shallowWithIntl } from '../../../../util/react-intl-test-helper';
 
 const post = { name: 'Prashant', title: 'Hello Mern', slug: 'hello-mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'" };
 const props = {
@@ -13,18 +12,18 @@ const props = {
 };
 
 test('renders properly', t => {
-  const wrapper = shallow(
+  const wrapper = shallowWithIntl(
     <PostListItem {...props} />
   );
 
-  t.truthy(wrapper.hasClass(styles['single-post']));
+  t.truthy(wrapper.hasClass('single-post'));
   t.is(wrapper.find('Link').first().prop('children'), post.title);
-  t.is(wrapper.find(`.${styles['author-name']}`).first().text(), `By ${post.name}`);
-  t.is(wrapper.find(`.${styles['post-desc']}`).first().text(), post.content);
+  t.regex(wrapper.find('.author-name').first().text(), new RegExp(post.name));
+  t.is(wrapper.find('.post-desc').first().text(), post.content);
 });
 
 test('has correct props', t => {
-  const wrapper = mount(
+  const wrapper = mountWithIntl(
     <PostListItem {...props} />
   );
 
@@ -36,13 +35,13 @@ test('has correct props', t => {
 test('calls onClick and onDelete', t => {
   const onClick = sinon.spy();
   const onDelete = sinon.spy();
-  const wrapper = shallow(
+  const wrapper = shallowWithIntl(
     <PostListItem post={post} onClick={onClick} onDelete={onDelete} />
   );
 
-  wrapper.find(`.${styles['post-title']} > Link`).first().simulate('click');
+  wrapper.find('.post-title > Link').first().simulate('click');
   t.truthy(onClick.calledOnce);
 
-  wrapper.find(`.${styles['post-action']} > a`).first().simulate('click');
+  wrapper.find('.post-action > a').first().simulate('click');
   t.truthy(onDelete.calledOnce);
 });

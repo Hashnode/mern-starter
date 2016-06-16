@@ -1,11 +1,11 @@
-import { localizationData } from './setup/setup';
+import { localizationData } from '../../../Intl/setup';
 
 // Export Constants
-export const SWITCH_LANGUAGES = 'SWITCH_LANGUAGES';
+export const SWITCH_LANGUAGE = 'SWITCH_LANGUAGE';
 
-export function switchLanguages(newLang) {
+export function switchLanguage(newLang) {
   return {
-    type: SWITCH_LANGUAGES,
+    type: SWITCH_LANGUAGE,
     ...localizationData[newLang],
   };
 }

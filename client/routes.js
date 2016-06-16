@@ -39,13 +39,5 @@ export default (
         });
       }}
     />
-    <Route
-      path="/intl"
-      getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          cb(null, require('./modules/Intl/pages/Demo/Demo').default);
-        });
-      }}
-    />
   </Route>
 );

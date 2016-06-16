@@ -1,8 +1,6 @@
 // list of available languages
 export const enabledLanguages = [
   'en',
-  'ar',
-  'es',
   'fr',
 ];
 
@@ -44,20 +42,6 @@ import enData from './localizationData/en';
 addLocaleData(en);
 localizationData.en = enData;
 localizationData.en.messages = flattenMessages(localizationData.en.messages);
-
-import 'intl/locale-data/jsonp/ar';
-import ar from 'react-intl/locale-data/ar';
-import arData from './localizationData/ar';
-addLocaleData(ar);
-localizationData.ar = arData;
-localizationData.ar.messages = flattenMessages(localizationData.ar.messages);
-
-import 'intl/locale-data/jsonp/es';
-import es from 'react-intl/locale-data/es';
-import esData from './localizationData/es';
-addLocaleData(es);
-localizationData.es = esData;
-localizationData.es.messages = flattenMessages(localizationData.es.messages);
 
 import 'intl/locale-data/jsonp/fr';
 import fr from 'react-intl/locale-data/fr';

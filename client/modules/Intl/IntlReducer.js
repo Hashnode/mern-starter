@@ -1,5 +1,5 @@
-import { enabledLanguages, localizationData } from './setup/setup';
-import { SWITCH_LANGUAGES } from './IntlActions';
+import { enabledLanguages, localizationData } from '../../../Intl/setup';
+import { SWITCH_LANGUAGE } from './IntlActions';
 
 const initLocale = global.navigator && global.navigator.language || 'en';
 
@@ -9,9 +9,9 @@ const initialState = {
   ...(localizationData[initLocale] || {}),
 };
 
-const IntlReducer = (state = initialState, { type, ...action }) => {
-  switch (type) {
-    case SWITCH_LANGUAGES:
+const IntlReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SWITCH_LANGUAGE:
       return { ...state, ...action };
 
     default:
