@@ -30,6 +30,7 @@ const PostReducer = (state = initialState, action) => {
 
     case DELETE_POST :
       return {
+        post: state.post,
         posts: state.posts.filter((post) => post._id !== action.post._id),
       };
 
