@@ -7,7 +7,6 @@ import { mountWithIntl, shallowWithIntl } from '../../../../util/react-intl-test
 const post = { name: 'Prashant', title: 'Hello Mern', slug: 'hello-mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'" };
 const props = {
   post,
-  onClick: () => {},
   onDelete: () => {},
 };
 
@@ -32,15 +31,11 @@ test('has correct props', t => {
   t.is(wrapper.prop('onDelete'), props.onDelete);
 });
 
-test('calls onClick and onDelete', t => {
-  const onClick = sinon.spy();
+test('calls onDelete', t => {
   const onDelete = sinon.spy();
   const wrapper = shallowWithIntl(
-    <PostListItem post={post} onClick={onClick} onDelete={onDelete} />
+    <PostListItem post={post} onDelete={onDelete} />
   );
-
-  wrapper.find('.post-title > Link').first().simulate('click');
-  t.truthy(onClick.calledOnce);
 
   wrapper.find('.post-action > a').first().simulate('click');
   t.truthy(onDelete.calledOnce);

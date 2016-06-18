@@ -2,23 +2,21 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
 // Import Components
-import PostListView from '../../components/PostList';
-import PostCreateView from '../../components/PostCreateWidget/PostCreateWidget';
+import PostList from '../../components/PostList';
+import PostCreateWidget from '../../components/PostCreateWidget/PostCreateWidget';
 
 // Import Actions
-import { addPostRequest, fetchPosts, addSelectedPost, deletePostRequest } from '../../PostActions';
+import { addPostRequest, fetchPosts, deletePostRequest } from '../../PostActions';
 import { toggleAddPost } from '../../../App/AppActions';
+
+// Import Selectors
+import { getShowAddPost } from '../../../App/AppReducer';
+import { getPosts } from '../../PostReducer';
 
 class PostListPage extends Component {
   componentDidMount() {
-    if (this.props.posts.length === 0) {
-      this.props.dispatch(fetchPosts());
-    }
+    this.props.dispatch(fetchPosts());
   }
-
-  handleShowPost = post => {
-    this.props.dispatch(addSelectedPost(post));
-  };
 
   handleDeletePost = post => {
     if (confirm('Do you want to delete this post')) { // eslint-disable-line
@@ -34,8 +32,8 @@ class PostListPage extends Component {
   render() {
     return (
       <div>
-        <PostCreateView addPost={this.handleAddPost} showAddPost={this.props.showAddPost} />
-        <PostListView handleShowPost={this.handleShowPost} handleDeletePost={this.handleDeletePost} posts={this.props.posts} />
+        <PostCreateWidget addPost={this.handleAddPost} showAddPost={this.props.showAddPost} />
+        <PostList handleDeletePost={this.handleDeletePost} posts={this.props.posts} />
       </div>
     );
   }
@@ -45,10 +43,10 @@ class PostListPage extends Component {
 PostListPage.need = [() => { return fetchPosts(); }];
 
 // Retrieve data from store as props
-function mapStateToProps(store) {
+function mapStateToProps(state) {
   return {
-    showAddPost: store.app.showAddPost,
-    posts: store.posts.posts,
+    showAddPost: getShowAddPost(state),
+    posts: getPosts(state),
   };
 }
 

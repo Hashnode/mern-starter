@@ -7,7 +7,10 @@ import { FormattedMessage } from 'react-intl';
 import styles from '../../components/PostListItem/PostListItem.css';
 
 // Import Actions
-import { getPostRequest } from '../../PostActions';
+import { fetchPost } from '../../PostActions';
+
+// Import Selectors
+import { getPost } from '../../PostReducer';
 
 export function PostDetailPage(props) {
   return (
@@ -23,14 +26,14 @@ export function PostDetailPage(props) {
 }
 
 // Actions required to provide data for this component to render in sever side.
-PostDetailPage.need = [(params) => {
-  return getPostRequest.bind(null, params.slug)();
+PostDetailPage.need = [params => {
+  return fetchPost(params.cuid);
 }];
 
 // Retrieve data from store as props
-function mapStateToProps(store) {
+function mapStateToProps(state, props) {
   return {
-    post: store.posts.post,
+    post: getPost(state, props.params.cuid),
   };
 }
 
@@ -42,7 +45,6 @@ PostDetailPage.propTypes = {
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   }).isRequired,
-  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(PostDetailPage);

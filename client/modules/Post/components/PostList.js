@@ -7,12 +7,11 @@ function PostList(props) {
   return (
     <div className="listView">
       {
-        props.posts.map((post, i) => (
+        props.posts.map(post => (
           <PostListItem
             post={post}
-            key={i}
-            onClick={() => props.handleShowPost(post)}
-            onDelete={() => props.handleDeletePost(post)}
+            key={post.cuid}
+            onDelete={() => props.handleDeletePost(post.cuid)}
           />
         ))
       }
@@ -28,7 +27,6 @@ PostList.propTypes = {
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   })).isRequired,
-  handleShowPost: PropTypes.func.isRequired,
   handleDeletePost: PropTypes.func.isRequired,
 };
 

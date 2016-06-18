@@ -35,14 +35,14 @@ test.serial('Should correctly give number of Posts', async t => {
   t.deepEqual(posts.length, res.body.posts.length);
 });
 
-test.serial('Should send correct data when queried against a title', async t => {
+test.serial('Should send correct data when queried against a cuid', async t => {
   t.plan(2);
 
   var post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
   post.save();
 
   const res = await request(app)
-    .get('/api/posts/foo-f34gb2bh24b24b2')
+    .get('/api/posts/f34gb2bh24b24b2')
     .set('Accept', 'application/json');
 
   t.is(res.status, 200);
@@ -70,13 +70,12 @@ test.serial('Should correctly delete a post', async t => {
   post.save();
 
   const res = await request(app)
-    .delete('/api/posts')
-    .send({ id: post.id})
+    .delete(`/api/posts/${post.cuid}`)
     .set('Accept', 'application/json');
 
   t.is(res.status, 200);
 
-  const queriedPost = await Post.findById(post.id).exec();
+  const queriedPost = await Post.findOne({ cuid: post.cuid }).exec();
   t.is(queriedPost, null);
 });
 

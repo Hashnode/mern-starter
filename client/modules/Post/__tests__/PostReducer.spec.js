@@ -1,11 +1,11 @@
 import test from 'ava';
 import { reducerTest } from 'redux-ava';
-import postReducer from '../PostReducer';
-import { addPost, addSelectedPost, deletePost, addPosts } from '../PostActions';
+import postReducer, { getPost, getPosts } from '../PostReducer';
+import { addPost, deletePost, addPosts } from '../PostActions';
 
 test('action for ADD_POST is working', reducerTest(
   postReducer,
-  { posts: ['foo'], post: null },
+  { data: ['foo'] },
   addPost({
     name: 'prank',
     title: 'first post',
@@ -14,92 +14,33 @@ test('action for ADD_POST is working', reducerTest(
     cuid: null,
     slug: 'first-post',
   }),
-  { posts: [{
+  { data: [{
     name: 'prank',
     title: 'first post',
     content: 'Hello world!',
     _id: null,
     cuid: null,
     slug: 'first-post',
-  }, 'foo'], post: null },
-));
-
-test('action for ADD_SELECTED_POST is working', reducerTest(
-  postReducer,
-  {
-    posts: [{
-      name: 'prank',
-      title: 'first post',
-      content: 'Hello world!',
-      _id: null,
-      slug: 'first-post',
-
-    }],
-    selectedPost: null,
-  },
-  addSelectedPost({
-    name: 'prank',
-    title: 'first post',
-    content: 'Hello world!',
-    _id: null,
-    slug: 'first-post',
-  }),
-  {
-    posts: [{
-      name: 'prank',
-      title: 'first post',
-      content: 'Hello world!',
-      _id: null,
-      slug: 'first-post',
-    }],
-    post: {
-      name: 'prank',
-      title: 'first post',
-      content: 'Hello world!',
-      _id: null,
-      slug: 'first-post',
-    },
-  },
-  {
-    posts: [{
-      name: 'prank',
-      title: 'first post',
-      content: 'Hello world!',
-      _id: null,
-      slug: 'first-post',
-    }],
-    post: {
-      name: 'prank',
-      title: 'first post',
-      content: 'Hello world!',
-      _id: null,
-      slug: 'first-post',
-    },
-  },
+  }, 'foo'] },
 ));
 
 test('action for DELETE_POST is working', reducerTest(
   postReducer,
-  { posts: [{
+  { data: [{
     name: 'prank',
     title: 'first post',
     content: 'Hello world!',
+    cuid: 'abc',
     _id: 1,
     slug: 'first-post',
   }] },
-  deletePost({
-    name: 'prank',
-    title: 'first post',
-    content: 'Hello world!',
-    _id: 1,
-    slug: 'first-post',
-  }),
-  { posts: [] },
+  deletePost('abc'),
+  { data: [] },
 ));
 
 test('action for ADD_POSTS is working', reducerTest(
   postReducer,
-  { posts: [], post: null },
+  { data: [] },
   addPosts([
     {
       name: 'prank',
@@ -110,13 +51,31 @@ test('action for ADD_POSTS is working', reducerTest(
       slug: 'first-post',
     },
   ]),
-  { posts: [{
+  { data: [{
     name: 'prank',
     title: 'first post',
     content: 'Hello world!',
     _id: null,
     cuid: null,
     slug: 'first-post',
-  }], post: null },
+  }] },
 ));
+
+test('getPosts selector', t => {
+  t.deepEqual(
+    getPosts({
+      posts: { data: ['foo'] },
+    }),
+    ['foo']
+  );
+});
+
+test('getPost selector', t => {
+  t.deepEqual(
+    getPost({
+      posts: { data: [{ cuid: '123' }] },
+    }, '123'),
+    { cuid: '123' }
+  );
+});
 
