@@ -13,12 +13,7 @@ export const DELETE_POST = 'DELETE_POST';
 export function addPost(post) {
   return {
     type: ADD_POST,
-    name: post.name,
-    title: post.title,
-    content: post.content,
-    slug: post.slug,
-    cuid: post.cuid,
-    _id: post._id,
+    post
   };
 }
 
