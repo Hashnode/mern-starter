@@ -6,14 +6,7 @@ const PostReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST :
       return {
-        posts: [{
-          name: action.name,
-          title: action.title,
-          content: action.content,
-          slug: action.slug,
-          cuid: action.cuid,
-          _id: action._id,
-        }, ...state.posts],
+        posts: [action.post, ...state.posts],
         post: state.post };
 
     case ADD_POSTS :
