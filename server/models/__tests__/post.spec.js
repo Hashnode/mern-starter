@@ -1,21 +1,19 @@
 import test from 'ava';
-import { expect } from 'chai';
 import request from 'supertest';
-import app from '../server';
-import Post from '../models/post';
-import { connectDB, dropDB } from '../util/test-helpers';
+import app from '../../server';
+import Post from '../post';
+import { connectDB, dropDB } from '../../util/test-helpers';
 
 // Initial posts added into test db
 const posts = [
-  new Post({name: 'Prashant', title: 'Hello Mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'"}),
-  new Post({name: 'Mayank', title: 'Hi Mern', cuid: 'f34gb2bh24b24b3', content: "All dogs bark 'mern!'"})
+  new Post({ name: 'Prashant', title: 'Hello Mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'" }),
+  new Post({ name: 'Mayank', title: 'Hi Mern', cuid: 'f34gb2bh24b24b3', content: "All dogs bark 'mern!'" }),
 ];
 
 test.beforeEach('connect and add two post entries', t => {
-
   connectDB(t, () => {
     Post.create(posts, err => {
-      if(err) t.fail('Unable to create posts');
+      if (err) t.fail('Unable to create posts');
     });
   });
 });
@@ -38,7 +36,7 @@ test.serial('Should correctly give number of Posts', async t => {
 test.serial('Should send correct data when queried against a cuid', async t => {
   t.plan(2);
 
-  var post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
+  const post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
   post.save();
 
   const res = await request(app)
