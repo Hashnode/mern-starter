@@ -27,7 +27,7 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 
 1. `npm run start` - starts the development server with hot reloading enabled
 
-2. `npm run start:prod` - bundles the code and starts the production server
+2. `npm run bs` - bundles the code and starts the production server
 
 3. `npm run test` - start the test runner
 
