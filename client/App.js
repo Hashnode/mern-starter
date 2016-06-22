@@ -16,7 +16,10 @@ export default function App(props) {
   return (
     <Provider store={props.store}>
       <IntlWrapper>
-        <Router history={browserHistory}>
+        <Router
+          history={browserHistory}
+          key={process.env.NODE_ENV === 'development' ? Math.random() : false}
+        >
           {routes}
         </Router>
       </IntlWrapper>
