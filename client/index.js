@@ -31,3 +31,4 @@ if (module.hot) {
     </AppContainer>,
     mountApp
   );
+}
