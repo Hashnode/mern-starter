@@ -11,13 +11,6 @@ import { configureStore } from './store';
 const store = configureStore(window.__INITIAL_STATE__);
 const mountApp = document.getElementById('root');
 
-render(
-  <AppContainer>
-    <App store={store} />
-  </AppContainer>,
-  mountApp
-);
-
 // For hot reloading of react components
 if (module.hot) {
   module.hot.accept('./App', () => {
@@ -31,4 +24,10 @@ if (module.hot) {
       mountApp
     );
   });
-}
+} else {
+  render(
+    <AppContainer>
+      <App store={store} />
+    </AppContainer>,
+    mountApp
+  );
