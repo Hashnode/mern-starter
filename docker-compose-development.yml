@@ -8,7 +8,7 @@ web:
   volumes:
    - .:/usr/src/app/
   environment:
-   NOVE_ENV: development 
+   NODE_ENV: development 
    MONGO_URL: mongodb://db:27017/mern-starter
 db:
   image: mongo:latest
