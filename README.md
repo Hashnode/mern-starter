@@ -33,7 +33,7 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 
 4. `npm run watch:test` - start the test runner with watch mode
 
-5. `npm run coverage` - generates test coverage report
+5. `npm run cover` - generates test coverage report
 
 6. `npm run lint` - runs linter to check for lint errors
 
