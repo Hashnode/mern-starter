@@ -10,6 +10,6 @@ COPY . /usr/src/app
 
 ENV NODE_ENV development
 
-EXPOSE 8000
+EXPOSE 8000 5858
 CMD ["npm", "start"]
 
