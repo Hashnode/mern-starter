@@ -6,8 +6,8 @@ import { connectDB, dropDB } from '../../util/test-helpers';
 
 // Initial posts added into test db
 const posts = [
-  new Post({ name: 'Prashant', title: 'Hello Mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'" }),
-  new Post({ name: 'Mayank', title: 'Hi Mern', cuid: 'f34gb2bh24b24b3', content: "All dogs bark 'mern!'" }),
+  new Post({ name: 'Prashant', title: 'Hello Mern', slug: 'hello-mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'" }),
+  new Post({ name: 'Mayank', title: 'Hi Mern', slug: 'hi-mern', cuid: 'f34gb2bh24b24b3', content: "All dogs bark 'mern!'" }),
 ];
 
 test.beforeEach('connect and add two post entries', t => {
