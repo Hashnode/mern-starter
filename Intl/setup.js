@@ -16,7 +16,20 @@ import { addLocaleData } from 'react-intl';
 
 // need Intl polyfill, Intl not supported in Safari
 import Intl from 'intl';
-global.Intl = Intl;
+import areIntlLocalesSupported from 'intl-locales-supported';
+
+if (global.Intl) {
+  // Determine if the built-in `Intl` has the locale data we need.
+  if (!areIntlLocalesSupported(enabledLanguages)) {
+    // `Intl` exists, but it doesn't have the data we need, so load the
+    // polyfill and patch the constructors we need with the polyfill's.
+    global.Intl.NumberFormat = Intl.NumberFormat;
+    global.Intl.DateTimeFormat = Intl.DateTimeFormat;
+  }
+} else {
+  // No `Intl`, so use and load the polyfill.
+  global.Intl = Intl;
+}
 
 // use this to allow nested messages, taken from docs:
 // https://github.com/yahoo/react-intl/wiki/Upgrade-Guide#flatten-messages-object
