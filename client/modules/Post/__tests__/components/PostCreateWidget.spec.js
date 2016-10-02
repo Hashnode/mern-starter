@@ -3,11 +3,12 @@ import test from 'ava';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { PostCreateWidget } from '../../components/PostCreateWidget/PostCreateWidget';
-import { mountWithIntl, shallowWithIntl } from '../../../../util/react-intl-test-helper';
+import { mountWithIntl, shallowWithIntl, intl } from '../../../../util/react-intl-test-helper';
 
 const props = {
   addPost: () => {},
   showAddPost: true,
+  intl,
 };
 
 test('renders properly', t => {
@@ -43,7 +44,7 @@ test('has correct props', t => {
 test('calls addPost', t => {
   const addPost = sinon.spy();
   const wrapper = mountWithIntl(
-    <PostCreateWidget addPost={addPost} showAddPost />
+    <PostCreateWidget addPost={addPost} showAddPost intl={intl} />
   );
 
   wrapper.ref('name').get(0).value = 'David';
@@ -58,7 +59,7 @@ test('calls addPost', t => {
 test('empty form doesn\'t call addPost', t => {
   const addPost = sinon.spy();
   const wrapper = mountWithIntl(
-    <PostCreateWidget addPost={addPost} showAddPost />
+    <PostCreateWidget addPost={addPost} showAddPost intl={intl} />
   );
 
   wrapper.find('a').first().simulate('click');
