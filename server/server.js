@@ -17,7 +17,13 @@ const app = new Express();
 // Run Webpack dev server in development mode
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(config);
-  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath,
+    watchOptions: {
+      poll: 1000,
+    },
+  }));
   app.use(webpackHotMiddleware(compiler));
 }
 
