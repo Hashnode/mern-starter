@@ -39,16 +39,18 @@ import serverConfig from './config';
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
 
-// MongoDB Connection
-mongoose.connect(serverConfig.mongoURL, (error) => {
-  if (error) {
-    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
-    throw error;
-  }
+// MongoDB Connection; will be initialized later in test environment.
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect(serverConfig.mongoURL, (error) => {
+    if (error) {
+      console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
+      throw error;
+    }
 
-  // feed some dummy data in DB.
-  dummyData();
-});
+    // feed some dummy data in DB.
+    dummyData();
+  });
+}
 
 // Apply body Parser and server public assets and routes
 app.use(compression());
