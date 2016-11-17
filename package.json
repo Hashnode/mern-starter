@@ -8,11 +8,12 @@
     "cover": "nyc npm run test",
     "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
     "start": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
+    "start2": "rimraf build && cross-env NODE_ENV=development webpack --watch --config webpack.config.devServer.js",
     "start:prod": "cross-env NODE_ENV=production node index.js",
     "bs": "npm run clean && npm run build && npm run build:server && npm run start:prod",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "build:server": "cross-env NODE_ENV=production webpack --config webpack.config.server.js",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist build",
     "slate": "rimraf node_modules && npm install",
     "lint": "eslint client server"
   },
@@ -101,15 +102,18 @@
     "redux-devtools-log-monitor": "^1.0.11",
     "rimraf": "^2.5.2",
     "sinon": "^1.17.4",
+    "start-server-webpack-plugin": "^2.1.1",
     "style-loader": "^0.13.1",
     "supertest": "^1.2.0",
+    "universal-style-loader": "^0.16.1",
     "url-loader": "^0.5.7",
     "webpack": "2.1.0-beta.8",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^2.1.0-beta.0",
     "webpack-externals-plugin": "^1.0.0",
     "webpack-hot-middleware": "^2.10.0",
-    "webpack-manifest-plugin": "^1.0.1"
+    "webpack-manifest-plugin": "^1.0.1",
+    "webpack-node-externals": "^1.5.4"
   },
   "engines": {
     "node": ">=4"
