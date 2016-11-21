@@ -32,7 +32,7 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
-import posts from './routes/post.routes';
+import apiRoutes from './apiRoutes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 
@@ -55,7 +55,15 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
-app.use('/api', posts);
+if (module.hot) {
+  module.hot.accept(['./apiRoutes', '../client/routes'], () => {
+    console.log('🔁  HMR Reloading `./app`...');
+  });
+  console.info('✅  Server-side HMR Enabled!');
+} else {
+  console.info('❌  Server-side HMR Not Supported.');
+}
+app.use('/api', (req, res) => apiRoutes.handle(req, res));
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
