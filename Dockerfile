@@ -1,4 +1,4 @@
-FROM node
+FROM node:6.3.0
 MAINTAINER jaga santagostino <kandros5591@gmail.com>
 
 RUN mkdir -p /usr/src/app
