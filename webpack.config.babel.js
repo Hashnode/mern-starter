@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 var cssnext = require('postcss-cssnext');
 var postcssFocus = require('postcss-focus');
 var postcssReporter = require('postcss-reporter');
@@ -7,38 +8,53 @@ if (process.env.NODE_ENV === 'production') {
   cssModulesIdentName = '[hash:base64]';
 }
 
+var cssloaders = [
+  'style-loader',
+  { loader: 'css-loader', 
+    options: { localIdentName: cssModulesIdentName, 
+      modules: true, 
+      importLoaders: 1, 
+      sourceMap: true
+    }
+  },
+  { loader: 'postcss-loader' }
+]
+
 module.exports = {
   output: {
     publicPath: '/',
     libraryTarget: 'commonjs2',
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     modules: [
       'client',
       'node_modules',
     ],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loader: 'style-loader!css-loader?localIdentName=' + cssModulesIdentName + '&modules&importLoaders=1&sourceMap!postcss-loader',
+        use: cssloaders,
       },
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
-        loader: 'url-loader?limit=10000',
+        use: 'url-loader?limit=10000',
       },
     ],
   },
-  postcss: () => [
-    postcssFocus(),
-    cssnext({
-      browsers: ['last 2 versions', 'IE > 10'],
-    }),
-    postcssReporter({
-      clearMessages: true,
-    }),
-  ],
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context  : __dirname,        
+        postcss: () => [
+          postcssFocus(),
+          cssnext({ browsers: ['last 2 versions', 'IE > 10'], }),
+          postcssReporter({ clearMessages: true, })
+        ]
+      }
+    })
+  ]
 };

@@ -3,7 +3,7 @@
   "plugins": ["react-hot-loader/babel"],
   "env": {
     "production": {
-      "presets": ["es2015", "react", "react-optimize", "es2015-native-modules", "stage-0"]
+      "presets": [["es2015", { modules: false }], "react", "react-optimize", "stage-0"]
     }
   }
 }
