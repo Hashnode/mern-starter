@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
-import dummyData from './dummyData';
+import dummyData from '../dummyData';
 
-export function MongooseConfig(serverConfig) {
+export default (serverConfig) => {
   mongoose.Promise = global.Promise;
   // MongoDB Connection
   mongoose.connect(serverConfig.mongoURL);
   // CONNECTION EVENTS
   mongoose.connection.on('connected', () => {
-    console.log(`Mongoose connected to ${dbURI}`);
+    console.log(`Mongoose connected to ${serverConfig.mongoURL}`);
   });
   mongoose.connection.on('error', (err) => {
     console.log(`Mongoose connection error: ${err}`);
@@ -17,4 +17,4 @@ export function MongooseConfig(serverConfig) {
   });
   // feed some dummy data in DB.
   dummyData();
-}
+};

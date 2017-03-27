@@ -1,7 +1,7 @@
 import Express from 'express';
 import serverConfig from './config';
-import ExpressConfg from './config/express.config';
-import MongooseConfig from './config/mongoose.config';
+import expressConfg from './config/express.config';
+import mongooseConfig from './config/mongoose.config';
 
 
 // Webpack Requirements
@@ -14,8 +14,8 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 const app = new Express();
 
 //Get Configuration files.
-ExpressConfg(app);
-MongooseConfig(serverConfig);
+expressConfg(app);
+mongooseConfig(serverConfig);
 
 // Run Webpack dev server in development mode
 if (process.env.NODE_ENV === 'development') {

@@ -1,7 +1,7 @@
 // React And Redux Setup
 import {
   configureStore
-} from '../client/store';
+} from '../../client/store';
 import {
   Provider
 } from 'react-redux';
@@ -14,18 +14,19 @@ import {
   RouterContext
 } from 'react-router';
 import Helmet from 'react-helmet';
-import { fetchComponentData } from './util/fetchData';
-import IntlWrapper from '../client/modules/Intl/IntlWrapper';
+import { fetchComponentData } from '../util/fetchData';
+import IntlWrapper from '../../client/modules/Intl/IntlWrapper';
 
 // Express Routes
-import routes from '../client/routes';
-
+import routes from '../../client/routes';
+import posts from '../routes/post.routes';
 //Express Middleware
+import Express from 'express';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import path from 'path';
 
-export function ExpressConfig(app) {
+export default (app) => {
   // Apply body Parser and server public assets and routes
   app.use(compression());
   app.use(bodyParser.json({
@@ -105,13 +106,11 @@ export function ExpressConfig(app) {
 
       return fetchComponentData(store, renderProps.components, renderProps.params)
         .then(() => {
-          const initialView = renderToString( 
-            <Provider store = {store} >
+          const initialView = renderToString(<Provider store = {store} >
                 <IntlWrapper >
                     <RouterContext { ...renderProps}/>  
                 </IntlWrapper>  
-            </Provider>
-          );
+            </Provider>);
           const finalState = store.getState();
 
           res
@@ -123,4 +122,4 @@ export function ExpressConfig(app) {
     });
   });
 
-}
+};
