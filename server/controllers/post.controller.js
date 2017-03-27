@@ -12,8 +12,10 @@ import sanitizeHtml from 'sanitize-html';
 export function getPosts(req, res) {
   Post.find().sort('-dateAdded')
     .exec()
-    .then(posts => res.json({ posts }))
-    .catch(err  => res.status(500).send(err));
+    .then(posts => res.json({
+      posts
+    }))
+    .catch(err => res.status(500).send(err));
 }
 
 /**
@@ -23,10 +25,14 @@ export function getPosts(req, res) {
  * @returns void
  */
 export function addPost(req, res) {
-  if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
-    res.status(403).end();
-  }
-
+  let fields = ['name', 'tile', 'content'];
+  fields.forEach(field => {
+    if (!(field in req.body.post && req.body.post[field])) {
+      res.status(400).json({
+        message: `you're missing the ${field}`
+      });
+    };
+  })
   const newPost = new Post(req.body.post);
 
   // Let's sanitize inputs
@@ -34,11 +40,15 @@ export function addPost(req, res) {
   newPost.name = sanitizeHtml(newPost.name);
   newPost.content = sanitizeHtml(newPost.content);
 
-  newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
+  newPost.slug = slug(newPost.title.toLowerCase(), {
+    lowercase: true
+  });
   newPost.cuid = cuid();
   newPost.save()
-    .then(saved => res.json({ post: saved }))
-    .catch(err  => res.status(500).send(err));
+    .then(saved => res.json({
+      post: saved
+    }))
+    .catch(err => res.status(500).send(err));
 }
 
 /**
@@ -48,9 +58,13 @@ export function addPost(req, res) {
  * @returns void
  */
 export function getPost(req, res) {
-  Post.findOne({ cuid: req.params.cuid })
+  Post.findOne({
+      cuid: req.params.cuid
+    })
     .exec()
-    .then(post => res.json({ post }))
+    .then(post => res.json({
+      post
+    }))
     .catch(err => res.status(500).send(err));
 }
 
@@ -61,7 +75,9 @@ export function getPost(req, res) {
  * @returns void
  */
 export function deletePost(req, res) {
-  Post.findOneAndRemove({ cuid: req.params.cuid })
+  Post.findOneAndRemove({
+      cuid: req.params.cuid
+    })
     .exec()
     .then(post => res.status(200).end())
     .catch(err => res.status(500).send(err));
