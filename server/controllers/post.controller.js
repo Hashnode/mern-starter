@@ -10,12 +10,10 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getPosts(req, res) {
-  Post.find().sort('-dateAdded').exec((err, posts) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ posts });
-  });
+  Post.find().sort('-dateAdded')
+    .exec()
+    .then(posts => res.json({ posts }))
+    .catch(err  => res.status(500).send(err));
 }
 
 /**
@@ -38,12 +36,9 @@ export function addPost(req, res) {
 
   newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
   newPost.cuid = cuid();
-  newPost.save((err, saved) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ post: saved });
-  });
+  newPost.save()
+    .then(saved => res.json({ post: saved }))
+    .catch(err  => res.status(500).send(err));
 }
 
 /**
@@ -53,12 +48,10 @@ export function addPost(req, res) {
  * @returns void
  */
 export function getPost(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ post });
-  });
+  Post.findOne({ cuid: req.params.cuid })
+    .exec()
+    .then(post => res.json({ post }))
+    .catch(err => res.status(500).send(err));
 }
 
 /**
@@ -68,13 +61,8 @@ export function getPost(req, res) {
  * @returns void
  */
 export function deletePost(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-
-    post.remove(() => {
-      res.status(200).end();
-    });
-  });
+  Post.findOneAndRemove({ cuid: req.params.cuid })
+    .exec()
+    .then(post => res.status(200).end())
+    .catch(err => res.status(500).send(err));
 }
