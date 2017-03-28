@@ -1,4 +1,4 @@
-import Express from 'express';
+import express from 'express';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -12,7 +12,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
 // Initialize the Express App
-const app = new Express();
+const app = express();
 
 // Run Webpack dev server in development mode
 if (process.env.NODE_ENV === 'development') {
@@ -54,7 +54,7 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
 app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
-app.use(Express.static(path.resolve(__dirname, '../dist')));
+app.use(express.static(path.resolve(__dirname, '../dist')));
 app.use('/api', posts);
 
 // Render Initial HTML
