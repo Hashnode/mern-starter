@@ -25,8 +25,26 @@ module.exports = {
         test: /\.css$/,
         exclude: /node_modules/,
         loader: 'style-loader!css-loader?localIdentName=' + cssModulesIdentName + '&modules&importLoaders=1&sourceMap!postcss-loader',
-      },
-      {
+      }, {
+        test: /\.styl$/,
+        loaders: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              camelCase: 'only',
+              localIdentName: '[name]_[local]_[hash:base64:5]',
+            },
+          },
+          'stylus-loader',
+        ],
+      }, {
+        test: /\.(eot|otf|ttf|woff|woff2)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]',
+        },
+      }, {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
         loader: 'url-loader?limit=10000',
       },

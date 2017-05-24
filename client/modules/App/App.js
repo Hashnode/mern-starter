@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 // Import Style
-import 'assets/bootstrap/css/bootstrap-theme.min.css';
 import styles from './App.css';
 
 // Import Components

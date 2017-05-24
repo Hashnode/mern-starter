@@ -1,35 +1,54 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
-// import { Button } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 
 // Import Style
-import styles from './Header.css';
+import './Header.styl';
 
 export function Header(props, context) {
   const languageNodes = props.intl.enabledLanguages.map(
-    lang => <li key={lang} onClick={() => props.switchLanguage(lang)} className={lang === props.intl.locale ? styles.selected : ''}>{lang}</li>
+    lang =>
+      <li
+        key={lang}
+        onClick={() => props.switchLanguage(lang)}
+        className={`language-switcher__language ${lang === props.intl.locale ? 'language-switcher__language--active' : ''}`}
+      >
+        {lang}
+      </li>
   );
 
   return (
-    <div className={styles.header}>
-      <div className={styles['language-switcher']}>
-        <ul>
-          <li><FormattedMessage id="switchLanguage" /></li>
-          {languageNodes}
-        </ul>
-      </div>
-      <div className={styles.content}>
-        <h1 className={styles['site-title']}>
+    <Navbar inverse collapseOnSelect>
+      <Navbar.Header>
+        <Navbar.Brand>
           <Link to="/" ><FormattedMessage id="siteTitle" /></Link>
-        </h1>
-        {
-          context.router.isActive('/', true)
-            ? <a className={styles['add-post-button']} href="#" onClick={props.toggleAddPost}><FormattedMessage id="addPost" /></a>
-            : null
-        }
-      </div>
-    </div>
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav pullRight>
+
+          <div className={'header__item header__item--add-post'}>
+            {
+              context.router.isActive('/', true)
+                ? <a href="#" onClick={props.toggleAddPost}><FormattedMessage id="addPost" /></a>
+                : null
+            }
+          </div>
+
+          <div className={'header__item header__item--language-switcher'}>
+            {languageNodes}
+          </div>
+
+          <div className={'header__item header__item--login'}>
+            <FormattedMessage id="login" />
+          </div>
+
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+
   );
 }
 

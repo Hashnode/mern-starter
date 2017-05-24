@@ -1,0 +1,34 @@
+.header {
+  content: '';
+
+  &__item {
+    display: block;
+    float: left;
+    line-height: 20px;
+    padding: 15px 15px;
+    position: relative;
+  }
+}
+
+.language-switcher {
+  content: '';
+
+  &__language {
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    &:not([class*='--active']) {
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+    }
+
+    &--active {
+      color: red;
+    }
+  }
+}

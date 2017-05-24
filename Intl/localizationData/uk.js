@@ -1,8 +1,11 @@
 export default {
   locale: 'uk',
   messages: {
+    // Global
     siteTitle: 'Facekoob',
     addPost: 'Додати допис',
+    login: 'Увійти',
+
     switchLanguage: 'Змінити мову',
     twitterMessage: 'We are on Twitter',
     by: 'од',

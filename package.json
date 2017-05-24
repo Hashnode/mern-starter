@@ -105,6 +105,8 @@
     "rimraf": "^2.5.2",
     "sinon": "^1.17.4",
     "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
     "supertest": "^1.2.0",
     "url-loader": "^0.5.7",
     "webpack": "2.1.0-beta.8",

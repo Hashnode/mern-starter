@@ -1,8 +1,11 @@
 export default {
   locale: 'en',
   messages: {
+    // Global
     siteTitle: 'Facekoob',
     addPost: 'Add Post',
+    login: 'Login',
+
     switchLanguage: 'Switch Language',
     twitterMessage: 'We are on Twitter',
     by: 'By',
