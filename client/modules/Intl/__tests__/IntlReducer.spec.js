@@ -7,6 +7,6 @@ import { localizationData, enabledLanguages } from '../../../../Intl/setup';
 test('action for SWITCH_LANGUAGE is working', reducerTest(
   intlReducer,
   { locale: 'en', enabledLanguages, ...localizationData.en },
-  switchLanguage('fr'),
-  { locale: 'fr', enabledLanguages, ...localizationData.fr },
+  switchLanguage('uk'),
+  { locale: 'uk', enabledLanguages, ...localizationData.uk },
 ));

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
+// import { Button } from 'react-bootstrap';
 
 // Import Style
 import styles from './Header.css';

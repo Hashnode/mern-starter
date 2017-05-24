@@ -8,7 +8,7 @@ import { intlShape } from 'react-intl';
 import { intl } from '../../../util/react-intl-test-helper';
 import { toggleAddPost } from '../AppActions';
 
-const intlProp = { ...intl, enabledLanguages: ['en', 'fr'] };
+const intlProp = { ...intl, enabledLanguages: ['en', 'uk'] };
 const children = <h1>Test</h1>;
 const dispatch = sinon.spy();
 const props = {
