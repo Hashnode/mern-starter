@@ -5,6 +5,7 @@ export default {
     siteTitle: 'Facekoob',
     addPost: 'Додати допис',
     login: 'Увійти',
+    signOut: 'Вийти',
 
     switchLanguage: 'Змінити мову',
     twitterMessage: 'We are on Twitter',

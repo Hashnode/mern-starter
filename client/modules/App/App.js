@@ -11,8 +11,8 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 // Import Actions
-import { toggleAddPost, toggleLogin } from './AppActions';
-import { getShowLogin } from './AppReducer';
+import { toggleAddPost, toggleLogin, signOut, signIn } from './AppActions';
+import { getShowLogin, getProfile } from './AppReducer';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
 
 export class App extends Component {
@@ -31,6 +31,14 @@ export class App extends Component {
 
   toggleLoginPopup = () => {
     this.props.dispatch(toggleLogin());
+  };
+
+  userSignIn = (profile) => {
+    this.props.dispatch(signIn(profile));
+  };
+
+  userSignOut = () => {
+    this.props.dispatch(signOut());
   };
 
   render() {
@@ -57,8 +65,11 @@ export class App extends Component {
             switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
             intl={this.props.intl}
             showLogin={this.props.showLogin}
+            profile={this.props.profile}
             toggleAddPost={this.toggleAddPostSection}
             toggleLogin={this.toggleLoginPopup}
+            signIn={this.userSignIn}
+            signOut={this.userSignOut}
           />
           <div className={styles.container}>
             {this.props.children}
@@ -75,6 +86,7 @@ App.propTypes = {
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
   showLogin: PropTypes.bool,
+  profile: PropTypes.object,
 };
 
 // Retrieve data from store as props
@@ -82,6 +94,7 @@ function mapStateToProps(store) {
   return {
     intl: store.intl,
     showLogin: getShowLogin(store),
+    profile: getProfile(store),
   };
 }
 

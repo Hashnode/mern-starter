@@ -1,77 +1,144 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { Navbar, Nav, Modal, Button } from 'react-bootstrap';
+import { FacebookLogin } from 'react-facebook-login-component';
+import { setStoredAuthState, removeStoredAuthState, getStoredAuthState } from '../../../../util/storedAuthState';
+import { Profile } from './Profile/Profile';
 
 // Import Style
-// import './Header.styl';
+import styles from './Header.css';
+const FACEBOOK_SOCIAL_ID = '1858452057748042';
 
-export function Header(props, context) {
-  const languageNodes = props.intl.enabledLanguages.map(
-    lang =>
-      <li
-        key={lang}
-        onClick={() => props.switchLanguage(lang)}
-        className={`language-switcher__language ${lang === props.intl.locale ? 'language-switcher__language--active' : ''}`}
-      >
-        {lang}
-      </li>
-  );
+export class Header extends Component {
 
-  const loginPopup = (
-    <Modal show={props.showLogin} onHide={props.toggleLogin}>
-      <Modal.Header closeButton>
-        <Modal.Title>Sign in</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <p>You can sign in using one of the following social networks:</p>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.toggleLogin}>Cancel</Button>
-      </Modal.Footer>
-    </Modal>
-  );
+  constructor(props) {
+    super(props);
+    this.responseFacebook = this.responseFacebook.bind(this);
+    this.signOut = this.signOut.bind(this);
+  }
 
-  return (
-    <div className="header">
 
-      {loginPopup}
+  componentWillMount() {
+    const authState = getStoredAuthState();
+    if (authState && authState.accessToken && authState.profile && (!this.props.profile || !this.props.profile.accessToken)) {
+      this.props.signIn(authState.profile);
+    }
+  }
 
-      <Navbar inverse collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/" ><FormattedMessage id="siteTitle" /></Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
+  responseFacebook(response) {
+    if (response.id) {
+      const profile = Object.assign({}, response, { provider: 'facebook' });
+      setStoredAuthState(profile.accessToken, profile.id, profile);
+      this.props.signIn(profile);
+      // TODO: API
+    } else {
+      // TODO: error
+    }
+  }
 
-            <div className={'header__item header__item--add-post'}>
-              {
-                context.router.isActive('/', true)
-                ? <a href="#" onClick={props.toggleAddPost}><FormattedMessage id="addPost" /></a>
-                : null
-              }
-            </div>
+  signOut() {
+    removeStoredAuthState();
+    this.props.signOut();
+    // TODO: redirect?
+  }
 
-            <div className={'header__item header__item--language-switcher'}>
-              {languageNodes}
-            </div>
+  languageNodes() {
+    return this.props.intl.enabledLanguages.map(
+      lang =>
+      (
+        <li
+          key={lang}
+          onClick={() => this.props.switchLanguage(lang)}
+          className={`${styles['language-switcher__language']} ${lang === this.props.intl.locale ? styles['language-switcher__language--active'] : ''}`}
+        >
+          {lang}
+        </li>
+      )
+    );
+  }
 
-            <div className={'header__item header__item--login'}>
-              <a href="#" onClick={props.toggleLogin}>
-                <FormattedMessage id="login" />
-              </a>
-            </div>
+  loginPopup() {
+    return (
+      <Modal show={this.props.showLogin} onHide={this.props.toggleLogin}>
+        <Modal.Header closeButton>
+          <Modal.Title>Sign in</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>You can sign in using one of the following social networks:</p>
+          <div>
+            <FacebookLogin
+              socialId={FACEBOOK_SOCIAL_ID}
+              language="en_US"
+              scope="public_profile,email"
+              xfbml
+              responseHandler={this.responseFacebook}
+              fields="id,email,name,link,picture"
+              version="v2.5"
+              class="facebook-login"
+              buttonText="Login With Facebook"
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.props.toggleLogin}>Cancel</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+  render() {
+    return (
+      <div>
 
-    </div>
+        {this.loginPopup()}
 
-  );
+        <Navbar inverse collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <Link to="/" ><FormattedMessage id="siteTitle" /></Link>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav pullRight>
+
+              <div className={styles.headerItem}>
+                {
+                  this.context.router.isActive('/', true)
+                  ? <a href="#" onClick={this.props.toggleAddPost}><FormattedMessage id="addPost" /></a>
+                  : null
+                }
+              </div>
+
+              <div className={`${styles.headerItem}`}>
+                {this.languageNodes()}
+              </div>
+
+              <div className={styles.headerItem}>
+                {(this.props.profile && this.props.profile.accessToken) && (
+                  <Profile
+                    profile={this.props.profile}
+                    signOut={this.signOut}
+                  />
+                )}
+
+                {(!this.props.profile || !this.props.profile.accessToken) && (
+                  <a href="#" onClick={this.props.toggleLogin}>
+                    <FormattedMessage id="login" />
+                  </a>
+                )}
+              </div>
+
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+
+      </div>
+
+    );
+  }
 }
 
 Header.contextTypes = {
@@ -84,6 +151,9 @@ Header.propTypes = {
   switchLanguage: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
   showLogin: PropTypes.bool,
+  profile: PropTypes.object,
+  signIn: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired,
 };
 
 export default Header;

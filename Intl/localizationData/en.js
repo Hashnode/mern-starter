@@ -5,6 +5,7 @@ export default {
     siteTitle: 'Facekoob',
     addPost: 'Add Post',
     login: 'Login',
+    signOut: 'Sign out',
 
     switchLanguage: 'Switch Language',
     twitterMessage: 'We are on Twitter',
