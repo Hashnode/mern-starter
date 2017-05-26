@@ -11,7 +11,8 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 // Import Actions
-import { toggleAddPost } from './AppActions';
+import { toggleAddPost, toggleLogin } from './AppActions';
+import { getShowLogin } from './AppReducer';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
 
 export class App extends Component {
@@ -26,6 +27,10 @@ export class App extends Component {
 
   toggleAddPostSection = () => {
     this.props.dispatch(toggleAddPost());
+  };
+
+  toggleLoginPopup = () => {
+    this.props.dispatch(toggleLogin());
   };
 
   render() {
@@ -51,7 +56,9 @@ export class App extends Component {
           <Header
             switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
             intl={this.props.intl}
+            showLogin={this.props.showLogin}
             toggleAddPost={this.toggleAddPostSection}
+            toggleLogin={this.toggleLoginPopup}
           />
           <div className={styles.container}>
             {this.props.children}
@@ -67,12 +74,14 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
+  showLogin: PropTypes.bool,
 };
 
 // Retrieve data from store as props
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    showLogin: getShowLogin(store),
   };
 }
 
