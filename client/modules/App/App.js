@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Import Style
@@ -11,7 +12,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 // Import Actions
-import { toggleAddPost, toggleLogin, signOut, signIn } from './AppActions';
+import { toggleAddPost, toggleLogin, signOut, signIn, signInRequest } from './AppActions';
 import { getShowLogin, getProfile } from './AppReducer';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
 
@@ -40,6 +41,10 @@ export class App extends Component {
   userSignOut = () => {
     this.props.dispatch(signOut());
   };
+
+  userSignInRequest = (profile) => {
+    this.props.dispatch(signInRequest(profile));
+  }
 
   render() {
     return (
@@ -70,6 +75,7 @@ export class App extends Component {
             toggleLogin={this.toggleLoginPopup}
             signIn={this.userSignIn}
             signOut={this.userSignOut}
+            signInRequest={this.userSignInRequest}
           />
           <div className={styles.container}>
             {this.props.children}

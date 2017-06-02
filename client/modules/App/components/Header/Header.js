@@ -29,10 +29,14 @@ export class Header extends Component {
 
   responseFacebook(response) {
     if (response.id) {
+      // extend profile data with provider
       const profile = Object.assign({}, response, { provider: 'facebook' });
+      // store user in localstorage
       setStoredAuthState(profile.accessToken, profile.id, profile);
+      // dispatch signin action
       this.props.signIn(profile);
-      // TODO: API
+      /* save/log signed in user in DB */
+      this.props.signInRequest(profile);
     } else {
       // TODO: error
     }
@@ -76,7 +80,7 @@ export class Header extends Component {
               responseHandler={this.responseFacebook}
               fields="id,email,name,link,picture"
               version="v2.5"
-              class="facebook-login"
+              class="btn btn-primary"
               buttonText="Login With Facebook"
             />
           </div>
@@ -154,6 +158,7 @@ Header.propTypes = {
   profile: PropTypes.object,
   signIn: PropTypes.func.isRequired,
   signOut: PropTypes.func.isRequired,
+  signInRequest: PropTypes.func.isRequired,
 };
 
 export default Header;

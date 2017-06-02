@@ -6,6 +6,7 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import App from './App';
 import { configureStore } from './store';
+import 'font-awesome/css/font-awesome.min.css';
 import 'assets/bootstrap/index.styl';
 
 // Initialize store

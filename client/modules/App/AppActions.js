@@ -1,3 +1,5 @@
+import callApi from '../../util/apiCaller';
+
 // Export Constants
 export const TOGGLE_ADD_POST = 'TOGGLE_ADD_POST';
 export const TOGGLE_LOGIN = 'TOGGLE_LOGIN';
@@ -27,5 +29,13 @@ export function signIn(profile) {
 export function signOut() {
   return {
     type: SIGN_OUT,
+  };
+}
+
+export function signInRequest(profile) {
+  return () => {
+    return callApi('signin', 'post', {
+      profile,
+    });
   };
 }

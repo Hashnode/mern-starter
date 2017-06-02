@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
-import { Dropdown, MenuItem, Glyphicon } from 'react-bootstrap';
+import { Dropdown, MenuItem } from 'react-bootstrap';
+import FontAwersome from 'react-fontawesome';
 
 // Import Style
 import styles from './Profile.css';
@@ -23,7 +24,7 @@ export function Profile(props) {
 
         <Dropdown.Menu>
           <MenuItem eventKey="1" onClick={props.signOut}>
-            <Glyphicon glyph="off" className={styles.iconSignOut} />
+            <FontAwersome name="sign-out" className={styles.iconSignOut} />
             <FormattedMessage id="signOut" />
           </MenuItem>
         </Dropdown.Menu>
