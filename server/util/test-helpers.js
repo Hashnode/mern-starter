@@ -5,7 +5,7 @@ export function connectDB(t, done) {
   mockgoose(mongoose).then(() => {
     mongoose.createConnection('mongodb://localhost:27017/mern-test', err => {
       if (err) t.fail('Unable to connect to test database');
-      if (done) done();
+      done();
     });
   });
 }
