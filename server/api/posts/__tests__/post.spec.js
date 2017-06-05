@@ -10,12 +10,13 @@ const posts = [
   new Post({ name: 'Mayank', title: 'Hi Mern', slug: 'hi-mern', cuid: 'f34gb2bh24b24b3', content: "All dogs bark 'mern!'" }),
 ];
 
-test.beforeEach('connect and add two post entries', t => {
-  connectDB(t, () => {
-    Post.create(posts, err => {
-      if (err) t.fail('Unable to create posts');
-    });
-  });
+test.beforeEach('connect and add two post entries', async t => {
+  try {
+    await connectDB(t);
+    await Post.create(posts);
+  } catch (e) {
+    t.fail('could not create posts');
+  }
 });
 
 test.afterEach.always(t => {
