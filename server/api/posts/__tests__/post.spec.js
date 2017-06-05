@@ -1,8 +1,8 @@
 import test from 'ava';
 import request from 'supertest';
-import app from '../../server';
-import Post from '../post';
-import { connectDB, dropDB } from '../../util/test-helpers';
+import app from '../../../server';
+import Post from '../post.model';
+import { connectDB, dropDB } from '../../../util/test-helpers';
 
 // Initial posts added into test db
 const posts = [
@@ -37,7 +37,7 @@ test.serial('Should send correct data when queried against a cuid', async t => {
   t.plan(2);
 
   const post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
-  post.save();
+  await post.save();
 
   const res = await request(app)
     .get('/api/posts/f34gb2bh24b24b2')
@@ -65,7 +65,7 @@ test.serial('Should correctly delete a post', async t => {
   t.plan(2);
 
   const post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
-  post.save();
+  await post.save();
 
   const res = await request(app)
     .delete(`/api/posts/${post.cuid}`)

@@ -1,8 +1,8 @@
-import Post from './models/post';
+import Post from '../api/posts/post.model';
 
 export default function () {
   Post.count().exec((err, count) => {
-    if (count > 0) {
+    if (count > 0 || process.env.NODE_ENV !== 'development') {
       return;
     }
 

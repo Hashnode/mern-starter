@@ -32,8 +32,8 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
-import posts from './routes/post.routes';
-import dummyData from './dummyData';
+import posts from './api/posts/post.routes';
+import dummyData from './util/dummyData';
 import serverConfig from './config';
 
 // Set native promises as mongoose promise
