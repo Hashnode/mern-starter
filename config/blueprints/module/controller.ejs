@@ -1,4 +1,4 @@
-import <%= helpers.capitalize(name) %> from '../models/<%= name %>';
+import <%= helpers.capitalize(name) %> from './<%= name %>.model';
 
 export function getSomething(req, res) {
   return res.status(200).end();

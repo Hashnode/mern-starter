@@ -15,7 +15,7 @@ test.beforeEach('connect and add two post entries', async t => {
     await connectDB(t);
     await Post.create(posts);
   } catch (e) {
-    t.fail('could not create posts');
+    t.fail('Unable to create posts');
   }
 });
 

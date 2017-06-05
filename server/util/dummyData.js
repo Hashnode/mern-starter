@@ -1,4 +1,4 @@
-import Post from '../api/posts/post.model';
+import Post from '../api/post/post.model';
 
 export default function () {
   Post.count().exec((err, count) => {
