@@ -2,7 +2,7 @@ import Post from '../api/posts/post.model';
 
 export default function () {
   Post.count().exec((err, count) => {
-    if (count > 0 || process.env.NODE_ENV !== 'development') {
+    if (count > 0) {
       return;
     }
 
