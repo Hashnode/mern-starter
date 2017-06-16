@@ -9,12 +9,12 @@ import cuid from 'cuid';
  * @returns void
  */
 function getUser(email, callback, error) {
-  console.log(3, email);
   User.findOne({ email }).exec((err, user) => {
-    if (err) {
+    if (err || !user) {
       error();
+    } else {
+      callback({ user });
     }
-    callback({ user });
   });
 }
 
@@ -25,7 +25,6 @@ function getUser(email, callback, error) {
  * @returns void
  */
 export function signinUser(req, res) {
-  console.log(2);
   if (!req.body.profile || !req.body.profile.email) {
     res.status(403).end();
   }
@@ -34,12 +33,15 @@ export function signinUser(req, res) {
     req.body.profile.email,
     // update user's last visit date
     (user) => {
-      console.log(user);
-      // TODO: update
+      const newData = req.body.profile;
+      newData.dateLastVisited = Date.now();
+      User.findOneAndUpdate({ email: req.body.profile.email }, newData, (err, item) => {
+        if (err) return res.send(500, { error: err });
+        res.json({ user: item });
+      });
     },
     // create new user
     () => {
-      console.log('save user', req.body.profile.email);
       const newUser = new User(req.body.profile);
       newUser.cuid = cuid();
 
