@@ -1,6 +1,10 @@
 import { Router } from 'express';
 import * as PostController from '../controllers/post.controller';
+import * as UserController from '../controllers/user.controller';
 const router = new Router();
+
+// SignIn (add new user or update existing one)
+router.route('/signin').post(UserController.signinUser);
 
 // Get all Posts
 router.route('/posts').get(PostController.getPosts);

@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { Header } from '../../components/Header/Header';
 import { intl } from '../../../../util/react-intl-test-helper';
 
-const intlProp = { ...intl, enabledLanguages: ['en', 'fr'] };
+const intlProp = { ...intl, enabledLanguages: ['en', 'uk'] };
 
 test('renders the header properly', t => {
   const router = {

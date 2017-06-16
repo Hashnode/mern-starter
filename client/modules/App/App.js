@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Import Style
@@ -11,7 +12,8 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 // Import Actions
-import { toggleAddPost } from './AppActions';
+import { toggleAddPost, toggleLogin, signOut, signIn, signInRequest } from './AppActions';
+import { getShowLogin, getProfile } from './AppReducer';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
 
 export class App extends Component {
@@ -28,14 +30,30 @@ export class App extends Component {
     this.props.dispatch(toggleAddPost());
   };
 
+  toggleLoginPopup = () => {
+    this.props.dispatch(toggleLogin());
+  };
+
+  userSignIn = (profile) => {
+    this.props.dispatch(signIn(profile));
+  };
+
+  userSignOut = () => {
+    this.props.dispatch(signOut());
+  };
+
+  userSignInRequest = (profile) => {
+    this.props.dispatch(signInRequest(profile));
+  }
+
   render() {
     return (
-      <div>
+      <div className={styles.facekoobApp}>
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
         <div>
           <Helmet
-            title="MERN Starter - Blog App"
-            titleTemplate="%s - Blog App"
+            title="Facekoob"
+            titleTemplate="%s - Facekoob"
             meta={[
               { charset: 'utf-8' },
               {
@@ -51,7 +69,13 @@ export class App extends Component {
           <Header
             switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
             intl={this.props.intl}
+            showLogin={this.props.showLogin}
+            profile={this.props.profile}
             toggleAddPost={this.toggleAddPostSection}
+            toggleLogin={this.toggleLoginPopup}
+            signIn={this.userSignIn}
+            signOut={this.userSignOut}
+            signInRequest={this.userSignInRequest}
           />
           <div className={styles.container}>
             {this.props.children}
@@ -67,12 +91,16 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
+  showLogin: PropTypes.bool,
+  profile: PropTypes.object,
 };
 
 // Retrieve data from store as props
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    showLogin: getShowLogin(store),
+    profile: getProfile(store),
   };
 }
 

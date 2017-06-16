@@ -45,6 +45,25 @@ module.exports = {
         include: /node_modules/,
         loaders: ['style-loader', 'css-loader'],
       }, {
+        test: /\.styl$/,
+        loaders: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              camelCase: 'only',
+              localIdentName: '[name]_[local]_[hash:base64:5]',
+            },
+          },
+          'stylus-loader',
+        ],
+      }, {
+        test: /\.(eot|otf|ttf|woff|woff2)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]',
+        },
+      }, {
         test: /\.jsx*$/,
         exclude: /node_modules/,
         loader: 'babel',
