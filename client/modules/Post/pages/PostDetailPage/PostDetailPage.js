@@ -7,6 +7,9 @@ import { FormattedMessage } from 'react-intl';
 import styles from '../../components/PostListItem/PostListItem.css';
 
 // Import Actions
+import { PostCommentContainer } from './PostComments/PostCommentContainer';
+
+// Import Actions
 import { fetchPost } from '../../PostActions';
 
 // Import Selectors
@@ -20,6 +23,7 @@ export function PostDetailPage(props) {
         <h3 className={styles['post-title']}>{props.post.title}</h3>
         <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
         <p className={styles['post-desc']}>{props.post.content}</p>
+        <PostCommentContainer comments={props.post.comments} />
       </div>
     </div>
   );
@@ -44,6 +48,7 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    comments: PropTypes.array
   }).isRequired,
 };
 
