@@ -3,6 +3,7 @@ import callApi from '../../util/apiCaller';
 // Export Constants
 export const ADD_POST = 'ADD_POST';
 export const ADD_POSTS = 'ADD_POSTS';
+export const ADD_СOMMENT = 'ADD_СOMMENT';
 export const DELETE_POST = 'DELETE_POST';
 
 // Export Actions
@@ -22,6 +23,14 @@ export function addPostRequest(post) {
         content: post.content,
       },
     }).then(res => dispatch(addPost(res.post)));
+  };
+}
+
+export function addCommentRequest(comment) {
+  return (dispatch) => {
+    return callApi(`posts/${comment.postId}/comment`, 'post', {
+      comment: comment,
+    });
   };
 }
 

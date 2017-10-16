@@ -10,12 +10,15 @@ import styles from '../../components/PostListItem/PostListItem.css';
 import { PostCommentContainer } from './PostComments/PostCommentContainer';
 
 // Import Actions
-import { fetchPost } from '../../PostActions';
+import { fetchPost, addCommentRequest } from '../../PostActions';
 
 // Import Selectors
 import { getPost } from '../../PostReducer';
 
 export function PostDetailPage(props) {
+  function handleAddComment (comment) {
+    props.dispatch(addCommentRequest(comment));
+  }
   return (
     <div>
       <Helmet title={props.post.title} />
@@ -23,7 +26,11 @@ export function PostDetailPage(props) {
         <h3 className={styles['post-title']}>{props.post.title}</h3>
         <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
         <p className={styles['post-desc']}>{props.post.content}</p>
-        <PostCommentContainer comments={props.post.comments} />
+        <PostCommentContainer
+          comments={props.post.comments}
+          postId={props.post.cuid}
+          addComment={handleAddComment}
+        />
       </div>
     </div>
   );
