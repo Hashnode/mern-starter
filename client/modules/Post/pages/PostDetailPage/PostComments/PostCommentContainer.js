@@ -46,5 +46,7 @@ export class PostCommentContainer extends Component {
 }
 
 PostCommentContainer.propTypes = {
-  comments: PropTypes.array
+  comments: PropTypes.array.isRequired,
+  postId: PropTypes.number.isRequired,
+  addComment: PropTypes.func.isRequired,
 };

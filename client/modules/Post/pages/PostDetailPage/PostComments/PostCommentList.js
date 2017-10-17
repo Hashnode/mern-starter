@@ -15,4 +15,8 @@ export const PostCommentList = ({ comments }) => (
   </div>
 );
 
+PostCommentList.propTypes = {
+  comments: PropType.array.isRequired,
+}
+
 export default PostCommentList;

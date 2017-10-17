@@ -37,29 +37,29 @@ export default function () {
     const comments = [
       {
         author: 'Steve',
-        text:   `Amazing stuff! Drawings me opinions returned absolute in.
-                Otherwise therefore sex did are unfeeling something.
-                Certain be ye amiable by exposed so. To celebrated estimating excellence do.
-                Coming either suffer living her gay theirs.
-                Furnished do otherwise daughters contented conveying attempted no.
-                Was yet general visitor present hundred too brother fat arrival.
-                Friend are day own either lively new.`
+        text: `Amazing stuff! Drawings me opinions returned absolute in.
+              Otherwise therefore sex did are unfeeling something.
+              Certain be ye amiable by exposed so. To celebrated estimating excellence do.
+              Coming either suffer living her gay theirs.
+              Furnished do otherwise daughters contented conveying attempted no.
+              Was yet general visitor present hundred too brother fat arrival.
+              Friend are day own either lively new.`
       },
       {
         author: 'Nancey',
-        text:   `Cool stuff! To celebrated estimating excellence do.
-                Coming either suffer living her gay theirs.
-                Furnished do otherwise daughters contented conveying attempted no.
-                Was yet general visitor present hundred too brother fat arrival.
-                Friend are day own either lively new. `
+        text: `Cool stuff! To celebrated estimating excellence do.
+              Coming either suffer living her gay theirs.
+              Furnished do otherwise daughters contented conveying attempted no.
+              Was yet general visitor present hundred too brother fat arrival.
+              Friend are day own either lively new. `
       },
       {
         author: 'Lucas',
-        text:   `Moments its musical age explain.
-                But extremity sex now education concluded earnestly her continual.
-                Oh furniture acuteness suspected continual ye something frankness.
-                Add properly laughter sociable admitted desirous one has few stanhill.
-                Opinion regular in perhaps another enjoyed no engaged he at.`
+        text: `Moments its musical age explain.
+              But extremity sex now education concluded earnestly her continual.
+              Oh furniture acuteness suspected continual ye something frankness.
+              Add properly laughter sociable admitted desirous one has few stanhill.
+              Opinion regular in perhaps another enjoyed no engaged he at.`
       },
     ];
 
