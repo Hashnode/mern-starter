@@ -25,6 +25,16 @@ export function addPostRequest(post) {
   };
 }
 
+// NOTE: Seems like we need to create our own reducer for comments,
+// but now it works without it.
+export function addCommentRequest(comment) {
+  return (dispatch) => {
+    return callApi(`posts/${comment.postId}/comment`, 'post', {
+      comment: comment,
+    });
+  };
+}
+
 export function addPosts(posts) {
   return {
     type: ADD_POSTS,

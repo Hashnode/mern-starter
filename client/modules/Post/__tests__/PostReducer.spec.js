@@ -78,4 +78,3 @@ test('getPost selector', t => {
     { cuid: '123' }
   );
 });
-

@@ -1,0 +1,13 @@
+.prev-comments-box {
+  margin: 20px 15px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.single-comment {
+  margin-top: 10px;
+}
+.single-comment-text {
+  margin: 5px;
+}

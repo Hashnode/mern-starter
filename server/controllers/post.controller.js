@@ -47,6 +47,27 @@ export function addPost(req, res) {
 }
 
 /**
+ * It saves fresh comment
+ * @param  {Request} req
+ * @param  {Responce} res
+ * @return {void}
+ */
+export function saveComment(req, res) {
+  if (!req.body.comment.postId || !req.body.comment.commentAuthorName || !req.body.comment.commentText) {
+    res.status(403).end();
+  }
+  const condition = { cuid: req.body.comment.postId };
+  const update = {$push: { "comments" : { author: req.body.comment.commentAuthorName,
+                                          text: req.body.comment.commentText }}};
+  Post.update(condition, update, {multi: true}, (err, numAffected) => {
+    if (err)
+      res.status(403).end();
+    console.log(numAffected);
+  });
+  res.status(200).end();
+}
+
+/**
  * Get a single post
  * @param req
  * @param res
