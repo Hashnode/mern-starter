@@ -19,6 +19,8 @@ export class PostCommentContainer extends Component {
                         commentAuthorName: commentAuthorName,
                         commentText: commentText };
       this.props.addComment(comment);
+      this.refs.name.value = '';
+      this.refs.text.value = '';
     }
   }
 
@@ -47,6 +49,6 @@ export class PostCommentContainer extends Component {
 
 PostCommentContainer.propTypes = {
   comments: PropTypes.array.isRequired,
-  postId: PropTypes.number.isRequired,
+  postId: PropTypes.string.isRequired,
   addComment: PropTypes.func.isRequired,
 };

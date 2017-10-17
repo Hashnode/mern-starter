@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import style from './PostCommentList.css';
 
@@ -16,7 +16,7 @@ export const PostCommentList = ({ comments }) => (
 );
 
 PostCommentList.propTypes = {
-  comments: PropType.array.isRequired,
+  comments: PropTypes.array.isRequired,
 }
 
 export default PostCommentList;
