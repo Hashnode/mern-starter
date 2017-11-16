@@ -1,29 +1,25 @@
 {
   "name": "mern-starter",
   "version": "2.0.0",
-  "description":
-    "Boilerplate project for building Isomorphic apps using React and Redux",
+  "description": "Boilerplate project for building Isomorphic apps using React and Redux",
   "scripts": {
-    "test":
-      "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/mern-test node_modules/.bin/nyc node --harmony-proxies node_modules/.bin/ava",
+    "test": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/mern-test node_modules/.bin/nyc node --harmony-proxies node_modules/.bin/ava",
     "watch:test": "npm run test -- --watch",
     "cover": "nyc npm run test",
-    "check-coverage":
-      "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
-    "start":
-      "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
+    "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "start": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
     "start:prod": "cross-env NODE_ENV=production node index.js",
-    "bs":
-      "npm run clean && npm run build && npm run build:server && npm run start:prod",
-    "build":
-      "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "build:server":
-      "cross-env NODE_ENV=production webpack --config webpack.config.server.js",
+    "bs": "npm run clean && npm run build && npm run build:server && npm run start:prod",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "build:server": "cross-env NODE_ENV=production webpack --config webpack.config.server.js",
     "clean": "rimraf dist",
     "slate": "rimraf node_modules && npm install",
     "lint": "eslint client server"
   },
-  "pre-commit": ["lint", "test"],
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hashnode/mern-starter.git"
@@ -32,8 +28,7 @@
     "url": "https://github.com/Hashnode/mern-starter/issues"
   },
   "homepage": "https://github.com/Hashnode/mern-starter#readme",
-  "author":
-    "Prashant Abhishek <prashant.abhishek7g@gmail.com>, Mayank Chandola <imayankchd@gmail.com>, Sandeep Panda <sandeep@hashnode.com>, Syed Fazle Rahman <fazle@hashnode.com>, Alkshendra Maurya <alkshendra@hashnode.com>",
+  "author": "Prashant Abhishek <prashant.abhishek7g@gmail.com>, Mayank Chandola <imayankchd@gmail.com>, Sandeep Panda <sandeep@hashnode.com>, Syed Fazle Rahman <fazle@hashnode.com>, Alkshendra Maurya <alkshendra@hashnode.com>",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.9.1",
@@ -120,14 +115,25 @@
     "node": ">=4"
   },
   "ava": {
-    "files": ["client/**/*.spec.js", "server/**/*.spec.js"],
-    "source": ["client/**/*.js", "server/**/*.js"],
+    "files": [
+      "client/**/*.spec.js",
+      "server/**/*.spec.js"
+    ],
+    "source": [
+      "client/**/*.js",
+      "server/**/*.js"
+    ],
     "failFast": true,
     "babel": "inherit",
-    "require": ["./server/util/setup-test-env.js"]
+    "require": [
+      "./server/util/setup-test-env.js"
+    ]
   },
   "nyc": {
-    "include": ["client/**/*.js", "server/**/*.js"],
+    "include": [
+      "client/**/*.js",
+      "server/**/*.js"
+    ],
     "exclude": [
       "**/*.spec.js",
       "client/reducers.js",
@@ -138,6 +144,10 @@
       "server/config.js",
       "server/dummyData.js"
     ],
-    "reporter": ["lcov", "text", "html"]
+    "reporter": [
+      "lcov",
+      "text",
+      "html"
+    ]
   }
 }
