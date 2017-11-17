@@ -16,9 +16,11 @@ const CommentReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_COMMENTS:
       return { ...state, comments: action.comments };
+
     case ADD_COMMENT: {
       return { ...state, comments: [...state.comments, action.comment] };
     }
+
     case EDIT_COMMENT: {
       let index = state.comments.findIndex(comment => {
         if (comment.cuid === action.comment.cuid) {
@@ -54,4 +56,6 @@ const CommentReducer = (state = initialState, action) => {
 /* Selectors */
 
 // Get corresponding comments
-export const getComments = state => state.comments;
+export const getComments = state => state.comments.comments;
+
+export default CommentReducer;

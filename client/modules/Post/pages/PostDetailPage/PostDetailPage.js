@@ -17,33 +17,10 @@ import CommentCreateWidget from "../../components/Comments/CommentCreateWidget";
 import { getPost } from "../../PostReducer";
 import { getComments } from "../../CommentReducer";
 
-// test data, remove after implementing server side
-const comments = [
-  {
-    author: "Mr 1",
-    body:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi doloremque maxime quia excepturi autem ipsa reprehenderit.",
-    cuid: "1"
-  },
-  {
-    author: "Mr two",
-    body:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi doloremque maxime quia excepturi autem ipsa reprehenderit.",
-    cuid: "2"
-  },
-  {
-    author: "Mr 3(threeeeeeeee)",
-    body:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi doloremque maxime quia excepturi autem ipsa reprehenderit.",
-    cuid: "3"
-  }
-];
-/////// end
-
 export class PostDetailPage extends Component {
   componentDidMount() {
     // fetch comments
-    //this.props.dispatch(fetchComments());
+    this.props.dispatch(fetchComments(this.props.post.cuid));
   }
   render() {
     return (
@@ -56,7 +33,9 @@ export class PostDetailPage extends Component {
           </p>
           <p className={styles["post-desc"]}>{this.props.post.content}</p>
         </div>
-        <CommentList comments={comments} />
+        {this.props.comments ? (
+          <CommentList comments={this.props.comments} />
+        ) : null}
         <CommentCreateWidget />
       </div>
     );
@@ -88,7 +67,15 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      author: PropTypes.string.isRequired,
+      cuid: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired
+    })
+  )
 };
 
 export default connect(mapStateToProps)(PostDetailPage);

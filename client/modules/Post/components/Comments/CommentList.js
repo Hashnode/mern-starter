@@ -1,20 +1,36 @@
-import React, { PropTypes } from "react";
+import React, { PropTypes, Component } from "react";
+import { connect } from "react-redux";
 
 import CommentListItem from "./CommentListItem";
+import { deleteCommentRequest } from "../../CommentActions";
 
 import styles from "./CommentList.css";
 
-function CommentList(props) {
-  if (props.comments.length === 0) {
-    return null;
+class CommentList extends Component {
+  handleDeleteComment = cuid => {
+    if (confirm("Do you want to delete this post")) {
+      // eslint-disable-line
+      this.props.dispatch(deleteCommentRequest(cuid));
+    }
+  };
+
+  handleEditComment = comment => {
+    // handle edit
+  };
+  render() {
+    return (
+      <div className={styles["comment-view"]}>
+        {this.props.comments.map(comment => (
+          <CommentListItem
+            key={comment.cuid}
+            comment={comment}
+            handleDeleteComment={this.handleDeleteComment}
+            handleEditComment={this.handleEditComment}
+          />
+        ))}
+      </div>
+    );
   }
-  return (
-    <div className={styles["comment-view"]}>
-      {props.comments.map(comment => (
-        <CommentListItem key={comment.cuid} comment={comment} />
-      ))}
-    </div>
-  );
 }
 
 CommentList.propTypes = {
@@ -24,7 +40,8 @@ CommentList.propTypes = {
       body: PropTypes.string.isRequired,
       cuid: PropTypes.string.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
-export default CommentList;
+export default connect()(CommentList);

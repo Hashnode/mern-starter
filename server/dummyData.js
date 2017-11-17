@@ -1,6 +1,7 @@
-import Post from './models/post';
+import Post from "./models/post";
+import Comment from "./models/comment";
 
-export default function () {
+export default function() {
   Post.count().exec((err, count) => {
     if (count > 0) {
       return;
@@ -34,13 +35,52 @@ export default function () {
       qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
       ipsum quia dolor sit amet.`;
 
-    const post1 = new Post({ name: 'Admin', title: 'Hello MERN', slug: 'hello-mern', cuid: 'cikqgkv4q01ck7453ualdn3hd', content: content1 });
-    const post2 = new Post({ name: 'Admin', title: 'Lorem Ipsum', slug: 'lorem-ipsum', cuid: 'cikqgkv4q01ck7453ualdn3hf', content: content2 });
+    const commentBody = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ea nam laboriosam nemo porro, perferendis,
+       et ex non expedita consequuntur sint reiciendis est ipsum libero recusandae. Architecto, nisi facilis? Corporis?`;
 
-    Post.create([post1, post2], (error) => {
+    const post1 = new Post({
+      name: "Admin",
+      title: "Hello MERN",
+      slug: "hello-mern",
+      cuid: "cikqgkv4q01ck7453ualdn3hd",
+      content: content1
+    });
+    const post2 = new Post({
+      name: "Admin",
+      title: "Lorem Ipsum",
+      slug: "lorem-ipsum",
+      cuid: "cikqgkv4q01ck7453ualdn3hf",
+      content: content2
+    });
+
+    const comment1 = new Comment({
+      author: "Mr. 1",
+      body: commentBody,
+      owner: post1,
+      cuid: "gadkgjfdalkgjdflkgjhdfjgkh324234"
+    });
+    const comment2 = new Comment({
+      author: "Mr. Two",
+      body: commentBody,
+      owner: post1,
+      cuid: "gadkgjfdalkgjdflkgjhdfsdf6534"
+    });
+    const comment3 = new Comment({
+      author: "Mr. 3(threeee)",
+      body: commentBody,
+      owner: post1,
+      cuid: "gadkgjfsdsfdfsddalsdfsdfvbkgjhdfsdf6534"
+    });
+
+    Post.create([post1, post2], error => {
       if (!error) {
-        // console.log('ready to go....');
+        console.log("Successfully created 2 posts");
       }
+      Comment.create([comment1, comment2, comment3], commentError => {
+        if (!commentError) {
+          console.log("Successfully created 3 comments");
+        }
+      });
     });
   });
 }

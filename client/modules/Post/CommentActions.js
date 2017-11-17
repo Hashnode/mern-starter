@@ -21,3 +21,18 @@ export function fetchComments(cuid) {
     });
   };
 }
+
+export function deleteComment(cuid) {
+  return {
+    type: DELETE_COMMENT,
+    cuid
+  };
+}
+
+export function deleteCommentRequest(cuid) {
+  return dispatch => {
+    return callApi(`comments/${cuid}`, "delete").then(() =>
+      dispatch(deleteComment(cuid))
+    );
+  };
+}

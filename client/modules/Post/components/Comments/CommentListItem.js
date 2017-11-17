@@ -6,17 +6,10 @@ import styles from "./CommentListItem.css";
 class CommentListItem extends Component {
   editComment = () => {};
 
-  deleteComment = () => {
-    let confirmDelete = confirm(
-      "Are you sure you want to delete this comment?"
-    );
-    if (confirmDelete) {
-      // call api endpoint
-    }
-  };
+  deleteComment = () => {};
 
   render() {
-    const { author, body } = this.props.comment;
+    const { author, body, cuid } = this.props.comment;
     return (
       <div className={styles["single-comment"]}>
         <h3 className={styles["comment-author"]}>By {author}</h3>
@@ -24,13 +17,13 @@ class CommentListItem extends Component {
         <div className={styles["btn-group"]}>
           <button
             className={`${styles["btn"]} ${styles["edit-btn"]}`}
-            onClick={this.editComment}
+            onClick={() => this.props.handleEditComment(null)}
           >
             Edit comment
           </button>
           <button
             className={`${styles["btn"]} ${styles["delete-btn"]}`}
-            onClick={this.deleteComment}
+            onClick={() => this.props.handleDeleteComment(cuid)}
           >
             Delete comment
           </button>
@@ -45,7 +38,9 @@ CommentListItem.propTypes = {
     author: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  handleEditComment: PropTypes.func.isRequired,
+  handleDeleteComment: PropTypes.func.isRequired
 };
 
-export default CommentListItem;
+export default connect()(CommentListItem);
