@@ -40,7 +40,7 @@ const CommentReducer = (state = initialState, action) => {
       };
     }
     case EDIT_COMMENT_MODE:
-      return { ...state, editComment: action.cuid };
+      return { ...state, editComment: action.comment };
     case CANCEL_EDIT_COMMENT:
       return { ...state, editComment: null };
     case DELETE_COMMENT:

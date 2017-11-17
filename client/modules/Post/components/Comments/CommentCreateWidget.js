@@ -2,13 +2,26 @@ import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 
 import styles from "./CommentCreateWidget.css";
-import { addCommentRequest } from "../../CommentActions";
+import {
+  addCommentRequest,
+  cancelEditMode,
+  updateCommentRequest
+} from "../../CommentActions";
 
 class CommentCreateWidget extends Component {
   state = {
     author: "",
     body: ""
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.editComment) {
+      this.setState({
+        author: nextProps.editComment.author,
+        body: nextProps.editComment.body
+      });
+    }
+  }
 
   createComment = e => {
     e.preventDefault();
@@ -23,7 +36,29 @@ class CommentCreateWidget extends Component {
     }
   };
 
-  render() {
+  saveEditComment = e => {
+    e.preventDefault();
+    if (!this.state.body) {
+      return;
+    }
+    if (this.props.editComment.body === this.state.body) {
+      this.cancelEditComment(e);
+      return;
+    }
+
+    this.props.dispatch(
+      updateCommentRequest(this.state.body, this.props.editComment.cuid)
+    );
+    this.cancelEditComment(e);
+  };
+
+  cancelEditComment = e => {
+    e.preventDefault();
+    this.props.dispatch(cancelEditMode());
+    this.setState({ author: "", body: "" });
+  };
+
+  renderCreateForm() {
     return (
       <div className={styles["form"]}>
         <div className={styles["form-content"]}>
@@ -42,7 +77,7 @@ class CommentCreateWidget extends Component {
             onChange={e => this.setState({ body: e.target.value })}
           />
           <a
-            className={styles["post-submit-button"]}
+            className={styles["comment-submit-button"]}
             href="#"
             onClick={this.createComment}
           >
@@ -51,6 +86,45 @@ class CommentCreateWidget extends Component {
         </div>
       </div>
     );
+  }
+
+  renderEditForm = () => {
+    return (
+      <div className={styles["form"]}>
+        <div className={styles["form-content"]}>
+          <h2 className={styles["form-title"]}>Edit existing comment</h2>
+          <h3 className={styles["comment-author"]}>By {this.state.author}</h3>
+
+          <textarea
+            placeholder="Write your comment here"
+            className={styles["form-field"]}
+            value={this.state.body}
+            onChange={e => this.setState({ body: e.target.value })}
+          />
+          <a
+            className={styles["comment-submit-button"]}
+            href="#"
+            onClick={this.saveEditComment}
+          >
+            Save Edit
+          </a>
+          <a
+            className={styles["comment-cancel-button"]}
+            href="#"
+            onClick={this.cancelEditComment}
+          >
+            Cancel
+          </a>
+        </div>
+      </div>
+    );
+  };
+
+  render() {
+    if (this.props.editComment) {
+      return this.renderEditForm();
+    }
+    return this.renderCreateForm();
   }
 }
 

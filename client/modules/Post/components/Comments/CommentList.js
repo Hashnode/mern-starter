@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from "react";
 import { connect } from "react-redux";
 
 import CommentListItem from "./CommentListItem";
-import { deleteCommentRequest } from "../../CommentActions";
+import { deleteCommentRequest, enableEditMode } from "../../CommentActions";
 
 import styles from "./CommentList.css";
 
@@ -14,7 +14,9 @@ class CommentList extends Component {
     }
   };
 
-  handleEditComment = comment => {};
+  handleEditComment = comment => {
+    this.props.dispatch(enableEditMode(comment));
+  };
   render() {
     return (
       <div className={styles["comment-view"]}>

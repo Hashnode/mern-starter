@@ -36,14 +36,29 @@ textarea {
   min-height: 200px;
 }
 
-.post-submit-button {
+.comment-cancel-button {
   display: inline-block;
   padding: 8px 16px;
+  font-size: 18px;
+  color: #fff;
+  background: #f4c842;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.comment-submit-button {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-right: 10px;
   font-size: 18px;
   color: #fff;
   background: #03a9f4;
   text-decoration: none;
   border-radius: 4px;
+}
+
+.comment-author {
+  margin-bottom: 20px;
 }
 
 .appear {

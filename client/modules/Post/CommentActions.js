@@ -54,3 +54,33 @@ export function addCommentRequest(comment, ownerId) {
     }).then(res => dispatch(addComment(res.comment)));
   };
 }
+
+export function enableEditMode(comment) {
+  return {
+    type: EDIT_COMMENT_MODE,
+    comment
+  };
+}
+
+export function cancelEditMode() {
+  return {
+    type: CANCEL_EDIT_COMMENT
+  };
+}
+
+export function saveEdit(comment) {
+  return {
+    type: EDIT_COMMENT,
+    comment
+  };
+}
+
+export function updateCommentRequest(commentBody, cuid) {
+  return dispatch => {
+    return callApi(`comments/${cuid}`, "put", {
+      comment: {
+        body: commentBody
+      }
+    }).then(res => dispatch(saveEdit(res.comment)));
+  };
+}

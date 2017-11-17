@@ -4,13 +4,8 @@ import { connect } from "react-redux";
 import styles from "./CommentListItem.css";
 
 function CommentListItem(props) {
-  const {
-    author,
-    body,
-    cuid,
-    handleEditComment,
-    handleDeleteComment
-  } = props.comment;
+  const { author, body, cuid } = props.comment;
+  const { handleEditComment, handleDeleteComment } = props;
   return (
     <div className={styles["single-comment"]}>
       <h3 className={styles["comment-author"]}>By {author}</h3>
@@ -18,7 +13,7 @@ function CommentListItem(props) {
       <div className={styles["btn-group"]}>
         <button
           className={`${styles["btn"]} ${styles["edit-btn"]}`}
-          onClick={() => handleEditComment(null)}
+          onClick={() => handleEditComment(props.comment)}
         >
           Edit comment
         </button>
