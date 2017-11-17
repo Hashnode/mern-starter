@@ -8,7 +8,7 @@ import styles from "../../components/PostListItem/PostListItem.css";
 
 // Import Actions
 import { fetchPost } from "../../PostActions";
-import { fetchComments } from "../../CommentActions";
+import { fetchComments, clearComments } from "../../CommentActions";
 
 import CommentList from "../../components/Comments/CommentList";
 import CommentCreateWidget from "../../components/Comments/CommentCreateWidget";
@@ -42,7 +42,8 @@ export class PostDetailPage extends Component {
   }
 
   componentWillUnmount() {
-    // clear edit component form
+    // clear comment
+    this.props.dispatch(clearComments());
   }
 }
 

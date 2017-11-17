@@ -4,7 +4,8 @@ import {
   EDIT_COMMENT,
   EDIT_COMMENT_MODE,
   CANCEL_EDIT_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  CLEAR_COMMENTS
 } from "./CommentActions";
 
 const initialState = {
@@ -48,6 +49,8 @@ const CommentReducer = (state = initialState, action) => {
         editComment: null,
         comments: state.comments.filter(comment => comment.cuid !== action.cuid)
       };
+    case CLEAR_COMMENTS:
+      return initialState;
     default:
       return state;
   }

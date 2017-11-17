@@ -6,6 +6,7 @@ export const EDIT_COMMENT = "EDIT_COMMENT";
 export const EDIT_COMMENT_MODE = "EDIT_COMMENT_MODE";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const CANCEL_EDIT_COMMENT = "CANCEL_EDIT_COMMENT";
+export const CLEAR_COMMENTS = "CLEAR_COMMENTS";
 
 export function addComments(comments) {
   return {
@@ -82,5 +83,11 @@ export function updateCommentRequest(commentBody, cuid) {
         body: commentBody
       }
     }).then(res => dispatch(saveEdit(res.comment)));
+  };
+}
+
+export function clearComments() {
+  return {
+    type: CLEAR_COMMENTS
   };
 }
