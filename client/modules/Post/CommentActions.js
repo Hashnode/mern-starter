@@ -36,3 +36,21 @@ export function deleteCommentRequest(cuid) {
     );
   };
 }
+
+export function addComment(comment) {
+  return {
+    type: ADD_COMMENT,
+    comment
+  };
+}
+
+export function addCommentRequest(comment, ownerId) {
+  return dispatch => {
+    return callApi(`posts/${ownerId}/comments`, "post", {
+      comment: {
+        author: comment.author,
+        body: comment.body
+      }
+    }).then(res => dispatch(addComment(res.comment)));
+  };
+}

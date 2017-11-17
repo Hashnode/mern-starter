@@ -14,9 +14,7 @@ class CommentList extends Component {
     }
   };
 
-  handleEditComment = comment => {
-    // handle edit
-  };
+  handleEditComment = comment => {};
   render() {
     return (
       <div className={styles["comment-view"]}>

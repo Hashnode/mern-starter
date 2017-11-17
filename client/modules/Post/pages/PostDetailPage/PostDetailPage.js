@@ -36,9 +36,13 @@ export class PostDetailPage extends Component {
         {this.props.comments ? (
           <CommentList comments={this.props.comments} />
         ) : null}
-        <CommentCreateWidget />
+        <CommentCreateWidget ownerId={this.props.post.cuid} />
       </div>
     );
+  }
+
+  componentWillUnmount() {
+    // clear edit component form
   }
 }
 
