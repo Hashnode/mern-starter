@@ -1,0 +1,43 @@
+.single-comment {
+  border: 1px solid #616161;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.comment-author {
+  margin-bottom: 7px;
+}
+
+.comment-body {
+  margin-bottom: 10px;
+}
+
+.btn-group {
+  height: 30px;
+}
+
+.btn {
+  height: 100%;
+  width: 140px;
+  margin-right: 7px;
+  border: 1px solid #616161;
+  border-radius: 5px;
+  color: white;
+}
+
+.edit-btn {
+  background-color: blue;
+}
+
+.edit-btn:hover {
+  background-color: #001a66;
+}
+
+.delete-btn {
+  background-color: red;
+}
+
+.delete-btn:hover {
+  background-color: #b30000;
+}
