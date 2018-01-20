@@ -6,7 +6,7 @@ import styles from './App.css';
 
 // Import Components
 import Helmet from 'react-helmet';
-import DevTools from './components/DevTools';
+// import DevTools from './components/DevTools';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
@@ -31,7 +31,7 @@ export class App extends Component {
   render() {
     return (
       <div>
-        {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
+        {/* {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />} */}
         <div>
           <Helmet
             title="MERN Starter - Blog App"
