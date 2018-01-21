@@ -7,6 +7,7 @@ import {
   sectionHeader,
   sectionRow,
   inputField,
+  inputLabel,
   textInput
 } from './App.css';
 
@@ -34,10 +35,12 @@ export default class App extends Component {
         <div className={mainSection}>
         <div className={sectionHeader}>Input</div>
           <div className={sectionRow}>
-            Bodyweight <input className={inputField + ' ' + textInput} type='number' name='bodyweight' value={bodyweight || ''} {...{onChange}} />
+          <div className={inputLabel}>Bodyweight</div>
+          <input className={inputField + ' ' + textInput} type='number' name='bodyweight' value={bodyweight || ''} {...{onChange}} />
           </div>
           <div className={sectionRow}>
-            Workouts <select className={inputField} name='workout' value={workout} {...{onChange}}>
+            <div className={inputLabel}>Workouts</div>
+            <select className={inputField} name='workout' value={workout} {...{onChange}}>
               <option value='1'>1 hr</option>
               <option value='2'>2+ hr</option>
             </select>

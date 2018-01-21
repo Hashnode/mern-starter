@@ -3,12 +3,20 @@
   font-size: 24px;
   display: flex;
   justify-content: space-evenly;
+  background: grey;
+  height: 100vh;
 }
 
 .mainSection {
+  background: white;
   margin: 1rem;
   display: inline-flex;
   flex-direction: column;
+  align-items: stretch;
+  border: black 2px solid;
+  border-radius: 1rem;
+  padding: 1rem;
+  height: 18rem;
 }
 
 .sectionHeader {
@@ -24,9 +32,14 @@
 }
 
 .inputField {
-  margin: 0 0.5rem;
   font-size: 24px;
   text-align: center;
+  border-radius: 0.3rem;
+}
+
+.inputLabel {
+  margin: 0 0.5rem 0 0;
+  display: inline;
 }
 
 .textInput {
