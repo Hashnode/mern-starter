@@ -41,8 +41,9 @@ export function fetchPosts() {
 }
 
 export function fetchPost(cuid) {
-  return (dispatch) => {
-    return callApi(`posts/${cuid}`).then(res => dispatch(addPost(res.post)));
+  return async function(dispatch) {
+    const res = await callApi(`posts/${cuid}`);
+    return dispatch(addPost(res.post));
   };
 }
 
