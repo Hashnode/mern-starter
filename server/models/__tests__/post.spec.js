@@ -10,11 +10,17 @@ const posts = [
   new Post({ name: 'Mayank', title: 'Hi Mern', slug: 'hi-mern', cuid: 'f34gb2bh24b24b3', content: "All dogs bark 'mern!'" }),
 ];
 
-test.beforeEach('connect and add two post entries', t => {
-  connectDB(t, () => {
-    Post.create(posts, err => {
-      if (err) t.fail('Unable to create posts');
-    });
+
+test.before('connect to mockgoose db', t => {
+  // No need to await here because Model.create promise will not resolve until connection is complete.
+  connectDB(t);
+});
+
+
+test.beforeEach('add two post entries', async t => {
+  // Must await here to be sure data is available before running test.
+  await Post.create(posts, err => {
+    if (err) t.fail('Unable to create posts');
   });
 });
 
