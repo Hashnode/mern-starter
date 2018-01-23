@@ -1,0 +1,23 @@
+{
+  "name": "mern-starter",
+  "version": "3.0.0",
+  "description": "Boilerplate project for building Isomorphic apps using React and Redux",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hashnode/mern-starter.git"
+  },
+  "author": "Prashant Abhishek <prashant.abhishek7g@gmail.com>, Mayank Chandola <imayankchd@gmail.com>, Sandeep Panda <sandeep@hashnode.com>, Syed Fazle Rahman <fazle@hashnode.com>, Alkshendra Maurya <alkshendra@hashnode.com>, Abinav Seelan <abinav.n.seelan@gmail.com>, Kashish Grover <kashishgrover95@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hashnode/mern-starter/issues"
+  },
+  "homepage": "https://github.com/hashnode/mern-starter#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
+  }
+}
