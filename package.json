@@ -23,7 +23,8 @@
     "mongoose": "^5.0.1",
     "morgan": "^1.9.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "jest": "^22.1.4",

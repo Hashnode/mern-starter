@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-class App extends Component {
-  constructor() {
-    super();
-  }
+import app from './routes';
 
-  render() {
-    return (
-      <h1>Hello World!</h1>
-    )
-  }
-}
+const App = () => (
+  <Router>
+    { app() }
+  </Router>
+);
 
-render('app', <App />);
+document.addEventListener('DOMContentLoaded', () => {
+  render(<App />, document.getElementById('app'));
+});
 
