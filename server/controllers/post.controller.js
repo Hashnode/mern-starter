@@ -7,13 +7,13 @@ const slug = require('limax');
  * @param res
  * @returns void
  */
-exports.getPosts = function (req, res) {
-  Post.find().sort('-dateAdded').exec((err, posts) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
+exports.getPosts = async function (req, res) {
+  try {
+    const posts = await Post.find().sort('-dateAdded').exec();
     res.json({ posts });
-  });
+  } catch (e) {
+    return res.status(500).send(e);
+  }
 }
 
 /**
@@ -22,20 +22,18 @@ exports.getPosts = function (req, res) {
  * @param res
  * @returns void
  */
-exports.addPost = function (req, res) {
-  if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
-    return res.status(403).end();
-  }
-
-  const newPost = new Post(req.body.post);
-
-  newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
-  newPost.save((err, saved) => {
-    if (err) {
-      return res.status(500).send(err);
+exports.addPost = async function (req, res) {
+  try {
+    if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
+      return res.status(403).end();
     }
+    const newPost = new Post(req.body.post);
+    newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
+    let saved = await newPost.save();
     res.json({ post: saved });
-  });
+  } catch (e) {
+    return res.status(500).send(e);
+  }
 }
 
 /**
@@ -44,13 +42,18 @@ exports.addPost = function (req, res) {
  * @param res
  * @returns void
  */
-exports.getPost = function (req, res) {
-  Post.findById(req.params._id).exec((err, post) => {
-    if (err || !post) {
-      return res.status(500).send(err);
+exports.getPost = async function (req, res) {
+  try {
+    const post = await Post.findById(req.params._id).exec();
+    if (!post) {
+      return res.sendStatus(404);
     }
-    res.json({ post });
-  });
+    res.json(post)
+  } catch (e) {
+    if (e.name === 'CastError')
+      return res.sendStatus(400);
+    return res.status(500).send(e);
+  }
 }
 
 /**
@@ -59,16 +62,18 @@ exports.getPost = function (req, res) {
  * @param res
  * @returns void
  */
-exports.deletePost = function (req, res) {
-  Post.findById(req.params._id).exec((err, post) => {
-    if (err || !post) {
-      return res.status(500).send(err);
+exports.deletePost = async function (req, res) {
+  try {
+    const post = await Post.findById(req.params._id).exec();
+    if (!post) {
+      return res.sendStatus(404);
     }
-    post.remove((err) => {
-      if (err) {
-        return console.warn(err);
-      }
-      res.status(200).end();
-    });
-  });
+    await post.remove();
+    res.sendStatus(200);
+  } catch (e) {
+    if (e.name === 'CastError')
+      return res.sendStatus(400);
+    return res.status(500).send(e);
+  }
 }
+
