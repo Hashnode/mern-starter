@@ -3,7 +3,8 @@
   "version": "3.0.0",
   "description": "Boilerplate project for building Isomorphic apps using React and Redux",
   "scripts": {
-    "test": "./node_modules/.bin/jest --forceExit"
+    "test": "./node_modules/.bin/jest --forceExit",
+    "build:dev": "NODE_ENV=development ./node_modules/.bin/webpack --config ./webpack.config.dev.js"
   },
   "repository": {
     "type": "git",
@@ -27,10 +28,16 @@
   "devDependencies": {
     "jest": "^22.1.4",
     "supertest": "^3.0.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "eslint": "^4.16.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.5.1"
+    "eslint-plugin-react": "^7.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "webpack": "^3.10.0"
   }
 }
