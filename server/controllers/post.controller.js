@@ -24,7 +24,7 @@ exports.getPosts = function (req, res) {
  */
 exports.addPost = function (req, res) {
   if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
-    res.status(403).end();
+    return res.status(403).end();
   }
 
   const newPost = new Post(req.body.post);

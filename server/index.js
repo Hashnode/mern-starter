@@ -8,7 +8,7 @@ const app = express();
 
 //Local Imports
 const serverConfig = require("./config");
-const posts = require('./routes/post.routes');
+const routes = require('./routes');
 const dummyData = require('./dummyData');
 
 // Set native promises as mongoose promise
@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
-app.use('/api/', posts);
+app.use('/api', routes.posts);
 
 app.listen(serverConfig.port, (error) => {
   if (!error) {

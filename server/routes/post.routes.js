@@ -4,15 +4,15 @@ const PostController = require('../controllers/post.controller');
 const router = Router();
 
 // Get all Posts
-router.get('/posts', PostController.getPosts);
+router.route('/posts').get(PostController.getPosts);
 
 // Get one post by _id
-router.get('/posts/:_id', PostController.getPost);
+router.route('/posts/:_id').get(PostController.getPost);
 
 // Add a new Post
-router.post('/posts', PostController.addPost);
+router.route('/posts').post(PostController.addPost);
 
 // Delete a post by _id
-router.delete('/posts/:_id', PostController.deletePost);
+router.route('/posts/:_id').delete(PostController.deletePost);
 
 module.exports = router;
