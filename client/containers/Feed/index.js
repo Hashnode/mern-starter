@@ -9,7 +9,7 @@ class Feed extends Component {
 
   render() {
     return (
-      <p>
+      <p className={styles.heading}>
         Feed
       </p>
     );
