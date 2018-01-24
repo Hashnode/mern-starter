@@ -18,6 +18,8 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "limax": "^1.6.0",
+    "mongoose": "^5.0.1",
     "morgan": "^1.9.0"
   }
 }
