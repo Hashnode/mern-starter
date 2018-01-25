@@ -7,6 +7,17 @@ var postcssFocus = require('postcss-focus');
 var postcssReporter = require('postcss-reporter');
 var cssnano = require('cssnano');
 
+var cssloaders = [
+  { loader: 'css-loader', 
+    options: { localIdentName: '[hash:base64]', 
+      modules: true, 
+      importLoaders: 1, 
+      sourceMap: true
+    }
+  },
+  { loader: 'postcss-loader' }
+]
+
 module.exports = {
   devtool: 'hidden-source-map',
 
@@ -27,7 +38,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     modules: [
       'client',
       'node_modules',
@@ -35,25 +46,27 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?localIdentName=[hash:base64]&modules&importLoaders=1!postcss-loader'),
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: cssloaders
+        })
       }, {
         test: /\.css$/,
         include: /node_modules/,
-        loaders: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader'],
       }, {
         test: /\.jsx*$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        use: 'babel-loader',
       }, {
         test: /\.(jpe?g|gif|png|svg)$/i,
-        loader: 'url-loader?limit=10000',
+        use: 'url-loader?limit=10000',
       }, {
         test: /\.json$/,
-        loader: 'json-loader',
+        use: 'json-loader',
       },
     ],
   },
@@ -64,12 +77,23 @@ module.exports = {
         'NODE_ENV': JSON.stringify('production'),
       }
     }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context  : __dirname,
+        postcss: [
+          postcssFocus(),
+          cssnext({ browsers: ['last 2 versions', 'IE > 10'], }),
+          cssnano({ autoprefixer: false }),
+          postcssReporter({ clearMessages: true, })
+        ]
+      }
+    }),    
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
       filename: 'vendor.js',
     }),
-    new ExtractTextPlugin('app.[chunkhash].css', { allChunks: true }),
+    new ExtractTextPlugin({ filename: 'app.[chunkhash].css', disable: false, allChunks: true }),
     new ManifestPlugin({
       basePath: '/',
     }),
@@ -81,19 +105,6 @@ module.exports = {
       compressor: {
         warnings: false,
       }
-    }),
-  ],
-
-  postcss: () => [
-    postcssFocus(),
-    cssnext({
-      browsers: ['last 2 versions', 'IE > 10'],
-    }),
-    cssnano({
-      autoprefixer: false
-    }),
-    postcssReporter({
-      clearMessages: true,
-    }),
+    }),    
   ],
 };

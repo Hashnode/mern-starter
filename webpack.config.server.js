@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var ExternalsPlugin = require('webpack-externals-plugin');
+var ExternalsPlugin = require('webpack2-externals-plugin');
 
 module.exports = {
 
@@ -19,7 +19,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     modules: [
       'client',
       'node_modules',
@@ -27,12 +27,12 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
+        options: {
           presets: [
             'react',
             'es2015',
@@ -49,7 +49,7 @@ module.exports = {
         },
       }, {
         test: /\.json$/,
-        loader: 'json-loader',
+        use: 'json-loader',
       },
     ],
   },
