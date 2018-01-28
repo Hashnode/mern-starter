@@ -1,20 +1,17 @@
-const mongoose = require('mongoose');
-const mockgoose = require('mockgoose');
+var Mongoose = require('mongoose').Mongoose;
+var mongoose = new Mongoose();
 
-// Set native promises as mongoose promise
-mongoose.Promise = global.Promise;
+var Mockgoose = require('mockgoose-fix').Mockgoose;
+var mockgoose = new Mockgoose(mongoose);
 
-exports.connectDB = function (done) {
-  // mongoose.connect('mongodb://localhost:27017/mern-test', (error) => {
-  //   if (error)
-  //     console.log('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
-  //   else {
-  //     console.log('Connected to DB at mongodb://localhost:27017/mern-test');
-  //     done();
-  //   }
-  // });
+exports.connectDB = async function () {
+  console.log('Setting up Mockgoose.');
+  await mockgoose.prepareStorage();
+  console.log('Done. Setting up test connection.');
+  let x = await mongoose.connect('mongodb://localhost:27017/mern-test');
+  return x;
 }
 
-exports.dropDB = function () {
-  mongoose.disconnect();
+exports.dropDB = async function () {
+  return await mockgoose.helper.reset();
 }

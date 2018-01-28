@@ -2163,15 +2163,28 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-mockgoose@^7.3.3:
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/mockgoose/-/mockgoose-7.3.3.tgz#0c7f07c2825781afc35fc20b986aee42d9e7c635"
+mockgoose-fix@^7.3.6:
+  version "7.3.6"
+  resolved "https://registry.yarnpkg.com/mockgoose-fix/-/mockgoose-fix-7.3.6.tgz#6b65ab4888c5eef4e12aa4aa09efa1c23c11560f"
   dependencies:
     async "2.1.5"
     debug "2.2.0"
     fs-extra "^2.0.0"
     https-proxy-agent "1.0.0"
-    mongodb-prebuilt "^6.3.3"
+    mongodb-prebuilt-https "^6.3.6"
+    portfinder "^1.0.13"
+    rimraf "^2.6.1"
+    uuid "^3.0.1"
+
+mockgoose@^7.3.4:
+  version "7.3.4"
+  resolved "https://registry.yarnpkg.com/mockgoose/-/mockgoose-7.3.4.tgz#623a871ec4ad76200d90f596f158ad0afc82306c"
+  dependencies:
+    async "2.1.5"
+    debug "2.2.0"
+    fs-extra "^2.0.0"
+    https-proxy-agent "1.0.0"
+    mongodb-prebuilt "^6.3.5"
     portfinder "^1.0.13"
     rimraf "^2.6.1"
     uuid "^3.0.1"
@@ -2183,9 +2196,9 @@ mongodb-core@3.0.1:
     bson "~1.0.4"
     require_optional "^1.0.1"
 
-mongodb-download@^2.2.3:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/mongodb-download/-/mongodb-download-2.2.4.tgz#4abf6a44edac671bf883ebaeb4492604377d96a5"
+mongodb-download-https@^2.2.4:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/mongodb-download-https/-/mongodb-download-https-2.2.6.tgz#2728423249271d45f486a0783943b20fdad6a9b0"
   dependencies:
     debug "^2.2.0"
     decompress "^4.0.0"
@@ -2196,13 +2209,36 @@ mongodb-download@^2.2.3:
     request-promise "^4.1.1"
     yargs "^3.26.0"
 
-mongodb-prebuilt@^6.3.3:
-  version "6.3.4"
-  resolved "https://registry.yarnpkg.com/mongodb-prebuilt/-/mongodb-prebuilt-6.3.4.tgz#2edb06e7d69c39630ff9f1016f89423f4ec01544"
+mongodb-download@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/mongodb-download/-/mongodb-download-2.2.5.tgz#75a6722a81e8d51ccf600d487e7c66a5392eeb3e"
+  dependencies:
+    debug "^2.2.0"
+    decompress "^4.0.0"
+    fs-extra "^2.0.0"
+    getos "^2.7.0"
+    md5-file "3.1.1"
+    request "^2.79.0"
+    request-promise "^4.1.1"
+    yargs "^3.26.0"
+
+mongodb-prebuilt-https@^6.3.6:
+  version "6.3.6"
+  resolved "https://registry.yarnpkg.com/mongodb-prebuilt-https/-/mongodb-prebuilt-https-6.3.6.tgz#c293394c4b4cf77e81dab1de90ced22021a399e9"
   dependencies:
     debug "^2.2.0"
     glob "^7.1.1"
-    mongodb-download "^2.2.3"
+    mongodb-download-https "^2.2.4"
+    spawn-sync "1.0.15"
+    yargs "^3.26.0"
+
+mongodb-prebuilt@^6.3.5:
+  version "6.3.5"
+  resolved "https://registry.yarnpkg.com/mongodb-prebuilt/-/mongodb-prebuilt-6.3.5.tgz#29b816a9f528fa27652514dbb0130211e829a2c7"
+  dependencies:
+    debug "^2.2.0"
+    glob "^7.1.1"
+    mongodb-download "^2.2.5"
     spawn-sync "1.0.15"
     yargs "^3.26.0"
 

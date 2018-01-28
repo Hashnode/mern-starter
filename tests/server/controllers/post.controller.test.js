@@ -9,41 +9,31 @@ const posts = [
   new Post({ name: 'Abinav', title: 'Hi Mern', slug: 'hi-mern', content: "All dogs bark 'MERN!'" }),
 ];
 
-beforeEach(() => {
-  connectDB(() => {
-    Post.create(posts, err => {
-      if (err) {
-        console.warn(err)
-        return console.warn('Unable to create posts')
-      }
-    });
-  })
-}, 1000);
+async function connectToDatabase() {
+  await connectDB();
+  Post.create(posts);
+  console.log('Connected and added Posts');
+  return true;
+}
 
-afterEach(() => {
-  dropDB();
-})
+beforeAll(async () => {
+  await connectToDatabase();
+});
 
-describe('Get all posts in mock db', () => {
-  it('Should load 2 posts', () => {
-    return postController.getPosts()
+afterAll(async () => {
+  await dropDB();
+});
+
+describe('Get a post using slug', () => {
+  test('Should load a post using slug', () => {
+    return postController.getPost({ slug: 'hello-mern' })
       .then(data => {
-        expect(data).toBeDefined()
-        expect(data.posts.length).toEqual(2)
+        console.error(data)
+        // expect(data).toBeDefined()
+        // expect(data).toEqual('Kashish')
+      })
+      .catch(err => {
+        return console.error(err)
       })
   })
 })
-
-// describe('Get a post using _id', () => {
-//   it('Should load a post using _id', () => {
-//     return postController.getPost({
-//       params: {
-//         _id: 2
-//       }
-//     })
-//       .then(data => {
-//         expect(data).toBeDefined()
-//         expect(data.post.name).toEqual('Abinav')
-//       })
-//   })
-// })
