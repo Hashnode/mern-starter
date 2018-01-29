@@ -74,6 +74,11 @@ const config = {
       title: 'MERN | Build amazing things ... faster',
       template: './index.html',
     }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
+    }),
   ],
 };
 

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import * as actions from '../../actions/Post';
 
 import * as styles from './styles.css';
 
@@ -7,13 +11,23 @@ class Feed extends Component {
     super();
   }
 
+  componentDidMount() {
+    this.props.dispatch(actions.fetchAllPosts());
+  }
+
   render() {
     return (
-      <p className={styles.heading}>
-        Feed
-      </p>
+      <div className={styles.container} />
     );
   }
+}
+
+const mapStateToProps = state => ({
+  feed: state.Post,
+});
+
+Feed.propTypes = {
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default Feed;
+export default connect(mapStateToProps)(Feed);

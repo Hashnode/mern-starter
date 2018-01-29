@@ -4,7 +4,8 @@
   "description": "Boilerplate project for building Isomorphic apps using React and Redux",
   "scripts": {
     "test": "./node_modules/.bin/jest --forceExit",
-    "build:dev": "NODE_ENV=development ./node_modules/.bin/webpack --config ./webpack.config.dev.js"
+    "build:dev": "NODE_ENV=development ./node_modules/.bin/webpack --config ./webpack.config.dev.js",
+    "start:dev": "NODE_ENV=development ./node_modules/.bin/nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,11 +18,14 @@
   },
   "homepage": "https://github.com/hashnode/mern-starter#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "limax": "^1.6.0",
     "mongoose": "^5.0.1",
     "morgan": "^1.9.0",
+    "nodemon": "^1.14.11",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
