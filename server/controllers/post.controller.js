@@ -10,7 +10,7 @@ const slug = require('limax');
 exports.getPosts = async function (req, res) {
   try {
     const posts = await Post.find().sort('-dateAdded').exec();
-    res.json({ posts });
+    res.status(200).json({ posts });
   } catch (e) {
     return res.status(500).send(e);
   }
@@ -30,7 +30,7 @@ exports.addPost = async function (req, res) {
     const newPost = new Post(req.body.post);
     newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
     let saved = await newPost.save();
-    res.json({ post: saved });
+    res.status(201).json({ post: saved });
   } catch (e) {
     return res.status(500).send(e);
   }
@@ -48,7 +48,7 @@ exports.getPost = async function (req, res) {
     if (!post) {
       return res.sendStatus(404);
     }
-    res.json(post)
+    res.status(200).json({ post })
   } catch (e) {
     if (e.name === 'CastError')
       return res.sendStatus(400);

@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "Boilerplate project for building Isomorphic apps using React and Redux",
   "scripts": {
-    "test": "jest --forceExit"
+    "test": "./node_modules/.bin/jest --forceExit"
   },
   "repository": {
     "type": "git",

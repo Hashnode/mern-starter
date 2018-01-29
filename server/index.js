@@ -3,22 +3,22 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-//Initialize Express App
-const app = express();
-
-// Check if test
-const isTest = app.get('env') === 'test' || false;
-
 //Local Imports
 const serverConfig = require("./config");
 const routes = require('./routes');
 const dummyData = require('./dummyData');
 
+//Initialize Express App
+const app = express();
+
+// Set test environment flag
+const isTest = serverConfig.nodeEnv === 'test';
+
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
-mongoose.connect(isTest ? serverConfig.testMongoURL : serverConfig.mongoURL, (error) => {
+mongoose.connect( isTest ? serverConfig.testMongoURL : serverConfig.mongoURL, (error) => {
   if (error) {
     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
     throw error;
@@ -30,19 +30,21 @@ mongoose.connect(isTest ? serverConfig.testMongoURL : serverConfig.mongoURL, (er
   dummyData();
 });
 
-// Apply body Parser and server public assets and routes
+// Apply body Parser
 app.use(bodyParser.json());
-
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
+// server public assets and routes
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
 app.use('/api', routes.posts);
 
-var server = app.listen(serverConfig.port, (error) => {
-  if (!error) {
-    console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
-  }
-});
+if (!isTest) {
+  // Testing does not require you to listen on a port
+  app.listen(serverConfig.port, (error) => {
+    if (!error) {
+      console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
+    }
+  });
+}
 
-module.exports = server;
+module.exports = app;
