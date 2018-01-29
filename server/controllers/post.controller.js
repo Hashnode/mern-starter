@@ -8,7 +8,6 @@ const slug = require('limax');
  * @returns void
  */
 exports.getPosts = async function (req, res) {
-  console.log(req)
   try {
     const posts = await Post.find().sort('-dateAdded').exec();
     res.json({ posts });
@@ -58,14 +57,14 @@ exports.getPost = async function (req, res) {
 }
 
 /**
- * Delete a post by _id
+ * Delete a post by slug
  * @param req
  * @param res
  * @returns void
  */
 exports.deletePost = async function (req, res) {
   try {
-    const post = await Post.findById(req.params._id).exec();
+    const post = await Post.findOne({ slug: req.params.slug }).exec();
     if (!post) {
       return res.sendStatus(404);
     }

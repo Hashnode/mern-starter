@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "Boilerplate project for building Isomorphic apps using React and Redux",
   "scripts": {
-    "test": "jest"
+    "test": "jest --forceExit"
   },
   "repository": {
     "type": "git",
@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "jest": "^22.1.4",
-    "mockgoose": "^7.3.4",
-    "mockgoose-fix": "^7.3.6"
+    "mockgoose-fix": "^7.3.6",
+    "supertest": "^3.0.0"
   },
   "jest": {
     "verbose": true,

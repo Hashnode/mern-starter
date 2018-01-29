@@ -36,9 +36,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
 app.use('/api', routes.posts);
 
-app.listen(serverConfig.port, (error) => {
+var server = app.listen(serverConfig.port, (error) => {
   if (!error) {
     console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
   }
 });
 
+module.exports = server;
