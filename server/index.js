@@ -6,6 +6,9 @@ const mongoose = require("mongoose");
 //Initialize Express App
 const app = express();
 
+// Check if test
+const isTest = app.get('env') === 'test' || false;
+
 //Local Imports
 const serverConfig = require("./config");
 const routes = require('./routes');
@@ -15,13 +18,13 @@ const dummyData = require('./dummyData');
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
-mongoose.connect(serverConfig.mongoURL, (error) => {
+mongoose.connect(isTest ? serverConfig.testMongoURL : serverConfig.mongoURL, (error) => {
   if (error) {
     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
     throw error;
   }
   else {
-    console.log('Connected to DB at ' + serverConfig.mongoURL);
+    console.log('Connected to DB at ' + isTest ? serverConfig.testMongoURL : serverConfig.mongoURL);
   }
   // feed some dummy data in DB.
   dummyData();
