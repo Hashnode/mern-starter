@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "jest": "^22.1.4",
-    "mockgoose-fix": "^7.3.6",
     "supertest": "^3.0.0"
   },
   "jest": {
