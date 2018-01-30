@@ -6,7 +6,7 @@ const Seed = require('../../server/dummyData');
 const cleanAndSeedDb = async () => {
   await Post.remove({});
   await Seed();
-}
+};
 
 describe('Post APIs', () => {
   beforeEach(async () => {
@@ -25,11 +25,11 @@ describe('Post APIs', () => {
   }, 5000);
 
   test('Should add a new post', async () => {
-    let postObj = {};
-    postObj["post"] = {
-      name: "Kashish",
-      title: "All cattos meow",
-      content: "All doggos woof"
+    const postObj = {};
+    postObj.post = {
+      name: 'Kashish',
+      title: 'All cattos meow',
+      content: 'All doggos woof',
     };
 
     const response = await request(server).post('/api/posts').send(postObj);

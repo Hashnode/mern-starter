@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
-import * as styles from './styles.css';
-
 class PostView extends Component {
   constructor() {
     super();
+
+    this.state = {
+
+    };
   }
 
   render() {
@@ -14,6 +16,6 @@ class PostView extends Component {
       </p>
     );
   }
-};
+}
 
 export default PostView;

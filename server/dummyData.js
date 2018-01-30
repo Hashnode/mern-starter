@@ -1,7 +1,7 @@
 const Post = require('./models/post');
 
-module.exports = async function () {
-  const count = await Post.count().exec()
+module.exports = async function generateDummyData() {
+  const count = await Post.count().exec();
   if (count > 0) {
     return;
   }
@@ -34,8 +34,12 @@ module.exports = async function () {
     qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
     ipsum quia dolor sit amet.`;
 
-  const post1 = new Post({ name: 'Admin', title: 'Hello MERN', slug: 'hello-mern', content: content1 });
-  const post2 = new Post({ name: 'Admin', title: 'Lorem Ipsum', slug: 'lorem-ipsum', content: content2 });
+  const post1 = new Post({
+    name: 'Admin', title: 'Hello MERN', slug: 'hello-mern', content: content1,
+  });
+  const post2 = new Post({
+    name: 'Admin', title: 'Lorem Ipsum', slug: 'lorem-ipsum', content: content2,
+  });
 
   await Post.create([post1, post2]);
-}
+};

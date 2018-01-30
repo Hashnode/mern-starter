@@ -1,6 +1,6 @@
 module.exports = {
   verbose: true,
-  testRegex: "\\.test\\.js$",
-  rootDir: ".",
-  testPathIgnorePatterns: ["/node_modules/", "/v2/"]
+  testRegex: '\\.test\\.js$',
+  rootDir: '.',
+  testPathIgnorePatterns: ['/node_modules/', '/v2/'],
 };

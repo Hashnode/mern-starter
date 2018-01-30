@@ -1,6 +1,5 @@
-const express = require('express')
-const router = express.Router();
+const posts = require('./post.routes');
 
 module.exports = {
-  posts: require('./post.routes'),
+  posts,
 };
