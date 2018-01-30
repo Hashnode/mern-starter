@@ -3,12 +3,19 @@
   "version": "3.0.0",
   "description": "Boilerplate project for building Isomorphic apps using React and Redux",
   "scripts": {
-    "test": "./node_modules/.bin/jest --forceExit"
+    "test": "echo 'Running tests' && ./node_modules/.bin/jest --forceExit",
+    "lint": "echo 'Running linter' && ./node_modules/.bin/eslint . --fix",
+    "build:dev": "NODE_ENV=development ./node_modules/.bin/webpack --config ./webpack.config.dev.js",
+    "start:dev": "NODE_ENV=development ./node_modules/.bin/nodemon server/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hashnode/mern-starter.git"
   },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "author": "Prashant Abhishek <prashant.abhishek7g@gmail.com>, Mayank Chandola <imayankchd@gmail.com>, Sandeep Panda <sandeep@hashnode.com>, Syed Fazle Rahman <fazle@hashnode.com>, Alkshendra Maurya <alkshendra@hashnode.com>, Abinav Seelan <abinav.n.seelan@gmail.com>, Kashish Grover <kashishgrover95@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -16,14 +23,46 @@
   },
   "homepage": "https://github.com/hashnode/mern-starter#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "limax": "^1.6.0",
     "mongoose": "^5.0.1",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "nodemon": "^1.14.11",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "caniuse-lite": "^1.0.30000697",
+    "css-loader": "^0.28.9",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^2.30.1",
     "jest": "^22.1.4",
-    "supertest": "^3.0.0"
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^11.0.0",
+    "postcss-loader": "^2.0.10",
+    "postcss-nested": "^3.0.0",
+    "pre-commit": "^1.2.2",
+    "precss": "^3.1.0",
+    "style-loader": "^0.19.1",
+    "supertest": "^3.0.0",
+    "webpack": "^3.10.0"
   }
 }
