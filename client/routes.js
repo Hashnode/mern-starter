@@ -7,7 +7,7 @@ import PostView from './containers/PostView';
 const App = () => (
   <Switch>
     <Route exact path="/" component={Feed} />
-    <Route path="/:id" component={PostView} />
+    <Route path="/:slug" component={PostView} />
   </Switch>
 );
 

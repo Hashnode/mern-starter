@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Post = ({ post }) => (
   <div>
-    <Link to={`/${post._id}`} href={`${post._id}`}>
+    <Link to={`/${post.slug}`} href={`${post.slug}`}>
       <h2>{post.title}</h2>
     </Link>
     <pre>
@@ -15,8 +15,8 @@ const Post = ({ post }) => (
 
 Post.propTypes = {
   post: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    _id: PropTypes.string,
+    content: PropTypes.string,
   }).isRequired,
 };
 

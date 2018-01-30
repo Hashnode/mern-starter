@@ -23,11 +23,7 @@ class Feed extends Component {
           <p>Loading posts</p>
         )
         : (
-          <div>
-            {
-              this.props.feed.posts.map(post => <Post post={post} />)
-            }
-          </div>
+          this.props.feed.posts.map(post => <Post post={post} key={post._id} />)
         )
     );
   }

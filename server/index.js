@@ -39,6 +39,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
 app.use('/api', routes.posts);
 
+app.get('*', (request, response) => {
+  response.header('Content-type', 'text/html');
+  response.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
+});
+
 if (!isTest) {
   // Testing does not require you to listen on a port
   app.listen(serverConfig.port, (error) => {

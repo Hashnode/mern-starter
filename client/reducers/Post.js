@@ -43,9 +43,9 @@ export default function (state = defaultState, action) {
 
     case 'FETCH_SINGLE_POST_REQUEST': {
       newState = {
+        ...state,
         isLoading: true,
         isError: false,
-        posts: [],
       };
 
       break;
@@ -53,6 +53,7 @@ export default function (state = defaultState, action) {
 
     case 'FETCH_SINGLE_POST_SUCCESS': {
       newState = {
+        ...state,
         isLoading: false,
         isError: false,
         currentPost: {
@@ -65,6 +66,7 @@ export default function (state = defaultState, action) {
 
     case 'FETCH_SINGLE_POST_FAILURE': {
       newState = {
+        ...state,
         isLoading: false,
         isError: true,
       };

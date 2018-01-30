@@ -52,11 +52,11 @@ function fetchSinglePostFailure() {
   };
 }
 
-export function fetchSinglePost(id) {
+export function fetchSinglePost(slug) {
   return (dispatch) => {
     dispatch(fetchSinglePostRequest());
     request
-      .get(`/api/posts/${id}`)
+      .get(`/api/posts/${slug}`)
       .then((response) => { dispatch(fetchSinglePostSuccess(response)); })
       .catch(() => { dispatch(fetchSinglePostFailure()); });
   };
