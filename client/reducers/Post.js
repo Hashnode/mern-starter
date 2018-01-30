@@ -74,6 +74,24 @@ export default function (state = defaultState, action) {
       break;
     }
 
+    case 'REMOVE_POST': {
+      newState = {
+        ...state,
+        posts: state.posts.filter(post => post.slug !== action.slug),
+      };
+
+      break;
+    }
+
+    case 'ADD_POST': {
+      newState = {
+        ...state,
+        posts: [action.post, ...state.posts],
+      };
+
+      break;
+    }
+
     default: {
       newState = state;
     }

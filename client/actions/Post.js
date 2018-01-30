@@ -61,3 +61,44 @@ export function fetchSinglePost(slug) {
       .catch(() => { dispatch(fetchSinglePostFailure()); });
   };
 }
+
+// Delete a Post
+
+function removePost(slug) {
+  return { type: 'REMOVE_POST', slug };
+}
+
+export function deletePost(slug) {
+  return (dispatch) => {
+    dispatch(removePost(slug));
+
+    request
+      .delete(`/api/posts/${slug}`)
+      .then(() => {})
+      .catch(() => {});
+  };
+}
+
+
+// Create a Post
+
+function addPost(post) {
+  return { type: 'ADD_POST', post };
+}
+
+export function createPost(title, content) {
+  return (dispatch) => {
+    request
+      .post('/api/posts', {
+        post: {
+          title,
+          content,
+          name: 'Admin',
+        },
+      })
+      .then((response) => {
+        dispatch(addPost(response.data.post));
+      })
+      .catch(() => {});
+  };
+}

@@ -10,11 +10,16 @@ class PostView extends Component {
     super();
 
     this.content = this.content.bind(this);
+    this.deletePost = this.deletePost.bind(this);
   }
 
   componentDidMount() {
     const { slug } = this.props.match.params;
     this.props.dispatch(actions.fetchSinglePost(slug));
+  }
+
+  deletePost(slug) {
+    this.props.dispatch(actions.deletePost(slug));
   }
 
   content() {
@@ -24,7 +29,11 @@ class PostView extends Component {
           <p>Loading Post</p>
         )
         : (
-          <Post post={this.props.feed.currentPost} key={this.props.feed.currentPost._id} />
+          <Post
+            post={this.props.feed.currentPost}
+            key={this.props.feed.currentPost._id}
+            deleteHandler={this.deletePost}
+          />
         )
     );
   }

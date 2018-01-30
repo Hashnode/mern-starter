@@ -9,11 +9,41 @@ class Feed extends Component {
   constructor() {
     super();
 
+    this.state = {
+      content: '',
+      title: '',
+    };
+
     this.content = this.content.bind(this);
+    this.deletePost = this.deletePost.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.addPost = this.addPost.bind(this);
   }
 
   componentDidMount() {
     this.props.dispatch(actions.fetchAllPosts());
+  }
+
+  deletePost(slug) {
+    this.props.dispatch(actions.deletePost(slug));
+  }
+
+  handleInput(event) {
+    const { name, value } = event.target;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  addPost() {
+    const { title, content } = this.state;
+    this.props.dispatch(actions.createPost(title, content));
+
+    this.setState({
+      title: '',
+      content: '',
+    });
   }
 
   content() {
@@ -23,7 +53,13 @@ class Feed extends Component {
           <p>Loading posts</p>
         )
         : (
-          this.props.feed.posts.map(post => <Post post={post} key={post._id} />)
+          this.props.feed.posts.map(post => (
+            <Post
+              post={post}
+              deleteHandler={this.deletePost}
+              key={post._id}
+            />
+          ))
         )
     );
   }
@@ -34,6 +70,24 @@ class Feed extends Component {
         {
           this.content()
         }
+        <div>
+          <input
+            type="text"
+            value={this.state.title}
+            name="title"
+            placeholder="Enter Title"
+            onChange={this.handleInput}
+          />
+          <textarea
+            value={this.state.content}
+            name="content"
+            placeholder="Enter post"
+            onChange={this.handleInput}
+          />
+          <button onClick={this.addPost}>
+            Create Post
+          </button>
+        </div>
       </div>
     );
   }
