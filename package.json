@@ -6,7 +6,8 @@
     "test": "echo 'Running tests' && ./node_modules/.bin/jest --forceExit",
     "lint": "echo 'Running linter' && ./node_modules/.bin/eslint . --fix",
     "build:dev": "NODE_ENV=development ./node_modules/.bin/webpack --config ./webpack.config.dev.js",
-    "start:dev": "NODE_ENV=development ./node_modules/.bin/nodemon server/index.js"
+    "start:dev": "NODE_ENV=development ./node_modules/.bin/nodemon server/index.js",
+    "start": "NODE_ENV=production ./node_modules/.bin/nodemon server/index.js"
   },
   "repository": {
     "type": "git",
