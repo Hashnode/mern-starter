@@ -13,6 +13,7 @@ const serverConfig = require('./config');
 const routes = require('./routes');
 const dummyData = require('./dummyData');
 const webpackConfig = require('../webpack.config.dev');
+const SSR = require('./SSR');
 
 // Initialize Express App
 const app = express();
@@ -50,6 +51,7 @@ mongoose.connect(isTest ? serverConfig.testMongoURL : serverConfig.mongoURL, (er
   } else {
     console.log(`Connected to DB at ${isTest ? serverConfig.testMongoURL : serverConfig.mongoURL}`);
   }
+
   // feed some dummy data in DB.
   dummyData();
 });
@@ -60,12 +62,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // server public assets and routes
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
+
 app.use('/api', routes.posts);
 
-app.get('*', (request, response) => {
-  response.header('Content-type', 'text/html');
-  response.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
-});
+app.get('*', SSR.default);
 
 if (!isTest) {
   // Testing does not require you to listen on a port
