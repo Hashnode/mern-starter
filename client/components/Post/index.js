@@ -6,7 +6,6 @@ const Post = ({ post, deleteHandler }) => (
   <div>
     <Link to={`/${post.slug}`} href={`${post.slug}`}>
       <h2>{post.title}</h2>
-      <p style={{ color: 'magenta' }}>Hello!!</p>
     </Link>
     <button onClick={() => { deleteHandler(post.slug); }}>Delete Post</button>
     <pre>

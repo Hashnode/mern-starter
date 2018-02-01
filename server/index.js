@@ -35,7 +35,6 @@ if (isDev) {
   const compiler = webpack(webpackConfig);
   const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, middlewareOptions);
   app.use(webpackDevMiddlewareInstance);
-
   app.use(webpackHotMiddleware(compiler));
 }
 
