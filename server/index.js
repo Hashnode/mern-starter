@@ -4,17 +4,40 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
 
 // Local Imports
 const serverConfig = require('./config');
 const routes = require('./routes');
 const dummyData = require('./dummyData');
+const webpackConfig = require('../webpack.config.dev');
 
 // Initialize Express App
 const app = express();
 
-// Set test environment flag
+// Set environment flags
 const isTest = serverConfig.nodeEnv === 'test';
+const isDev = serverConfig.nodeEnv === 'development';
+
+// HMR Stuff
+if (isDev) {
+  const middlewareOptions = {
+    stats: { colors: true },
+    noInfo: false,
+    lazy: false,
+    headers: {
+      'Access-Control-Allow-Origin': 'http://localhost',
+    },
+    publicPath: webpackConfig.output.publicPath,
+  };
+  const compiler = webpack(webpackConfig);
+  const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, middlewareOptions);
+  app.use(webpackDevMiddlewareInstance);
+  app.use(webpackHotMiddleware(compiler));
+}
+
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;

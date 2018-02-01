@@ -13,7 +13,12 @@ const config = {
   devtool: 'eval-source-map',
 
   entry: {
-    app: './app.jsx',
+    app: [
+      'babel-polyfill',
+      'react-hot-loader/patch',
+      './app.jsx',
+      'webpack-hot-middleware/client',
+    ],
   },
 
   output: {
@@ -79,6 +84,8 @@ const config = {
         NODE_ENV: JSON.stringify('development'),
       },
     }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
   ],
 };
 
