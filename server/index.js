@@ -12,7 +12,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const serverConfig = require('./config');
 const routes = require('./routes');
 const dummyData = require('./dummyData');
-const webpackConfig = require('../webpack.config.dev');
+const webpackConfig = require('../webpack.config.dev')[0];
 const SSR = require('./SSR');
 
 // Initialize Express App
@@ -33,6 +33,7 @@ if (isDev) {
     },
     publicPath: webpackConfig.output.publicPath,
   };
+
   const compiler = webpack(webpackConfig);
   const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, middlewareOptions);
   app.use(webpackDevMiddlewareInstance);
