@@ -9,4 +9,5 @@ install:
 services:
   - mongodb
 before_script:
+  - 'yarn build:dev'
   - sleep 15
