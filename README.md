@@ -1,255 +1,226 @@
-![](http://res.cloudinary.com/hashnode/image/upload/w_200/v1466495663/static_imgs/mern/v2/mernio-logo.png)
+# Create React App [![Build Status](https://travis-ci.org/facebook/create-react-app.svg?branch=master)](https://travis-ci.org/facebook/create-react-app)
 
-# mern-starter
-![title](https://travis-ci.org/Hashnode/mern-starter.svg?branch=v2.0.0)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Discuss on Hashnode](
-https://hashnode.github.io/badges/mern.svg)](https://hashnode.com/n/mern)
+Create React apps with no build configuration.
 
+* [Creating an App](#creating-an-app) – How to create a new app.
+* [User Guide](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md) – How to develop apps bootstrapped with Create React App.
 
-MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mongo, Express, React and NodeJS. It minimises the setup time and gets you up to speed using proven technologies.
+Create React App works on macOS, Windows, and Linux.<br>
+If something doesn’t work, please [file an issue](https://github.com/facebook/create-react-app/issues/new).
 
-- [Website](http://mern.io)
-- [Documentation](http://mern.io/documentation.html)
-- [Discussions](https://hashnode.com/n/mern)
+## Quick Overview
 
-## Quickstart
-
-```
-  npm install -g mern-cli
-  mern init your_new_app
-  cd your_new_app
-  npm install
-  npm start
+```sh
+npx create-react-app my-app
+cd my-app
+npm start
 ```
 
-**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/). Also `npm3` is required to install dependencies properly.
+*([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))*
 
-## Available Commands
+Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
+When you’re ready to deploy to production, create a minified bundle with `npm run build`.
 
-1. `npm run start` - starts the development server with hot reloading enabled
+<p align='center'>
+<img src='https://cdn.rawgit.com/facebook/create-react-app/27b42ac/screencast.svg' width='600' alt='npm start'>
+</p>
 
-2. `npm run bs` - bundles the code and starts the production server
+### Get Started Immediately
 
-3. `npm run test` - start the test runner
+You **don’t** need to install or configure tools like Webpack or Babel.<br>
+They are preconfigured and hidden so that you can focus on the code.
 
-4. `npm run watch:test` - start the test runner with watch mode
+Just create a project, and you’re good to go.
 
-5. `npm run cover` - generates test coverage report
+## Creating an App
 
-6. `npm run lint` - runs linter to check for lint errors
+**You’ll need to have Node >= 6 on your local development machine** (but it’s not required on the server). You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to easily switch Node versions between different projects.
 
-## File Structure
+To create a new app, run a single command:
 
-### Webpack Configs
-
-MERN uses Webpack for bundling modules. There are four types of Webpack configs provided `webpack.config.dev.js` (for development), `webpack.config.prod.js` (for production), `webpack.config.server.js` (for bundling server in production) and `webpack.config.babel.js` (for [babel-plugin-webpack-loaders](https://github.com/istarkov/babel-plugin-webpack-loaders) for server rendering of assets included through webpack).
-
-The Webpack configuration is minimal and beginner-friendly. You can customise and add more features to it for production build.
-
-### Server
-
-MERN uses express web framework. Our app sits in server.js where we check for NODE_ENV.
-
-If NODE_ENV is development, we apply Webpack middlewares for bundling and Hot Module Replacement.
-
-#### Server Side Rendering
-
-We use React Router's match function for handling all page requests so that browser history works.
-
-All the routes are defined in `client/routes.js`. React Router renders components according to route requested.
-
-```js
-// Server Side Rendering based on routes matched by React-router.
-app.use((req, res) => {
-    match({
-        routes,
-        location: req.url
-    }, (err, redirectLocation, renderProps) => {
-        if (err) {
-            return res.status(500).end('Internal server error');
-        }
-
-        if (!renderProps) {
-            return res.status(404).end('Not found!');
-        }
-
-        const initialState = {
-            posts: [],
-            post: {}
-        };
-
-        const store = configureStore(initialState);
-
-        fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then(() => {
-            const initialView = renderToString(
-                <Provider store = {store} >
-                  <RouterContext {...renderProps}/>
-                </Provider>
-            );
-
-            const finalState = store.getState();
-
-            res.status(200).end(renderFullPage(initialView, finalState));
-        }).catch(() => {
-            res.end(renderFullPage('Error', {}));
-        });
-    });
-});
+```sh
+npx create-react-app my-app
 ```
 
-`match` takes two parameters, first is an object that contains routes, location and history and second is a callback function which is called when routes have been matched to a location.
+*([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))*
 
-If there's an error in matching we return 500 status code, if no matches are found we return 404 status code. If a match is found then, we need to create a new Redux Store instance.
+It will create a directory called `my-app` inside the current folder.<br>
+Inside that directory, it will generate the initial project structure and install the transitive dependencies:
 
-**Note:** A new Redux Store has populated afresh on every request.
-
-`fetchComponentData` is the essential function. It takes three params: first is a dispatch function of Redux store, the second is an array of components that should be rendered in current route and third is the route params. `fetchComponentData` collects all the needs (need is an array of actions that are required to be dispatched before rendering the component) of components in the current route. It returns a promise when all the required actions are dispatched. We render the page and send data to the client for client-side rendering in `window.__INITIAL_STATE__`.
-
-### Client
-
-Client directory contains all the shared components, routes, modules.
-
-#### components
-This folder contains all the common components which are used throughout the project.
-
-#### index.js
-Index.js simply does client side rendering using the data provided from `window.__INITIAL_STATE__`.
-
-#### modules
-Modules are the way of organising different domain-specific modules in the project. A typical module contains the following
 ```
-| - Post
-  | - __tests__ // all the tests for this module goes here
-      | - components // Sub components of this module
-          | - Post.spec.js
-          | - PostList.spec.js
-          | - PostItem.spec.js
-          | - PostImage.spec.js
-      | - pages
-          | - PostPage.spec.js
-          | - PostViewPage.spec.js
-      | - PostReducer.spec.js
-      | - PostActions.spec.js
-  | - components // Sub components of this module
-      | - Post.js
-      | - PostList.js
-      | - PostItem.js
-      | - PostImage.js
-  | - pages // React Router Pages from this module
-      | - PostPage
-          | - PostPage.js
-          | - PostPage.css
-      | - PostViewPage
-          | - PostViewPage.js
-          | - PostViewPage.css
-  | - PostReducer.js
-  | - PostActions.js
+my-app
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── public
+│   └── favicon.ico
+│   └── index.html
+│   └── manifest.json
+└── src
+    └── App.css
+    └── App.js
+    └── App.test.js
+    └── index.css
+    └── index.js
+    └── logo.svg
+    └── registerServiceWorker.js
 ```
 
-## Misc
+No configuration or complicated folder structures, just the files you need to build your app.<br>
+Once the installation is done, you can open your project folder:
 
-### Importing Assets
-Assets can be kept where you want and can be imported into your js files or css files. Those fill be served by webpack in development mode and copied to the dist folder during production.
-
-### ES6 support
-We use babel to transpile code in both server and client with `stage-0` plugin. So, you can use both ES6 and experimental ES7 features.
-
-### Docker
-There are docker configurations for both development and production.
-
-To run docker for development,
-```
-docker-compose -f docker-compose-development.yml build
-docker-compose -f docker-compose-development.yml up
+```sh
+cd my-app
 ```
 
-To run docker for production,
-```
-docker-compose build
-docker-compose up
-```
+Inside the newly created project, you can run some built-in commands:
 
-### Make your MERN
-In this version, we enabled the `mern-cli` to clone not only this project but also the variants of `mern-starter` like one project with MaterialUI or JWT auth. To make your version of MERN, follow these steps
+### `npm start` or `yarn start`
 
-1. Clone this project
-    ```
-    git clone https://github.com/Hashnode/mern-starter
-    ```
+Runs the app in development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-2. Make your changes. Add a package, add authentication, modify the file structure, replace Redux with MobX or anything else.
+The page will automatically reload if you make changes to the code.<br>
+You will see the build errors and lint warnings in the console.
 
-3. In this version, we also added code generators. Blueprints for those generators are located at `config/blueprints`, and config is located at `mern.json`. Make sure to edit them if necessary after your made modifications in the previous step. There is a section below which explains how to modify generators.
+<p align='center'>
+<img src='https://cdn.rawgit.com/marionebl/create-react-app/9f62826/screencast-error.svg' width='600' alt='Build errors'>
+</p>
 
-4. Next clone `mern-cli` project
-    ```
-    git clone https://github.com/Hashnode/mern-cli
-    ```
+### `npm test` or `yarn test`
 
-5. Add your project details to `variants.json` in the cloned project and send a pull request.
+Runs the test watcher in an interactive mode.<br>
+By default, runs tests related to files changed since the last commit.
 
-### Modifying Generators
+[Read more about testing.](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#running-tests)
 
-#### mern.json
-It contains a blueprints array. Each object in it is the config for a generator. A blueprint config contains the name, description, usage, and files array. An example blueprint config
-```
-{
-  "name": "dumb-s",
-  "description": "Generates a dumb react component in shared components",
-  "usage": "dumb-s [component-name]",
-  "files": [
-    {
-      "blueprint-path": "config/blueprints/dumb-component.ejs",
-      "target-path": "client/components/<%= helpers.capitalize(name) %>.js"
-    }
-  ]
-}
-```
+### `npm run build` or `yarn build`
 
-A file object contains
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-1. `blueprint-path` - location of the blueprint file
+The build is minified and the filenames include the hashes.<br>
+By default, it also [includes a service worker](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) so that your app loads from local cache on future visits.
 
-2. `target-path` - location where the file should be generated
+Your app is ready to be deployed.
 
-3. `parent-path` - optional parameter, used if you want to generate the file inside an already existing folder in your project.
+## User Guide
 
-Also, `target-path` supports [ejs](https://github.com/mde/ejs) and the following variables will be passed while rendering,
+The [User Guide](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md) includes information on different topics, such as:
 
-1. `name` - `<component-name>` input from user
+- [Updating to New Releases](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#updating-to-new-releases)
+- [Folder Structure](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#folder-structure)
+- [Available Scripts](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#available-scripts)
+- [Supported Browsers](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#supported-browsers)
+- [Supported Language Features and Polyfills](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#supported-language-features-and-polyfills)
+- [Syntax Highlighting in the Editor](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#syntax-highlighting-in-the-editor)
+- [Displaying Lint Output in the Editor](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#displaying-lint-output-in-the-editor)
+- [Formatting Code Automatically](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically)
+- [Debugging in the Editor](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-in-the-editor)
+- [Changing the Page `<title>`](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#changing-the-page-title)
+- [Installing a Dependency](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#installing-a-dependency)
+- [Importing a Component](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#importing-a-component)
+- [Code Splitting](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#code-splitting)
+- [Adding a Stylesheet](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-stylesheet)
+- [Post-Processing CSS](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#post-processing-css)
+- [Adding a CSS Preprocessor (Sass, Less etc.)](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc)
+- [Adding Images, Fonts, and Files](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-images-fonts-and-files)
+- [Using the `public` Folder](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#using-the-public-folder)
+- [Using Global Variables](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#using-global-variables)
+- [Adding Bootstrap](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-bootstrap)
+- [Adding Flow](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-flow)
+- [Adding a Router](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-router)
+- [Adding Custom Environment Variables](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables)
+- [Can I Use Decorators?](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#can-i-use-decorators)
+- [Fetching Data with AJAX Requests](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#fetching-data-with-ajax-requests)
+- [Integrating with an API Backend](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#integrating-with-an-api-backend)
+- [Proxying API Requests in Development](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#proxying-api-requests-in-development)
+- [Using HTTPS in Development](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#using-https-in-development)
+- [Generating Dynamic `<meta>` Tags on the Server](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#generating-dynamic-meta-tags-on-the-server)
+- [Pre-Rendering into Static HTML Files](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#pre-rendering-into-static-html-files)
+- [Running Tests](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#running-tests)
+- [Debugging Tests](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-tests)
+- [Developing Components in Isolation](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#developing-components-in-isolation)
+- [Publishing Components to npm](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#publishing-components-to-npm)
+- [Making a Progressive Web App](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app)
+- [Analyzing the Bundle Size](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#analyzing-the-bundle-size)
+- [Deployment](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment)
+- [Advanced Configuration](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#advanced-configuration)
+- [Troubleshooting](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#troubleshooting)
 
-2. `parent` - in particular special cases where you need to generate files inside an already existing folder, you can obtain this parent variable from the user. A config using that will look like,
-    ```
-    {
-      "name": "dumb-m",
-      "description": "Generates a dumb react component in a module directory",
-      "usage": "dumb-m <module-name>/<component-name>",
-      "files": [
-        {
-          "blueprint-path": "config/blueprints/dumb-component.ejs",
-          "parent-path": "client/modules/<%= helpers.capitalize(parent) %>",
-          "target-path": "components/<%= helpers.capitalize(name) %>/<%= helpers.capitalize(name) %>.js"
-        }
-      ]
-    }
-    ```
-    Here, notice the usage. In `<module-name>/<component-name>`, `<module-name>` will be passed as `parent` and `<component-name>` will be passed as `<name>`.
+A copy of the user guide will be created as `README.md` in your project folder.
 
-3. `helpers` - an helper object is passed which include common utility functions. For now, it contains `capitalize`. If you want to add more, send a PR to [mern-cli](https://github.com/Hashnode/mern-cli).
+## How to Update to New Versions?
 
-#### Blueprint files
-Blueprints are basically [ejs](https://github.com/mde/ejs) templates which are rendered with the same three variables(`name`, optional `parent` and `helpers` object) as above.
+Please refer to the [User Guide](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#updating-to-new-releases) for this and other information.
 
-### Caveats
+## Philosophy
 
-#### FOUC (Flash of Unstyled Content)
-To make the hot reloading of CSS work, we are not extracting CSS in development. Ideally, during server rendering, we will be extracting CSS, and we will get a .css file, and we can use it in the html template. That's what we are doing in production.
+* **One Dependency:** There is just one build dependency. It uses Webpack, Babel, ESLint, and other amazing projects, but provides a cohesive curated experience on top of them.
 
-In development, after all scripts get loaded, react loads the CSS as BLOBs. That's why there is a second of FOUC in development.
+* **No Configuration Required:** You don't need to configure anything. Reasonably good configuration of both development and production builds is handled for you so you can focus on writing code.
 
-#### Client and Server Markup Mismatch
-This warning is visible only on development and totally harmless. This occurs to hash difference in `react-router`. To solve it, react router docs asks you to use `match` function. If we use `match`, `react-hot-reloader` stops working.
+* **No Lock-In:** You can “eject” to a custom setup at any time. Run a single command, and all the configuration and build dependencies will be moved directly into your project, so you can pick up right where you left off.
 
-## License
-MERN is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+## What’s Included?
+
+Your environment will have everything you need to build a modern single-page React app:
+
+* React, JSX, ES6, and Flow syntax support.
+* Language extras beyond ES6 like the object spread operator.
+* Autoprefixed CSS, so you don’t need `-webkit-` or other prefixes.
+* A fast interactive unit test runner with built-in support for coverage reporting.
+* A live development server that warns about common mistakes.
+* A build script to bundle JS, CSS, and images for production, with hashes and sourcemaps.
+* An offline-first [service worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) and a [web app manifest](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/), meeting all the [Progressive Web App](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) criteria.
+* Hassle-free updates for the above tools with a single dependency.
+
+Check out [this guide](https://github.com/nitishdayal/cra_closer_look) for an overview of how these tools fit together.
+
+The tradeoff is that **these tools are preconfigured to work in a specific way**. If your project needs more customization, you can ["eject"](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#npm-run-eject) and customize it, but then you will need to maintain this configuration.
+
+## Popular Alternatives
+
+Create React App is a great fit for:
+
+* **Learning React** in a comfortable and feature-rich development environment.
+* **Starting new single-page React applications.**
+* **Creating examples** with React for your libraries and components.
+
+Here’s a few common cases where you might want to try something else:
+
+* If you want to **try React** without hundreds of transitive build tool dependencies, consider [using a single HTML file or an online sandbox instead](https://reactjs.org/docs/try-react.html).
+
+* If you need to **integrate React code with a server-side template framework** like Rails or Django, or if you’re **not building a single-page app**, consider using [nwb](https://github.com/insin/nwb), or [Neutrino](https://neutrino.js.org/) which are more flexible. For Rails specifically, you can use [Rails Webpacker](https://github.com/rails/webpacker).
+
+* If you need to **publish a React component**, [nwb](https://github.com/insin/nwb) can [also do this](https://github.com/insin/nwb#react-components-and-libraries), as well as [Neutrino's react-components preset](https://neutrino.js.org/packages/react-components/).
+
+* If you want to do **server rendering** with React and Node.js, check out [Next.js](https://github.com/zeit/next.js/) or [Razzle](https://github.com/jaredpalmer/razzle). Create React App is agnostic of the backend, and just produces static HTML/JS/CSS bundles.
+
+* If your website is **mostly static** (for example, a portfolio or a blog), consider using [Gatsby](https://www.gatsbyjs.org/) instead. Unlike Create React App, it pre-renders the website into HTML at the build time.
+
+* If you want to use **TypeScript**, consider using [create-react-app-typescript](https://github.com/wmonk/create-react-app-typescript).
+
+* Finally, if you need **more customization**, check out [Neutrino](https://neutrino.js.org/) and its [React preset](https://neutrino.js.org/packages/react/).
+
+All of the above tools can work with little to no configuration.
+
+If you prefer configuring the build yourself, [follow this guide](https://reactjs.org/docs/add-react-to-an-existing-app.html).
+
+## Contributing
+
+We'd love to have your helping hand on `create-react-app`! See [CONTRIBUTING.md](CONTRIBUTING.md) for more information on what we're looking for and how to get started.
+
+## React Native
+
+Looking for something similar, but for React Native?<br>
+Check out [Create React Native App](https://github.com/react-community/create-react-native-app/).
+
+## Acknowledgements
+
+We are grateful to the authors of existing related projects for their ideas and collaboration:
+
+* [@eanplatter](https://github.com/eanplatter)
+* [@insin](https://github.com/insin)
+* [@mxstbr](https://github.com/mxstbr)
