@@ -4,7 +4,8 @@
   display: flex;
   justify-content: space-evenly;
   background: grey;
-  height: 100vh;
+  height: calc(100vh - 2rem);
+  width: calc(100vw - 2rem);
 }
 
 .mainSection {
