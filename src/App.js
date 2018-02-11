@@ -4,12 +4,13 @@ import './App.css';
 export default class App extends Component {
 
   constructor(props) {
+    // -- "props" on a component are like parameters to a function --> their values are (passed down || declared) by the (parent || invoker)
     super(props);
     // -- "state" is an object of variables that a component uses to keep track of itself
     // -- a component's state is local to this instance of the component
     //   -- e.g., if the same component is called multiple times, they each have their own, private state
     this.state = { bodyweight: 0, workout: '1', multiplier: 1 };
-    // -- the constructor is the *only* place you can directly mutate this.state
+    // -- the constructor is the *only* place you can directly assign/mutate this.state
     //   -- all other locations in the component must use the "async-ish" this.setState() function
     //   -- all other locations that do directly mutate this.state may have their changes overwritten and lost
     //     -- as you can imagine, this can lead to some incredibly hard-to-find bugs for those without this knowledge
@@ -26,6 +27,7 @@ export default class App extends Component {
     // const mapStateToProps = this.mapStateToProps;
     const { bodyweight, workout, multiplier } = state;
     const { restingCalories, workoutCalories, baseCalories, newCalories } = mapStateToProps(state);
+    const immaProp = {mup: ['mlem!']};
 
     // -- Where the magic happens!
     // -- The thing returned by a `render()` function *must* be either:
@@ -44,7 +46,7 @@ export default class App extends Component {
             {/* that freaky `{...{ onChange }}` syntax is equivalent to... `<input onChange={onChange} /> */}
             {/* if there were more same-named variables, it could be `{...{ onChange, value, name }}` */}
           </SectionRow>
-          <SectionRow>
+          <SectionRow log='This is a prop.'>
             <div className='inputLabel'>Workouts</div>
             <select className='inputField' name='workout' value={workout} {...{ onChange }}>
               <option value='1'>1 hr</option>
@@ -56,7 +58,7 @@ export default class App extends Component {
               allowing the multiline `/*..../` syntax to be recognized as comments */}
           {/* Not even an HTML comment `<!-- .... -->` works */}
           {/* Fortunately, VSCode knows this distinction; press `Ctrl+/` (`CMD+/` on OSX) within JSX and it *knows*. Ooooooooh. */}
-          <SectionRow>
+          <SectionRow log={immaProp}>
             <select className='inputField' name='multiplier' value={multiplier} {...{ onChange }}>
               <option value={0.75}>Cut/Lose</option>
               <option value={1.00}>Mantain/Lean</option>
@@ -134,6 +136,9 @@ export default class App extends Component {
 //   -- I.E., if you give it the same `props`, it will always return the same exact component
 // -- See the following link for a crash course on props.children --> https://codeburst.io/a-quick-intro-to-reacts-props-children-cb3d2fce4891
 function SectionRow(props) {
+  if (props.log) {
+    console.log(props.log);
+  }
   return <div className='sectionRow'>{props.children}</div>
 }
 // const SectionRow = ({children}) => <div className='sectionRow'>{children}</div>
