@@ -172,14 +172,20 @@ We use babel to transpile code in both server and client with `stage-0` plugin. 
 There are docker configurations for both development and production.
 
 To run docker for development,
+
 ```
-docker-compose -f docker-compose-development.yml build
 docker-compose -f docker-compose-development.yml up
 ```
 
-To run docker for production,
+or, if you want to override the web port:
+
 ```
-docker-compose build
+WEB_PORT=<your_custom_port> docker-compose -f docker-compose-development.yml up
+```
+
+To run docker for production,
+
+```
 docker-compose up
 ```
 

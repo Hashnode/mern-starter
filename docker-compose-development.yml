@@ -1,18 +1,27 @@
-web:
-  build: .
-  dockerfile: Dockerfile-development
-  links:
-   - db
-  ports:
-   - "8000:8000"
-  volumes:
-   - ./server:/usr/src/app/server
-   - ./client:/usr/src/app/client
-   - ./Intl:/usr/src/app/Intl
-  environment:
-   NODE_ENV: development
-   MONGO_URL: mongodb://db:27017/mern-starter
-db:
-  image: mongo:latest
-  ports:
-   - "27017:27017"
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-development
+    depends_on:
+      - db
+    volumes:
+      - ./client:/usr/src/app/client
+      - ./Intl:/usr/src/app/Intl
+      - ./server:/usr/src/app/server
+    ports:
+      - "${WEB_PORT:-8000}:8000"
+    environment:
+      MONGO_URL: mongodb://db:27017/mern-starter
+
+  db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata_dev:/data/db
+
+volumes:
+  dbdata_dev:

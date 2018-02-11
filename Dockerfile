@@ -8,8 +8,13 @@ COPY package.json /usr/src/app
 RUN npm install
 COPY . /usr/src/app
 
-ENV NODE_ENV production
+RUN npm run clean \
+  && npm run build \
+  && npm run build:server
 
 EXPOSE 8000
-CMD ["npm", "run", "bs"]
+
+ENV NODE_ENV production
+
+CMD ["node", "index.js"]
 

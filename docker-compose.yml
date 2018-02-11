@@ -1,13 +1,22 @@
-web:
-  build: .
-  links:
-   - db
-  ports:
-   - "80:8000"
-  environment:
-   NODE_ENV: production
-   MONGO_URL: mongodb://db:27017/mern-starter
-db:
-  image: mongo:latest
-  ports:
-   - "27017:27017"
+version: '3'
+
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "80:8000"
+    environment:
+      NODE_ENV: production
+      MONGO_URL: mongodb://db:27017/mern-starter
+
+  db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata:/data/db
+
+volumes:
+  dbdata:
