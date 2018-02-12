@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import App from './containers/App';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-const render = Component => {
-  ReactDOM.render(
+import store from '../shared/store';
+import App from '../shared/routes';
+
+const render = (Component) => {
+  ReactDOM.hydrate(
     <AppContainer>
-      <Component />
+      <Provider store={store}>
+        <BrowserRouter>
+          <Component />
+        </BrowserRouter>
+      </Provider>
     </AppContainer>,
-    document.getElementById('app')
+    document.getElementById('app'),
   );
 };
 
@@ -18,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./containers/App', () => {
-    const NextApp = require('./containers/App').default
-    render(App);
+  module.hot.accept('../shared/routes', () => {
+    const NextApp = require('../shared/routes').default; // eslint-disable-line
+    render(NextApp);
   });
 }

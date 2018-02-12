@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo 'Running tests' && ./node_modules/.bin/jest --forceExit",
     "lint": "echo 'Running linter' && ./node_modules/.bin/eslint . --fix",
-    "build:dev": "NODE_ENV=development ./node_modules/.bin/webpack --config ./webpack.config.dev.js",
+    "build:dev": "NODE_ENV=development ./node_modules/.bin/webpack --config ./webpack.config.dev.js --progress --colors",
     "start:dev": "NODE_ENV=development ./node_modules/.bin/nodemon server/index.js",
     "start": "NODE_ENV=production ./node_modules/.bin/nodemon server/index.js"
   },
@@ -59,7 +59,6 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
-    "html-webpack-plugin": "^2.30.1",
     "jest": "^22.1.4",
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^11.0.0",

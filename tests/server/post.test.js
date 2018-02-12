@@ -13,15 +13,15 @@ describe('Post APIs', () => {
     await cleanAndSeedDb();
   });
 
+  test('Should load a post by slug', async () => {
+    const response = await request(server).get('/api/posts/hello-mern');
+    expect(response.statusCode).toBe(200);
+  }, 5000);
+
   test('Should load all posts', async () => {
     const response = await request(server).get('/api/posts');
     expect(response.statusCode).toBe(200);
     expect(response.body.posts.length).toEqual(2);
-  }, 5000);
-
-  test('Should load a post by slug', async () => {
-    const response = await request(server).get('/api/posts/hello-mern');
-    expect(response.statusCode).toBe(200);
   }, 5000);
 
   test('Should add a new post', async () => {

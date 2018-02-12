@@ -12,7 +12,8 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const serverConfig = require('./config');
 const routes = require('./routes');
 const dummyData = require('./dummyData');
-const webpackConfig = require('../webpack.config.dev');
+const webpackConfig = require('../webpack.config.dev')[0];
+const SSR = require('./SSR');
 
 // Initialize Express App
 const app = express();
@@ -32,6 +33,7 @@ if (isDev) {
     },
     publicPath: webpackConfig.output.publicPath,
   };
+
   const compiler = webpack(webpackConfig);
   const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, middlewareOptions);
   app.use(webpackDevMiddlewareInstance);
@@ -50,6 +52,7 @@ mongoose.connect(isTest ? serverConfig.testMongoURL : serverConfig.mongoURL, (er
   } else {
     console.log(`Connected to DB at ${isTest ? serverConfig.testMongoURL : serverConfig.mongoURL}`);
   }
+
   // feed some dummy data in DB.
   dummyData();
 });
@@ -60,12 +63,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // server public assets and routes
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
+
 app.use('/api', routes.posts);
 
-app.get('*', (request, response) => {
-  response.header('Content-type', 'text/html');
-  response.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
-});
+app.get('*', SSR.default);
 
 if (!isTest) {
   // Testing does not require you to listen on a port
