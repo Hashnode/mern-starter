@@ -7,7 +7,8 @@
     "lint": "echo 'Running linter' && ./node_modules/.bin/eslint . --fix",
     "build:dev": "NODE_ENV=development ./node_modules/.bin/webpack --config ./webpack.config.dev.js --progress --colors",
     "start:dev": "NODE_ENV=development ./node_modules/.bin/nodemon server/index.js",
-    "start": "NODE_ENV=production ./node_modules/.bin/nodemon server/index.js"
+    "start": "NODE_ENV=production ./node_modules/.bin/nodemon server/index.js",
+    "inspect-bundle:dev": "NODE_ENV=inspect ./node_modules/.bin/webpack --config ./webpack.config.dev.js --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -67,6 +68,7 @@
     "pre-commit": "^1.2.2",
     "precss": "^3.1.0",
     "style-loader": "^0.19.1",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "webpack-bundle-analyzer": "^2.10.0"
   }
 }
