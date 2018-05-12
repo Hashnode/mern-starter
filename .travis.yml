@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - '5'
   - '4'
+git:
+  depth: 5
 before_install:
   - 'npm install -g npm@latest'
 services:
