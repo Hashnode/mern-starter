@@ -21,7 +21,13 @@ const isProdMode = process.env.NODE_ENV === 'production' || false;
 // Run Webpack dev server in development mode
 if (isDevMode) {
   const compiler = webpack(config);
-  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath,
+    watchOptions: {
+      poll: 1000,
+    },
+  }));
   app.use(webpackHotMiddleware(compiler));
 }
 
