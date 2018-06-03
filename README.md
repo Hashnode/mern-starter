@@ -13,6 +13,18 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 - [Documentation](http://mern.io/documentation.html)
 - [Discussions](https://hashnode.com/n/mern)
 
+## Road to V3!
+We're on our way towards V3, which will bring a few updates to MERN!
+
+We are tracking towards V3 with the following milestones:
+
+V2.5.0 -> React V16.x upgrade + urgent fixes
+V2.6.0 -> Webpack upgrade to V4
+V2.7.0 -> database/mongo/mongoose updates/fixes
+V2.8.0 -> React Router V4
+V2.9.0 -> Express/Server dependencies/code upgrade
+V3.0.0 -> CLI/devtools optimization (docker, etc.)
+
 ## Quickstart
 
 ```
