@@ -27,7 +27,7 @@ We are tracking towards V3 with the following milestones:
 
 ## Quickstart
 
-```
+```sh
   npm install -g mern-cli
   mern init your_new_app
   cd your_new_app
@@ -35,7 +35,7 @@ We are tracking towards V3 with the following milestones:
   npm start
 ```
 
-**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/). Also `npm3` is required to install dependencies properly.
+**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/). Also `npm5` is required to install dependencies properly.
 
 ## Available Commands
 
@@ -171,29 +171,31 @@ We use babel to transpile code in both server and client with `stage-0` plugin. 
 ### Docker
 There are docker configurations for both development and production.
 
-To run docker for development,
-
-```
-docker-compose -f docker-compose-development.yml up
-```
-
-or, if you want to override the web port:
-
-```
-WEB_PORT=<your_custom_port> docker-compose -f docker-compose-development.yml up
-```
-
-To run docker for production,
-
-```
+To run docker for development:
+```sh
+docker-compose build # re-run after changing dependencies
 docker-compose up
+```
+or, if you want to override the web port:
+```sh
+WEB_PORT=<your_custom_port> docker-compose up
+```
+
+To run docker for production:
+```sh
+docker-compose -f docker-compose-production.yml up --build
+```
+
+To reset the database:
+```sh
+docker-compose down --volumes
 ```
 
 ### Make your MERN
 In this version, we enabled the `mern-cli` to clone not only this project but also the variants of `mern-starter` like one project with MaterialUI or JWT auth. To make your version of MERN, follow these steps
 
 1. Clone this project
-    ```
+    ```sh
     git clone https://github.com/Hashnode/mern-starter
     ```
 
@@ -202,7 +204,7 @@ In this version, we enabled the `mern-cli` to clone not only this project but al
 3. In this version, we also added code generators. Blueprints for those generators are located at `config/blueprints`, and config is located at `mern.json`. Make sure to edit them if necessary after your made modifications in the previous step. There is a section below which explains how to modify generators.
 
 4. Next clone `mern-cli` project
-    ```
+    ```sh
     git clone https://github.com/Hashnode/mern-cli
     ```
 
@@ -212,7 +214,7 @@ In this version, we enabled the `mern-cli` to clone not only this project but al
 
 #### mern.json
 It contains a blueprints array. Each object in it is the config for a generator. A blueprint config contains the name, description, usage, and files array. An example blueprint config
-```
+```json
 {
   "name": "dumb-s",
   "description": "Generates a dumb react component in shared components",
@@ -239,7 +241,7 @@ Also, `target-path` supports [ejs](https://github.com/mde/ejs) and the following
 1. `name` - `<component-name>` input from user
 
 2. `parent` - in particular special cases where you need to generate files inside an already existing folder, you can obtain this parent variable from the user. A config using that will look like,
-    ```
+    ```json
     {
       "name": "dumb-m",
       "description": "Generates a dumb react component in a module directory",
@@ -258,7 +260,7 @@ Also, `target-path` supports [ejs](https://github.com/mde/ejs) and the following
 3. `helpers` - an helper object is passed which include common utility functions. For now, it contains `capitalize`. If you want to add more, send a PR to [mern-cli](https://github.com/Hashnode/mern-cli).
 
 #### Blueprint files
-Blueprints are basically [ejs](https://github.com/mde/ejs) templates which are rendered with the same three variables(`name`, optional `parent` and `helpers` object) as above.
+Blueprints are basically [ejs](https://github.com/mde/ejs) templates which are rendered with the same three variables (`name`, optional `parent` and `helpers` object) as above.
 
 ### Caveats
 

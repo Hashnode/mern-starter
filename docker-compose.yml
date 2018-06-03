@@ -1,22 +1,37 @@
-version: '3'
-
+version: '3.4'
 services:
   web:
-    build: .
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: development
     depends_on:
       - db
     ports:
-      - "80:8000"
+      - "${WEB_PORT:-8000}:8000"
+    volumes:
+      - ./client:/usr/src/app/client
+      - ./Intl:/usr/src/app/Intl
+      - ./server:/usr/src/app/server
+      - ./.babelrc:/usr/src/app/.babelrc
+      - ./index.js:/usr/src/app/index.js
+      - ./nodemon.json:/usr/src/app/nodemon.json
+      - ./package.json:/usr/src/app/package.json
+      - ./package-lock.json:/usr/src/app/package-lock.json
+      - ./webpack.config.babel.js:/usr/src/app/webpack.config.babel.js
+      - ./webpack.config.dev.js:/usr/src/app/webpack.config.dev.js
+      - ./webpack.config.prod.js:/usr/src/app/webpack.config.prod.js
+      - ./webpack.config.server.js:/usr/src/app/webpack.config.server.js
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
       MONGO_URL: mongodb://db:27017/mern-starter
-
+    stdin_open: true
+    tty: true
   db:
     image: mongo:latest
     ports:
       - "27017:27017"
     volumes:
       - dbdata:/data/db
-
 volumes:
   dbdata:
