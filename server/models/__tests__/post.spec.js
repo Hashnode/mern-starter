@@ -10,16 +10,16 @@ const posts = [
   new Post({ name: 'Mayank', title: 'Hi Mern', slug: 'hi-mern', cuid: 'f34gb2bh24b24b3', content: "All dogs bark 'mern!'" }),
 ];
 
-test.beforeEach('connect and add two post entries', t => {
-  connectDB(t, () => {
-    Post.create(posts, err => {
-      if (err) t.fail('Unable to create posts');
-    });
-  });
+test.before('connect to mockgoose', async () => {
+  await connectDB();
 });
 
-test.afterEach.always(t => {
-  dropDB(t);
+test.beforeEach('connect and add two post entries', async () => {
+  await Post.create(posts).catch(() => 'Unable to create posts');
+});
+
+test.afterEach.always(async () => {
+  await dropDB();
 });
 
 test.serial('Should correctly give number of Posts', async t => {
@@ -76,4 +76,3 @@ test.serial('Should correctly delete a post', async t => {
   const queriedPost = await Post.findOne({ cuid: post.cuid }).exec();
   t.is(queriedPost, null);
 });
-

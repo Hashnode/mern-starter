@@ -3,8 +3,13 @@
  */
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import DevTools from './modules/App/components/DevTools';
 import rootReducer from './reducers';
+
+let DevTools;
+if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line global-require
+  DevTools = require('./modules/App/components/DevTools');
+}
 
 export function configureStore(initialState = {}) {
   // Middleware and store enhancers
