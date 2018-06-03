@@ -76,4 +76,3 @@ test.serial('Should correctly delete a post', async t => {
   const queriedPost = await Post.findOne({ cuid: post.cuid }).exec();
   t.is(queriedPost, null);
 });
-
