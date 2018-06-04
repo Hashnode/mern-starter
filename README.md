@@ -34,7 +34,7 @@ We're on our way towards V3, which will bring a few updates to MERN! We are trac
   npm start
 ```
 
-**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/). Also `npm5` is required to install dependencies properly.
+**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/). Also `npm6` is required to install dependencies properly.
 
 ## Available Commands
 
