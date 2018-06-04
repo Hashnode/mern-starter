@@ -4,9 +4,7 @@ node_js:
   - '8'
   - '10'
 before_install:
-  - 'npm install -g npm@latest'
-# services:
-#   - mongodb
+  - 'npm install -g npm@6'
 before_script:
   - sleep 15
 after_success:
