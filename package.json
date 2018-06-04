@@ -1,5 +1,5 @@
 {
-  "name": "mern-starter",
+  "name": "@hashnode/mern-starter",
   "version": "2.4.0",
   "description": "Boilerplate project for building Isomorphic apps using React and Redux",
   "scripts": {
