@@ -1,0 +1,12 @@
+# List of changes V2.4
+- Fix test runner windows
+- Updated to webpack 3
+- Use .dockerignore to increase speed of building Docker image (no need to copy files to Docker build context).
+- Use npm@6 and add package-lock.json.
+- Update versions of nodejs used for testing in Travis (only LTS / actively maintained versions - no more node@4!!).
+- Use a single Dockerfile w/ build targets, to greatly speed up building of Docker image.
+- Swap default Docker environment from production to development, to improve DX.
+- Eliminate production-mode inclusion of devDependencies, to keep production Docker image as light as possible and lower production-mode memory usage.
+- Explicitly volume-map all files into Docker container when in dev-mode.
+- Removed the --harmony-proxies flag from npm test, as it is no longer supported by nodejs.
+- Eliminate different markup warning between client/server during dev

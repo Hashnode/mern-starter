@@ -27,7 +27,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     modules: [
       'client',
       'node_modules',
@@ -35,25 +35,61 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.s?css$/,
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                localIdentName: '[hash:base64]',
+                modules: true,
+                importLoaders: 1,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [
+                  postcssFocus(),
+                  cssnext({
+                    browsers: ['last 2 versions', 'IE > 10'],
+                  }),
+                  cssnano({
+                    autoprefixer: false,
+                  }),
+                  postcssReporter({
+                    clearMessages: true,
+                  }),
+                ],
+              },
+            },
+          ],
+        }),
+      },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?localIdentName=[hash:base64]&modules&importLoaders=1!postcss-loader'),
-      }, {
-        test: /\.css$/,
         include: /node_modules/,
-        loaders: ['style-loader', 'css-loader'],
-      }, {
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.jsx*$/,
         exclude: /node_modules/,
-        loader: 'babel',
-      }, {
+        use: 'babel-loader',
+      },
+      {
         test: /\.(jpe?g|gif|png|svg)$/i,
-        loader: 'url-loader?limit=10000',
-      }, {
-        test: /\.json$/,
-        loader: 'json-loader',
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+            },
+          },
+        ],
       },
     ],
   },
@@ -69,7 +105,10 @@ module.exports = {
       minChunks: Infinity,
       filename: 'vendor.js',
     }),
-    new ExtractTextPlugin('app.[chunkhash].css', { allChunks: true }),
+    new ExtractTextPlugin({
+      filename: 'app.[contenthash].css',
+      allChunks: true,
+    }),
     new ManifestPlugin({
       basePath: '/',
     }),
@@ -77,23 +116,6 @@ module.exports = {
       filename: "chunk-manifest.json",
       manifestVariable: "webpackManifest",
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false,
-      }
-    }),
-  ],
-
-  postcss: () => [
-    postcssFocus(),
-    cssnext({
-      browsers: ['last 2 versions', 'IE > 10'],
-    }),
-    cssnano({
-      autoprefixer: false
-    }),
-    postcssReporter({
-      clearMessages: true,
-    }),
+    new webpack.optimize.UglifyJsPlugin(),
   ],
 };

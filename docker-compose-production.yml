@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: production
+    depends_on:
+      - db
+    ports:
+      - "${WEB_PORT:-80}:8000"
+    environment:
+      NODE_ENV: production
+      MONGO_URL: mongodb://db:27017/mern-starter
+  db:
+    image: mongo:latest
+    volumes:
+      - dbdata:/data/db
+volumes:
+  dbdata:
