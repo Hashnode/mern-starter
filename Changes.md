@@ -8,6 +8,5 @@
 - Swap default Docker environment from production to development, to improve DX.
 - Eliminate production-mode inclusion of devDependencies, to keep production Docker image as light as possible and lower production-mode memory usage.
 - Explicitly volume-map all files into Docker container when in dev-mode.
-- Restore mongodb port mapping, for test suite (temporary - this should be removed once the test suite properly uses an in-memory mock db).
 - Removed the --harmony-proxies flag from npm test, as it is no longer supported by nodejs.
 - Eliminate different markup warning between client/server during dev

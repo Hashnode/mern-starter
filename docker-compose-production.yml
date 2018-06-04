@@ -14,8 +14,6 @@ services:
       MONGO_URL: mongodb://db:27017/mern-starter
   db:
     image: mongo:latest
-    ports:
-      - "27017:27017"
     volumes:
       - dbdata:/data/db
 volumes:
