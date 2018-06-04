@@ -5,6 +5,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Discuss on Hashnode](
 https://hashnode.github.io/badges/mern.svg)](https://hashnode.com/n/mern)
+[![GitHub version](https://badge.fury.io/gh/boennemann%2Fbadges.svg)](http://badge.fury.io/gh/boennemann%2Fbadges)
 
 
 MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mongo, Express, React and NodeJS. It minimises the setup time and gets you up to speed using proven technologies.
@@ -14,11 +15,10 @@ MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mo
 - [Discussions](https://hashnode.com/n/mern)
 
 ## Road to V3!
-We're on our way towards V3, which will bring a few updates to MERN!
+We're on our way towards V3, which will bring a few updates to MERN! We are tracking with the following milestones:
 
-We are tracking towards V3 with the following milestones:
-
-- V2.5.0 -> React V16.x upgrade + urgent fixes
+- V2.4.0 -> Webpack 3 and many fixes *Completed* : [list of changes](Changes.md)
+- V2.5.0 -> React V16.x upgrade and propTypes fix
 - V2.6.0 -> Webpack upgrade to V4
 - V2.7.0 -> database/mongo/mongoose updates/fixes
 - V2.8.0 -> React Router V4

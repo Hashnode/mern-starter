@@ -1,6 +1,6 @@
 {
   "name": "mern-starter",
-  "version": "2.0.0",
+  "version": "2.4.0",
   "description": "Boilerplate project for building Isomorphic apps using React and Redux",
   "scripts": {
     "test": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/mern-test node_modules/.bin/nyc node node_modules/ava/cli.js",
