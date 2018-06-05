@@ -27,7 +27,7 @@ We're on our way towards V3, which will bring a few updates to MERN! We are trac
 ## Quickstart
 
 ```sh
-  npm install -g @hashnode/mern-starter
+  npm install -g mern-cli
   mern init your_new_app
   cd your_new_app
   npm install
