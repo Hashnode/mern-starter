@@ -39,9 +39,8 @@ import { configureStore } from '../client/store';
 import { Provider } from 'react-redux';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { match, RouterContext } from 'react-router';
+import { StaticRouter, match } from 'react-router';
 import Helmet from 'react-helmet';
-
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
@@ -139,7 +138,7 @@ app.use((req, res, next) => {
         const initialView = renderToString(
           <Provider store={store}>
             <IntlWrapper>
-              <RouterContext {...renderProps} />
+              <StaticRouter {...renderProps} />
             </IntlWrapper>
           </Provider>
         );
