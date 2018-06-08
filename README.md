@@ -18,9 +18,9 @@ We're on our way towards V3, which will bring a few updates to MERN! We are trac
 
 - V2.4.0 -> Webpack 3 and many fixes *Completed* : [list of changes](Changes.md)
 - V2.5.0 -> React V16.x upgrade and propTypes fix
-- V2.6.0 -> Webpack upgrade to V4
-- V2.7.0 -> database/mongo/mongoose updates/fixes
-- V2.8.0 -> React Router V4
+- V2.6.0 -> React Router V4
+- V2.7.0 -> Webpack upgrade to V4
+- V2.8.0 -> database/mongo/mongoose updates/fixes
 - V2.9.0 -> Express/Server dependencies/code upgrade
 - V3.0.0 -> CLI/devtools optimization (docker, etc.)
 
