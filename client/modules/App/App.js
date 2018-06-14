@@ -16,7 +16,7 @@ import { switchLanguage } from '../../modules/Intl/IntlActions';
 let DevTools;
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line global-require
-  DevTools = require('./components/DevTools');
+  DevTools = require('./components/DevTools').default;
 }
 
 export class App extends Component {
