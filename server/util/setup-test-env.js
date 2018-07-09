@@ -9,6 +9,7 @@ require.extensions['.gif'] = noop => noop;
 
 require('babel-register');
 require('babel-polyfill');
+require('raf/polyfill');
 
 global.document = require('jsdom').jsdom('<body></body>');
 global.window = document.defaultView;
