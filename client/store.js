@@ -8,7 +8,7 @@ import rootReducer from './reducers';
 let DevTools;
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line global-require
-  DevTools = require('./modules/App/components/DevTools');
+  DevTools = require('./modules/App/components/DevTools').default;
 }
 
 export function configureStore(initialState = {}) {
