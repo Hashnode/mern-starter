@@ -18,10 +18,10 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js'],
     modules: [
-      'client',
-      'node_modules',
+      'server',
+      'node_modules'
     ],
   },
 
@@ -34,9 +34,8 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              'react',
               'es2015',
-              'stage-0',
+              'stage-0'
             ],
             plugins: [
               [
