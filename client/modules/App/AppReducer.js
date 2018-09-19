@@ -1,3 +1,4 @@
+/*
 // Import Actions
 import { TOGGLE_ADD_POST } from './AppActions';
 
@@ -26,3 +27,4 @@ export const getShowAddPost = state => state.app.showAddPost;
 // Export Reducer
 export default AppReducer;
 
+*/
