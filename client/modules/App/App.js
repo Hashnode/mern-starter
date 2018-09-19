@@ -7,7 +7,8 @@ import styles from './App.css';
 
 // Import External Components
 import Slider, { createSliderWithTooltip } from 'rc-slider';
-import 'rc-slider/assets/index.css';
+// import 'rc-slider/assets/index.css';
+import '!style-loader!css-loader!rc-slider/assets/index.css';
 
 // Import Components
 import Helmet from 'react-helmet';
