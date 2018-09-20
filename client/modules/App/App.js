@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 // Import Style
 import styles from './App.css';
 
 // Import External Components
 import Slider, { createSliderWithTooltip } from 'rc-slider';
-//import 'rc-slider/assets/index.css';
+// import 'rc-slider/assets/index.css';
+import '!style-loader!css-loader!rc-slider/assets/index.css';
 
 // Import Components
 import Helmet from 'react-helmet';
@@ -64,7 +64,6 @@ export class App extends Component {
             <div className={styles.slidecontainer}>
               <Slider />
               <SliderWithTooltip />
-              <Link to="/admin">admin</Link>
             </div>
           </div>
           <Footer />
