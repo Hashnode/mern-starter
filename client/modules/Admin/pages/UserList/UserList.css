@@ -1,0 +1,43 @@
+
+.container {
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.add-container {
+  width: 100%;
+}
+
+.add {
+  width: 100px;
+  height: 30px;
+  color: white;
+  background-color: #03A9F4;
+  text-align: center;
+  line-height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+th {
+  width: 16%;
+}
+
+td {
+  width: 16%;
+  height: 30px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.operation {
+  color: white;
+  width: 60px;
+  background-color: #03A9F4;
+  line-height: 20px;
+  height: 20px;
+  margin: 5px auto;
+}

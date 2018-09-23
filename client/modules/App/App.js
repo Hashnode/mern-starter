@@ -74,8 +74,15 @@ export class App extends Component {
             <div className={styles.slideContainer}>
               <SliderWithTooltip marks={sliderMarks} included={false} className={styles.slider} />
             </div>
-            <Link to="/teams/"> <FormattedMessage id="teams" /></Link>
-            <Link to="/posts/"> <FormattedMessage id="posts" /></Link>
+            <div>
+              <Link to="/teams/"> <FormattedMessage id="teams" /></Link>
+            </div>
+            <div>
+              <Link to="/posts/"> <FormattedMessage id="posts" /></Link>
+            </div>
+            <div>
+              <Link to="/admin"> <FormattedMessage id="admin" /></Link>
+            </div>
             {this.props.children}
           </div>
           <Footer />

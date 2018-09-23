@@ -11,6 +11,7 @@ export default {
     deleteTeam: 'Delete team',
     createNewTeam: 'Create new team',
     submit: 'Submit',
+    admin: 'Admin',
     comment: `user {name} {value, plural,
     	  =0 {does not have any comments}
     	  =1 {has # comment}

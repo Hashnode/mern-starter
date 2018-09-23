@@ -1,0 +1,38 @@
+
+.container {
+  width: 300px;
+  margin: 200px auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.pwd-container {
+  margin-top: 30px;
+}
+
+.pwd-content {
+  border: 1px solid #03A9F4;
+  width: 60%;
+  margin-left: 20%;
+  height: 30px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.submit-container {
+  width: 80%;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #03A9F4;
+  line-height: 30px;
+  color: white;
+  border: none;
+  text-align: center;
+}

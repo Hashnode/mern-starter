@@ -5,8 +5,11 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
+// import UserRouter from 'routes/users.routes';
+
 // Initialize the Express App
 const app = new Express();
+const session = require('express-session');
 
 // Set Development modes checks
 const isDevMode = process.env.NODE_ENV === 'development' || false;
@@ -71,8 +74,15 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist/client')));
+app.use(session({
+  secret: '12345',
+  resave: true,
+  saveUninitialized: true
+}));
+
 app.use('/api', posts);
 app.use('/api', teams);
+
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -161,5 +171,7 @@ app.listen(serverConfig.port, (error) => {
     console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
   }
 });
+
+
 
 export default app;
