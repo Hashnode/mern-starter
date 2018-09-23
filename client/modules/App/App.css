@@ -7,11 +7,15 @@
 
 .inputLabel {
   font-weight: bold;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 
-.slidecontainer {
+.slideContainer {
   width: 50%; /* Width of the outside container */
+}
+
+.slider {
+  margin-bottom: 30px !important;
 }
 
 /*!* The slider itself *!*/

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 // Import Style
 import styles from './App.css';
@@ -8,12 +9,13 @@ import styles from './App.css';
 // Import External Components
 import Slider, { createSliderWithTooltip } from 'rc-slider';
 // import 'rc-slider/assets/index.css';
-import '!style-loader!css-loader!rc-slider/assets/index.css';
+import sliderStylesIgnored from '!style-loader!css-loader!rc-slider/assets/index.css'; // eslint-disable-unused-import global-require
 
 // Import Components
 import Helmet from 'react-helmet';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import { FormattedMessage } from 'react-intl';
 
 let DevTools;
 if (process.env.NODE_ENV === 'development') {
@@ -22,6 +24,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const SliderWithTooltip = createSliderWithTooltip(Slider);
+const sliderMarks = { 0: 'very unhappy', 50: 'neutral', 100: 'very happy' };
 
 export class App extends Component {
   constructor(props) {
@@ -61,10 +64,19 @@ export class App extends Component {
             <div className={styles.inputLabel}>
               {this.props.intl.messages.ownHappiness}
             </div>
-            <div className={styles.slidecontainer}>
-              <Slider />
-              <SliderWithTooltip />
+            <div className={styles.slideContainer}>
+              <SliderWithTooltip marks={sliderMarks} included={false} className={styles.slider} />
             </div>
+
+            <div className={styles.inputLabel}>
+              {this.props.intl.messages.teamHappiness}
+            </div>
+            <div className={styles.slideContainer}>
+              <SliderWithTooltip marks={sliderMarks} included={false} className={styles.slider} />
+            </div>
+            <Link to="/teams/"> <FormattedMessage id="teams" /></Link>
+            <Link to="/posts/"> <FormattedMessage id="posts" /></Link>
+            {this.props.children}
           </div>
           <Footer />
         </div>

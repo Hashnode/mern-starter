@@ -2,16 +2,14 @@ export default {
   locale: 'en',
   messages: {
     siteTitle: 'How is it',
-    ownHappiness: 'How happy are you?',
-    addPost: 'Add Post',
+    ownHappiness: 'How happy are you with your work?',
+    teamHappiness: 'How happy are you with your teams work?',
+    teamName: 'Team name',
+    teams: 'Teams',
+    addTeam: 'Add team',
     switchLanguage: 'Switch Language',
-    twitterMessage: 'We are on Twitter',
-    by: 'By',
-    deletePost: 'Delete Post',
-    createNewPost: 'Create new post',
-    authorName: 'Author\'s Name',
-    postTitle: 'Post Title',
-    postContent: 'Post Content',
+    deleteTeam: 'Delete team',
+    createNewTeam: 'Create new team',
     submit: 'Submit',
     comment: `user {name} {value, plural,
     	  =0 {does not have any comments}
@@ -28,5 +26,9 @@ export default {
     	  =1 {has # comment}
     	  other {has # comments}
     	} as of {date}`,
+    posts: 'Posts',
+    createNewPost: 'create new post',
+    by: 'author',
+    deletePost: 'delete post'
   },
 };

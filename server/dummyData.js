@@ -1,6 +1,28 @@
 import Post from './models/post';
+import Team from './models/team';
 
 export default function () {
+  Team.count().exec((err, count) => {
+    // console.log(`${count} Teams available.`);
+
+    if (count > 0) {
+      return;
+    }
+
+    const team1 = new Team({ name: 'Team 01', cuid: '1aec5410064b4986aebd3d2d9686b3e5' });
+    const team2 = new Team({ name: 'Test Team 99', cuid: 'bb341c44a156493db62840aa5ff8ce5f' });
+    const team3 = new Team({ name: 'Jims Favourites', cuid: 'adc104afee684c21b90d54160f8b7df3' });
+
+    Team.create([team1, team2, team3], (error) => {
+      if (!error) {
+        // console.log('We have now some team test data :)');
+      }
+      if (error) {
+        // console.log(error.toString());
+      }
+    });
+  });
+
   Post.count().exec((err, count) => {
     if (count > 0) {
       return;
