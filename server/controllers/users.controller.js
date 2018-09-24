@@ -1,6 +1,3 @@
-
-import React from 'react';
-import { renderToString } from 'react-dom/server';
 import User from '../models/user';
 import sanitizeHtml from 'sanitize-html';
 import cuid from 'cuid';
@@ -19,11 +16,11 @@ export function userList(req, res) {
   User.find().exec((err, users) => {
     if (err) {
       res.send({
-        success: false, code: 0, message: err
+        success: false, code: 0, message: err,
       });
     } else {
       res.send({
-        success: true, code: 1, message: users
+        success: true, code: 1, message: users,
       });
     }
   });
@@ -34,7 +31,7 @@ export function addUser(req, res) {
     res.send({
       success: false,
       code: 0,
-      message: 'please input user name'
+      message: 'please input user name',
     });
     return;
   }
@@ -48,24 +45,22 @@ export function addUser(req, res) {
   newUser.save((err) => {
     if (err) {
       res.send({
-        success: false, code: 0, message: err
+        success: false, code: 0, message: err,
       });
     } else {
       res.send({
-        success: true, code: 1, message: 'user added'
+        success: true, code: 1, message: 'user added',
       });
     }
   });
 }
 
-
 export function editUser(req, res) {
-
   if (!req.body.name) {
     res.send({
       success: false,
       code: 0,
-      message: 'please input user name'
+      message: 'please input user name',
     });
     return;
   }
@@ -92,6 +87,3 @@ export function deleteUser(req, res) {
     });
   });
 }
-
-
-

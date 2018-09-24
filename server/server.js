@@ -77,7 +77,7 @@ app.use(Express.static(path.resolve(__dirname, '../dist/client')));
 app.use(session({
   secret: '12345',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
 }));
 
 app.use('/api', posts);
@@ -171,7 +171,5 @@ app.listen(serverConfig.port, (error) => {
     console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
   }
 });
-
-
 
 export default app;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console,no-alert */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import callApi from '../../../../util/apiCaller';

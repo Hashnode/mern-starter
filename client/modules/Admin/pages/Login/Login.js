@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import UserList from './../UserList/UserList';
@@ -16,7 +17,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    //ReactDOM.render((<UserList />), document.getElementById('root'));
+    // ReactDOM.render((<UserList />), document.getElementById('root'));
   }
 
   submit() {
@@ -27,7 +28,7 @@ class Login extends Component {
     }
 
     callApi('checkAdmin', 'post', {
-      password: pwd
+      password: pwd,
     }).then((res) => {
       if (!res.success) {
         alert('wrong password, please reinput');

@@ -1,8 +1,10 @@
+/* eslint-disable no-alert,no-console */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import callApi from '../../../../util/apiCaller';
 import style from './AddUser.css';
 import UserList from './UserList';
+import PropTypes from 'prop-types';
 
 class AddUser extends Component {
 
@@ -11,10 +13,10 @@ class AddUser extends Component {
     this.save = this.save.bind(this);
     this.change = this.change.bind(this);
     this.state = {
-      id: props.user.id? props.user.id: '',
+      id: props.user.id ? props.user.id : '',
       name: props.user.name,
       phone: props.user.phone,
-      email: props.user.email
+      email: props.user.email,
     };
   }
 
@@ -50,15 +52,15 @@ class AddUser extends Component {
           <tbody>
             <tr>
               <td className={style['td-right']}>User Name:</td>
-              <td className={style['td-left']}><input name="name" onChange={this.change} value={this.state['name']} /></td>
+              <td className={style['td-left']}><input name="name" onChange={this.change} value={this.state.name} /></td>
             </tr>
             <tr>
               <td className={style['td-right']}>Phone Number:</td>
-              <td className={style['td-left']}><input name="phone" onChange={this.change} value={this.state['phone']} /></td>
+              <td className={style['td-left']}><input name="phone" onChange={this.change} value={this.state.phone} /></td>
             </tr>
             <tr>
               <td className={style['td-right']}>Email Address:</td>
-              <td className={style['td-left']}><input name="email" onChange={this.change} value={this.state['email']} /></td>
+              <td className={style['td-left']}><input name="email" onChange={this.change} value={this.state.email} /></td>
             </tr>
           </tbody>
         </table>
@@ -69,5 +71,14 @@ class AddUser extends Component {
     );
   }
 }
+
+AddUser.propTypes = {
+  user: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  })).isRequired,
+};
 
 export default AddUser;
