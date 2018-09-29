@@ -19,6 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Post/pages/PostListPage/PostListPage');
   require('./modules/Post/pages/PostDetailPage/PostDetailPage');
   require('./modules/Team/pages/TeamListPage/TeamListPage');
+  require('./modules/Survey/pages/SurveyPage/SurveyPage');
 }
 
 // react-router setup with code-splitting
@@ -28,7 +29,7 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);
+          cb(null, require('./modules/Survey/pages/SurveyPage/SurveyPage').default);
         });
       }}
     />
@@ -57,10 +58,18 @@ export default (
       }}
     />
     <Route
-      path="/admin"
+      path="/admin/"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Admin/pages/Login/Login').default);
+        });
+      }}
+    />
+    <Route
+      path="/survey/"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Survey/pages/SurveyPage/SurveyPage').default);
         });
       }}
     />

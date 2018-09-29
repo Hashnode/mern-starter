@@ -12,16 +12,9 @@ import Login from './modules/Admin/pages/Login/Login';
 const store = configureStore(window.__INITIAL_STATE__);
 const mountApp = document.getElementById('root');
 
-// render(
-//   <AppContainer>
-//     <App store={store} />
-//   </AppContainer>,
-//   mountApp
-// );
-
 render(
   <AppContainer>
-    <Login />
+    <App store={store} />
   </AppContainer>,
   mountApp
 );

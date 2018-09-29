@@ -6,11 +6,6 @@ import { Link } from 'react-router';
 // Import Style
 import styles from './App.css';
 
-// Import External Components
-import Slider, { createSliderWithTooltip } from 'rc-slider';
-// import 'rc-slider/assets/index.css';
-import sliderStylesIgnored from '!style-loader!css-loader!rc-slider/assets/index.css'; // eslint-disable-unused-import global-require
-
 // Import Components
 import Helmet from 'react-helmet';
 import Header from './components/Header/Header';
@@ -22,9 +17,6 @@ if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line global-require
   DevTools = require('./components/DevTools').default;
 }
-
-const SliderWithTooltip = createSliderWithTooltip(Slider);
-const sliderMarks = { 0: 'very unhappy', 50: 'neutral', 100: 'very happy' };
 
 export class App extends Component {
   constructor(props) {
@@ -60,20 +52,6 @@ export class App extends Component {
             intl={this.props.intl}
           />
           <div className={styles.container}>
-
-            <div className={styles.inputLabel}>
-              {this.props.intl.messages.ownHappiness}
-            </div>
-            <div className={styles.slideContainer}>
-              <SliderWithTooltip marks={sliderMarks} included={false} className={styles.slider} />
-            </div>
-
-            <div className={styles.inputLabel}>
-              {this.props.intl.messages.teamHappiness}
-            </div>
-            <div className={styles.slideContainer}>
-              <SliderWithTooltip marks={sliderMarks} included={false} className={styles.slider} />
-            </div>
             <div>
               <Link to="/teams/"> <FormattedMessage id="teams" /></Link>
             </div>

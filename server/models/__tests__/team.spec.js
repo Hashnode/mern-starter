@@ -51,7 +51,7 @@ test.serial('Should correctly add a team', async t => {
   t.plan(2);
 
   const res = await request(app)
-    .team('/api/teams')
+    .post('/api/teams')
     .send({ team: { name: 'Foo' } })
     .set('Accept', 'application/json');
 
