@@ -70,7 +70,7 @@
     "chai": "^3.5.0",
     "chunk-manifest-webpack-plugin": "^1.1.2",
     "coveralls": "^2.11.9",
-    "css-loader": "^0.28.7",
+    "css-loader": "^0.28.11",
     "css-modules-require-hook": "^4.2.2",
     "cssnano": "^3.7.0",
     "enzyme": "^3.3.0",

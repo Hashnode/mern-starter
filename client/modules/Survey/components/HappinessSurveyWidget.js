@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 // Import Style
 import styles from './HappinessSurveyWidget.css';
+require('../../../../node_modules/rc-slider/assets/index.css'); // workaround for webpack problem with css imports
 
 // Import External Components
 import Slider, { createSliderWithTooltip } from 'rc-slider';
-import sliderStylesIgnored from '!style-loader!css-loader!rc-slider/assets/index.css'; // eslint-disable-unused-import global-require
 
 // constants for Sliders
-const SliderWithTooltip = createSliderWithTooltip(Slider);
+const SliderWithTooltipOwn = createSliderWithTooltip(Slider);
+const SliderWithTooltipTeam = createSliderWithTooltip(Slider);
 const sliderMarks = { 0: 'very unhappy', 50: 'neutral', 100: 'very happy' };
 
 export class HappinessSurveyWidget extends Component {
@@ -24,18 +25,18 @@ export class HappinessSurveyWidget extends Component {
   render() {
     return (
       <div>
-        <div className={styles.inputLabel}>
+        <h2 className={styles.inputLabel}>
           <FormattedMessage id={"ownHappiness"} />
-        </div>
+        </h2>
         <div className={styles.slideContainer}>
-          <SliderWithTooltip marks={sliderMarks} included={false} className={styles.slider} />
+          <SliderWithTooltipOwn marks={sliderMarks} included={false} className={styles.slider} />
         </div>
 
-        <div className={styles.inputLabel}>
+        <h2 className={styles.inputLabel}>
           <FormattedMessage id={"teamHappiness"} />
-        </div>
+        </h2>
         <div className={styles.slideContainer}>
-          <SliderWithTooltip marks={sliderMarks} included={false} className={styles.slider} />
+          <SliderWithTooltipTeam marks={sliderMarks} included={false} className={styles.slider} />
         </div>
       </div>
     );
