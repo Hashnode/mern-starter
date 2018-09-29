@@ -1,29 +1,37 @@
 /* eslint-disable no-console,no-alert */
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import callApi from '../../../../util/apiCaller';
-import AddUser from './AddUser';
+import { withRouter } from 'react-router';
+import callAdminApi from '../../../../util/apiAdminCaller';
 import style from './UserList.css';
+import valueOfProperty from '../../../../util/objectHelper';
 
 class UserList extends Component {
 
   constructor() {
     super();
+    this.state = { list: [] };
     this.add = this.add.bind(this);
     this.edit = this.edit.bind(this);
     this.delete = this.delete.bind(this);
-    this.state = { list: [] };
   }
 
   componentDidMount() {
-    callApi('userList', 'post', {}).then(res => {
-      this.setState({ list: res.message });
-      console.log(this.state);
+    callAdminApi('userList', 'post', {}).then(res => {
+      if (res.success) {
+        console.log(res.message);
+        this.setState({ list: res.message });
+      }
     });
   }
 
   add() {
-    ReactDOM.render((<AddUser user={{ id: '', name: '', phone: '', email: '' }} />), document.getElementById('root'));
+    const user = { id: '', name: '', email: '', phone: '' };
+    this.props.router.push({
+      pathname: "/admin/adduser",
+      state: {
+        user: user
+      }
+    });
   }
 
   edit(e) {
@@ -33,7 +41,12 @@ class UserList extends Component {
       }
       return false;
     });
-    ReactDOM.render((<AddUser user={user} />), document.getElementById('root'));
+    this.props.router.push({
+      pathname: "/admin/adduser",
+      state: {
+        user: user
+      }
+    });
   }
 
   delete(e) {
@@ -44,7 +57,7 @@ class UserList extends Component {
       }
       return false;
     });
-    callApi('deleteUser', 'post', user).then(res => {
+    callAdminApi('deleteUser', 'post', user).then(res => {
       if (!res.success) {
         alert(res.message);
         return;
@@ -66,6 +79,7 @@ class UserList extends Component {
               <th>Name</th>
               <th>Phone</th>
               <th>Email</th>
+              <th>Team</th>
               <th></th>
               <th></th>
             </tr>
@@ -77,12 +91,12 @@ class UserList extends Component {
                 <td>{item.name}</td>
                 <td>{item.phone}</td>
                 <td>{item.email}</td>
+                <td>{valueOfProperty(item.team, 'name')}</td>
                 <td><div className={style.operation} onClick={this.edit} id={item.id}>edit</div></td>
                 <td><div className={style.operation} onClick={this.delete} id={item.id}>delete</div></td>
               </tr>);
             })
           }
-
           </tbody>
         </table>
       </div>
@@ -90,4 +104,4 @@ class UserList extends Component {
   }
 }
 
-export default UserList;
+export default withRouter(UserList);

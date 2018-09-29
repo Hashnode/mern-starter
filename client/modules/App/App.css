@@ -18,6 +18,12 @@
   margin-bottom: 30px !important;
 }
 
+.link {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+}
+
 /*!* The slider itself *!*/
 /*.slider {*/
   /*-webkit-appearance: none;  !* Override default CSS styles *!*/

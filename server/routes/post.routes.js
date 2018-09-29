@@ -15,14 +15,16 @@ router.route('/posts').post(PostController.addPost);
 // Delete a post by cuid
 router.route('/posts/:cuid').delete(PostController.deletePost);
 
-router.route('/checkAdmin').post(UserController.checkAdmin);
+router.route('/admin/checkSession').post(UserController.checkSession);
 
-router.route('/userList').post(UserController.userList);
+router.route('/admin/checkAdmin').post(UserController.checkAdmin);
 
-router.route('/addUser').post(UserController.addUser);
+router.route('/admin/userList').post(UserController.userList);
 
-router.route('/editUser').post(UserController.editUser);
+router.route('/admin/addUser').post(UserController.addUser);
 
-router.route('/deleteUser').post(UserController.deleteUser);
+router.route('/admin/editUser').post(UserController.editUser);
+
+router.route('/admin/deleteUser').post(UserController.deleteUser);
 
 export default router;

@@ -80,6 +80,18 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+app.all('/api/admin/*', (req, res, next) => {
+  if (req.path === '/api/admin/checkAdmin') {
+    next();
+    return;
+  }
+  if (!req.session.sessionid) {
+    res.send({ code: 508, success: true, message: 'Please login' });
+    return;
+  }
+  next();
+});
+
 app.use('/api', posts);
 app.use('/api', teams);
 

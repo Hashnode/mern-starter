@@ -1,7 +1,8 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute, Switch } from 'react-router';
 import App from './modules/App/App';
+import Login from './modules/Admin/pages/Login/Login';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -28,7 +29,7 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);
+          cb(null, require('./modules/Index/pages/Index').default);
         });
       }}
     />
@@ -57,12 +58,28 @@ export default (
       }}
     />
     <Route
-      path="/admin"
+      path="/admin" exact
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Admin/pages/Login/Login').default);
         });
       }}
     />
-  </Route>
+    <Route
+      path="/admin/userlist"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Admin/pages/UserList/UserList').default);
+        });
+      }}
+    />
+    <Route
+      path="/admin/adduser"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Admin/pages/UserList/AddUser').default);
+        });
+      }}
+    />
+          </Route>
 );
