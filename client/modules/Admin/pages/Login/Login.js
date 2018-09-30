@@ -49,7 +49,7 @@ class Login extends Component {
   render() {
     return (
       <div className={style.container}>
-        <h2>Administrator</h2>
+        <h2 className={style.administratorLabel}>Administrator</h2>
         <div className={style['pwd-container']}>
           <input type="password" placeholder="please input password" className={style['pwd-content']} onChange={this.change} />
         </div>

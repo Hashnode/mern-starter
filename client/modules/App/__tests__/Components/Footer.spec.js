@@ -9,5 +9,5 @@ test('renders the footer properly', t => {
   );
 
   // t.is(wrapper.find('p').length, 2);
-  t.is(wrapper.find('p').first().text(), '© 2016 · Hashnode · LinearBytes Inc.');
+  t.is(wrapper.find('p').first().text(), '© 2018 · Team 4 · AUT - SDM');
 });

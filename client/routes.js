@@ -1,8 +1,7 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { Route, IndexRoute, Switch } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
-import Login from './modules/Admin/pages/Login/Login';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -20,6 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Post/pages/PostListPage/PostListPage');
   require('./modules/Post/pages/PostDetailPage/PostDetailPage');
   require('./modules/Team/pages/TeamListPage/TeamListPage');
+  require('./modules/Survey/pages/SurveyPage/SurveyPage');
 }
 
 // react-router setup with code-splitting
@@ -29,7 +29,7 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Index/pages/Index').default);
+          cb(null, require('./modules/Survey/pages/SurveyPage/SurveyPage').default);
         });
       }}
     />
@@ -58,10 +58,18 @@ export default (
       }}
     />
     <Route
-      path="/admin" exact
+      path="/admin/"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Admin/pages/Login/Login').default);
+        });
+      }}
+    />
+    <Route
+      path="/survey/"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Survey/pages/SurveyPage/SurveyPage').default);
         });
       }}
     />
@@ -81,5 +89,5 @@ export default (
         });
       }}
     />
-          </Route>
+  </Route>
 );

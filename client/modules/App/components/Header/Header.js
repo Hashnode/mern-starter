@@ -13,6 +13,17 @@ export function Header() {
         <h1 className={styles['site-title']}>
           <Link to="/" ><FormattedMessage id="siteTitle" /></Link>
         </h1>
+        <div className={styles.navigation}>
+          <span>
+            <Link to="/teams/" className={styles.link}> <FormattedMessage id="teams" /></Link>
+          </span>
+          <span>
+            <Link to="/posts/" className={styles.link}> <FormattedMessage id="posts" /></Link>
+          </span>
+          <span>
+            <Link to="/admin/" className={styles.link}> <FormattedMessage id="admin" /></Link>
+          </span>
+        </div>
       </div>
     </div>
   );

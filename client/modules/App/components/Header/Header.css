@@ -20,3 +20,13 @@
   text-decoration: none;
   /*color: #FFF;*/
 }
+
+.navigation {
+  margin: 1em auto auto auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.link {
+  margin: 15px;
+}
