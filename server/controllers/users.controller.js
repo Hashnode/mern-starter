@@ -50,6 +50,7 @@ export function addUser(req, res) {
   newUser.name = sanitizeHtml(newUser.name);
   newUser.phone = sanitizeHtml(newUser.phone);
   newUser.email = sanitizeHtml(newUser.email);
+  newUser.team = sanitizeHtml(newUser.team);
 
   newUser.save((err) => {
     if (err) {
@@ -79,7 +80,7 @@ export function editUser(req, res) {
       res.send({ success: false, code: 0, message: err });
     }
 
-    user.update({ name: req.body.name, phone: req.body.phone, email: req.body.email }, () => {
+    user.update({ name: req.body.name, phone: req.body.phone, email: req.body.email, team: req.body.team }, () => {
       res.send({ success: true, code: 1, message: 'update success' });
     });
   });

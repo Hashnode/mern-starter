@@ -5,6 +5,9 @@ import callAdminApi from '../../../../util/apiAdminCaller';
 import style from './UserList.css';
 import valueOfProperty from '../../../../util/objectHelper';
 
+// team list
+import TeamListPage from '../../../Team/pages/TeamListPage/TeamListPage';
+
 class UserList extends Component {
 
   constructor() {
@@ -27,10 +30,10 @@ class UserList extends Component {
   add() {
     const user = { id: '', name: '', email: '', phone: '' };
     this.props.router.push({
-      pathname: "/admin/adduser",
+      pathname: '/admin/adduser',
       state: {
-        user: user
-      }
+        user,
+      },
     });
   }
 
@@ -42,15 +45,15 @@ class UserList extends Component {
       return false;
     });
     this.props.router.push({
-      pathname: "/admin/adduser",
+      pathname: '/admin/adduser',
       state: {
-        user: user
-      }
+        user,
+      },
     });
   }
 
   delete(e) {
-    if (!confirm('Sure to delete this user?')) return;
+    if (!confirm('Do you want to delete this user?')) return;
     const user = this.state.list.find(item => {
       if (item.id === e.target.id) {
         return true;
@@ -99,6 +102,8 @@ class UserList extends Component {
           }
           </tbody>
         </table>
+        <h2>Team List</h2>
+        <TeamListPage />
       </div>
     );
   }

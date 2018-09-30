@@ -5,6 +5,8 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
+import timer from './util/timer';
+
 // import UserRouter from 'routes/users.routes';
 
 // Initialize the Express App

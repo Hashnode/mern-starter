@@ -11,6 +11,10 @@
   width: 100%;
 }
 
+h2 {
+  color: #333333;
+}
+
 .add {
   width: 80%;
   height: 30px;
@@ -24,6 +28,18 @@
 input {
   border: 1px solid #03A9F4;
   margin-left: 20px;
+  height: 25px;
+  width: 200px;
+  font-size: 16px;
+  color: #333333;
+}
+
+select {
+  margin-left: 20px;
+  height: 25px;
+  width: 200px;
+  font-size: 16px;
+  color: #333333;
 }
 
 table {
@@ -36,4 +52,5 @@ table {
 
 .td-right {
   text-align: right;
+  color: #666666;
 }
