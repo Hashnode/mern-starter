@@ -1,9 +1,9 @@
 /* eslint-disable no-alert */
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import UserList from './../UserList/UserList';
-import callApi from '../../../../util/apiCaller';
+import { withRouter } from 'react-router';
+import callAdminApi from '../../../../util/apiAdminCaller';
 import style from './Login.css';
+
 
 class Login extends Component {
 
@@ -17,7 +17,11 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    // ReactDOM.render((<UserList />), document.getElementById('root'));
+    callAdminApi('checkSession', 'post', {}).then((res) => {
+      if (res.success) {
+        this.props.router.push('admin/userlist');
+      }
+    });
   }
 
   submit() {
@@ -27,15 +31,14 @@ class Login extends Component {
       return;
     }
 
-    callApi('checkAdmin', 'post', {
+    callAdminApi('checkAdmin', 'post', {
       password: pwd,
     }).then((res) => {
       if (!res.success) {
         alert('wrong password, please reinput');
         return;
       }
-
-      ReactDOM.render((<UserList />), document.getElementById('root'));
+      this.props.router.push('admin/userlist');
     });
   }
 
@@ -58,4 +61,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

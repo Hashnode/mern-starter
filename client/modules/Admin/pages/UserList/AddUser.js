@@ -1,10 +1,9 @@
 /* eslint-disable no-alert,no-console */
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import callApi from '../../../../util/apiCaller';
+import { withRouter } from 'react-router';
+import callAdminApi from '../../../../util/apiAdminCaller';
 import style from './AddUser.css';
-import UserList from './UserList';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 class AddUser extends Component {
 
@@ -12,12 +11,7 @@ class AddUser extends Component {
     super(props);
     this.save = this.save.bind(this);
     this.change = this.change.bind(this);
-    this.state = {
-      id: props.user.id ? props.user.id : '',
-      name: props.user.name,
-      phone: props.user.phone,
-      email: props.user.email,
-    };
+    this.state = this.props.location.state.user;
   }
 
   componentDidMount() {
@@ -28,9 +22,9 @@ class AddUser extends Component {
     if (this.state.id.length > 0) {
       uri = 'editUser';
     }
-    callApi(uri, 'post', this.state).then(res => {
+    callAdminApi(uri, 'post', this.state).then(res => {
       if (res.success) {
-        ReactDOM.render((<UserList />), document.getElementById('root'));
+        this.props.router.push('/admin/userlist');
       } else {
         alert(res.message);
         console.log(res);
@@ -72,13 +66,13 @@ class AddUser extends Component {
   }
 }
 
-AddUser.propTypes = {
-  user: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-  })).isRequired,
-};
+// AddUser.propTypes = {
+//   user: PropTypes.arrayOf(PropTypes.shape({
+//     id: PropTypes.string.isRequired,
+//     name: PropTypes.string.isRequired,
+//     phone: PropTypes.string.isRequired,
+//     email: PropTypes.string.isRequired,
+//   })).isRequired,
+// };
 
-export default AddUser;
+export default withRouter(AddUser);

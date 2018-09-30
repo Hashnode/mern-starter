@@ -1,5 +1,6 @@
 import Post from './models/post';
 import Team from './models/team';
+import User from './models/user';
 
 export default function () {
   Team.count().exec((err, count) => {
@@ -19,6 +20,35 @@ export default function () {
       }
       if (error) {
         // console.log(error.toString());
+      }
+    });
+  });
+
+  User.count().exec((err, count) => {
+    if (count > 0) {
+      return;
+    }
+
+    const user1 = new User({
+      id: 'cjmah9iu8000146gz0tbav7ki',
+      name: 'Rosman',
+      phone: '0225902072',
+      email: 'test@test.com',
+      team: '5bab105c87082abdcbd71659'
+    });
+    const user2 = new User({
+      id: 'cjmah9iu8000146gz0tbav7kj',
+      name: 'Test',
+      phone: '0',
+      email: 'test1@test.com',
+      team: '5bab105c87082abdcbd7165a'
+    });
+
+    User.create([user1, user2], (error) => {
+      if (error) {
+        console.log('user dummy data failed!' + error);
+      } else {
+        console.log('user dummy data added!');
       }
     });
   });

@@ -1,19 +1,28 @@
 import User from '../models/user';
+import Team from '../models/team';
 import sanitizeHtml from 'sanitize-html';
 import cuid from 'cuid';
 
 /* public */
+export function checkSession(req, res) {
+  if (req.session.sessionid === '1') {
+    res.send({ code: 1, success: true, message: 'valid session' });
+  }
+  res.send({ code: 0, success: false, message: 'expired session' });
+}
+
 export function checkAdmin(req, res) {
   const password = req.body.password;
   if (password !== '1') {
     res.send({ success: false });
   } else {
+    req.session.sessionid = '1';
     res.send({ success: true });
   }
 }
 
 export function userList(req, res) {
-  User.find().exec((err, users) => {
+  User.find().populate({ path: 'team', model: Team, select: { name: 1, _id: 1 }}).exec((err, users) => {
     if (err) {
       res.send({
         success: false, code: 0, message: err,

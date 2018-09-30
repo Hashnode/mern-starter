@@ -6,6 +6,7 @@ const userSchema = new Schema({
   name: { type: 'String', required: true },
   phone: { type: 'String', required: false },
   email: { type: 'String', required: false },
+  team: { type: Schema.Types.ObjectId, required: false, ref: 'Team' },
 });
 
 export default mongoose.model('User', userSchema);

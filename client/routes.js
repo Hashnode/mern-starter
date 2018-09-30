@@ -73,5 +73,21 @@ export default (
         });
       }}
     />
+    <Route
+      path="/admin/userlist"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Admin/pages/UserList/UserList').default);
+        });
+      }}
+    />
+    <Route
+      path="/admin/adduser"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Admin/pages/UserList/AddUser').default);
+        });
+      }}
+    />
   </Route>
 );

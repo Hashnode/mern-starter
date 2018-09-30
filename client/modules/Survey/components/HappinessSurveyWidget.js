@@ -4,7 +4,8 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 
 // Import Style
 import styles from './HappinessSurveyWidget.css';
-require('../../../../node_modules/rc-slider/assets/index.css'); // workaround for webpack problem with css imports
+// require('../../../../node_modules/rc-slider/assets/index.css'); // webpack problem with css imports (this line works for tests)
+import '!style-loader!css-loader!../../../../node_modules/rc-slider/assets/index.css'; // webpack problem with css imports (this line works for execution)
 
 // Import External Components
 import Slider, { createSliderWithTooltip } from 'rc-slider';

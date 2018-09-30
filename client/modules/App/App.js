@@ -46,9 +46,7 @@ export class App extends Component {
               },
             ]}
           />
-          <Header
-            intl={this.props.intl}
-          />
+          <Header intl={this.props.intl} />
           <div className={styles.container}>
             {this.props.children}
           </div>
