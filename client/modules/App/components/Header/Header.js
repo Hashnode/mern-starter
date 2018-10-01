@@ -21,7 +21,7 @@ export function Header() {
             <Link to="/posts/" className={styles.link}> <FormattedMessage id="posts" /></Link>
           </span>
           <span>
-            <Link to="/admin/" className={styles.link}> <FormattedMessage id="admin" /></Link>
+            <Link to="/admin" className={styles.link}> <FormattedMessage id="admin" /></Link>
           </span>
         </div>
       </div>
