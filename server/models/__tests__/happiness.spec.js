@@ -8,7 +8,7 @@ import { connectDB, dropDB } from '../../util/test-helpers';
 const team1 = new Team({ name: 'Team 01', cuid: '1aec5410064b4986aebd3d2d9686b3e5' });
 
 const happinesses = [
-  new Happiness({ individualhappiness: '30', teamhappiness: '50', cuid: 'kljdklfjs', teamid: '1aec5410064b4986aebd3d2d9686b3e5'}),
+  new Happiness({ individualhappiness: '30', teamhappiness: '50', cuid: 'kljdklfjs', teamid: '1aec5410064b4986aebd3d2d9686b3e5' }),
   new Happiness({ individualhappiness: '55', teamhappiness: '76', cuid: 'uidshfiosud', teamid: '1aec5410064b4986aebd3d2d9686b3e5' }),
 ];
 
