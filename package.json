@@ -1,14 +1,14 @@
 {
-  "name": "@hashnode/mern-starter",
-  "version": "2.4.0",
-  "description": "Boilerplate project for building Isomorphic apps using React and Redux",
+  "name": "how-is-it",
+  "version": "1.0.0",
+  "description": "application for happiness of development teams, based on mern.io boilerplate",
   "scripts": {
     "test": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/mern-test node_modules/.bin/nyc node node_modules/ava/cli.js",
     "watch:test": "npm run test -- --watch",
     "cover": "nyc npm run test",
     "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
-    "start": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
-    "start:prod": "cross-env NODE_ENV=production node index.js",
+    "start:dev": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
+    "start": "cross-env NODE_ENV=production MONGO_URL=mongodb://heroku_prod_user_sdm:team4_sdm_2018@ds121603.mlab.com:21603/heroku_kxw1j04d node index.js",
     "bs": "npm run clean && npm run build && npm run build:server && npm run start:prod",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "build:server": "cross-env NODE_ENV=production webpack --config webpack.config.server.js",
@@ -17,17 +17,17 @@
     "lint": "eslint client server"
   },
   "pre-commit": [
-    
+
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hashnode/mern-starter.git"
+    "url": "git+https://github.com/Assignment2-Team4-SDM-AUT/sdm-mern-starter.git"
   },
   "bugs": {
-    "url": "https://github.com/Hashnode/mern-starter/issues"
+    "url": "https://github.com/Assignment2-Team4-SDM-AUT/sdm-mern-starter/issues"
   },
-  "homepage": "https://github.com/Hashnode/mern-starter#readme",
-  "author": "Prashant Abhishek <prashant.abhishek7g@gmail.com>, Mayank Chandola <imayankchd@gmail.com>, Sandeep Panda <sandeep@hashnode.com>, Syed Fazle Rahman <fazle@hashnode.com>, Alkshendra Maurya <alkshendra@hashnode.com>",
+  "homepage": "https://github.com/Assignment2-Team4-SDM-AUT/sdm-mern-starter#readme",
+  "author": "Linye, Rossman, Saif, Thorsten",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -119,7 +119,7 @@
     "webpack2-externals-plugin": "^1.0.0"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "ava": {
     "files": [
