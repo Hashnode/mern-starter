@@ -2,10 +2,11 @@ import User from '../models/user';
 import Team from '../models/team';
 import sanitizeHtml from 'sanitize-html';
 import cuid from 'cuid';
+import session from '../util/session';
 
 /* public */
 export function checkSession(req, res) {
-  if (req.session.sessionid === '1') {
+  if (req.session.sessionid === 'cjmah9iu8000146gz0tbav7ki') {
     res.send({ code: 1, success: true, message: 'valid session' });
   }
   res.send({ code: 0, success: false, message: 'expired session' });
@@ -16,7 +17,7 @@ export function checkAdmin(req, res) {
   if (password !== '1') {
     res.send({ success: false });
   } else {
-    req.session.sessionid = '1';
+    req.session.sessionid = 'cjmah9iu8000146gz0tbav7ki';
     res.send({ success: true });
   }
 }

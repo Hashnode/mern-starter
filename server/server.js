@@ -95,6 +95,13 @@ app.all('/api/admin/*', (req, res, next) => {
   next();
 });
 
+app.all('/', (req, res, next) => {
+  if (!req.session.sessionid) {
+    req.session.sessionid = 'cjmah9iu8000146gz0tbav7ki';
+  }
+  next();
+});
+
 app.use('/api', posts);
 app.use('/api', teams);
 app.use('/api', happiness);
