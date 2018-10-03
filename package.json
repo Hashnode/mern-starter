@@ -119,9 +119,6 @@
   },
   "devDependencies": {
   },
-  "engines": {
-    "node": ">=8"
-  },
   "ava": {
     "files": [
       "client/**/*.spec.js",
