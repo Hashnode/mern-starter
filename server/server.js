@@ -52,6 +52,7 @@ import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 import posts from './routes/post.routes';
 import teams from './routes/team.routes';
+import happiness from './routes/happiness.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 
@@ -96,6 +97,7 @@ app.all('/api/admin/*', (req, res, next) => {
 
 app.use('/api', posts);
 app.use('/api', teams);
+app.use('/api', happiness);
 
 
 // Render Initial HTML
