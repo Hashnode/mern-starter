@@ -1,6 +1,7 @@
 import Happiness from '../models/happiness';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
+import session from '../util/session';
 
 
 
@@ -18,7 +19,9 @@ export function addHappiness(req, res) {
     res.status(403).end();
   }
 
+  //session.get(req.session.sessionid)
   const newHappiness = new Happiness(req.body.happiness);
+
 
   // Let's sanitize inputs
   newHappiness.individualhappiness = sanitizeHtml(newHappiness.individualhappiness);
