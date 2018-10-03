@@ -4,25 +4,39 @@ import User from '../models/user';
 class Session {
   constructor() {
     this.list = {
-      cjmah9iu8000146gz0tbav7ki: 1,
-      cjmah9iu8000146gz0tbav7kj: 1
+      cjmah9iu8000146gz0tbav7ki: 1
     };
   }
 
-  get(req) {
-    if (!req.session.sessionid) {
-      return { session: false, user: null };
+  get(sessionId, cb) {
+    if (!sessionId) {
+      cb(null);
+      return;
     }
-    if (this.list[req.session.sessionid] != '1') {
-      return { session: false, user: null };
+    if (this.list[sessionId] !== 1) {
+      cb(null);
+      return;
     }
-    User.find({ id: req.session.sessionid }).exec((err, user) => {
+
+    User.find({ id: sessionId }).exec((err, user) => {
       if (err) {
-        return { session: false, user: null };
+        cb(null);
       } else {
-        return { session: true, user: user };
+        cb(user);
       }
     });
+  }
+
+  put(sessionId) {
+    if (!sessionId) {
+      return false;
+    }
+    this.list[sessionId] = 1;
+    return true;
+  }
+
+  remove(sessionId) {
+    delete this.list[sessionId];
   }
 }
 
