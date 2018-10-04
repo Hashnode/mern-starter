@@ -10,13 +10,9 @@ function TeamListItem(props) {
   return (
     <div className={styles['single-team']}>
       <h3 className={styles['team-title']}>
-        <Link to={`/teams/${props.team.name}-${props.team.cuid}`} >
           {props.team.name}
-        </Link>
       </h3>
-      <p className={styles['team-name']}><FormattedMessage id="teamName" /> {props.team.name}</p>
       <p className={styles['team-action']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deleteTeam" /></a></p>
-      <hr className={styles.divider} />
     </div>
   );
 }
