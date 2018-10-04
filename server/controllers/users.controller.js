@@ -3,6 +3,7 @@ import Team from '../models/team';
 import sanitizeHtml from 'sanitize-html';
 import cuid from 'cuid';
 import session from '../util/session';
+import notification from '../util/notification';
 
 /* public */
 export function checkSession(req, res) {
@@ -23,7 +24,7 @@ export function checkAdmin(req, res) {
 }
 
 export function userList(req, res) {
-  User.find().populate({ path: 'team', model: Team, select: { name: 1, _id: 1 }}).exec((err, users) => {
+  User.find().populate({ path: 'team', model: Team, select: { name: 1, _id: 1 } }).exec((err, users) => {
     if (err) {
       res.send({
         success: false, code: 0, message: err,
@@ -95,6 +96,27 @@ export function deleteUser(req, res) {
 
     user.remove(() => {
       res.send({ success: true, code: 1, message: 'delete success' });
+    });
+  });
+}
+
+export function sendSMS(req, res) {
+  if (!req.body.text) {
+    res.send({ success: false, code: 0, message: 'no text body' });
+    return;
+  }
+
+  session.get(req.session.sessionid, (user) => {
+    if (!user) {
+      res.send({ success: false, code: 0, message: 'please login in' });
+      return;
+    }
+    notification.sendTextMessage(req.body.text, '+64'+user.phone, '+15105737124', (msg) => {
+      if (msg) {
+        res.send({ success: true, code: 1, message: 'message send' });
+      } else {
+        res.send({ success: false, code: 0, message: 'message send failed' });
+      }
     });
   });
 }

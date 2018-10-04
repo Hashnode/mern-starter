@@ -1,0 +1,57 @@
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.6);
+}
+
+
+.container {
+  background-color: white;
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+}
+
+.close-container {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #999999;
+}
+
+.close {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  float: right;
+  color: #666666;
+}
+
+.text-container {
+  width: 100%;
+}
+
+.text {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 10px;
+  height: 200px;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
+.send {
+  width: 80px;
+  height: 20px;
+  line-height: 20px;
+  float: right;
+  background-color: #03A9F4;
+  color: white;
+  text-align: center;
+  margin-right: 15px;
+  margin-top: 5px;
+}

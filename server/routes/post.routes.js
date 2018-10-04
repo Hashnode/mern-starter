@@ -27,4 +27,7 @@ router.route('/admin/editUser').post(UserController.editUser);
 
 router.route('/admin/deleteUser').post(UserController.deleteUser);
 
+router.route('/admin/sendSMS').post(UserController.sendSMS);
+
+
 export default router;

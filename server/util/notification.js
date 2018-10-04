@@ -16,14 +16,25 @@ export class notification {
     });
   }
 
+  // static sendTextMessage(message, recipient, sender, cb) {
+  //   twilio.messages.create({
+  //     to: recipient, // must be a registered number in dev mode
+  //     from: sender, // must be a valid twilio number
+  //     body: message,
+  //   }, (err, response) => {
+  //     cb(err, response);
+  //   });
+  // }
+
   static sendTextMessage(message, recipient, sender, cb) {
-    twilio.messages.create({
-      to: recipient, // must be a registered number in dev mode
-      from: sender, // must be a valid twilio number
-      body: message,
-    }, (err, response) => {
-      cb(err, response);
-    });
+    twilio.messages
+      .create({
+        body: message,
+        from: sender,
+        to: recipient
+      })
+      .then((msg) => cb(msg))
+      .done();
   }
 }
 
