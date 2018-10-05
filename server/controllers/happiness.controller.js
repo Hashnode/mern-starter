@@ -21,7 +21,7 @@ export function addHappiness(req, res) {
   // Let's sanitize inputs
     newHappiness.individualhappiness = sanitizeHtml(newHappiness.individualhappiness);
     newHappiness.teamhappiness = sanitizeHtml(newHappiness.teamhappiness);
-    
+    newHappiness.teamid = user.team;
   // session id still needs to be done
     newHappiness.cuid = cuid();
     newHappiness.save((err, saved) => {
