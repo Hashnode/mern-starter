@@ -6,6 +6,9 @@ import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
 import timer from './util/timer';
+import notification from './util/notification';
+import User from './models/user';
+
 
 // import UserRouter from 'routes/users.routes';
 
@@ -55,6 +58,7 @@ import teams from './routes/team.routes';
 import happiness from './routes/happiness.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
+import Team from './models/team';
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -107,6 +111,26 @@ app.all('/', (req, res, next) => {
 app.use('/api', posts);
 app.use('/api', teams);
 app.use('/api', happiness);
+
+
+// User.find().exec((err, users) => {
+//   if (err) {
+//     return;
+//   }
+//
+//   for (let i = 0; i < users.length; i++) {
+//     const user = users[i];
+//     let msg = 'Hi ' + user.name +  '. How are you feeling about the happiness right now? Please tell me about it on https://how-is-it.herokuapp.com/';
+//     let phone = '+64' + user.phone;
+//     timer.addTask(() => {
+//       notification.sendTextMessage(msg, phone, '+15105737124', (msg) => {
+//
+//       });
+//     }, (new Date()).valueOf() + 1000 * 10);
+//   }
+//
+//   timer.begin();
+// });
 
 
 // Render Initial HTML

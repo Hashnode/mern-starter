@@ -19,9 +19,7 @@
     "heroku-prebuild": "npm run build:server",
     "heroku-postbuild": "npm run build"
   },
-  "pre-commit": [
-
-  ],
+  "pre-commit": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Assignment2-Team4-SDM-AUT/sdm-mern-starter.git"
@@ -119,8 +117,7 @@
     "webpack-manifest-plugin": "^1.3.2",
     "webpack2-externals-plugin": "^1.0.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "ava": {
     "files": [
       "client/**/*.spec.js",
