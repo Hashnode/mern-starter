@@ -20,6 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Post/pages/PostDetailPage/PostDetailPage');
   require('./modules/Team/pages/TeamListPage/TeamListPage');
   require('./modules/Survey/pages/SurveyPage/SurveyPage');
+  require('./modules/Survey/components/HappinessSurveyWidget');
 }
 
 // react-router setup with code-splitting
@@ -29,7 +30,11 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Survey/pages/SurveyPage/SurveyPage').default);
+          // cb(null, require('./modules/Survey/pages/SurveyPage/SurveyPage').default);
+          cb(
+            null,
+            require('./modules/Survey/components/HappinessSurveyWidget').default
+          );
         });
       }}
     />
@@ -37,7 +42,11 @@ export default (
       path="/posts/:slug-:cuid"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostDetailPage/PostDetailPage').default);
+          cb(
+            null,
+            require('./modules/Post/pages/PostDetailPage/PostDetailPage')
+              .default
+          );
         });
       }}
     />
@@ -45,7 +54,10 @@ export default (
       path="/teams/"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Team/pages/TeamListPage/TeamListPage').default);
+          cb(
+            null,
+            require('./modules/Team/pages/TeamListPage/TeamListPage').default
+          );
         });
       }}
     />
@@ -53,7 +65,10 @@ export default (
       path="/posts/"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);
+          cb(
+            null,
+            require('./modules/Post/pages/PostListPage/PostListPage').default
+          );
         });
       }}
     />
@@ -61,7 +76,10 @@ export default (
       path="/survey/"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Survey/pages/SurveyPage/SurveyPage').default);
+          cb(
+            null,
+            require('./modules/Survey/pages/SurveyPage/SurveyPage').default
+          );
         });
       }}
     />
