@@ -10,7 +10,7 @@ import session from '../util/session';
  * @returns void
  */
 export function addHappiness(req, res) {
-  if (!req.body.happiness.individualhappiness || req.body.happiness.teamhappiness) {
+  if (!req.body.happiness.individualhappiness || !req.body.happiness.teamhappiness) {
     res.status(403).end();
   }
   session.get(req.session.sessionid, (user) => {
