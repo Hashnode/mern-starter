@@ -18,7 +18,7 @@ class Session {
       return;
     }
 
-    User.find({ id: sessionId }).exec((err, user) => {
+    User.findOne({ id: sessionId }).exec((err, user) => {
       if (err) {
         cb(null);
       } else {

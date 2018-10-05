@@ -1,18 +1,10 @@
 language: node_js
 node_js:
-  - '6'
   - '8'
-  - '10'
 before_install:
   - 'npm install -g npm@6'
 before_script:
   - sleep 15
 after_success:
   - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
-deploy:
-  provider: heroku
-  api_key:
-    secure: ICWTa3J3tgL5jdmxvsZaYR6jTzsZdI//5uZpNoDT+zH+zQIM9G5R8Enf7tI4SzzrSChxXrhvWeYQclNbcSTi28S4VU0hYXgaVDnarOnd+6EZmK30UvedGmA8xHmYyCKH+P3xscCuTZS8oiMOzwOiCZ07PQtqo299jQScNjagwExp9XM3d5fizxDDt9E910l0gAY0SN7be8CkRku9a985FL0ldAydqEEsRPqH8B6KrBFhBtzGdYbGbt6oupU4VPTVsgpu3OLP0LABSGUh22/rbdtWg/eajWV+XFu4MviK3y2DQ5fzaLZ+XzNnbZtMTEiGc5hQSrOg0QOXpClNWFaWM8gBTI4Hqf65FNbUNhDRPDHUnMqp7/i74V+Nk7MG5g4ik57cRe94YpH+nyeR3SdIz+Gie9YB/dnXg4UvUs6hIa0TflsK8WZW/NK8XDUZZHvRGK1dEkqP8XEWjXuWR35ULpkD7U6qUNBdErqY/yD/vCsHBnFpK9IuDtB3DyZtk+OS1Y5J/9OsF+EKe9aZWNTOP0SktGRJ6Qft8hvqO+0lnz5dqhhazpsMc461T/AvEH9s6i3T48+NqdY4FqZE4L0UfAK44qq/7JVGKzQPYJROx8Il8B37LzRr87S2mSmCzhVpvdh7ZdzJOkZSeLBMs91eTPN+Ybe5yVtbtmSjSGjKlWA=
-  app: how-is-it
-  on:
-    repo: Assignment2-Team4-SDM-AUT/smd-mern-starter
+
