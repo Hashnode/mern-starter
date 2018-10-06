@@ -1,0 +1,42 @@
+.comment-block {
+    margin-top: 10px;
+}
+
+.author {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.changing-text-input {
+    padding: 5px;
+    margin-top: 10px;
+    margin-right: 5px;
+    border-radius: 2px;
+    border: 1px solid #888;
+    color: #555;
+    min-height: auto;
+    resize: none;
+    outline: none;
+}
+
+.admin-panel {
+
+}
+
+.admin-question {
+    display: inline-block;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.admin-button {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.admin-button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
