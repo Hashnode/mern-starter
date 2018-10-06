@@ -60,13 +60,11 @@ function mapStateToProps(state, props) {
 }
 
 PostDetailPage.propTypes = {
-  comment: PropTypes.shape({
-    post_id: PropTypes.string.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
-  }).isRequired,
+  })).isRequired,
 };
 
 export default connect(mapStateToProps)(PostDetailPage);

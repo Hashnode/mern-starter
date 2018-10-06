@@ -47,7 +47,6 @@ class PostCommentsListItem extends Component {
 
   render() {
     const props = this.props;
-    console.log(props);
     const { changing, changingText, deleting } = this.state;
 
     return (
@@ -67,21 +66,22 @@ class PostCommentsListItem extends Component {
 
         <div className={styles['admin-panel']}>
           
-          {!changing && !deleting && [
+          {!changing && !deleting && <div>
             <p className={styles['admin-button']} onClick={this.handleToChangeBtnClick}>Change</p>,
             <p className={styles['admin-button']} onClick={this.handleToDeleteBtnClick}>Delete</p>
-          ]}
+          </div>}
 
-          {changing && [
+          {changing && <div>
             <p className={styles['admin-question']}>Save changes ?</p>,
             <p className={styles['admin-button']} onClick={this.handleSaveChanges}>Save</p>,
             <p className={styles['admin-button']} onClick={this.handleResetBtnClick}>Cancel</p>
-          ]}
-          {deleting && [
+          </div>}
+
+          {deleting && <div>
             <p className={styles['admin-question']}>Exactly delete ?</p>,
             <p className={styles['admin-button']} onClick={this.handleDelete}>Delete</p>,
             <p className={styles['admin-button']} onClick={this.handleResetBtnClick}>Cancel</p>
-          ]}
+          </div>}
         
         </div>
       </div>
@@ -90,8 +90,9 @@ class PostCommentsListItem extends Component {
 }
 
 PostCommentsListItem.propTypes = {
-    author: PropTypes.string.isReqiured,
-    text: PropTypes.string.isReqiured,
+  comment_id: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default connect(null)(PostCommentsListItem);
