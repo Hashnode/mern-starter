@@ -1,6 +1,7 @@
 import Post from './models/post';
 import Team from './models/team';
 import User from './models/user';
+import Happiness from './models/happiness';
 
 export default function () {
   Team.count().exec((err, count) => {
@@ -22,6 +23,31 @@ export default function () {
         // console.log(error.toString());
       }
     });
+  });
+
+  Happiness.count((err,count) => {
+    if (count > 0 ){
+      return;
+    }
+
+    const happiness1 = new Happiness({
+      individualhappiness:3 ,
+      teamhappiness:4,
+      teamid:"5bab12681991ef2274b2866f" ,
+      cuid:'cjmah9iu8000146gz0tbav7ki'
+
+    });
+
+    Happiness.create([happiness1], (error) => {
+      if (!error) {
+        // console.log('We have now some team test data :)');
+      }
+      if (error) {
+        // console.log(error.toString());
+      }
+    });
+
+
   });
 
   User.count().exec((err, count) => {
