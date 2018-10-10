@@ -30,7 +30,7 @@ test.serial('Should correctly add a happiness', async t => {
   t.plan(2);
 
   const res = await request(app)
-    .post('/api/happiness')
+    .post('/api/happinesses')
     .send({ happiness: { individualhappiness: '30', teamhappiness: '50' } })
     .set('Accept', 'application/json');
 
