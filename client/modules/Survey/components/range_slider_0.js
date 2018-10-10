@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './c1.css';
+import style from './c1.css';
 
 // const Component = React.Component;
 
@@ -53,7 +53,7 @@ class RangeSlider0 extends Component {
       // </form>
 
       <label>
-        <div className="relative">
+        <div className={style.relative}>
           {this.props.name}
           happiness Level: <span id="demo"> {this.state.value}</span>
         </div>
@@ -63,8 +63,8 @@ class RangeSlider0 extends Component {
           max="100"
           value={this.state.value}
           onChange={this.handleChange}
-          className="slider"
-          id="myRange"
+          className={style.slider}
+          id={style.myRange}
         />
       </label>
 

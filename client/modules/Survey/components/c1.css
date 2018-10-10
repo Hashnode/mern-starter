@@ -11,7 +11,7 @@ body {
 /* https://www.w3schools.com/css/css_positioning.asp */
 #form_login {
   /* display: table-cell; */
-  text-align: center;
+  text-align: left;
   font-size: 180%;
   color: orangered;
   position: relative;
@@ -32,7 +32,7 @@ div.relative {
   /* left: 30%; */
   padding: 2%;
   margin: auto;
-  width: 40%;
+  /* width: 40%; */
   /* border: 3px solid #73ad21; */
 }
 

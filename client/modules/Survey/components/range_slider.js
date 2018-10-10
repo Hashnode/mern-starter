@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './c1.css';
+import style from './c1.css';
 import RangeSlider0 from './range_slider_0';
 
 // const Component = React.Component;
@@ -57,7 +57,7 @@ class RangeSlider extends Component {
       //   <input type="submit" value="Submit" />
       // </form>
 
-      <div id="form_login">
+      <div id={style.form_login}>
         <form onSubmit={this.handleSubmit}>
           <RangeSlider0 name="Own " />
           <RangeSlider0 name="Team " />
