@@ -3,7 +3,7 @@ import styles from './HappinessSurveyWidget.css';
 
 // const Component = React.Component;
 
-class RangeSlider_1 extends Component {
+class RangeSlider extends Component {
   // state initialization in constructor
   constructor(props) {
     super(props); // call parent method
@@ -18,8 +18,6 @@ class RangeSlider_1 extends Component {
   }
 
   handleChange = event => {
-    console.log('<<handleChange');
-    // console.log(event.target.value);
     this.setState({ value: event.target.value });
 
     // print the value get from Range Slider
@@ -38,17 +36,13 @@ class RangeSlider_1 extends Component {
 
   // Range slider: drag.  but I trigger it without press the element
   onMouseDown = e => {
-    // console.log('mouseDown');
     this.setState({ drag: 1 });
   };
   onMouseUp = e => {
-    // console.log('mouseUp');
-
     this.setState({ drag: 0 });
   };
 
   handleClick = e => {
-    console.log('<<handleClick');
     // var slider = document.getElementById('myRange');
     var element = document.getElementById('myRange');
     var rect = element.getBoundingClientRect();
@@ -230,9 +224,6 @@ class RangeSlider_1 extends Component {
 
   // const returnValue = {}
   render() {
-    console.log('RENDER ', this.props.question);
-
-    console.log('now this.state.value: ', this.state.value);
     const styles1 = {
       width: this.state.value === 1 ? '60px' : '41px',
       height: this.state.value === 1 ? '60px' : '40px',
@@ -318,5 +309,5 @@ class RangeSlider_1 extends Component {
   }
 }
 
-export default RangeSlider_1;
+export default RangeSlider;
 //

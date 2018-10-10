@@ -15,17 +15,10 @@ export class HappinessSurveyWidget extends Component {
   }
 
   handleSubmit(event) {
-    // alert(
-    //   'A name was submitted: ' +
-    //     this.state.valueIndividual +
-    //     ' ' +
-    //     this.state.valueTeam
-    // );
     // event.preventDefault();
   }
 
   render() {
-    console.log('RENDER');
     const sliderStyle = {
       margin: '50px auto 140px auto'
     };
