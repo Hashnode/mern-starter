@@ -1,50 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import callApi from '../../../util/apiCaller';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import './c1.css';
 import RangeSlider0 from './range_slider_0';
 
-// Import Style
-// import styles from './HappinessSurveyWidget.css';
-// require('../../../../node_modules/rc-slider/assets/index.css'); // webpack problem with css imports (this line works for tests)
-// import '!style-loader!css-loader!../../../../node_modules/rc-slider/assets/index.css'; // webpack problem with css imports (this line works for execution)
-
-// // Import External Components
-// import Slider, { createSliderWithTooltip } from 'rc-slider';
-
-// // constants for Sliders
-// const SliderWithTooltipOwn = createSliderWithTooltip(Slider);
-// const SliderWithTooltipTeam = createSliderWithTooltip(Slider);
-// const sliderMarks = { 0: 'very unhappy', 50: 'neutral', 100: 'very happy' };
-
 export class HappinessSurveyWidget extends Component {
-  // submitSurvey = () => {
-  //   const happinessLevelRef = this.refs.happinessLevel;
-  //   if (happinessLevelRef.value) {
-  //     this.props.submitSurvey();
-  //   }
-  // };
-
-  // render() {
-  //   return (
-  //     <div>
-  //       <h2 className={styles.inputLabel}>
-  //         <FormattedMessage id={"ownHappiness"} />
-  //       </h2>
-  //       <div className={styles.slideContainer}>
-  //         <SliderWithTooltipOwn marks={sliderMarks} included={false} className={styles.slider} />
-  //       </div>
-
-  //       <h2 className={styles.inputLabel}>
-  //         <FormattedMessage id={"teamHappiness"} />
-  //       </h2>
-  //       <div className={styles.slideContainer}>
-  //         <SliderWithTooltipTeam marks={sliderMarks} included={false} className={styles.slider} />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
+  
   constructor(props) {
     super(props); // call parent method
     this.state = { value: '50' };
@@ -70,8 +32,28 @@ export class HappinessSurveyWidget extends Component {
   }
 
   handleSubmit(event) {
-    // alert('A name was submitted: ' + this.state.value);
-    alert('A name was submitted: ' + this.state.value);
+    const individualhappiness = 35;
+    const teamhappiness = 66;
+    const happiness = {
+      happiness: {
+        individualhappiness: individualhappiness,
+        teamhappiness: teamhappiness
+      }
+    };
+
+     alert(1);
+
+     callApi('/happiness', 'post', happiness).then(res => {
+      if (res.success) {
+        //for resetting all the states
+        // success message under submit button
+        alert(res.cuid);
+      } else {
+        alert(res.message);
+        console.log(res);
+      }
+    });
+     alert(2);
     event.preventDefault();
   }
 
@@ -98,7 +80,6 @@ export class HappinessSurveyWidget extends Component {
 }
 
 HappinessSurveyWidget.propTypes = {
-  submitSurvey: PropTypes.func.isRequired
 };
 
 export default injectIntl(HappinessSurveyWidget);
