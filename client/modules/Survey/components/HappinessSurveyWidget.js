@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import styles from './HappinessSurveyWidget.css';
 import RangeSlider from './RangeSlider';
 
-export class HappinessSurveyWidget extends Component {
+class HappinessSurveyWidget extends Component {
   constructor(props) {
     super(props); // call parent method
     this.state = {
@@ -81,3 +81,4 @@ export class HappinessSurveyWidget extends Component {
 // };
 
 export default injectIntl(HappinessSurveyWidget);
+// export default HappinessSurveyWidget;

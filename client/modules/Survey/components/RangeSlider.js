@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './HappinessSurveyWidget.css';
-
+import logo1 from './images/1.gif';
+import logo3 from './images/neutral.png';
 // const Component = React.Component;
 
 class RangeSlider extends Component {
@@ -49,7 +50,7 @@ class RangeSlider extends Component {
 
     var spaceToLeft = e.clientX - rect.left;
     const ulWidth = document.getElementById('myRange').clientWidth;
-    if (spaceToLeft < 0 || spaceToLeft > ulWidth) {
+    if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
       return;
     }
 
@@ -262,13 +263,13 @@ class RangeSlider extends Component {
 
     return (
       <div className={styles.wrapper}>
+        {/* return <img src={logo1} alt="Logo" />; */}
         {/* <label className="statement">
           {this.props.question} <span ref="demo">{this.state.value} </span>
         </label> */}
         <label className={styles.statement}>
           {this.props.question} <span ref="demo"> </span>
         </label>
-
         <ul
           className={styles.likert}
           onClick={this.handleClick}
@@ -282,7 +283,16 @@ class RangeSlider extends Component {
           ref="score"
         >
           <li className={styles.li1}>
+            {/* <img src={logo1} alt="Logo" /> */}
             <div id="one" className={styles.one} style={styles1} />
+            {/* <img
+              src={logo3}
+              alt="Logo"
+              id="one"
+              className={styles.one}
+              style={styles1}
+            /> */}
+
             <label className={styles.label1}>Sad</label>
           </li>
           <li className={styles.li1}>

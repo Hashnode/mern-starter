@@ -98,8 +98,10 @@ body {
   height: 40px; */
   border: 2px solid rgb(255, 230, 0);
   border-radius: 50%;
-  background: url('./images/1.gif');
+  /* background: url(./images/1.gif); */
   /* background: url('https://media1.tenor.com/images/03e9ddaca81f336a82de1616d6fed4a5/tenor.gif?itemid=7596073'); */
+  background: url('https://media.tenor.com/images/020e1899e91ed2742fd0491927d90401/tenor.gif');
+
   background-size: 170%;
   background-repeat: no-repeat;
   /* background-position: -18px -28px; */
@@ -116,9 +118,9 @@ body {
   height: 50px; */
   border: 0;
   border-radius: 50%;
-  /* background: url('2.gif'); */
-  background: url('./images/2.gif');
-  /* background: url('https://media1.tenor.com/images/03e9ddaca81f336a82de1616d6fed4a5/tenor.gif?itemid=7596073'); */
+  /* background-image: url(./images/2.gif); */
+  /* background-image: url(./images/2.gif); */
+  background: url('https://media1.tenor.com/images/cd03fa15e25b27bb105200aa5de41c5e/tenor.gif?itemid=4175119');
   background-size: 170%;
   background-repeat: no-repeat;
   /* background-position: -18px -28px; */
@@ -136,9 +138,9 @@ body {
   height: 55px; */
   border: 0;
   border-radius: 50%;
-  background: url('./images/neutral.png');
-  /* background: url('https://media1.tenor.com/images/03e9ddaca81f336a82de1616d6fed4a5/tenor.gif?itemid=7596073'); */
-  background-size: 105%;
+  /* background-image: url(./images/neutral.png); */
+  background: url('https://emojis.wiki/emoji-pics/neutral-face-apple.png');
+  background-size: 110%;
   background-repeat: no-repeat;
   /* background-position: -18px -28px; */
   background-position: 50% 57%;
@@ -154,7 +156,8 @@ body {
   height: 50px; */
   border: 0;
   border-radius: 50%;
-  background: url('./images/4.gif');
+  /* background-image: url(./images/4.gif); */
+  background: url('https://media1.tenor.com/images/03e9ddaca81f336a82de1616d6fed4a5/tenor.gif?itemid=7596073');
   background-size: 170%;
   background-repeat: no-repeat;
   /* background-position: -18px -28px; */
@@ -171,8 +174,8 @@ body {
   height: 50px; */
   border: 0;
   border-radius: 50%;
-  background: url('./images/5.gif');
-  /* background: url('https://media1.tenor.com/images/03e9ddaca81f336a82de1616d6fed4a5/tenor.gif?itemid=7596073'); */
+  /* background: url('./images/5.gif'); */
+  background-image: url('https://media1.tenor.com/images/fe1551c057d345669f1191ac037d593f/tenor.gif?itemid=10370442');
   background-size: 170%;
   background-repeat: no-repeat;
   /* background-position: -18px -28px; */
