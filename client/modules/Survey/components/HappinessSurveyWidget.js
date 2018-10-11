@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import callApi from '../../../util/apiCaller';
+import { injectIntl } from 'react-intl';
+
+// import styles
 import styles from './HappinessSurveyWidget.css';
 import RangeSlider from './RangeSlider';
 
@@ -9,18 +11,43 @@ class HappinessSurveyWidget extends Component {
     super(props); // call parent method
     this.state = {
       valueIndividual: 3,
-      valueTeam: 3
+      valueTeam: 3,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  getData(val) {
+    // do not forget to bind getData in constructor
+    // console.log(val);
+    this.setState({ value: val });
+  }
+
   handleSubmit(event) {
-    // event.preventDefault();
+    const individualHappiness = 35;
+    const teamHappiness = 66;
+    const happiness = {
+      happiness: {
+        individualHappiness,
+        teamHappiness,
+      },
+    };
+
+    callApi('/happiness', 'post', happiness).then(res => {
+      if (res.success) {
+        // reset all the states
+        // success message under submit button
+        alert(res.cuid);
+      } else {
+        alert(res.message);
+        console.log(res);
+      }
+    });
+    event.preventDefault();
   }
 
   render() {
     const sliderStyle = {
-      margin: '50px auto 140px auto'
+      margin: '50px auto 140px auto',
     };
     return (
       <div>
@@ -30,7 +57,7 @@ class HappinessSurveyWidget extends Component {
             style={{
               // border: '1px solid orange',
               top: '-53px',
-              position: 'relative'
+              position: 'relative',
             }}
           >
             <div style={sliderStyle}>
@@ -46,7 +73,7 @@ class HappinessSurveyWidget extends Component {
                 width: '200px',
                 border: '1px inset #f1f1f1',
                 margin: '10px auto -14px auto',
-                opacity: '0'
+                opacity: '0',
               }}
             />
             <div style={sliderStyle}>
@@ -65,7 +92,7 @@ class HappinessSurveyWidget extends Component {
                   margin: 'auto',
                   fontSize: '20px',
                   bottom: '15px',
-                  position: 'relative'
+                  position: 'relative',
                 }}
               />
             </div>
@@ -75,10 +102,6 @@ class HappinessSurveyWidget extends Component {
     );
   }
 }
-
-// HappinessSurveyWidget.propTypes = {
-//   // submitSurvey: PropTypes.func.isRequired
-// };
 
 export default injectIntl(HappinessSurveyWidget);
 // export default HappinessSurveyWidget;

@@ -19,7 +19,7 @@ body {
 
 .wrapper {
   -webkit-user-select: none;
-  -moz-user-select: 'none';
+  -moz-user-select: none;
   position: relative;
   margin: 0 auto -35px auto;
 
@@ -109,6 +109,7 @@ body {
   cursor: pointer;
   display: block;
 }
+
 .two {
   position: relative;
   top: -13px;
