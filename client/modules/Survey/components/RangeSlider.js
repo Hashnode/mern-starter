@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './HappinessSurveyWidget.css';
-import logo1 from './images/1.gif';
-import logo3 from './images/neutral.png';
+// import logo1 from './images/1.gif';
+// import logo3 from './images/neutral.png';
 // const Component = React.Component;
 
 class RangeSlider extends Component {
