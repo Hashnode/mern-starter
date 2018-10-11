@@ -17,8 +17,8 @@ class HappinessSurveyWidget extends Component {
   }
 
   handleSubmit(event) {
-    const individualHappiness = 35;
-    const teamHappiness = 66;
+    const individualHappiness = this.state.valueIndividual;
+    const teamHappiness = this.state.valueTeam;
     const happiness = {
       happiness: {
         individualHappiness,
