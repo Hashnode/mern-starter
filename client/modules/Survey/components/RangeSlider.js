@@ -11,7 +11,7 @@ class RangeSlider extends Component {
     this.state = {
       value: 3,
       drag: 0,
-      top: ['-11px', '-11px', '-42px', '-11px', '-11px'],
+      top: ['-11px', '-11px', '-42px', '-11px', '-11px']
     };
     this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,27 +52,27 @@ class RangeSlider extends Component {
     if (level === 1) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-42px', '-11px', '-13px', '-11px', '-11px'],
+        top: ['-42px', '-11px', '-13px', '-11px', '-11px']
       });
     } else if (level === 2) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-42px', '-13px', '-11px', '-11px'],
+        top: ['-11px', '-42px', '-13px', '-11px', '-11px']
       });
     } else if (level === 3) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-11px', '-45px', '-11px', '-11px'],
+        top: ['-11px', '-11px', '-45px', '-11px', '-11px']
       });
     } else if (level === 4) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-11px', '-13px', '-42px', '-11px'],
+        top: ['-11px', '-11px', '-13px', '-42px', '-11px']
       });
     } else if (level === 5) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-11px', '-13px', '-11px', '-42px'],
+        top: ['-11px', '-11px', '-13px', '-11px', '-42px']
       });
     }
     this.props.happyValue(this.refs.score.value);
@@ -100,27 +100,27 @@ class RangeSlider extends Component {
     if (level === 1) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-42px', '-11px', '-13px', '-11px', '-11px'],
+        top: ['-42px', '-11px', '-13px', '-11px', '-11px']
       });
     } else if (level === 2) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-42px', '-13px', '-11px', '-11px'],
+        top: ['-11px', '-42px', '-13px', '-11px', '-11px']
       });
     } else if (level === 3) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-11px', '-45px', '-11px', '-11px'],
+        top: ['-11px', '-11px', '-45px', '-11px', '-11px']
       });
     } else if (level === 4) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-11px', '-13px', '-42px', '-11px'],
+        top: ['-11px', '-11px', '-13px', '-42px', '-11px']
       });
     } else if (level === 5) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-11px', '-13px', '-11px', '-42px'],
+        top: ['-11px', '-11px', '-13px', '-11px', '-42px']
       });
     }
     this.props.happyValue(this.refs.score.value);
@@ -145,33 +145,33 @@ class RangeSlider extends Component {
 
     // this.state.value = this.refs.score.value;
     this.setState({
-      value: this.refs.score.value,
+      value: this.refs.score.value
     });
 
     if (level === 1) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-42px', '-11px', '-15px', '-11px', '-11px'],
+        top: ['-42px', '-11px', '-15px', '-11px', '-11px']
       });
     } else if (level === 2) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-42px', '-15px', '-11px', '-11px'],
+        top: ['-11px', '-42px', '-15px', '-11px', '-11px']
       });
     } else if (level === 3) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-11px', '-45px', '-11px', '-11px'],
+        top: ['-11px', '-11px', '-45px', '-11px', '-11px']
       });
     } else if (level === 4) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-11px', '-15px', '-42px', '-11px'],
+        top: ['-11px', '-11px', '-15px', '-42px', '-11px']
       });
     } else if (level === 5) {
       this.setState({
         value: this.refs.score.value,
-        top: ['-11px', '-11px', '-15px', '-11px', '-42px'],
+        top: ['-11px', '-11px', '-15px', '-11px', '-42px']
       });
     }
 
@@ -201,36 +201,36 @@ class RangeSlider extends Component {
       width: this.state.value === 1 ? '60px' : '41px',
       height: this.state.value === 1 ? '60px' : '40px',
       left: this.state.value === 1 ? '-3px' : '10px',
-      border: this.state.value === 1 ? '4px solid rgb(255, 230, 0)' : 0,
-      top: this.state.top[0],
+      border: this.state.value === 1 ? '5px solid rgb(255, 230, 0)' : 0,
+      top: this.state.top[0]
     };
     const styles2 = {
       width: this.state.value === 2 ? '60px' : '41px',
       height: this.state.value === 2 ? '60px' : '40px',
       left: this.state.value === 2 ? '-3px' : '10px',
-      border: this.state.value === 2 ? '4px solid rgb(255, 230, 0)' : 0,
-      top: this.state.top[1],
+      border: this.state.value === 2 ? '5px solid rgb(255, 230, 0)' : 0,
+      top: this.state.top[1]
     };
     const styles3 = {
       width: this.state.value === 3 ? '60px' : '41px',
       height: this.state.value === 3 ? '60px' : '40px',
       left: this.state.value === 3 ? '-3px' : '10px',
-      border: this.state.value === 3 ? '4px solid rgb(255, 230, 0)' : 0,
-      top: this.state.top[2],
+      border: this.state.value === 3 ? '5px solid rgb(255, 230, 0)' : 0,
+      top: this.state.top[2]
     };
     const styles4 = {
       width: this.state.value === 4 ? '60px' : '41px',
       height: this.state.value === 4 ? '60px' : '40px',
       left: this.state.value === 4 ? '-3px' : '10px',
-      border: this.state.value === 4 ? '4px solid rgb(255, 230, 0)' : 0,
-      top: this.state.top[3],
+      border: this.state.value === 4 ? '5px solid rgb(255, 230, 0)' : 0,
+      top: this.state.top[3]
     };
     const styles5 = {
       width: this.state.value === 5 ? '60px' : '41px',
       height: this.state.value === 5 ? '60px' : '40px',
       left: this.state.value === 5 ? '-3px' : '10px',
-      border: this.state.value === 5 ? '4px solid rgb(255, 230, 0)' : 0,
-      top: this.state.top[4],
+      border: this.state.value === 5 ? '5px solid rgb(255, 230, 0)' : 0,
+      top: this.state.top[4]
     };
 
     return (
