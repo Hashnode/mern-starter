@@ -1,16 +1,203 @@
-.inputLabel {
+html,
+body {
+  overflow: hidden;
+  width: 100%;
+}
+
+.form_login {
+  /* display: table-cell; */
+  text-align: center;
+  font-size: 150%;
+
+  color: rgb(14, 12, 7);
+  position: relative;
+  top: 0;
+  right: 0;
+  left: -11px;
+  /* width: 500px; */
+}
+
+.wrapper {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  position: relative;
+  margin: 0 auto -35px auto;
+
+  width: 350px;
+  /* height: 20px; */
+  font: 22px Arial, san-serif;
+  /* border: 1px solid darkgray; */
+  min-width: 290px;
+}
+.wrapper .statement {
+  font-family: 'Bai Jamjuree', sans-serif;
+  position: relative;
+  /* top: '100px'; */
+  bottom: 10px;
+  display: block;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 10px;
+  padding: 0 0 35px 0;
+  /* top: 0px; */
+  margin-bottom: 150px;
+  text-align: center;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+/* #wrapper .likert-header {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 30px 0 0 4.25%;
+} */
+.wrapper .likert {
+  list-style: none;
+  position: relative;
+  width: 100%;
+  margin: 0 0 15%;
+  padding: 0;
+  display: block;
+  /* border-bottom: 2px solid #efefef; */
+  /* border: 1px solid red; */
+  position: absolute;
+  top: 83px;
+}
+.likert:last-of-type {
+  border-bottom: 0;
+}
+.likert:before {
+  /* z-index: -2; */
+  content: '';
+  position: relative;
+  top: 11px;
+  left: 9.5%;
+  display: block;
+  /* background-color: #2cd8ad; */
+  background-color: #efefef;
+  height: 4px;
+  width: 78%;
 }
 
-.slideContainer {
-  width: 50%; /* Width of the outside container */
+.wrapper .likert .li1 {
+  display: inline-block;
+  width: 19%;
+  text-align: center;
+  vertical-align: top;
+}
+.wrapper .likert li .desc {
+  position: relative;
+  top: -5px;
 }
 
-.slider {
-  margin-bottom: 30px !important;
+.one {
+  position: relative;
+  top: -11px;
+  -webkit-appearance: none;
+  appearance: none;
+  /* width: 41px;
+  height: 40px; */
+  border: 2px solid rgb(255, 230, 0);
+  border-radius: 50%;
+  /* background: url(./images/1.gif); */
+  background: url('https://media1.tenor.com/images/b3d3e40e0cec1d3619152bde6ee8a1a8/tenor.gif?itemid=7596100');
+  background-size: 170%;
+  background-repeat: no-repeat;
+  /* background-position: -18px -28px; */
+  background-position: 49% 52%;
+  cursor: pointer;
+  display: block;
 }
 
-h2 {
-  font-size: 1em !important;;
+.two {
+  position: relative;
+  top: -13px;
+  -webkit-appearance: none;
+  appearance: none;
+  /* width: 51px;
+  height: 50px; */
+  border: 0;
+  border-radius: 50%;
+  /* background-image: url(./images/2.gif); */
+  background: url('https://media1.tenor.com/images/cd03fa15e25b27bb105200aa5de41c5e/tenor.gif?itemid=4175119');
+  background-size: 170%;
+  background-repeat: no-repeat;
+  /* background-position: -18px -28px; */
+  background-position: 49% 51%;
+  cursor: pointer;
+  display: block;
 }
+
+.three {
+  position: relative;
+  top: -12px;
+  -webkit-appearance: none;
+  appearance: none;
+  /* width: 55px;
+  height: 55px; */
+  border: 0;
+  border-radius: 50%;
+  /* background-image: url(./images/neutral.png); */
+  background: url('https://emojis.wiki/emoji-pics/neutral-face-apple.png');
+  background-size: 110%;
+  background-repeat: no-repeat;
+  /* background-position: -18px -28px; */
+  background-position: 50% 57%;
+  cursor: pointer;
+  display: block;
+}
+.four {
+  position: relative;
+  top: -13px;
+  -webkit-appearance: none;
+  appearance: none;
+  /* width: 51px;
+  height: 50px; */
+  border: 0;
+  border-radius: 50%;
+  /* background-image: url(./images/4.gif); */
+  background: url('https://media1.tenor.com/images/03e9ddaca81f336a82de1616d6fed4a5/tenor.gif?itemid=7596073');
+  background-size: 170%;
+  background-repeat: no-repeat;
+  /* background-position: -18px -28px; */
+  background-position: 49% 51%;
+  cursor: pointer;
+  display: block;
+}
+.five {
+  position: relative;
+  top: -13px;
+  -webkit-appearance: none;
+  appearance: none;
+  /* width: 51px;
+  height: 50px; */
+  border: 0;
+  border-radius: 50%;
+  /* background: url('./images/5.gif'); */
+  background-image: url('https://media1.tenor.com/images/fe1551c057d345669f1191ac037d593f/tenor.gif?itemid=10370442');
+  background-size: 170%;
+  background-repeat: no-repeat;
+  /* background-position: -18px -28px; */
+  background-position: 49% 51%;
+  cursor: pointer;
+  display: block;
+}
+/* same name but use ID */
+
+@import url('https://fonts.googleapis.com/css?family=Bai+Jamjuree:500|PT+Sans+Narrow');
+
+.wrapper .likert li .label1 {
+  /* width: 100%; */
+  font-size: 13px;
+  font-weight: bold;
+  position: static;
+  /* color: rgb(6, 7, 58); */
+  color: rgb(52, 12, 88);
+  /* font-family: 'Bai Jamjuree', sans-serif; */
+  font-family: 'PT Sans Narrow', sans-serif;
+  text-transform: uppercase;
+}
+
+/* .show {
+  position: relative;
+  top: 150px;
+} */

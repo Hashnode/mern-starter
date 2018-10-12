@@ -1,104 +1,100 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import './c1.css';
-import RangeSlider0 from './range_slider_0';
+import callApi from '../../../util/apiCaller';
+import { injectIntl } from 'react-intl';
 
-// Import Style
-// import styles from './HappinessSurveyWidget.css';
-// require('../../../../node_modules/rc-slider/assets/index.css'); // webpack problem with css imports (this line works for tests)
-// import '!style-loader!css-loader!../../../../node_modules/rc-slider/assets/index.css'; // webpack problem with css imports (this line works for execution)
+// import styles
+import styles from './HappinessSurveyWidget.css';
+import RangeSlider from './RangeSlider';
 
-// // Import External Components
-// import Slider, { createSliderWithTooltip } from 'rc-slider';
-
-// // constants for Sliders
-// const SliderWithTooltipOwn = createSliderWithTooltip(Slider);
-// const SliderWithTooltipTeam = createSliderWithTooltip(Slider);
-// const sliderMarks = { 0: 'very unhappy', 50: 'neutral', 100: 'very happy' };
-
-export class HappinessSurveyWidget extends Component {
-  // submitSurvey = () => {
-  //   const happinessLevelRef = this.refs.happinessLevel;
-  //   if (happinessLevelRef.value) {
-  //     this.props.submitSurvey();
-  //   }
-  // };
-
-  // render() {
-  //   return (
-  //     <div>
-  //       <h2 className={styles.inputLabel}>
-  //         <FormattedMessage id={"ownHappiness"} />
-  //       </h2>
-  //       <div className={styles.slideContainer}>
-  //         <SliderWithTooltipOwn marks={sliderMarks} included={false} className={styles.slider} />
-  //       </div>
-
-  //       <h2 className={styles.inputLabel}>
-  //         <FormattedMessage id={"teamHappiness"} />
-  //       </h2>
-  //       <div className={styles.slideContainer}>
-  //         <SliderWithTooltipTeam marks={sliderMarks} included={false} className={styles.slider} />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
+class HappinessSurveyWidget extends Component {
   constructor(props) {
     super(props); // call parent method
-    this.state = { value: '50' };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.getData = this.getData.bind(this);
-  }
-
-  handleChange(event) {
-    //   console.log(event.target.value);
-    this.setState({ value: event.target.value });
-
-    // print the value get from Range Slider
-    var slider = document.getElementById('myRange');
-    var output = document.getElementById('demo');
-    output.innerHTML = slider.value;
-
-    slider.oninput = function() {
-      output.innerHTML = this.value;
+    this.state = {
+      valueIndividual: 3,
+      valueTeam: 3
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
-    // alert('A name was submitted: ' + this.state.value);
-    alert('A name was submitted: ' + this.state.value);
+    const individualHappiness = this.state.valueIndividual;
+    const teamHappiness = this.state.valueTeam;
+    const happiness = {
+      happiness: {
+        individualhappiness: individualHappiness,
+        teamhappiness: teamHappiness,
+      }
+    };
+
+    callApi('happiness', 'post', happiness).then(res => {
+      if (res.cuid) {
+        // reset all the states
+        // success message under submit button
+      } else {
+        alert(res.message);
+        console.log(res);
+      }
+    });
     event.preventDefault();
   }
 
-  getData(val) {
-    // do not forget to bind getData in constructor
-    // console.log(val);
-    this.setState({ value: val });
-  }
-
   render() {
-    console.log('RENDER');
+    const sliderStyle = {
+      margin: '50px auto 140px auto'
+    };
     return (
-      <div id="form_login">
-        <form onSubmit={this.handleSubmit}>
-          <RangeSlider0 name="Own " />
-          <RangeSlider0 name="Team " />
-          <div>
-            <input type="submit" value="Submit" />
-          </div>
-        </form>
+      <div>
+        <div className={styles.form_login}>
+          <form
+            onSubmit={this.handleSubmit}
+            style={{
+              // border: '1px solid orange',
+              top: '-53px',
+              position: 'relative'
+            }}
+          >
+            <div style={sliderStyle}>
+              <RangeSlider
+                question="How happy are you?"
+                happyValue={valueIndividual =>
+                  this.setState({ valueIndividual })
+                }
+              />
+            </div>
+            <div
+              style={{
+                width: '200px',
+                border: '1px inset #f1f1f1',
+                margin: '10px auto -14px auto',
+                opacity: '0'
+              }}
+            />
+            <div style={sliderStyle}>
+              <RangeSlider
+                question="How happy are you with your team?"
+                happyValue={valueTeam => this.setState({ valueTeam })}
+              />
+            </div>
+            <div>
+              <input
+                type="submit"
+                value="Submit"
+                style={{
+                  width: '110px',
+                  height: '50px',
+                  margin: 'auto',
+                  fontSize: '20px',
+                  bottom: '15px',
+                  position: 'relative'
+                }}
+              />
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
 }
 
-HappinessSurveyWidget.propTypes = {
-  submitSurvey: PropTypes.func.isRequired
-};
-
 export default injectIntl(HappinessSurveyWidget);
+// export default HappinessSurveyWidget;
