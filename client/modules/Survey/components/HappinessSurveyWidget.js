@@ -21,16 +21,15 @@ class HappinessSurveyWidget extends Component {
     const teamHappiness = this.state.valueTeam;
     const happiness = {
       happiness: {
-        individualHappiness,
-        teamHappiness
+        individualhappiness: individualHappiness,
+        teamhappiness: teamHappiness,
       }
     };
 
-    callApi('/happiness', 'post', happiness).then(res => {
-      if (res.success) {
+    callApi('happiness', 'post', happiness).then(res => {
+      if (res.cuid) {
         // reset all the states
         // success message under submit button
-        alert(res.cuid);
       } else {
         alert(res.message);
         console.log(res);
