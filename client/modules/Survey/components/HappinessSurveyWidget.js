@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import callApi from '../../../util/apiCaller';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 // import styles
 import styles from './HappinessSurveyWidget.css';
 import RangeSlider from './RangeSlider';
+import { Link } from 'react-router';
 
 class HappinessSurveyWidget extends Component {
   constructor(props) {
     super(props); // call parent method
     this.state = {
       valueIndividual: 3,
-      valueTeam: 3
+      valueTeam: 3,
+      query: props.location.query
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const u = this.state.query.u;
+    const t = this.state.query.t;
+    if (typeof u !== 'undefined' && typeof t !== 'undefined') {
+      const title = '<a href="javascript:void(0)">' + u + ' | ' + t + '</a>';
+      document.getElementById('titleRight').innerHTML = title;
+    }
   }
 
   handleSubmit(event) {

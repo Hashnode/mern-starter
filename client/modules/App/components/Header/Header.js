@@ -14,7 +14,7 @@ export function Header() {
           <Link to="/" ><FormattedMessage id="siteTitle" /></Link>
         </h1>
         <div className={styles.navigation}>
-          <span>
+          <span id="titleRight" className={styles['navigation-content']}>
             <Link to="/admin" className={styles.link}> <FormattedMessage id="admin" /></Link>
           </span>
         </div>
