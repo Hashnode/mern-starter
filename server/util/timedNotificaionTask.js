@@ -10,11 +10,15 @@ const schedule = require('node-schedule');
 
 const isDevMode = process.env.NODE_ENV === 'development' || false;
 
-const os = require('os');
-let IPv4;
-for (let i = 0; i < os.networkInterfaces().en0.length; i++) {
-  if (os.networkInterfaces().en0[i].family === 'IPv4') {
-    IPv4 = os.networkInterfaces().en0[i].address;
+const interfaces = require('os').networkInterfaces(); // 在开发环境中获取局域网中的本机iP地址
+let IPv4 = '';
+for (const devName in interfaces) {
+  const iface = interfaces[devName];
+  for (let i = 0; i < iface.length; i++) {
+    const alias = iface[i];
+    if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+      IPv4 = alias.address;
+    }
   }
 }
 
