@@ -50,16 +50,16 @@ class HappinessSurveyWidget extends Component {
 
   render() {
     const sliderStyle = {
-      margin: '50px auto 140px auto',
+      margin: '10px auto 140px auto',
     };
     return (
-      <div>
+      <div style={{ overflow: 'hidden' }}>
         <div className={styles.form_login}>
           <form
             onSubmit={this.handleSubmit}
             style={{
               // border: '1px solid orange',
-              top: '-53px',
+              top: '0px',
               position: 'relative',
             }}
           >
