@@ -37,7 +37,7 @@ class HappinessSurveyWidget extends Component {
     };
 
     callApi('happiness', 'post', happiness).then(res => {
-      if (res.cuid) {
+      if (!res.message) {
         // reset all the states
         // success message under submit button
       } else {
