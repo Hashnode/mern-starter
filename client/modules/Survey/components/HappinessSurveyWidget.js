@@ -16,6 +16,15 @@ class HappinessSurveyWidget extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    const username = this.state.query.u;
+    const teamname = this.state.query.t;
+    if (typeof username !== 'undefined' && typeof teamname !== 'undefined') {
+      const title = `<a href="javascript:void(0)">${username} | ${teamname}</a>`;
+      document.getElementById('titleRight').innerHTML = title;
+    }
+  }
+
   handleSubmit(event) {
     const individualHappiness = this.state.valueIndividual;
     const teamHappiness = this.state.valueTeam;

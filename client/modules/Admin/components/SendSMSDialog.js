@@ -22,7 +22,6 @@ class SendSMSDialog extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log(props);
     this.setState({
       display: props.data.display,
       text: 'Hi, ' + props.data.name + '. How are you feeling about the happiness right now? Please tell me about it on https://how-is-it.herokuapp.com/\n'

@@ -5,9 +5,8 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
-import timer from './util/timer';
-import notification from './util/notification';
-import User from './models/user';
+
+import timedTask from './util/timedNotificaionTask';
 
 
 // import UserRouter from 'routes/users.routes';
@@ -112,25 +111,7 @@ app.use('/api', posts);
 app.use('/api', teams);
 app.use('/api', happiness);
 
-
-// User.find().exec((err, users) => {
-//   if (err) {
-//     return;
-//   }
-//
-//   for (let i = 0; i < users.length; i++) {
-//     const user = users[i];
-//     let msg = 'Hi ' + user.name +  '. How are you feeling about the happiness right now? Please tell me about it on https://how-is-it.herokuapp.com/';
-//     let phone = '+64' + user.phone;
-//     timer.addTask(() => {
-//       notification.sendTextMessage(msg, phone, '+15105737124', (msg) => {
-//
-//       });
-//     }, (new Date()).valueOf() + 1000 * 10);
-//   }
-//
-//   timer.begin();
-// });
+//timedTask.begin();
 
 
 // Render Initial HTML
