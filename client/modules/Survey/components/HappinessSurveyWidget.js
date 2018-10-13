@@ -12,6 +12,7 @@ class HappinessSurveyWidget extends Component {
     this.state = {
       valueIndividual: 3,
       valueTeam: 3,
+      query: props.location.query
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
