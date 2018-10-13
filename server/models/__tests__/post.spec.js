@@ -18,7 +18,7 @@ test.beforeEach('connect and add two post entries', async () => {
   await Post.create(posts).catch(() => 'Unable to create posts');
 });
 
-test.afterEach.always(async () => {
+test.afterEach(async () => {
   await dropDB();
 });
 

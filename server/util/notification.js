@@ -1,37 +1,15 @@
-const messagebird = require('messagebird')('9JoazGaGY5c3ffa2NxEdxfY1I');
-
 const accountSid = 'ACd7451db25e4af5611895d69d42c2d6d4'; // Your Account SID from www.twilio.com/console
 const authToken = 'd3094298e342cddebaeac56f27b3bdd3';   // Your Auth Token from www.twilio.com/console
 
 const twilio = require('twilio')(accountSid, authToken);
 
 export class notification {
-  static sendTextMessagebird(message, recipient, sender, cb) {
-    messagebird.messages.create({
-      originator: sender,
-      recipients: [recipient],
-      body: message,
-    }, (err, response) => {
-      cb(err, response);
-    });
-  }
-
-  // static sendTextMessage(message, recipient, sender, cb) {
-  //   twilio.messages.create({
-  //     to: recipient, // must be a registered number in dev mode
-  //     from: sender, // must be a valid twilio number
-  //     body: message,
-  //   }, (err, response) => {
-  //     cb(err, response);
-  //   });
-  // }
-
   static sendTextMessage(message, recipient, sender, cb) {
     twilio.messages
       .create({
         body: message,
         from: sender,
-        to: recipient
+        to: recipient,
       })
       .then((msg) => cb(msg))
       .done();
@@ -50,7 +28,6 @@ function callback(error, response) {
   console.log(response);
 }
 
-notification.sendTextMessagebird(testMessage, user, originator, callback);
 notification.sendTextMessage(testMessage, user, originator, callback); */
 
 
