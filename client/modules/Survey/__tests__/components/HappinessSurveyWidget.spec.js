@@ -9,9 +9,7 @@ const props = {
 };
 
 test('renders properly', t => {
-  const wrapper = shallowWithIntl(
-    <HappinessSurveyWidget {...props} />
-  );
+  const wrapper = shallowWithIntl(<HappinessSurveyWidget />);
 
   t.is(wrapper.find('h2').length, 2);
   t.truthy(wrapper.find('h2').first().containsMatchingElement(<FormattedMessage id="ownHappiness" />));

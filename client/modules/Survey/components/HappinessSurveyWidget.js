@@ -11,7 +11,7 @@ class HappinessSurveyWidget extends Component {
     super(props); // call parent method
     this.state = {
       valueIndividual: 3,
-      valueTeam: 3
+      valueTeam: 3,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -23,7 +23,7 @@ class HappinessSurveyWidget extends Component {
       happiness: {
         individualhappiness: individualHappiness,
         teamhappiness: teamHappiness,
-      }
+      },
     };
 
     callApi('happiness', 'post', happiness).then(res => {
@@ -40,7 +40,7 @@ class HappinessSurveyWidget extends Component {
 
   render() {
     const sliderStyle = {
-      margin: '50px auto 140px auto'
+      margin: '50px auto 140px auto',
     };
     return (
       <div>
@@ -50,12 +50,12 @@ class HappinessSurveyWidget extends Component {
             style={{
               // border: '1px solid orange',
               top: '-53px',
-              position: 'relative'
+              position: 'relative',
             }}
           >
             <div style={sliderStyle}>
               <RangeSlider
-                question="How happy are you?"
+                question="How happy are you with your work in the team?"
                 happyValue={valueIndividual =>
                   this.setState({ valueIndividual })
                 }
@@ -66,12 +66,12 @@ class HappinessSurveyWidget extends Component {
                 width: '200px',
                 border: '1px inset #f1f1f1',
                 margin: '10px auto -14px auto',
-                opacity: '0'
+                opacity: '0',
               }}
             />
             <div style={sliderStyle}>
               <RangeSlider
-                question="How happy are you with your team?"
+                question="How happy do you think is your team with the work?"
                 happyValue={valueTeam => this.setState({ valueTeam })}
               />
             </div>
@@ -85,7 +85,7 @@ class HappinessSurveyWidget extends Component {
                   margin: 'auto',
                   fontSize: '20px',
                   bottom: '15px',
-                  position: 'relative'
+                  position: 'relative',
                 }}
               />
             </div>

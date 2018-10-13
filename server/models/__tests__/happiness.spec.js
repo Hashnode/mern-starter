@@ -21,7 +21,7 @@ test.beforeEach('connect and add two happiness entries', async () => {
   await Happiness.create(happinesses).catch(() => 'Unable to create posts');
 });
 
-test.afterEach.always(async () => {
+test.afterEach(async () => {
   await dropDB();
 });
 
@@ -30,12 +30,13 @@ test.serial('Should correctly add a happiness', async t => {
   t.plan(2);
 
   const res = await request(app)
-    .post('/api/happinesses')
+    .post('/api/happiness')
     .send({ happiness: { individualhappiness: '30', teamhappiness: '50' } })
     .set('Accept', 'application/json');
 
   t.is(res.status, 200);
 
-  const savedHappiness = await Happiness.findOne({ individualhappiness: '30' }).exec();
+  const storedHappinessId = res._id;
+  const savedHappiness = await Happiness.findOne({ _id: storedHappinessId }).exec();
   t.is(savedHappiness.individualhappiness, '30');
 });
