@@ -16,13 +16,6 @@ function callback(err, resp) {
 }
 
 // The tests seem not able to invoke the sms notification frameworks
-
-test.serial('Send text message with messagebird and required parameters will successfully send the message', t => {
-  notification.sendTextMessagebird(testMessage, recipient, sender, callback);
-  t.is(error, null, `error is not null, but ${error}.`);
-  t.not(response, null, `Response is not null, but ${response}.`);
-});
-
 test.serial('Send text message with trilio and required parameters will successfully send the message', t => {
   notification.sendTextMessage(testMessage, recipient, sender, callback);
   t.is(this.error, null, `error is not null, but ${this.error}.`);

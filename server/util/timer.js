@@ -73,7 +73,7 @@ class Timer {
 
   removeTask(id) {
     delete this.pool[id];
-    if (Object.keys(this.pool).length == 0) {
+    if (Object.keys(this.pool).length === 0) {
       clearTimeout(this.timeOut);
       this.timeOut = null;
     }
@@ -87,6 +87,11 @@ class Timer {
     }
     console.log('delayTask - cannot find task with id:' + id.toString());
     return false;
+  }
+
+  flush() {
+    this.end();
+    this.pool = {};
   }
 }
 

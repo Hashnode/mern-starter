@@ -1,6 +1,6 @@
 html,
 body {
-  overflow: hidden;
+  /*overflow: hidden;*/
   width: 100%;
 }
 
@@ -52,7 +52,6 @@ body {
 } */
 .wrapper .likert {
   list-style: none;
-  position: relative;
   width: 100%;
   margin: 0 0 15%;
   padding: 0;

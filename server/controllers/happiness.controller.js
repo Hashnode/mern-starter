@@ -15,7 +15,7 @@ export function addHappiness(req, res) {
   }
   session.get(req.session.sessionid, (user) => {
     if (!user) {
-       res.status(403).end();
+      res.status(403).end();
     }
     const newHappiness = new Happiness(req.body.happiness);
   // Let's sanitize inputs
@@ -31,4 +31,4 @@ export function addHappiness(req, res) {
       res.json({ happiness: saved });
     });
   });
-} 
+}

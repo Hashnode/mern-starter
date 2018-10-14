@@ -11,9 +11,19 @@ class HappinessSurveyWidget extends Component {
     super(props); // call parent method
     this.state = {
       valueIndividual: 3,
-      valueTeam: 3
+      valueTeam: 3,
+      query: props.location.query
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const username = this.state.query.u;
+    const teamname = this.state.query.t;
+    if (typeof username !== 'undefined' && typeof teamname !== 'undefined') {
+      const title = `<a href="javascript:void(0)">${username} | ${teamname}</a>`;
+      document.getElementById('titleRight').innerHTML = title;
+    }
   }
 
   handleSubmit(event) {
@@ -21,20 +31,22 @@ class HappinessSurveyWidget extends Component {
     const teamHappiness = this.state.valueTeam;
     const happiness = {
       happiness: {
-        individualHappiness,
-        teamHappiness
+        individualhappiness: individualHappiness,
+        teamhappiness: teamHappiness
       }
     };
 
-    const element = document.getElementById('success_message');
-    // element.innerHTML = this.state.valueIndividual;
-    element.innerHTML = 'submitted';
+    // const element = document.getElementById('success_message');
+    // // element.innerHTML = this.state.valueIndividual;
+    // element.innerHTML = 'submitted';
 
-    callApi('/happiness', 'post', happiness).then(res => {
-      if (res.success) {
+    // callApi('/happiness', 'post', happiness).then(res => {
+    //   if (res.success) {
+
+    callApi('happiness', 'post', happiness).then(res => {
+      if (!res.message) {
         // reset all the states
         // success message under submit button
-        alert(res.cuid);
       } else {
         alert(res.message);
         console.log(res);
@@ -45,22 +57,22 @@ class HappinessSurveyWidget extends Component {
 
   render() {
     const sliderStyle = {
-      margin: '50px auto 140px auto'
+      margin: '10px auto 140px auto'
     };
     return (
-      <div>
+      <div style={{ overflow: 'hidden' }}>
         <div className={styles.form_login}>
           <form
             onSubmit={this.handleSubmit}
             style={{
               // border: '1px solid orange',
-              top: '-53px',
+              top: '0px',
               position: 'relative'
             }}
           >
             <div style={sliderStyle}>
               <RangeSlider
-                question="How happy are you?"
+                question="How happy are you with your work in the team?"
                 happyValue={valueIndividual =>
                   this.setState({ valueIndividual })
                 }
@@ -76,7 +88,7 @@ class HappinessSurveyWidget extends Component {
             />
             <div style={sliderStyle}>
               <RangeSlider
-                question="How happy are you with your team?"
+                question="How happy do you think is your team with the work?"
                 happyValue={valueTeam => this.setState({ valueTeam })}
               />
             </div>
