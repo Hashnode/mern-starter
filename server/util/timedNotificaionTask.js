@@ -10,7 +10,7 @@ import Team from '../models/team';
 
 const isDevMode = process.env.NODE_ENV === 'development' || false;
 
-const interfaces = require('os').networkInterfaces(); // 在开发环境中获取局域网中的本机iP地址
+const interfaces = require('os').networkInterfaces();
 let IPv4 = '';
 for (const devName in interfaces) {
   const iface = interfaces[devName];
@@ -105,6 +105,27 @@ class TimedNotificationTask {
 
   clearNotificationOfUser(userId) {
     delete this.list[userId];
+  }
+
+  /**
+   * postpone a notification for a user
+   * @param userId
+   * @param postponeTime if 5 minutes, it is 5*60*1000
+   */
+  postponeNotificationForUser(userId, postponeTime) {
+    if (!userId || !postponeTime) {
+      console.log('invalid userId or postponeTime: ' + userId + postponeTime);
+      return false;
+    }
+
+    const handler = this.list[userId];
+    if (!handler) {
+      console.log('can not find task for user: ' + userId);
+      return false;
+    }
+
+    clearTimeout(handler);
+    return true;
   }
 
   begin() {
