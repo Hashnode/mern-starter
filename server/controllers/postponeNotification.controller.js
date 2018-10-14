@@ -7,7 +7,7 @@ function messageContentIs5_or_10_or_20(message) {
   return message !== 'undefined' && Number.isInteger(message) && permittedDelays.includes(message);
 }
 
-export async function postponeNotification(req) {
+export function postponeNotification(req) {
   const messageBody = req.body.Body;
   const senderNumber = req.body.From;
 
@@ -20,14 +20,15 @@ export async function postponeNotification(req) {
     notification.sendTextMessage(messageInvalidContent, senderNumber, '+15105737124', () => {});
   } else {
     // find User
-    const user = await User.findOne({ phone: senderNumber }).exec();
-    if (user === 'undefined' || user === null) {
-      notification.sendTextMessage(messageUserUnknown, senderNumber, '+15105737124', () => {});
-    } else {
-      const postponeTimeInMilliseconds = messageBody * 60 * 1000;
-      timedNotificationTask.postponeNotificationForUser(user.id, postponeTimeInMilliseconds);
-      // increase postponing time to user in db
-    }
+    User.findOne({ phone: senderNumber }).exec((err, user) => {
+      if (user === 'undefined' || user === null) {
+        notification.sendTextMessage(messageUserUnknown, senderNumber, '+15105737124', () => {});
+      } else {
+        const postponeTimeInMilliseconds = messageBody * 60 * 1000;
+        timedNotificationTask.postponeNotificationForUser(user.id, postponeTimeInMilliseconds);
+        // increase postponing time to user in db
+      }
+    });
   }
   console.log(`The following message was received as sms: ${messageBody.toString()} from ${senderNumber.toString()}.`);
 }
