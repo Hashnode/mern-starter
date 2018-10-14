@@ -26,6 +26,10 @@ class HappinessSurveyWidget extends Component {
       }
     };
 
+    const element = document.getElementById('success_message');
+    // element.innerHTML = this.state.valueIndividual;
+    element.innerHTML = 'submitted';
+
     callApi('/happiness', 'post', happiness).then(res => {
       if (res.success) {
         // reset all the states
@@ -78,6 +82,7 @@ class HappinessSurveyWidget extends Component {
             </div>
             <div>
               <input
+                // id="success_message"success_message
                 type="submit"
                 value="Submit"
                 style={{
@@ -91,6 +96,7 @@ class HappinessSurveyWidget extends Component {
               />
             </div>
           </form>
+          <div id="success_message" className="show" />
         </div>
       </div>
     );
