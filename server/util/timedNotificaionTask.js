@@ -4,9 +4,13 @@ import User from '../models/user';
 import notification from './notification';
 import Team from '../models/team';
 
-//const schedule = require('node-schedule');
+// const schedule = require('node-schedule');
 
 // 21749130 Jim's Phone
+
+let timeRangeForTeam = 5 * 60 * 1000;  // 5 minutes
+let nextNotificationTime = 3 * 60 * 1000;  // 3 minutes
+
 
 const isDevMode = process.env.NODE_ENV === 'development' || false;
 
@@ -22,8 +26,14 @@ for (const devName in interfaces) {
   }
 }
 
+// host ip address
 const serverAddress = isDevMode ? 'http://' + IPv4 + ':8000/?' : 'https://how-is-it.herokuapp.com/?';
 
+
+/**
+ * query all users from database
+ * @param cb
+ */
 function getAllUsers(cb) {
   User.find().populate({ path: 'team', model: Team, select: { name: 1, _id: 1 } }).exec((err, users) => {
     if (err) {
@@ -47,10 +57,29 @@ function getAllUsers(cb) {
   });
 }
 
+/**
+ * query a user from database
+ * @param userId
+ * @param cb
+ */
+function getUserById(userId, cb) {
+  User.findOne({ id: userId }).populate({ path: 'team', model: Team, select: { name: 1, _id: 1 } }).exec((err, user) => {
+    if (err) {
+      cb(null);
+      return;
+    }
+    cb(user);
+  });
+}
+
 class TimedNotificationTask {
 
   list = {};
 
+  /**
+   * send notification to a user
+   * @param user
+   */
   sendUserSMS(user) {
     let msg = 'Hi ';
     msg += user.name;
@@ -65,36 +94,48 @@ class TimedNotificationTask {
     server += user.id;
     server = encodeURI(server);
 
+    const twilioPhoneNumber = '+15105737124';
+    const postponeInfo = ` or postpone it by sending \'5\', \'10\' or \'20\' to  ${twilioPhoneNumber}`;
+
     let phone = '+64';
     phone += user.phone;
-    notification.sendTextMessage(msg + server, phone, '+15105737124', (sms) => {
+    notification.sendTextMessage(msg + server + postponeInfo, phone, twilioPhoneNumber, (sms) => {
 
     });
 
     const handler = setTimeout(() => {
       this.sendUserSMS(user);
-    }, 3 * 60 * 1000);
+    }, nextNotificationTime);
 
-    this.list[user._id] = handler;
+    this.list[user.id] = handler;
   }
 
+  /**
+   * send notification to all users
+   */
   sendNotification() {
     getAllUsers((users) => {
       if (!users) {
         return;
       }
+
       for (let i = 0; i < users.length; ++i) {
         const userArray = users[i];
-        const interval = 60000 / userArray.length;
+        const interval = timeRangeForTeam / userArray.length;
         for (let j = 0; j < userArray.length; ++j) {
+          const sendingTime = (Math.random() + j) * interval;
+          console.log(`message will be sent within: ${sendingTime / 1000} for user: ${userArray[j].name}`);
           setTimeout(() => {
             this.sendUserSMS(userArray[j]);
-          }, 1000 * interval * j);
+          }, sendingTime);
         }
       }
     });
   }
 
+  /**
+   * clear all awaiting notification tasks
+   */
   flush() {
     const handlers = Object.values(this.list);
     for (let i = 0; i < handlers.length; i++) {
@@ -103,7 +144,16 @@ class TimedNotificationTask {
     this.list = {};
   }
 
+  /**
+   * stop sending notification to user
+   * @param userId
+   */
   clearNotificationOfUser(userId) {
+    const handler = this.list[userId];
+    if (!handler) {
+      return;
+    }
+    clearTimeout(handler);
     delete this.list[userId];
   }
 
@@ -114,28 +164,48 @@ class TimedNotificationTask {
    */
   postponeNotificationForUser(userId, postponeTime) {
     if (!userId || !postponeTime) {
-      console.log('invalid userId or postponeTime: ' + userId + postponeTime);
-      return false;
+      console.log(`invalid userId: ${userId} or postponeTime: ${postponeTime}`);
+      return;
     }
 
-    const handler = this.list[userId];
+    let handler = this.list[userId];
     if (!handler) {
-      console.log('can not find task for user: ' + userId);
-      return false;
+      console.log(`can not find task for user: ${userId}`);
+      return;
     }
 
     clearTimeout(handler);
-    return true;
+
+    getUserById(userId, (user) => {
+      if (!user) {
+        return;
+      }
+      handler = setTimeout(() => {
+        this.sendUserSMS(user);
+      }, postponeTime);
+
+      this.list[userId] = handler;
+    });
   }
 
+  /**
+   * start to run notification tasks
+   */
   begin() {
-    this.sendNotification();
+    //this.sendNotification();
     // schedule.scheduleJob('* 25 17 * * 1-5', () => {
     //   sendNotification();
     // });
     // schedule.scheduleJob('0 0 18 * * 1-5', () => {
     //   timer.flush();
     // });
+  }
+
+  beginWithNextNotificationTimeAndTeamTimeLength(time, length) {
+    this.flush();
+    timeRangeForTeam = length * 60 * 1000;
+    nextNotificationTime = time * 60 * 1000;
+    this.sendNotification();
   }
 }
 

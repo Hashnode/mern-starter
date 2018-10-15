@@ -93,16 +93,9 @@ app.all('/api/admin/*', (req, res, next) => {
     next();
     return;
   }
-  if (!req.session.sessionid) {
+  if (req.session.sessionid !== '1') {
     res.send({ code: 508, success: true, message: 'Please login' });
     return;
-  }
-  next();
-});
-
-app.all('/', (req, res, next) => {
-  if (!req.session.sessionid) {
-    req.session.sessionid = 'cjmah9iu8000146gz0tbav7ki';
   }
   next();
 });
@@ -112,7 +105,7 @@ app.use('/api', teams);
 app.use('/api', happiness);
 app.use('/api', postponeNotification);
 
-//timedTask.begin();
+timedTask.begin();
 
 
 // Render Initial HTML

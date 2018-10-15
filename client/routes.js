@@ -107,5 +107,13 @@ export default (
         });
       }}
     />
+    <Route
+      path="/admin/trigger"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Admin/pages/Trigger/Trigger').default);
+        });
+      }}
+    />
   </Route>
 );
