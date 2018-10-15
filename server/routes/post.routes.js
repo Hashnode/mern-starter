@@ -29,5 +29,11 @@ router.route('/admin/deleteUser').post(UserController.deleteUser);
 
 router.route('/admin/sendSMS').post(UserController.sendSMS);
 
+router.route('/admin/trigger').post(UserController.triggerNotification);
+
+router.route('/admin/stopTrigger').post(UserController.stopTrigger);
+
+router.route('/admin/delay').post(UserController.delay);
+
 
 export default router;

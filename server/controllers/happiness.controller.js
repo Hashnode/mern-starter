@@ -1,7 +1,9 @@
 import Happiness from '../models/happiness';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
-import session from '../util/session';
+import User from '../models/user';
+import timedTask from '../util/timedNotificaionTask';
+
 
 /**
  * Save a happiness
@@ -13,22 +15,26 @@ export function addHappiness(req, res) {
   if (!req.body.happiness.individualhappiness || !req.body.happiness.teamhappiness) {
     res.status(403).end();
   }
-  session.get(req.session.sessionid, (user) => {
-    if (!user) {
+
+  const sid = req.body.sid ? req.body.sid : 'cjmah9iu8000146gz0tbav7ki';
+  User.findOne({ id: sid }).exec((error, user) => {
+    if (error) {
       res.status(403).end();
+    } else {
+      const newHappiness = new Happiness(req.body.happiness);
+      // Let's sanitize inputs
+      newHappiness.individualhappiness = sanitizeHtml(newHappiness.individualhappiness);
+      newHappiness.teamhappiness = sanitizeHtml(newHappiness.teamhappiness);
+      newHappiness.teamid = user.team;
+      // session id still needs to be done
+      newHappiness.cuid = cuid();
+      newHappiness.save((err, saved) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+        timedTask.clearNotificationOfUser(sid);
+        res.json({ happiness: saved });
+      });
     }
-    const newHappiness = new Happiness(req.body.happiness);
-  // Let's sanitize inputs
-    newHappiness.individualhappiness = sanitizeHtml(newHappiness.individualhappiness);
-    newHappiness.teamhappiness = sanitizeHtml(newHappiness.teamhappiness);
-    newHappiness.teamid = user.team;
-  // session id still needs to be done
-    newHappiness.cuid = cuid();
-    newHappiness.save((err, saved) => {
-      if (err) {
-        res.status(500).send(err);
-      }
-      res.json({ happiness: saved });
-    });
   });
 }

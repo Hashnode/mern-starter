@@ -29,19 +29,22 @@ class HappinessSurveyWidget extends Component {
   handleSubmit(event) {
     const individualHappiness = this.state.valueIndividual;
     const teamHappiness = this.state.valueTeam;
+    const sid = this.state.query.s;
     const happiness = {
       happiness: {
         individualhappiness: individualHappiness,
         teamhappiness: teamHappiness,
+        sid: typeof sid === 'undefined' ? '' : sid
       },
     };
 
     callApi('happiness', 'post', happiness).then(res => {
-      if (!res.message) {
+      if (res.happiness) {
         // reset all the states
         // success message under submit button
+        console.log(res.happiness);
       } else {
-        alert(res.message);
+        alert(res);
         console.log(res);
       }
     });
