@@ -25,6 +25,9 @@ class RangeSlider extends Component {
   onMouseUp = () => {
     this.setState({ drag: 0 });
   };
+  onMouseLeave = e => {
+    this.setState({ drag: 0 });
+  };
 
   onTouchMove = e => {
     // var output = document.getElementById('show');
@@ -45,7 +48,7 @@ class RangeSlider extends Component {
 
     // const liWidth = document.getElementById('one').clientWidth;
     // var ulWidth = rect.right - rect.left - 40
-    const score = (spaceToLeft / ulWidth) * 5;
+    const score = ((spaceToLeft + 10) / ulWidth) * 5;
     const level = Math.ceil(score);
     this.refs.score.value = level;
 
@@ -83,11 +86,25 @@ class RangeSlider extends Component {
       return;
     }
     const element = document.getElementById('myRange');
+    console.log('element ' + element);
     const rect = element.getBoundingClientRect();
+    // const likert = document.querySelector('.likert');
+    // console.log('likert ', likert);
+    const likertStyle = window.getComputedStyle(element);
+    const likertMarginLeft = likertStyle.getPropertyValue('margin-left');
 
-    const spaceToLeft = e.clientX - rect.left;
-    const ulWidth = document.getElementById('myRange').clientWidth;
-    if (spaceToLeft < 0 || spaceToLeft > ulWidth) {
+    const spaceToLeft =
+      e.clientX - rect.left - Number(likertMarginLeft.slice(0, -2));
+    console.log(Number(likertMarginLeft.slice(0, -2)));
+    console.log('e.clientX ', e.clientX);
+    console.log('rect.left', rect.left);
+    console.log('rect.right', rect.right);
+    console.log('rect.right - rect.left', rect.right - rect.left);
+    const ulWidth =
+      document.getElementById('myRange').clientWidth -
+      2 * Number(likertMarginLeft.slice(0, -2));
+    console.log('ulWidth ', ulWidth);
+    if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
       return;
     }
 
@@ -130,6 +147,9 @@ class RangeSlider extends Component {
     // var slider = document.getElementById('myRange');
     const element = document.getElementById('myRange');
     const rect = element.getBoundingClientRect();
+
+    console.log('e.clientX ', e.clientX);
+    console.log('rect.left ', rect.left);
 
     const spaceToLeft = e.clientX - rect.left;
     const ulWidth = document.getElementById('myRange').clientWidth;
@@ -239,15 +259,20 @@ class RangeSlider extends Component {
         {/* <label className="statement">
           {this.props.question} <span ref="demo">{this.state.value} </span>
         </label> */}
-        <label className={styles.statement}>
+        <label
+          className={styles.statement}
+          // style={{ border: '1px solid pink' }}
+        >
           {this.props.question} <span ref="demo"> </span>
         </label>
         <ul
+          // style={{ border: '1px solid red' }}
           className={styles.likert}
           onClick={this.handleClick}
           onChange={this.handleChange}
           onMouseDown={this.onMouseDown}
           onMouseUp={this.onMouseUp}
+          onMouseLeave={this.onMouseLeave}
           onMouseMove={this._onMouseMove}
           onTouchMove={this.onTouchMove}
           value={this.state.value}
