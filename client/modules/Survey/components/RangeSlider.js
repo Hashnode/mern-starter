@@ -71,50 +71,6 @@ class RangeSlider extends Component {
     this.setState({ drag: 0 });
   };
 
-  onTouchStart = e => {
-    const element = document.getElementById('myRange');
-    const rect = element.getBoundingClientRect();
-
-    const spaceToLeft = e.touches[0].clientX - rect.left + 7;
-    const ulWidth = document.getElementById('myRange').clientWidth;
-    if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
-      return;
-    }
-
-    // const liWidth = document.getElementById('one').clientWidth;
-    // var ulWidth = rect.right - rect.left - 40
-    const score = (spaceToLeft / ulWidth) * 5;
-    const level = Math.ceil(score);
-    this.refs.score.value = level;
-
-    if (level === 1) {
-      this.setState({
-        value: this.refs.score.value,
-        top: ['-42px', '-11px', '-13px', '-11px', '-11px']
-      });
-    } else if (level === 2) {
-      this.setState({
-        value: this.refs.score.value,
-        top: ['-11px', '-42px', '-13px', '-11px', '-11px']
-      });
-    } else if (level === 3) {
-      this.setState({
-        value: this.refs.score.value,
-        top: ['-11px', '-11px', '-45px', '-11px', '-11px']
-      });
-    } else if (level === 4) {
-      this.setState({
-        value: this.refs.score.value,
-        top: ['-11px', '-11px', '-13px', '-42px', '-11px']
-      });
-    } else if (level === 5) {
-      this.setState({
-        value: this.refs.score.value,
-        top: ['-11px', '-11px', '-13px', '-11px', '-42px']
-      });
-    }
-    this.props.happyValue(this.refs.score.value);
-  };
   onTouchMove = e => {
     // var output = document.getElementById('show');
     // output.innerHTML = e.touches[0].clientX;
@@ -339,8 +295,9 @@ class RangeSlider extends Component {
           onMouseUp={this.onMouseUp}
           onMouseLeave={this.onMouseLeave}
           onMouseMove={this._onMouseMove}
-          onTouchStart={this.onTouchStart}
+          onTouchStart={this.onTouchMove}
           onTouchMove={this.onTouchMove}
+          onTouchEnd={this.onTouchMove}
           value={this.state.value}
           id="myRange"
           ref="score"
