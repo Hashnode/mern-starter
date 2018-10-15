@@ -94,9 +94,12 @@ class TimedNotificationTask {
     server += user.id;
     server = encodeURI(server);
 
+    const twilioPhoneNumber = '+15105737124';
+    const postponeInfo = ` or postpone it by sending \'5\', \'10\' or \'20\' to  ${twilioPhoneNumber}`;
+
     let phone = '+64';
     phone += user.phone;
-    notification.sendTextMessage(msg + server, phone, '+15105737124', (sms) => {
+    notification.sendTextMessage(msg + server + postponeInfo, phone, twilioPhoneNumber, (sms) => {
 
     });
 
