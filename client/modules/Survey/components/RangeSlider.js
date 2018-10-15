@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import styles from './HappinessSurveyWidget.css';
-import logo1 from './images/1.gif';
-import logo3 from './images/neutral.png';
-// const Component = React.Component;
+// import logo1 from './images/1.gif';
 
 class RangeSlider extends Component {
   // state initialization in constructor
@@ -14,18 +12,109 @@ class RangeSlider extends Component {
       top: ['-11px', '-11px', '-42px', '-11px', '-11px']
     };
     this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
   }
 
   // Range slider: drag.  but I trigger it without press the element
-  onMouseDown = () => {
+  onMouseDown = e => {
     this.setState({ drag: 1 });
+    // this._onMouseMove(e);
+    const element = document.getElementById('myRange');
+    const rect = element.getBoundingClientRect();
+
+    const spaceToLeft = e.clientX - rect.left + 7;
+    const ulWidth = document.getElementById('myRange').clientWidth;
+    if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
+      return;
+    }
+
+    // const liWidth = document.getElementById('one').clientWidth;
+    // var ulWidth = rect.right - rect.left - 40
+    const score = (spaceToLeft / ulWidth) * 5;
+    const level = Math.ceil(score);
+    this.refs.score.value = level;
+
+    if (level === 1) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-42px', '-11px', '-15px', '-11px', '-11px']
+      });
+    } else if (level === 2) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-42px', '-15px', '-11px', '-11px']
+      });
+    } else if (level === 3) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-45px', '-11px', '-11px']
+      });
+    } else if (level === 4) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-15px', '-42px', '-11px']
+      });
+    } else if (level === 5) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-15px', '-11px', '-42px']
+      });
+    }
+
+    this.props.happyValue(this.refs.score.value);
+
+    // console.log('MouseDown _onMouseMove');
   };
   onMouseUp = () => {
     this.setState({ drag: 0 });
   };
+  onMouseLeave = e => {
+    this.setState({ drag: 0 });
+  };
 
+  onTouchStart = e => {
+    const element = document.getElementById('myRange');
+    const rect = element.getBoundingClientRect();
+
+    const spaceToLeft = e.touches[0].clientX - rect.left + 7;
+    const ulWidth = document.getElementById('myRange').clientWidth;
+    if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
+      return;
+    }
+
+    // const liWidth = document.getElementById('one').clientWidth;
+    // var ulWidth = rect.right - rect.left - 40
+    const score = (spaceToLeft / ulWidth) * 5;
+    const level = Math.ceil(score);
+    this.refs.score.value = level;
+
+    if (level === 1) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-42px', '-11px', '-13px', '-11px', '-11px']
+      });
+    } else if (level === 2) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-42px', '-13px', '-11px', '-11px']
+      });
+    } else if (level === 3) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-45px', '-11px', '-11px']
+      });
+    } else if (level === 4) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-13px', '-42px', '-11px']
+      });
+    } else if (level === 5) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-13px', '-11px', '-42px']
+      });
+    }
+    this.props.happyValue(this.refs.score.value);
+  };
   onTouchMove = e => {
     // var output = document.getElementById('show');
     // output.innerHTML = e.touches[0].clientX;
@@ -37,7 +126,7 @@ class RangeSlider extends Component {
     const element = document.getElementById('myRange');
     const rect = element.getBoundingClientRect();
 
-    const spaceToLeft = e.touches[0].clientX - rect.left;
+    const spaceToLeft = e.touches[0].clientX - rect.left + 7;
     const ulWidth = document.getElementById('myRange').clientWidth;
     if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
       return;
@@ -83,11 +172,12 @@ class RangeSlider extends Component {
       return;
     }
     const element = document.getElementById('myRange');
+    // console.log('element ' + element);
     const rect = element.getBoundingClientRect();
 
-    const spaceToLeft = e.clientX - rect.left;
+    const spaceToLeft = e.clientX - rect.left + 7;
     const ulWidth = document.getElementById('myRange').clientWidth;
-    if (spaceToLeft < 0 || spaceToLeft > ulWidth) {
+    if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
       return;
     }
 
@@ -131,9 +221,9 @@ class RangeSlider extends Component {
     const element = document.getElementById('myRange');
     const rect = element.getBoundingClientRect();
 
-    const spaceToLeft = e.clientX - rect.left;
+    const spaceToLeft = e.clientX - rect.left + 7;
     const ulWidth = document.getElementById('myRange').clientWidth;
-    if (spaceToLeft < 0 || spaceToLeft > ulWidth) {
+    if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
       return;
     }
 
@@ -142,11 +232,6 @@ class RangeSlider extends Component {
     const score = (spaceToLeft / ulWidth) * 5;
     const level = Math.ceil(score);
     this.refs.score.value = level;
-
-    // this.state.value = this.refs.score.value;
-    this.setState({
-      value: this.refs.score.value
-    });
 
     if (level === 1) {
       this.setState({
@@ -239,16 +324,22 @@ class RangeSlider extends Component {
         {/* <label className="statement">
           {this.props.question} <span ref="demo">{this.state.value} </span>
         </label> */}
-        <label className={styles.statement}>
+        <label
+          className={styles.statement}
+          // style={{ border: '1px solid pink' }}
+        >
           {this.props.question} <span ref="demo"> </span>
         </label>
         <ul
+          // style={{ border: '1px solid red' }}
           className={styles.likert}
           onClick={this.handleClick}
           onChange={this.handleChange}
           onMouseDown={this.onMouseDown}
           onMouseUp={this.onMouseUp}
+          onMouseLeave={this.onMouseLeave}
           onMouseMove={this._onMouseMove}
+          onTouchStart={this.onTouchStart}
           onTouchMove={this.onTouchMove}
           value={this.state.value}
           id="myRange"
