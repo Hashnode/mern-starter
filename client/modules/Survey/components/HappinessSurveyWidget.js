@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import callApi from '../../../util/apiCaller';
 import { injectIntl } from 'react-intl';
 
-// import styles
 import styles from './HappinessSurveyWidget.css';
 import RangeSlider from './RangeSlider';
 
@@ -12,7 +11,9 @@ class HappinessSurveyWidget extends Component {
     this.state = {
       valueIndividual: 3,
       valueTeam: 3,
-      query: props.location.query
+      query: props.location.query,
+      display: 'block',
+      message: 'Your input has been successfully submitted'
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -47,6 +48,11 @@ class HappinessSurveyWidget extends Component {
       if (!res.message) {
         // reset all the states
         // success message under submit button
+        this.setState({
+          display: 'none'
+        });
+        const message = document.getElementById('success_message');
+        message.innerHTML = this.state.message;
       } else {
         alert(res.message);
         console.log(res);
@@ -59,10 +65,15 @@ class HappinessSurveyWidget extends Component {
     const sliderStyle = {
       margin: '10px auto 140px auto'
     };
+    const messageStyle = {
+      display: this.state.display
+    };
+
     return (
       <div style={{ overflow: 'hidden' }}>
         <div className={styles.form_login}>
           <form
+            style={messageStyle}
             onSubmit={this.handleSubmit}
             // style={{
             //   border: '1px solid orange',
@@ -110,7 +121,7 @@ class HappinessSurveyWidget extends Component {
               />
             </div>
           </form>
-          <div id="success_message" className="show" />
+          <div id="success_message" className={styles.show} />
         </div>
       </div>
     );
