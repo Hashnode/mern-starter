@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import styles from './HappinessSurveyWidget.css';
 // import logo1 from './images/1.gif';
-// import logo3 from './images/neutral.png';
-// const Component = React.Component;
 
 class RangeSlider extends Component {
   // state initialization in constructor
@@ -14,13 +12,57 @@ class RangeSlider extends Component {
       top: ['-11px', '-11px', '-42px', '-11px', '-11px']
     };
     this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
   }
 
   // Range slider: drag.  but I trigger it without press the element
-  onMouseDown = () => {
+  onMouseDown = e => {
     this.setState({ drag: 1 });
+    // this._onMouseMove(e);
+    const element = document.getElementById('myRange');
+    const rect = element.getBoundingClientRect();
+
+    const spaceToLeft = e.clientX - rect.left + 7;
+    const ulWidth = document.getElementById('myRange').clientWidth;
+    if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
+      return;
+    }
+
+    // const liWidth = document.getElementById('one').clientWidth;
+    // var ulWidth = rect.right - rect.left - 40
+    const score = (spaceToLeft / ulWidth) * 5;
+    const level = Math.ceil(score);
+    this.refs.score.value = level;
+
+    if (level === 1) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-42px', '-11px', '-15px', '-11px', '-11px']
+      });
+    } else if (level === 2) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-42px', '-15px', '-11px', '-11px']
+      });
+    } else if (level === 3) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-45px', '-11px', '-11px']
+      });
+    } else if (level === 4) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-15px', '-42px', '-11px']
+      });
+    } else if (level === 5) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-15px', '-11px', '-42px']
+      });
+    }
+
+    this.props.happyValue(this.refs.score.value);
+
+    // console.log('MouseDown _onMouseMove');
   };
   onMouseUp = () => {
     this.setState({ drag: 0 });
@@ -29,6 +71,50 @@ class RangeSlider extends Component {
     this.setState({ drag: 0 });
   };
 
+  onTouchStart = e => {
+    const element = document.getElementById('myRange');
+    const rect = element.getBoundingClientRect();
+
+    const spaceToLeft = e.touches[0].clientX - rect.left + 7;
+    const ulWidth = document.getElementById('myRange').clientWidth;
+    if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
+      return;
+    }
+
+    // const liWidth = document.getElementById('one').clientWidth;
+    // var ulWidth = rect.right - rect.left - 40
+    const score = (spaceToLeft / ulWidth) * 5;
+    const level = Math.ceil(score);
+    this.refs.score.value = level;
+
+    if (level === 1) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-42px', '-11px', '-13px', '-11px', '-11px']
+      });
+    } else if (level === 2) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-42px', '-13px', '-11px', '-11px']
+      });
+    } else if (level === 3) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-45px', '-11px', '-11px']
+      });
+    } else if (level === 4) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-13px', '-42px', '-11px']
+      });
+    } else if (level === 5) {
+      this.setState({
+        value: this.refs.score.value,
+        top: ['-11px', '-11px', '-13px', '-11px', '-42px']
+      });
+    }
+    this.props.happyValue(this.refs.score.value);
+  };
   onTouchMove = e => {
     // var output = document.getElementById('show');
     // output.innerHTML = e.touches[0].clientX;
@@ -40,7 +126,7 @@ class RangeSlider extends Component {
     const element = document.getElementById('myRange');
     const rect = element.getBoundingClientRect();
 
-    const spaceToLeft = e.touches[0].clientX - rect.left;
+    const spaceToLeft = e.touches[0].clientX - rect.left + 7;
     const ulWidth = document.getElementById('myRange').clientWidth;
     if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
       return;
@@ -48,7 +134,7 @@ class RangeSlider extends Component {
 
     // const liWidth = document.getElementById('one').clientWidth;
     // var ulWidth = rect.right - rect.left - 40
-    const score = ((spaceToLeft + 10) / ulWidth) * 5;
+    const score = (spaceToLeft / ulWidth) * 5;
     const level = Math.ceil(score);
     this.refs.score.value = level;
 
@@ -86,24 +172,11 @@ class RangeSlider extends Component {
       return;
     }
     const element = document.getElementById('myRange');
-    console.log('element ' + element);
+    // console.log('element ' + element);
     const rect = element.getBoundingClientRect();
-    // const likert = document.querySelector('.likert');
-    // console.log('likert ', likert);
-    const likertStyle = window.getComputedStyle(element);
-    const likertMarginLeft = likertStyle.getPropertyValue('margin-left');
 
-    const spaceToLeft =
-      e.clientX - rect.left - Number(likertMarginLeft.slice(0, -2));
-    console.log(Number(likertMarginLeft.slice(0, -2)));
-    console.log('e.clientX ', e.clientX);
-    console.log('rect.left', rect.left);
-    console.log('rect.right', rect.right);
-    console.log('rect.right - rect.left', rect.right - rect.left);
-    const ulWidth =
-      document.getElementById('myRange').clientWidth -
-      2 * Number(likertMarginLeft.slice(0, -2));
-    console.log('ulWidth ', ulWidth);
+    const spaceToLeft = e.clientX - rect.left + 7;
+    const ulWidth = document.getElementById('myRange').clientWidth;
     if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
       return;
     }
@@ -148,12 +221,9 @@ class RangeSlider extends Component {
     const element = document.getElementById('myRange');
     const rect = element.getBoundingClientRect();
 
-    console.log('e.clientX ', e.clientX);
-    console.log('rect.left ', rect.left);
-
-    const spaceToLeft = e.clientX - rect.left;
+    const spaceToLeft = e.clientX - rect.left + 7;
     const ulWidth = document.getElementById('myRange').clientWidth;
-    if (spaceToLeft < 0 || spaceToLeft > ulWidth) {
+    if (spaceToLeft < 0 || spaceToLeft > ulWidth || spaceToLeft === 0) {
       return;
     }
 
@@ -162,11 +232,6 @@ class RangeSlider extends Component {
     const score = (spaceToLeft / ulWidth) * 5;
     const level = Math.ceil(score);
     this.refs.score.value = level;
-
-    // this.state.value = this.refs.score.value;
-    this.setState({
-      value: this.refs.score.value
-    });
 
     if (level === 1) {
       this.setState({
@@ -274,6 +339,7 @@ class RangeSlider extends Component {
           onMouseUp={this.onMouseUp}
           onMouseLeave={this.onMouseLeave}
           onMouseMove={this._onMouseMove}
+          onTouchStart={this.onTouchStart}
           onTouchMove={this.onTouchMove}
           value={this.state.value}
           id="myRange"

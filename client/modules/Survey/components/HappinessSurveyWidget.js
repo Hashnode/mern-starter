@@ -64,11 +64,11 @@ class HappinessSurveyWidget extends Component {
         <div className={styles.form_login}>
           <form
             onSubmit={this.handleSubmit}
-            style={{
-              // border: '1px solid orange',
-              top: '0px',
-              position: 'relative'
-            }}
+            // style={{
+            //   border: '1px solid orange',
+            //   top: '0px',
+            //   position: 'relative'
+            // }}
           >
             <div style={sliderStyle}>
               <RangeSlider
@@ -98,12 +98,14 @@ class HappinessSurveyWidget extends Component {
                 type="submit"
                 value="Submit"
                 style={{
-                  width: '110px',
-                  height: '50px',
+                  width: '90px',
+                  height: '45px',
                   margin: 'auto',
-                  fontSize: '20px',
+                  fontSize: '16px',
                   bottom: '15px',
-                  position: 'relative'
+                  position: 'relative',
+                  color: 'rgb(0, 92, 230)',
+                  textTransform: 'uppercase'
                 }}
               />
             </div>
