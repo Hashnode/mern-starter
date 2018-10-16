@@ -189,10 +189,11 @@ app.use((req, res, next) => {
   });
 });
 
+const serverPort = process.env.NODE_ENV === 'test' ? 0 : serverConfig.port;
 // start app
-app.listen(serverConfig.port, (error) => {
+app.listen(serverPort, (error) => {
   if (!error) {
-    console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
+    console.log(`MERN is running on port: ${serverPort}! Build something amazing!`); // eslint-disable-line
   }
 });
 

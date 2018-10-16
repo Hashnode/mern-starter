@@ -3,9 +3,16 @@ import request from 'supertest';
 import app from '../../server';
 import Happiness from '../happiness';
 import Team from '../team';
+import User from '../user';
 import { connectDB, dropDB } from '../../util/test-helpers';
 
 const team1 = new Team({ name: 'Team 01', cuid: '1aec5410064b4986aebd3d2d9686b3e5' });
+const user1 = new User({
+  id: 'cjmah9iu8000146gz0tbav7ki',
+  name: 'Rosman',
+  phone: '0225902072',
+  email: 'test@test.com',
+  team: '1aec5410064b4986aebd3d2d9686b3e5' });
 
 const happinesses = [
   new Happiness({ individualhappiness: '30', teamhappiness: '50', cuid: 'kljdklfjs', teamid: '1aec5410064b4986aebd3d2d9686b3e5' }),
@@ -18,13 +25,13 @@ test.before('connect to mockgoose', async () => {
 
 test.beforeEach('connect and add two happiness entries', async () => {
   await Team.create(team1).catch(() => 'Unable to create team');
+  await User.create(user1).catch(() => 'Unable to create user');
   await Happiness.create(happinesses).catch(() => 'Unable to create posts');
 });
 
 test.afterEach(async () => {
   await dropDB();
 });
-
 
 test.serial('Should correctly add a happiness', async t => {
   t.plan(2);
