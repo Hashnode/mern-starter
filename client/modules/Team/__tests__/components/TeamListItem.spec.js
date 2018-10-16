@@ -16,7 +16,7 @@ test('renders properly', t => {
   );
 
   t.truthy(wrapper.hasClass('single-team'));
-  t.regex(wrapper.find('.team-name').first().text(), new RegExp(team.name));
+  t.regex(wrapper.find('h3').first().text(), new RegExp(team.name));
 });
 
 test('has correct props', t => {

@@ -40,8 +40,9 @@ export function postponeNotification(req, res) {
     res.send({ success: false, code: 0, message: 'invalid content' });
     return;
   }
+  const userPhoneNumberWithoutCountryCode = userPhoneNumber.substr(3); // cut of +64
   // find User
-  User.findOne({ phone: userPhoneNumber }).exec((err, user) => {
+  User.findOne({ phone: userPhoneNumberWithoutCountryCode }).exec((err, user) => {
     // user unknown?
     if (user === 'undefined' || user === null) {
       notification.sendTextMessage(userUnknownMessage, userPhoneNumber, twilioPhoneNumber, () => {});
@@ -49,7 +50,8 @@ export function postponeNotification(req, res) {
       return;
     }
     // postpone time exceeded?
-    const restTimeForUserToPostpone = maximumPostponeTimeForOneSchedule - user.postponedTimeForSchedule;
+    const usersPostponedTimeForSchedule = user.postponedTimeForSchedule !== 'undefined' && user.postponedTimeForSchedule !== null ? user.postponedTimeForSchedule : 0;
+    const restTimeForUserToPostpone = maximumPostponeTimeForOneSchedule - usersPostponedTimeForSchedule;
     if (restTimeForUserToPostpone === 0) {
       notification.sendTextMessage(postponeTimeExceededMessage, userPhoneNumber, twilioPhoneNumber, () => {});
       res.send({ success: false, code: 0, message: 'postpone time exceeded' });
