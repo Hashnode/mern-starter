@@ -5,6 +5,8 @@ import { injectIntl } from 'react-intl';
 import styles from './HappinessSurveyWidget.css';
 import RangeSlider from './RangeSlider';
 import { throws } from 'assert';
+import ReactTimeout from 'react-timeout';
+//https://www.npmjs.com/package/react-timeout
 
 class HappinessSurveyWidget extends Component {
   constructor(props) {
@@ -19,6 +21,10 @@ class HappinessSurveyWidget extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  toggle = () => {
+    this.setState({ message: '' });
+  };
 
   componentDidMount() {
     const username = this.state.query.u;
@@ -59,8 +65,14 @@ class HappinessSurveyWidget extends Component {
           submit: true
         });
         const message = document.getElementById('success_message');
-        message.innerHTML = 'Your input has been successfully submitted';
+        // message.innerHTML = 'Your input has been successfully submitted';
+        this.setState({
+          message: 'Your input has been successfully submitted'
+        });
+        // message.innerHTML = this.state.on;
         // message.innerHTML = this.state.valueIndividual;
+
+        this.props.setTimeout(this.toggle, 2500);
       } else {
         alert(res);
         console.log(res);
@@ -139,8 +151,13 @@ class HappinessSurveyWidget extends Component {
               />
             </div>
           </form>
-          <div id="success_message" className={styles.show}>
-            {this.state.valueIndividual + ' & ' + this.state.valueTeam}
+          <div
+            id="success_message"
+            className={styles.show}
+            // style={{ backgroundColor: this.state.on ? 'yellow' : 'gray' }}
+          >
+            {this.state.message + ''}
+            {/* {this.state.valueIndividual + ' & ' + this.state.valueTeam} */}
           </div>
         </div>
       </div>
@@ -148,5 +165,5 @@ class HappinessSurveyWidget extends Component {
   }
 }
 
-export default injectIntl(HappinessSurveyWidget);
+export default injectIntl(ReactTimeout(HappinessSurveyWidget));
 // export default HappinessSurveyWidget;

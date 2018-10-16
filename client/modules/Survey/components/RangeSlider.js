@@ -120,7 +120,6 @@ class RangeSlider extends Component {
     this.props.happyValue(level);
   };
 
-  // const returnValue = {}
   render() {
     // console.log('render in ', this.props.question);
     // https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous
@@ -171,7 +170,6 @@ class RangeSlider extends Component {
 
     return (
       <div className={styles.wrapper}>
-        {/* return <img src={logo1} alt="Logo" />; */}
         {/* <label className="statement">
           {this.props.question} <span ref="demo">{this.state.value} </span>
         </label> */}
@@ -198,7 +196,6 @@ class RangeSlider extends Component {
           ref="score"
         >
           <li className={styles.li1}>
-            {/* <img src={logo1} alt="Logo" /> */}
             <div id="one" className={styles.one} style={styles1} />
             {/* <img
               src={logo3}

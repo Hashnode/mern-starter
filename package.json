@@ -98,6 +98,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^3.2.1",
     "react-router-dom": "^4.3.1",
+    "react-timeout": "^1.1.2",
     "redux": "^3.5.2",
     "redux-ava": "^2.0.0",
     "redux-devtools": "^3.3.1",
