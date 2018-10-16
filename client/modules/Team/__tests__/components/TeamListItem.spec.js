@@ -16,7 +16,6 @@ test('renders properly', t => {
   );
 
   t.truthy(wrapper.hasClass('single-team'));
-  t.is(wrapper.find('Link').first().prop('children'), team.name);
   t.regex(wrapper.find('.team-name').first().text(), new RegExp(team.name));
 });
 
