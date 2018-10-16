@@ -198,11 +198,11 @@ body {
 
 .show {
   position: relative;
-  top: 150px;
-  height: 350px;
+  top: -17px;
+  /* height: 350px; */
 
-  font-size: 23px;
-  font-weight: bold;
+  font-size: 17px;
+  /* font-weight: bold; */
   /* color: rgb(6, 7, 58); */
   color: rgb(25, 145, 14);
   /* font-family: 'Bai Jamjuree', sans-serif; */

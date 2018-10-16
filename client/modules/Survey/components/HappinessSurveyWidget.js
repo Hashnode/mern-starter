@@ -12,7 +12,7 @@ class HappinessSurveyWidget extends Component {
       valueIndividual: 3,
       valueTeam: 3,
       query: props.location.query,
-      display: 'block',
+      // display: 'block',
       message: 'Your input has been successfully submitted'
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -68,15 +68,15 @@ class HappinessSurveyWidget extends Component {
     const sliderStyle = {
       margin: '10px auto 140px auto'
     };
-    const messageStyle = {
-      display: this.state.display
-    };
+    // const messageStyle = {
+    //   display: this.state.display
+    // };
 
     return (
       <div style={{ overflow: 'hidden' }}>
         <div className={styles.form_login}>
           <form
-            style={messageStyle}
+            // style={messageStyle}
             onSubmit={this.handleSubmit}
             // style={{
             //   border: '1px solid orange',
@@ -113,7 +113,7 @@ class HappinessSurveyWidget extends Component {
                 value="Submit"
                 style={{
                   width: '90px',
-                  height: '45px',
+                  height: '35px',
                   margin: 'auto',
                   fontSize: '16px',
                   bottom: '15px',
