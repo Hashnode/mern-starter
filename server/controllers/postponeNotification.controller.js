@@ -3,9 +3,9 @@ import User from '../models/user';
 import notification from '../util/notification';
 import timedNotificationTask from '../util/timedNotificaionTask';
 
-function messageContentIs5_or_10_or_20(message) {
-  const permittedDelays = [5, 10, 20];
-  return message !== 'undefined' && Number.isInteger(message) && permittedDelays.includes(message);
+export function messageContentIs5_or_10_or_20(message) {
+  const permittedDelays = ['5', '10', '20'];
+  return message !== 'undefined' && permittedDelays.includes(message);
 }
 
 function increasePostponedTimeForUser(user, postponeTimeInMilliseconds) {
@@ -13,12 +13,12 @@ function increasePostponedTimeForUser(user, postponeTimeInMilliseconds) {
   user.save();
 }
 
-function getPostponeTimeInMilliseconds(restTimeForUserToPostpone, requestedPostponeTime) {
+export function getPostponeTimeInMilliseconds(restTimeForUserToPostpone, requestedPostponeTime) {
   const postponeTime = restTimeForUserToPostpone >= requestedPostponeTime ? requestedPostponeTime : restTimeForUserToPostpone;
   return postponeTime * 60 * 1000;
 }
 
-export function postponeNotification(req) {
+export function postponeNotification(req, res) {
   const requestedPostponeTime = req.body.Body;
   const userPhoneNumber = req.body.From;
   const twilioPhoneNumber = '+15105737124';
@@ -37,6 +37,7 @@ export function postponeNotification(req) {
   if (!messageContentIs5_or_10_or_20(requestedPostponeTime)) {
     notification.sendTextMessage(invalidContentMessage, userPhoneNumber, twilioPhoneNumber, () => {
     });
+    res.send({ success: false, code: 0, message: 'invalid content' });
     return;
   }
   // find User
@@ -44,12 +45,14 @@ export function postponeNotification(req) {
     // user unknown?
     if (user === 'undefined' || user === null) {
       notification.sendTextMessage(userUnknownMessage, userPhoneNumber, twilioPhoneNumber, () => {});
+      res.send({ success: false, code: 0, message: 'unknown phone number' });
       return;
     }
     // postpone time exceeded?
     const restTimeForUserToPostpone = maximumPostponeTimeForOneSchedule - user.postponedTimeForSchedule;
     if (restTimeForUserToPostpone === 0) {
       notification.sendTextMessage(postponeTimeExceededMessage, userPhoneNumber, twilioPhoneNumber, () => {});
+      res.send({ success: false, code: 0, message: 'postpone time exceeded' });
       return;
     }
     // postpone notification
