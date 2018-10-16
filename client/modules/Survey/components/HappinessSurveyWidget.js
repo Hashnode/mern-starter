@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 
 import styles from './HappinessSurveyWidget.css';
 import RangeSlider from './RangeSlider';
+import { throws } from 'assert';
 
 class HappinessSurveyWidget extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class HappinessSurveyWidget extends Component {
       valueTeam: 3,
       query: props.location.query,
       // display: 'block',
-      message: 'Your input has been successfully submitted'
+      message: '',
+      submit: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -52,10 +54,13 @@ class HappinessSurveyWidget extends Component {
         // success message under submit button
 
         this.setState({
-          display: 'none'
+          valueIndividual: 3,
+          valueTeam: 3,
+          submit: true
         });
         const message = document.getElementById('success_message');
-        message.innerHTML = this.state.message;
+        message.innerHTML = 'Your input has been successfully submitted';
+        // message.innerHTML = this.state.valueIndividual;
       } else {
         alert(res);
         console.log(res);
@@ -71,7 +76,7 @@ class HappinessSurveyWidget extends Component {
     // const messageStyle = {
     //   display: this.state.display
     // };
-
+    console.log('render');
     return (
       <div style={{ overflow: 'hidden' }}>
         <div className={styles.form_login}>
@@ -87,6 +92,9 @@ class HappinessSurveyWidget extends Component {
             <div style={sliderStyle}>
               <RangeSlider
                 question="How happy are you with your work in the team?"
+                value={this.state.valueIndividual}
+                submit={this.state.submit}
+                // value={this.state.valueIndividual}
                 happyValue={valueIndividual =>
                   this.setState({ valueIndividual })
                 }
@@ -103,7 +111,14 @@ class HappinessSurveyWidget extends Component {
             <div style={sliderStyle}>
               <RangeSlider
                 question="How happy do you think is your team with the work?"
-                happyValue={valueTeam => this.setState({ valueTeam })}
+                value={this.state.valueTeam}
+                submit={this.state.submit}
+                happyValue={valueTeam => {
+                  this.setState({ valueTeam });
+                  const message = document.getElementById('success_message');
+                  // message.innerHTML =
+                  //   this.state.valueIndividual + ' ' + this.state.valueTeam;
+                }}
               />
             </div>
             <div>
@@ -124,7 +139,9 @@ class HappinessSurveyWidget extends Component {
               />
             </div>
           </form>
-          <div id="success_message" className={styles.show} />
+          <div id="success_message" className={styles.show}>
+            {this.state.valueIndividual + ' & ' + this.state.valueTeam}
+          </div>
         </div>
       </div>
     );
