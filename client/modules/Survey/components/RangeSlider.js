@@ -7,14 +7,14 @@ class RangeSlider extends Component {
   constructor(props) {
     super(props); // call parent method
 
-    const tempTop = ['-11px', '-11px', '-11px', '-11px', '-11px'];
-    tempTop[this.props.value - 1] = '-42px';
+    // const tempTop = ['-11px', '-11px', '-11px', '-11px', '-11px'];
+    // tempTop[this.props.value - 1] = '-42px';
     // console.log('tempTop: ', tempTop);
 
     this.state = {
       value: props.value,
-      drag: 0,
-      top: tempTop
+      drag: 0
+      // top: tempTop
     };
 
     // console.log('Top: ', this.state.top);
