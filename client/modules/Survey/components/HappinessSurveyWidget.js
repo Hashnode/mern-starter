@@ -79,6 +79,13 @@ class HappinessSurveyWidget extends Component {
           // query: props.location.query,
           button: 'none'
         });
+
+        setTimeout(() => {
+          this.setState({
+            message: '',
+            button: 'inherit'
+          });
+        }, 3000);
         // message.innerHTML = this.state.on;
         // message.innerHTML = this.state.valueIndividual;
 
