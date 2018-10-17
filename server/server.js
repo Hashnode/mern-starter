@@ -5,11 +5,7 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
-
 import timedTask from './util/timedNotificaionTask';
-
-
-// import UserRouter from 'routes/users.routes';
 
 // Initialize the Express App
 const app = new Express();
@@ -52,7 +48,7 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
-import posts from './routes/post.routes';
+import users from './routes/users.routes';
 import teams from './routes/team.routes';
 import happiness from './routes/happiness.routes';
 import postponeNotification from './routes/postponeNotification.routes';
@@ -100,10 +96,10 @@ app.all('/api/admin/*', (req, res, next) => {
   next();
 });
 
-app.use('/api', posts);
 app.use('/api', teams);
 app.use('/api', happiness);
 app.use('/api', postponeNotification);
+app.use('/api', users);
 
 timedTask.begin();
 
@@ -189,10 +185,11 @@ app.use((req, res, next) => {
   });
 });
 
+const serverPort = process.env.NODE_ENV === 'test' ? 0 : serverConfig.port;
 // start app
-app.listen(serverConfig.port, (error) => {
+app.listen(serverPort, (error) => {
   if (!error) {
-    console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
+    console.log(`MERN is running on port: ${serverPort}! Build something amazing!`); // eslint-disable-line
   }
 });
 

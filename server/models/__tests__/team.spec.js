@@ -18,7 +18,7 @@ test.beforeEach('connect and add two team entries', async () => {
   await Team.create(teams).catch(() => 'Unable to create teams');
 });
 
-test.afterEach.always(async () => {
+test.afterEach(async () => {
   await dropDB();
 });
 

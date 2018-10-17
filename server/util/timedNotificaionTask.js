@@ -84,6 +84,13 @@ function getUserById(userId, cb) {
   );
 }
 
+function resetUsersPostponedTimeForSchedule(userId) {
+  User.findOne({ id: userId }).exec((err, user) => {
+    user.postponedTimeForSchedule = 0;
+    user.save();
+  });
+}
+
 class TimedNotificationTask {
 
   list = {};
@@ -167,6 +174,7 @@ class TimedNotificationTask {
     }
     clearTimeout(handler);
     delete this.list[userId];
+    resetUsersPostponedTimeForSchedule(userId);
   }
 
   /**
