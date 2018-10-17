@@ -16,6 +16,7 @@ class HappinessSurveyWidget extends Component {
       valueTeam: 3,
       query: props.location.query,
       // display: 'block',
+      button: 'inherit',
       message: '',
       submit: false
     };
@@ -23,7 +24,10 @@ class HappinessSurveyWidget extends Component {
   }
 
   toggle = () => {
-    this.setState({ message: '' });
+    this.setState({
+      message: '',
+      button: 'inherit'
+    });
   };
 
   componentDidMount() {
@@ -47,6 +51,10 @@ class HappinessSurveyWidget extends Component {
       }
     };
 
+    this.setState({
+      button: 'none'
+    });
+
     // const element = document.getElementById('success_message');
     // // element.innerHTML = this.state.valueIndividual;
     // element.innerHTML = 'submitted';
@@ -58,7 +66,6 @@ class HappinessSurveyWidget extends Component {
       if (res.happiness) {
         // reset all the states
         // success message under submit button
-
         this.setState({
           valueIndividual: 3,
           valueTeam: 3,
@@ -67,7 +74,9 @@ class HappinessSurveyWidget extends Component {
         const message = document.getElementById('success_message');
         // message.innerHTML = 'Your input has been successfully submitted';
         this.setState({
-          message: 'Your input has been successfully submitted'
+          message: 'Your input has been successfully submitted',
+          // query: props.location.query,
+          button: 'none'
         });
         // message.innerHTML = this.state.on;
         // message.innerHTML = this.state.valueIndividual;
@@ -88,6 +97,9 @@ class HappinessSurveyWidget extends Component {
     // const messageStyle = {
     //   display: this.state.display
     // };
+    const buttonStyle = {
+      pointerEvents: this.state.button
+    };
     console.log('render');
     return (
       <div style={{ overflow: 'hidden' }}>
@@ -148,6 +160,7 @@ class HappinessSurveyWidget extends Component {
                   color: 'rgb(0, 92, 230)',
                   textTransform: 'uppercase'
                 }}
+                style={buttonStyle}
               />
             </div>
           </form>
