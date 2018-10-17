@@ -4,8 +4,10 @@ import notification from '../util/notification';
 import timedNotificationTask from '../util/timedNotificaionTask';
 
 export function messageContentIs5_or_10_or_20(message) {
-  const permittedDelays = ['5', '10', '20'];
-  return message !== 'undefined' && permittedDelays.includes(message);
+  const permittedDelays = [5, 10, 20];
+  if (message === 'undefined') return false;
+  const postponeTime = parseInt(message, 0);
+  return postponeTime !== 0 && permittedDelays.includes(message);
 }
 
 function increasePostponedTimeForUser(user, postponeTimeInMilliseconds) {
