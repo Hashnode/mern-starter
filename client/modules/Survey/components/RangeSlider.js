@@ -205,11 +205,11 @@ class RangeSlider extends Component {
               style={styles1}
             /> */}
 
-            <label className={styles.label1}>Sad</label>
+            <label className={styles.label1}>very unhappy</label>
           </li>
           <li className={styles.li1}>
             <div id="two" className={styles.two} style={styles2} />
-            <label className={styles.label1}>Unhappy</label>
+            <label className={styles.label1}>a bit Unhappy</label>
           </li>
           <li className={styles.li1}>
             <div id="three" className={styles.three} style={styles3} />
@@ -219,7 +219,7 @@ class RangeSlider extends Component {
           </li>
           <li className={styles.li1}>
             <div id="four" className={styles.four} style={styles4} />
-            <label className={styles.label1}>Little happy</label>
+            <label className={styles.label1}>a bit happy</label>
           </li>
           <li className={styles.li1}>
             <div id="five" className={styles.five} style={styles5} />
