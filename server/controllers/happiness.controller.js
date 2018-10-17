@@ -16,7 +16,7 @@ export function addHappiness(req, res) {
     res.status(403).end();
   }
 
-  const sid = req.body.sid ? req.body.sid : 'cjmah9iu8000146gz0tbav7ki';
+  const sid = req.body.happiness.sid ? req.body.happiness.sid : 'cjmah9iu8000146gz0tbav7ki';
   User.findOne({ id: sid }).exec((error, user) => {
     if (error) {
       res.status(403).end();
