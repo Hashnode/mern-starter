@@ -8,6 +8,12 @@ class Session {
     };
   }
 
+
+  /**
+   * async - get login session
+   * @param sessionId
+   * @param cb
+   */
   get(sessionId, cb) {
     if (!sessionId) {
       cb(null);
