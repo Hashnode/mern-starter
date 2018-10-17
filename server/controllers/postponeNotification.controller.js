@@ -63,7 +63,7 @@ export function postponeNotification(req, res) {
     // postpone notification
     const postponeTime = parseInt(requestedPostponeTime, 0);
     const postponeTimeInMilliseconds = getPostponeTimeInMilliseconds(restTimeForUserToPostpone, postponeTime);
-    increasePostponedTimeForUser(user, postponeTimeInMilliseconds);
-    timedNotificationTask.postponeNotificationForUser(user.id, postponeTime);
+    increasePostponedTimeForUser(user, postponeTime);
+    timedNotificationTask.postponeNotificationForUser(user.id, postponeTimeInMilliseconds);
   });
 }
