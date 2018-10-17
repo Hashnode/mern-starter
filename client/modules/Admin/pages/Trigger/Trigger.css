@@ -1,0 +1,19 @@
+
+.container {
+
+}
+
+.number {
+  width: 100px;
+  height: 20px;
+  font-size: 15px;
+  color: #333333;
+}
+
+.submit {
+  width: 100px;
+  height: 30px;
+  background-color: #03A9F4;
+  color: white;
+  font-size: 16px;
+}

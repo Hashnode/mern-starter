@@ -5,8 +5,11 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
+import timedTask from './util/timedNotificaionTask';
+
 // Initialize the Express App
 const app = new Express();
+const session = require('express-session');
 
 // Set Development modes checks
 const isDevMode = process.env.NODE_ENV === 'development' || false;
@@ -45,7 +48,10 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
-import posts from './routes/post.routes';
+import users from './routes/users.routes';
+import teams from './routes/team.routes';
+import happiness from './routes/happiness.routes';
+import postponeNotification from './routes/postponeNotification.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 
@@ -54,14 +60,16 @@ mongoose.Promise = global.Promise;
 
 // MongoDB Connection
 if (process.env.NODE_ENV !== 'test') {
+  const db = mongoose.connection;
+  db.on('error', console.error);
+  db.once('open', () => {
+    dummyData(); // feed some dummy data in DB.
+  });
   mongoose.connect(serverConfig.mongoURL, (error) => {
     if (error) {
       console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
       throw error;
     }
-
-    // feed some dummy data in DB.
-    dummyData();
   });
 }
 
@@ -70,7 +78,31 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist/client')));
-app.use('/api', posts);
+app.use(session({
+  secret: '12345',
+  resave: true,
+  saveUninitialized: true,
+}));
+
+app.all('/api/admin/*', (req, res, next) => {
+  if (req.path === '/api/admin/checkAdmin') {
+    next();
+    return;
+  }
+  if (req.session.sessionid !== '1') {
+    res.send({ code: 508, success: true, message: 'Please login' });
+    return;
+  }
+  next();
+});
+
+app.use('/api', teams);
+app.use('/api', happiness);
+app.use('/api', postponeNotification);
+app.use('/api', users);
+
+timedTask.begin();
+
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -92,7 +124,6 @@ const renderFullPage = (html, initialState) => {
 
         ${isProdMode ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
-        <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
       </head>
       <body>
         <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
@@ -154,10 +185,11 @@ app.use((req, res, next) => {
   });
 });
 
+const serverPort = process.env.NODE_ENV === 'test' ? 0 : serverConfig.port;
 // start app
-app.listen(serverConfig.port, (error) => {
+app.listen(serverPort, (error) => {
   if (!error) {
-    console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
+    console.log(`MERN is running on port: ${serverPort}! Build something amazing!`); // eslint-disable-line
   }
 });
 

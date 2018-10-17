@@ -7,3 +7,4 @@ export function toggleAddPost() {
     type: TOGGLE_ADD_POST,
   };
 }
+

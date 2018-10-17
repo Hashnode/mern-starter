@@ -1,0 +1,56 @@
+
+.container {
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  /*margin-top: 30px;*/
+}
+
+.add-container {
+  width: 100%;
+}
+
+h2 {
+  color: #333333;
+}
+
+.add {
+  width: 80%;
+  height: 30px;
+  color: white;
+  background-color: #03A9F4;
+  text-align: center;
+  line-height: 30px;
+  margin: 50px auto;
+}
+
+input {
+  border: 1px solid #03A9F4;
+  margin-left: 20px;
+  height: 25px;
+  width: 200px;
+  font-size: 16px;
+  color: #333333;
+}
+
+select {
+  margin-left: 20px;
+  height: 25px;
+  width: 200px;
+  font-size: 16px;
+  color: #333333;
+}
+
+table {
+  margin-top: 30px;
+}
+
+.td-left {
+  text-align: left;
+}
+
+.td-right {
+  text-align: right;
+  color: #666666;
+}

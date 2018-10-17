@@ -1,17 +1,17 @@
-.footer{
+.footer {
   text-align: center;
   padding: 56px 0;
   background-size: cover;
 }
 
-.footer p{
+.footer p {
   margin: 0 0 8px 0;
   font-size: 14px;
-  color: #FFF;
+  color: #999999;
 }
 
-.footer a{
-  color: #FFF;
+.footer a {
+  color: #fff;
   text-decoration: none;
   font-weight: 700;
 }
