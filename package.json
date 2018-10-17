@@ -17,6 +17,7 @@
     "slate": "rimraf node_modules && npm install",
     "lint": "eslint client server",
     "heroku-prebuild": "npm run build:server && npm run build",
+    "preinstall": "npm install",
     "heroku-postbuild": ""
   },
   "pre-commit": [],
