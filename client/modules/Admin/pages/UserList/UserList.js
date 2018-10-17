@@ -101,7 +101,7 @@ class UserList extends Component {
               <th>Team</th>
               <th></th>
               <th></th>
-              <th></th>
+              {/*<th></th>*/}
             </tr>
           </thead>
           <tbody>
@@ -114,7 +114,7 @@ class UserList extends Component {
                 <td>{valueOfProperty(item.team, 'name')}</td>
                 <td><div className={style.operation} onClick={this.edit} id={item.id}>edit</div></td>
                 <td><div className={style.operation} onClick={this.delete} id={item.id}>delete</div></td>
-                <td><div className={style.operation} onClick={this.text} id={item.id}>text</div></td>
+                {/*<td><div className={style.operation} onClick={this.text} id={item.id}>text</div></td>*/}
               </tr>);
             })
           }

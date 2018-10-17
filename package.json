@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "application for happiness of development teams, based on mern.io boilerplate",
   "engines": {
-  "node": "8.12.0"
+    "node": "8.12.0"
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/mern-test node_modules/.bin/nyc node node_modules/ava/cli.js",
@@ -101,7 +101,6 @@
     "react-redux": "^4.4.5",
     "react-router": "^3.2.1",
     "react-router-dom": "^4.3.1",
-    "react-timeout": "^1.1.2",
     "redux": "^3.5.2",
     "redux-ava": "^2.0.0",
     "redux-devtools": "^3.3.1",
