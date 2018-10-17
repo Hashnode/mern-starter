@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 import styles from './HappinessSurveyWidget.css';
 import RangeSlider from './RangeSlider';
 import { throws } from 'assert';
-import ReactTimeout from 'react-timeout';
+// import ReactTimeout from 'react-timeout';
 //https://www.npmjs.com/package/react-timeout
 
 class HappinessSurveyWidget extends Component {
@@ -23,12 +23,12 @@ class HappinessSurveyWidget extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  toggle = () => {
-    this.setState({
-      message: '',
-      button: 'inherit'
-    });
-  };
+  // toggle = () => {
+  //   this.setState({
+  //     message: '',
+  //     button: 'inherit'
+  //   });
+  // };
 
   componentDidMount() {
     const username = this.state.query.u;
@@ -66,6 +66,7 @@ class HappinessSurveyWidget extends Component {
       if (res.happiness) {
         // reset all the states
         // success message under submit button
+        console.log(this.state.valueIndividual + ' ' + this.state.valueTeam);
         this.setState({
           valueIndividual: 3,
           valueTeam: 3,
@@ -78,10 +79,17 @@ class HappinessSurveyWidget extends Component {
           // query: props.location.query,
           button: 'none'
         });
+
+        setTimeout(() => {
+          this.setState({
+            message: '',
+            button: 'inherit'
+          });
+        }, 3000);
         // message.innerHTML = this.state.on;
         // message.innerHTML = this.state.valueIndividual;
 
-        this.props.setTimeout(this.toggle, 2500);
+        // this.props.setTimeout(this.toggle, 5500);
       } else {
         alert(res);
         console.log(res);
@@ -100,7 +108,7 @@ class HappinessSurveyWidget extends Component {
     const buttonStyle = {
       pointerEvents: this.state.button
     };
-    console.log('render');
+    console.log('render survey');
     return (
       <div style={{ overflow: 'hidden' }}>
         <div className={styles.form_login}>
@@ -178,5 +186,5 @@ class HappinessSurveyWidget extends Component {
   }
 }
 
-export default injectIntl(ReactTimeout(HappinessSurveyWidget));
+export default injectIntl(HappinessSurveyWidget);
 // export default HappinessSurveyWidget;
