@@ -25,18 +25,34 @@ export function checkAdmin(req, res) {
   }
 }
 
+
+/**
+ * interface - get users list
+ * @param req
+ * @param res
+ */
 export function userList(req, res) {
-  User.find().populate({ path: 'team', model: Team, select: { name: 1, _id: 1 } }).exec((err, users) => {
-    if (err) {
-      res.send({
-        success: false, code: 0, message: err,
-      });
-    } else {
-      res.send({
-        success: true, code: 1, message: users,
-      });
+  const populateCondition = {
+    path: 'team',
+    model: Team,
+    select: { name: 1, _id: 1 },
+  };
+
+  User.find()
+      .populate(populateCondition)
+      .exec((err, users) => {
+        if (err) {
+          res.send({
+            success: false, code: 0, message: err,
+          });
+        } else {
+          res.send({
+            success: true, code: 1, message: users,
+          }
+        );
+      }
     }
-  });
+  );
 }
 
 export function addUser(req, res) {
@@ -113,7 +129,7 @@ export function sendSMS(req, res) {
       res.send({ success: false, code: 0, message: 'please login in' });
       return;
     }
-    notification.sendTextMessage(req.body.text, '+64'+user.phone, '+15105737124', (msg) => {
+    notification.sendTextMessage(req.body.text, '+64' + user.phone, '+15105737124', (msg) => {
       if (msg) {
         res.send({ success: true, code: 1, message: 'message send' });
       } else {

@@ -63,13 +63,25 @@ function getAllUsers(cb) {
  * @param cb
  */
 function getUserById(userId, cb) {
-  User.findOne({ id: userId }).populate({ path: 'team', model: Team, select: { name: 1, _id: 1 } }).exec((err, user) => {
-    if (err) {
-      cb(null);
-      return;
-    }
-    cb(user);
-  });
+  const queryCondition = {
+    id: userId,
+  };
+  const populateCondition = {
+    path: 'team',
+    model: Team,
+    select: { name: 1, _id: 1 },
+  };
+
+  User.findOne(queryCondition)
+      .populate(populateCondition)
+      .exec((err, user) => {
+        if (err) {
+          cb(null);
+          return;
+        }
+        cb(user);
+      }
+  );
 }
 
 class TimedNotificationTask {
@@ -192,7 +204,7 @@ class TimedNotificationTask {
    * start to run notification tasks
    */
   begin() {
-    //this.sendNotification();
+    // this.sendNotification();
     // schedule.scheduleJob('* 25 17 * * 1-5', () => {
     //   sendNotification();
     // });
