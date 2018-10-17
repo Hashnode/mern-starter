@@ -6,7 +6,7 @@ const userSchema = new Schema({
   name: { type: 'String', required: true },
   phone: { type: 'String', required: false },
   email: { type: 'String', required: false },
-  postponedTimeForSchedule: { type: 'Number', required: false },
+  postponedTimeForSchedule: { type: 'Number', required: false, default: 0 },
   team: { type: Schema.Types.ObjectId, required: false, ref: 'Team' },
 });
 

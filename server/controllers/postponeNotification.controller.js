@@ -11,7 +11,8 @@ export function messageContentIs5_or_10_or_20(message) {
 }
 
 function increasePostponedTimeForUser(user, postponeTimeInMilliseconds) {
-  user.postponedTimeForSchedule += postponeTimeInMilliseconds;
+  const storedPostponeTime = typeof user.postponeTimeInMilliseconds !== 'undefined' ? user.postponeTimeInMilliseconds : 0;
+  user.postponeTimeInMilliseconds = storedPostponeTime + postponeTimeInMilliseconds;
   user.save();
 }
 
@@ -52,7 +53,7 @@ export function postponeNotification(req, res) {
       return;
     }
     // postpone time exceeded?
-    const usersPostponedTimeForSchedule = user.postponedTimeForSchedule !== 'undefined' && user.postponedTimeForSchedule !== null ? user.postponedTimeForSchedule : 0;
+    const usersPostponedTimeForSchedule = typeof user.postponedTimeForSchedule !== 'undefined' && user.postponedTimeForSchedule !== null ? user.postponedTimeForSchedule : 0;
     const restTimeForUserToPostpone = maximumPostponeTimeForOneSchedule - usersPostponedTimeForSchedule;
     if (restTimeForUserToPostpone === 0) {
       notification.sendTextMessage(postponeTimeExceededMessage, userPhoneNumber, twilioPhoneNumber, () => {});
@@ -63,6 +64,6 @@ export function postponeNotification(req, res) {
     const postponeTime = parseInt(requestedPostponeTime, 0);
     const postponeTimeInMilliseconds = getPostponeTimeInMilliseconds(restTimeForUserToPostpone, postponeTime);
     increasePostponedTimeForUser(user, postponeTimeInMilliseconds);
-    timedNotificationTask.postponeNotificationForUser(user.id, postponeTimeInMilliseconds);
+    timedNotificationTask.postponeNotificationForUser(user.id, postponeTime);
   });
 }
