@@ -2,6 +2,9 @@
   "name": "how-is-it",
   "version": "1.0.0",
   "description": "application for happiness of development teams, based on mern.io boilerplate",
+  "engines": {
+  "node": "8.12.0"
+  },
   "scripts": {
     "test": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/mern-test node_modules/.bin/nyc node node_modules/ava/cli.js",
     "watch:test": "npm run test -- --watch",
