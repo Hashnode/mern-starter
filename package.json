@@ -7,7 +7,7 @@
     "watch:test": "npm run test -- --watch",
     "cover": "nyc npm run test",
     "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
-    "start": " cross-env NODE_ENV=production MONGO_URL=mongodb://heroku_prod_user_sdm:team4_sdm_2018@ds121603.mlab.com:21603/heroku_kxw1j04d node index.js",
+    "start": "cross-env NODE_ENV=production MONGO_URL=mongodb://heroku_prod_user_sdm:team4_sdm_2018@ds121603.mlab.com:21603/heroku_kxw1j04d node index.js",
     "start:dev": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
     "start:build": "npm run build && npm run build:server && npm run start:prod",
     "bs": "npm run clean && npm run build && npm run build:server && npm run start:prod",
