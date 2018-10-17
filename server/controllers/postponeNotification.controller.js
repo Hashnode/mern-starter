@@ -7,7 +7,7 @@ export function messageContentIs5_or_10_or_20(message) {
   const permittedDelays = [5, 10, 20];
   if (message === 'undefined') return false;
   const postponeTime = parseInt(message, 0);
-  return postponeTime !== 0 && permittedDelays.includes(message);
+  return postponeTime !== 0 && permittedDelays.includes(postponeTime);
 }
 
 function increasePostponedTimeForUser(user, postponeTimeInMilliseconds) {
@@ -60,7 +60,8 @@ export function postponeNotification(req, res) {
       return;
     }
     // postpone notification
-    const postponeTimeInMilliseconds = getPostponeTimeInMilliseconds(restTimeForUserToPostpone, requestedPostponeTime);
+    const postponeTime = parseInt(requestedPostponeTime, 0);
+    const postponeTimeInMilliseconds = getPostponeTimeInMilliseconds(restTimeForUserToPostpone, postponeTime);
     increasePostponedTimeForUser(user, postponeTimeInMilliseconds);
     timedNotificationTask.postponeNotificationForUser(user.id, postponeTimeInMilliseconds);
   });
