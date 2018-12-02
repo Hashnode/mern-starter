@@ -13,6 +13,8 @@ import { fetchPost } from '../../PostActions';
 // Import Selectors
 import { getPost } from '../../PostReducer';
 
+import CommentBox from '../../../Comments/CommentBox';
+
 export function PostDetailPage(props) {
   return (
     <div>
@@ -21,6 +23,7 @@ export function PostDetailPage(props) {
         <h3 className={styles['post-title']}>{props.post.title}</h3>
         <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
         <p className={styles['post-desc']}>{props.post.content}</p>
+        <CommentBox />
       </div>
     </div>
   );

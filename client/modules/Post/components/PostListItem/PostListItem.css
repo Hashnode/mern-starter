@@ -1,3 +1,40 @@
+h3 {
+  margin-top: 20px
+}
+
+hr {
+  border: 1px solid #FFBC42;
+  margin-top: 20px;
+  width: 100px;
+}
+
+a {
+  color: tomato;
+  cursor: pointer;
+}
+
+.time {
+  color: #30A9DE;
+}
+
+input {
+  border: 1px solid #FFBC42;
+  outline: none;
+  margin: 5px;
+  margin-left: 0;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+button {
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 5px;
+  border-radius: 2px;
+  color: #333;
+}
+
 .single-post {
   margin: 20px 0;
   padding: 15px;
