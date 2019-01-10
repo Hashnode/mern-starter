@@ -1,23 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
 // Import Style
 import styles from './CommentListItem.css';
 
 function CommentListItem(props) {
+  const date = new Date(props.comment.dateAdded);
+  const dateString = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+
   return (
-    <div className={styles['single-comment']}>
-      <h3 className={styles['comment-title']}>
-        {props.comment.name}
-      </h3>
-      <p className={styles['comment-desc']}>{props.comment.content}</p>
-      <p className={styles['comment-action']}>
-        <button onClick={props.onEdit} data-cuid={comment.cuid}>
+    <div className={styles.wrapper}>
+      <div className={styles['info-bar']}>
+        <h3>
+          <FormattedMessage id="by" /> {props.comment.name}
+        </h3>
+        <div>{dateString}</div>
+      </div>
+      <p className={styles.content}>{props.comment.content}</p>
+      <p>
+        <button
+          onClick={props.onEdit}
+          data-cuid={props.comment.cuid}
+          className={`${styles.button} ${styles['edit-button']}`}
+        >
           <FormattedMessage id="editComment" />
         </button>
-        <button onClick={props.onDelete} data-cuid={comment.cuid}>
+        <button
+          onClick={props.onDelete}
+          data-cuid={props.comment.cuid}
+          className={`${styles.button} ${styles['delete-button']}`}
+        >
           <FormattedMessage id="deleteComment" />
         </button>
       </p>

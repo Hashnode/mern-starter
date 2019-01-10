@@ -1,7 +1,6 @@
 import Post from '../models/post';
 import Comment from '../models/comment';
 import cuid from 'cuid';
-import slug from 'limax';
 import sanitizeHtml from 'sanitize-html';
 
 /**
@@ -30,28 +29,28 @@ export function addComment(req, res) {
     res.status(403).end();
   }
 
-  Post.findOne({ cuid: req.body.comment.postCuid }).exec((err, post) => {
-      if (err) {
-        res.status(500).send(err);
+  Post.findOne({ cuid: req.body.comment.postCuid }).exec((err, comment) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+
+    if (!comment) {
+      res.status(403).end();
+    }
+
+    const newComment = new Comment(req.body.comment);
+
+    // Let's sanitize inputs
+    newComment.name = sanitizeHtml(newComment.name);
+    newComment.content = sanitizeHtml(newComment.content);
+
+    newComment.cuid = cuid();
+    newComment.save((error, saved) => {
+      if (error) {
+        res.status(500).send(error);
       }
-
-      if (!post) {
-        res.status(403).end();
-      }
-
-      const newComment = new Comment(req.body.comment);
-
-      // Let's sanitize inputs
-      newComment.name = sanitizeHtml(newPost.name);
-      newComment.content = sanitizeHtml(newPost.content);
-
-      newComment.cuid = cuid();
-      newComment.save((err, saved) => {
-        if (err) {
-          res.status(500).send(err);
-        }
-        res.json({ comment: saved });
-      });
+      res.json({ comment: saved });
+    });
   });
 }
 
@@ -62,13 +61,43 @@ export function addComment(req, res) {
  * @returns void
  */
 export function deleteComment(req, res) {
-  Comment.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+  Comment.findOne({ cuid: req.params.cuid }).exec((err, comment) => {
     if (err) {
       res.status(500).send(err);
     }
 
-    post.remove(() => {
+    comment.remove(() => {
       res.status(200).end();
+    });
+  });
+}
+
+/**
+ * Edit a comment
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function editComment(req, res) {
+  if (!req.body.comment.name || !req.body.comment.content) {
+    res.status(403).end();
+  }
+
+  Comment.findOne({ cuid: req.params.cuid }).exec((err, comment) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+
+    /* eslint-disable no-param-reassign */
+    comment.name = sanitizeHtml(req.body.comment.name);
+    comment.content = sanitizeHtml(req.body.comment.content);
+    /* eslint-enable no-param-reassign */
+
+    comment.save((error, saved) => {
+      if (error) {
+        res.status(500).send(error);
+      }
+      res.json({ comment: saved });
     });
   });
 }

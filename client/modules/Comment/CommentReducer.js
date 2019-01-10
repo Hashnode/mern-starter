@@ -16,13 +16,14 @@ const CommentReducer = (state = [], action) => {
     case DELETE_COMMENT :
       return state.filter(comment => comment.cuid !== action.cuid);
 
-    case EDIT_COMMENT :
-      const index = state.findIndex(comment => comment.cuid !== action.comment.cuid);
+    case EDIT_COMMENT : {
+      const index = state.findIndex(comment => comment.cuid === action.comment.cuid);
       return [
         ...state.slice(0, index),
         action.comment,
         ...state.slice(index + 1),
       ];
+    }
 
     default:
       return state;
@@ -35,7 +36,7 @@ const CommentReducer = (state = [], action) => {
 export const getComments = state => state.comments;
 
 // Get post by cuid
-export const getComment = (state, cuid) => state.comments.find(post => post.cuid === cuid);
+export const getComment = (comments, cuid) => comments.find(comment => comment.cuid === cuid);
 
 // Export Reducer
 export default CommentReducer;

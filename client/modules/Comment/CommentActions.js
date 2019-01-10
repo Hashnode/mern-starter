@@ -10,7 +10,7 @@ export const EDIT_COMMENT = 'EDIT_COMMENT';
 export function addComment(comment) {
   return {
     type: ADD_COMMENT,
-    post,
+    comment,
   };
 }
 
@@ -59,7 +59,7 @@ export function editComment(comment) {
 
 export function editCommentRequest(comment) {
   return (dispatch) => {
-    return callApi(`comments/${comment.cuid}`, 'put')
+    return callApi(`comments/${comment.cuid}`, 'put', { comment })
       .then(res => dispatch(editComment(res.comment)));
   };
 }

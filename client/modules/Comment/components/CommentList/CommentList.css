@@ -1,0 +1,32 @@
+.wrapper {
+  margin: 20px 0;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  margin: 20px 0;
+}
+
+.title{
+  font-size: 28px;
+  margin-bottom: 16px;
+  font-weight: 400;
+  color: #616161;
+}
+
+.comment-button {
+  align-self: flex-end;
+}
+
+.success-button {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 18px;
+  color: #FFF;
+  background: #03A9F4;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

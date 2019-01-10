@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
+// Import Style
+import styles from './CommentList.css';
+
 // Import Components
-import CommentListItem from './CommentListItem/CommentListItem';
-import CommentCreateWidget from './CommentCreateWidget/CommentCreateWidget';
+import CommentListItem from '../CommentListItem/CommentListItem';
+import CommentCreateWidget from '../CommentCreateWidget/CommentCreateWidget';
 
 // Import Actions
 import {
@@ -13,12 +16,12 @@ import {
   fetchComments,
   deleteCommentRequest,
   editCommentRequest,
-} from '../CommentActions';
-import { toggleAddCommentModal, toggleEditCommentModal } from '../../App/AppActions';
+} from '../../CommentActions';
+import { toggleAddCommentModal, toggleEditCommentModal } from '../../../App/AppActions';
 
 // Import Selectors
-import { getShowAddComment, getShowEditComment } from '../../App/AppReducer';
-import { getComments, getComment } from '../CommentReducer';
+import { getShowAddComment, getShowEditComment } from '../../../App/AppReducer';
+import { getComments, getComment } from '../../CommentReducer';
 
 class CommentList extends Component {
   constructor(props) {
@@ -40,45 +43,45 @@ class CommentList extends Component {
     this.props.fetchComments(this.props.postCuid);
   }
 
-  handleAddCommentModal(comment) {
+  handleAddCommentModal() {
     this.setState({
       comment: {
         name: '',
         content: '',
         postCuid: this.props.postCuid,
-      }
+      },
     });
 
     this.props.toggleAddCommentModal();
-  };
+  }
+
+  handleAddComment(comment) {
+    this.props.addCommentRequest(comment);
+    this.props.toggleAddCommentModal();
+  }
 
   handleEditCommentModal(e) {
     this.setState({
-      comment: getComment(this.props.comments, e.currentTarget.dataset.cuid)
+      comment: getComment(this.props.comments, e.currentTarget.dataset.cuid),
     });
 
     this.props.toggleEditCommentModal();
-  };
+  }
 
-  handleAddComment(comment) {
-    this.props.addCommentRequest(this.state.comment);
+  handleEditComment(comment) {
+    this.props.editCommentRequest(comment);
     this.props.toggleEditCommentModal();
-  };
+  }
 
   handleDeleteComment(e) {
     if (confirm('Do you want to delete this post')) { // eslint-disable-line
       this.props.deleteCommentRequest(e.currentTarget.dataset.cuid);
     }
-  };
-
-  handleEditComment() {
-    this.props.editCommentRequest(this.state.comment);
-    this.props.toggleEditCommentModal();
-  };
+  }
 
   render() {
     return (
-      <div className="listView">
+      <div className={styles.wrapper}>
         {
           this.props.showAddComment || this.props.showEditComment ? (
             <CommentCreateWidget
@@ -89,22 +92,36 @@ class CommentList extends Component {
                   ? this.handleEditComment
                   : this.handleAddComment
               }
+              onClose={
+                this.props.showEditComment
+                  ? this.props.toggleEditCommentModal
+                  : this.props.toggleAddCommentModal
+              }
             />
           ) : (
-            <button onClick={this.handleAddCommentModal}>
+            <button onClick={this.handleAddCommentModal} className={`${styles['success-button']} ${styles['comment-button']}`}>
               <FormattedMessage id="addComment" />
             </button>
           )
         }
         {
-          !this.props.comments.length && this.props.comments.map(comment => (
-            <CommentListItem
-              comment={comment}
-              key={comment.cuid}
-              onDelete={this.handleDeleteComment}
-              onEdit={this.handleEditCommentModal}
-            />
-          ))
+          this.props.comments.length ? (
+            <div className={styles.list}>
+              <h3 className={styles.title}>
+                <FormattedMessage id="commentsHeader" />
+              </h3>
+              {
+                this.props.comments.map(comment => (
+                  <CommentListItem
+                    comment={comment}
+                    key={comment.cuid}
+                    onDelete={this.handleDeleteComment}
+                    onEdit={this.handleEditCommentModal}
+                  />
+                ))
+              }
+            </div>
+          ) : null
         }
       </div>
     );
@@ -122,6 +139,8 @@ const mapStateToProps = state => ({
 
 CommentList.propTypes = {
   postCuid: PropTypes.string.isRequired,
+  showAddComment: PropTypes.bool.isRequired,
+  showEditComment: PropTypes.bool.isRequired,
   comments: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
@@ -129,6 +148,12 @@ CommentList.propTypes = {
     cuid: PropTypes.string.isRequired,
     dateAdded: PropTypes.string.isRequired,
   })).isRequired,
+  addCommentRequest: PropTypes.func.isRequired,
+  fetchComments: PropTypes.func.isRequired,
+  deleteCommentRequest: PropTypes.func.isRequired,
+  editCommentRequest: PropTypes.func.isRequired,
+  toggleAddCommentModal: PropTypes.func.isRequired,
+  toggleEditCommentModal: PropTypes.func.isRequired,
 };
 
 export default connect(
