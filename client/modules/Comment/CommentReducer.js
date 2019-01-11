@@ -35,7 +35,7 @@ const CommentReducer = (state = [], action) => {
 // Get all comments
 export const getComments = state => state.comments;
 
-// Get post by cuid
+// Get comment by cuid
 export const getComment = (comments, cuid) => comments.find(comment => comment.cuid === cuid);
 
 // Export Reducer

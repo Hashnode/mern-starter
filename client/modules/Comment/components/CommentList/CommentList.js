@@ -74,7 +74,7 @@ class CommentList extends Component {
   }
 
   handleDeleteComment(e) {
-    if (confirm('Do you want to delete this post')) { // eslint-disable-line
+    if (confirm('Do you want to delete this comment')) { // eslint-disable-line
       this.props.deleteCommentRequest(e.currentTarget.dataset.cuid);
     }
   }
