@@ -20,4 +20,7 @@ router.route('/posts/:cuid').post(PostController.createCommentToPost);
 // Update an exist comment
 router.route('/posts/:cuid').put(PostController.editCommentPost);
 
+// Remove comment from post
+router.route('/posts/:id/:comment_id').delete(PostController.removeCommentFromPost);
+
 export default router;
