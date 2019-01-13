@@ -5,6 +5,7 @@ export const ADD_POST = 'ADD_POST';
 export const ADD_POSTS = 'ADD_POSTS';
 export const DELETE_POST = 'DELETE_POST';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const EDIT_COMMENT = 'EDIT_COMMENT';
 
 // Export Actions
 export function addPost(post) {
@@ -76,6 +77,27 @@ export function addCommentRequest(cuid, comment) {
       },
     }).then(res => {
       dispatch(createComment(res));
+    });
+  };
+}
+
+export function editComment(post) {
+  return {
+    type: EDIT_COMMENT,
+    post,
+  };
+}
+
+export function editCommentRequest(cuid, comment) {
+  return (dispatch) => {
+    return callApi(`posts/${cuid}`, 'put', {
+      comment: {
+        commentId: comment.commentId,
+        name: comment.name,
+        text: comment.text,
+      },
+    }).then(res => {
+      dispatch(editComment(res));
     });
   };
 }
