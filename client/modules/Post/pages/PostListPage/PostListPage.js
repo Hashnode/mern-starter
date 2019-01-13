@@ -6,18 +6,22 @@ import { connect } from 'react-redux';
 import PostList from '../../components/PostList';
 import PostCreateWidget from '../../components/PostCreateWidget/PostCreateWidget';
 import CommentCreateWidget from '../../components/CommentCreateWidget/CommentCreateWidget';
+import CommentEditWidget from '../../components/CommentEditWidget/CommentEditWidget';
 
 // Import Actions
-import { addPostRequest, fetchPosts, deletePostRequest, addCommentRequest } from '../../PostActions';
-import { toggleAddPost, toggleAddComment } from '../../../App/AppActions';
+import { addPostRequest, fetchPosts, deletePostRequest, addCommentRequest, editCommentRequest } from '../../PostActions';
+
+// Import Togglers Actions
+import { toggleAddPost, toggleAddComment, toggleEditComment } from '../../../App/AppActions';
 
 // Import Selectors
-import { getShowAddPost, getShowAddComment } from '../../../App/AppReducer';
+import { getShowAddPost, getShowAddComment, getShowEditComment } from '../../../App/AppReducer';
 import { getPosts } from '../../PostReducer';
 
 class PostListPage extends Component {
   state = {
     postId: null,
+    commentId: null,
   };
   componentDidMount() {
     this.props.dispatch(fetchPosts());
@@ -45,9 +49,22 @@ class PostListPage extends Component {
     }
   };
 
+  handleEditComment = (...args) => {
+    if (!Array.isArray(...args)) {
+      const { postID, commentID } = args[0];
+      this.setState({ postId: postID, commentId: commentID });
+      this.props.dispatch(toggleEditComment());
+    }
+    if (args.length > 1) {
+      const [postId, name, text] = args;
+      const { commentId } = this.state;
+      this.props.dispatch(editCommentRequest(postId, { commentId, name, text }));
+    }
+  };
+
   render() {
     const { postId } = this.state;
-    const { showAddPost, posts, showAddComment } = this.props;
+    const { showAddPost, posts, showAddComment, showEditComment } = this.props;
     return (
       <div>
         <PostCreateWidget
@@ -57,6 +74,11 @@ class PostListPage extends Component {
         <CommentCreateWidget
           addComment={this.handleAddComment}
           showAddComment={showAddComment}
+          postId={postId}
+        />
+        <CommentEditWidget
+          editComment={this.handleEditComment}
+          showEditComment={showEditComment}
           postId={postId}
         />
         <PostList
@@ -77,6 +99,7 @@ function mapStateToProps(state) {
     showAddPost: getShowAddPost(state),
     posts: getPosts(state),
     showAddComment: getShowAddComment(state),
+    showEditComment: getShowEditComment(state),
   };
 }
 
@@ -89,6 +112,7 @@ PostListPage.propTypes = {
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
   showAddComment: PropTypes.bool.isRequired,
+  showEditComment: PropTypes.bool.isRequired,
 };
 
 PostListPage.contextTypes = {
