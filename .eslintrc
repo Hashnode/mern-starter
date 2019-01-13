@@ -21,6 +21,8 @@
      "comma-dangle": [1, "always-multiline"],
      "no-underscore-dangle" : 0,
      "no-confusing-arrow": 0,
+     "no-return-assign": 0,
+     "no-param-reassign": 0,
      "max-len": [1, 180, 4],
      "arrow-body-style": [0],
      "react/jsx-no-bind": [0],
