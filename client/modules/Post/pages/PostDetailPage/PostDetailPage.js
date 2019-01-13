@@ -14,13 +14,14 @@ import { fetchPost } from '../../PostActions';
 import { getPost } from '../../PostReducer';
 
 export function PostDetailPage(props) {
+  const { post } = props;
   return (
     <div>
-      <Helmet title={props.post.title} />
+      <Helmet title={post.title} />
       <div className={`${styles['single-post']} ${styles['post-detail']}`}>
-        <h3 className={styles['post-title']}>{props.post.title}</h3>
-        <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
-        <p className={styles['post-desc']}>{props.post.content}</p>
+        <h3 className={styles['post-title']}>{post.title}</h3>
+        <p className={styles['author-name']}><FormattedMessage id="by" /> {post.name}</p>
+        <p className={styles['post-desc']}>{post.content}</p>
       </div>
     </div>
   );
