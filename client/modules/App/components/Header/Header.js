@@ -7,8 +7,9 @@ import { FormattedMessage } from 'react-intl';
 import styles from './Header.css';
 
 export function Header(props, context) {
-  const languageNodes = props.intl.enabledLanguages.map(
-    lang => <li key={lang} onClick={() => props.switchLanguage(lang)} className={lang === props.intl.locale ? styles.selected : ''}>{lang}</li>
+  const { showAddPost, intl, switchLanguage, toggleAddPost } = props;
+  const languageNodes = intl.enabledLanguages.map(
+    lang => <li key={lang} onClick={() => switchLanguage(lang)} className={lang === intl.locale ? styles.selected : ''}>{lang}</li>
   );
 
   return (
@@ -25,7 +26,7 @@ export function Header(props, context) {
         </h1>
         {
           context.router.isActive('/', true)
-            ? <a className={styles['add-post-button']} href="#" onClick={props.toggleAddPost}><FormattedMessage id="addPost" /></a>
+            ? <a className={styles['add-post-button']} href="#" onClick={toggleAddPost}><FormattedMessage id={`${showAddPost ? 'hidePostForm' : 'addPost'}`} /></a>
             : null
         }
       </div>
@@ -41,6 +42,8 @@ Header.propTypes = {
   toggleAddPost: PropTypes.func.isRequired,
   switchLanguage: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
+  showAddPost: PropTypes.bool.isRequired,
 };
 
 export default Header;
+
