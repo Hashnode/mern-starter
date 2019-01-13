@@ -9,7 +9,7 @@ import CommentCreateWidget from '../../components/CommentCreateWidget/CommentCre
 import CommentEditWidget from '../../components/CommentEditWidget/CommentEditWidget';
 
 // Import Actions
-import { addPostRequest, fetchPosts, deletePostRequest, addCommentRequest, editCommentRequest } from '../../PostActions';
+import { addPostRequest, fetchPosts, deletePostRequest, addCommentRequest, editCommentRequest, deleteCommentRequest } from '../../PostActions';
 
 // Import Togglers Actions
 import { toggleAddPost, toggleAddComment, toggleEditComment } from '../../../App/AppActions';
@@ -28,7 +28,7 @@ class PostListPage extends Component {
   }
 
   handleDeletePost = post => {
-    if (confirm('Do you want to delete this post')) { // eslint-disable-line
+    if (confirm('Do you want to delete this post')) {// eslint-disable-line
       this.props.dispatch(deletePostRequest(post));
     }
   };
@@ -62,6 +62,12 @@ class PostListPage extends Component {
     }
   };
 
+  handleDeleteComment = postIDAndCommentIDObj => {
+    if (confirm('Do you want to delete this comment')) {// eslint-disable-line
+      this.props.dispatch(deleteCommentRequest(postIDAndCommentIDObj));
+    }
+  };
+
   render() {
     const { postId } = this.state;
     const { showAddPost, posts, showAddComment, showEditComment } = this.props;
@@ -84,6 +90,11 @@ class PostListPage extends Component {
         <PostList
           handleDeletePost={this.handleDeletePost}
           posts={posts}
+          handleCreateComment={this.handleAddComment}
+          handleEditComment={this.handleEditComment}
+          handleDeleteComment={this.handleDeleteComment}
+          showAddComment={showAddComment}
+          showEditComment={showEditComment}
         />
       </div>
     );
