@@ -35,7 +35,7 @@ export class CommentCreateWidget extends Component {
 }
 
 CommentCreateWidget.propTypes = {
-  postId: PropTypes.string.isRequired,
+  postId: PropTypes.string,
   addComment: PropTypes.func.isRequired,
   showAddComment: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,

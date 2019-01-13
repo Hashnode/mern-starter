@@ -36,7 +36,7 @@ export class CommentEditWidget extends Component {
 }
 
 CommentEditWidget.propTypes = {
-  postId: PropTypes.string.isRequired,
+  postId: PropTypes.string,
   editComment: PropTypes.func.isRequired,
   showEditComment: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,
