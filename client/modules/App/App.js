@@ -35,6 +35,7 @@ export class App extends Component {
   };
 
   render() {
+    const { showAddPost, intl } = this.props;
     return (
       <div>
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
@@ -56,8 +57,9 @@ export class App extends Component {
           />
           <Header
             switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
-            intl={this.props.intl}
+            intl={intl}
             toggleAddPost={this.toggleAddPostSection}
+            showAddPost={showAddPost}
           />
           <div className={styles.container}>
             {this.props.children}
@@ -73,12 +75,14 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
+  showAddPost: PropTypes.bool.isRequired,
 };
 
 // Retrieve data from store as props
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    showAddPost: store.app.showAddPost,
   };
 }
 
