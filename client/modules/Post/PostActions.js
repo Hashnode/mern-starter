@@ -6,6 +6,7 @@ export const ADD_POSTS = 'ADD_POSTS';
 export const DELETE_POST = 'DELETE_POST';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 // Export Actions
 export function addPost(post) {
@@ -98,6 +99,23 @@ export function editCommentRequest(cuid, comment) {
       },
     }).then(res => {
       dispatch(editComment(res));
+    });
+  };
+}
+
+export function deleteComment(post) {
+  return {
+    type: DELETE_COMMENT,
+    post,
+  };
+}
+
+export function deleteCommentRequest(testObj) {
+  const { postID, commentID } = testObj;
+  return (dispatch) => {
+    return callApi(`posts/${postID}/${commentID}`, 'delete'
+    ).then(res => {
+      dispatch(deleteComment(res));
     });
   };
 }
