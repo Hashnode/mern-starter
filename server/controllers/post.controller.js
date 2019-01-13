@@ -2,6 +2,7 @@ import Post from '../models/post';
 import cuid from 'cuid';
 import slug from 'limax';
 import sanitizeHtml from 'sanitize-html';
+const ObjectId = require('mongodb').ObjectID;
 
 /**
  * Get all posts
@@ -100,4 +101,23 @@ export async function createCommentToPost(req, res) {
   post.comments.unshift(newComment);
   const commentedPost = await post.save();
   return res.json(commentedPost);
+}
+
+/**
+ * @route PUT
+ * @desc update comment post
+ * @access Public
+ */
+export async function editCommentPost(req, res) {
+  const { commentId, name, text } = req.body.comment;
+  const _id = new ObjectId(commentId);
+  const dateAdded = new Date().toISOString();
+  const newComment = { _id, name, text, dateAdded };
+
+  const onePost = await Post.findById(req.params.cuid);
+  const updComments = onePost.comments.map(comment => comment._id.toString() === commentId ? newComment : comment);
+
+  onePost.comments = updComments;
+  const updCommentedPost = await onePost.save();
+  return res.json(updCommentedPost);
 }
