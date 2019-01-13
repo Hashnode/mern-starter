@@ -78,3 +78,26 @@ export function deletePost(req, res) {
     });
   });
 }
+
+/**
+ * @route POST
+ * @desc add new comment to post
+ * @access Public
+ */
+export async function createCommentToPost(req, res) {
+  const post = await Post.findById(req.params.cuid);
+
+  const newComment = {
+    name: req.body.comment.name,
+    text: req.body.comment.text,
+  };
+
+  if (!post) {
+    return res.status(404).json({ postnotfound: 'No post found' });
+  }
+
+  // Add comment to comments array
+  post.comments.unshift(newComment);
+  const commentedPost = await post.save();
+  return res.json(commentedPost);
+}
