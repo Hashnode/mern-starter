@@ -9,7 +9,14 @@ import CommentCreateWidget from '../../components/CommentCreateWidget/CommentCre
 import CommentEditWidget from '../../components/CommentEditWidget/CommentEditWidget';
 
 // Import Actions
-import { addPostRequest, fetchPosts, deletePostRequest, addCommentRequest, editCommentRequest, deleteCommentRequest } from '../../PostActions';
+import {
+  addPostRequest,
+  fetchPosts,
+  deletePostRequest,
+  addCommentRequest,
+  editCommentRequest,
+  deleteCommentRequest,
+} from '../../PostActions';
 
 // Import Togglers Actions
 import { toggleAddPost, toggleAddComment, toggleEditComment } from '../../../App/AppActions';
@@ -27,8 +34,9 @@ class PostListPage extends Component {
     this.props.dispatch(fetchPosts());
   }
 
-  handleDeletePost = post => {
-    if (confirm('Do you want to delete this post')) {// eslint-disable-line
+  handleDeletePost = (post) => {
+    if (confirm('Do you want to delete this post')) {
+      // eslint-disable-line
       this.props.dispatch(deletePostRequest(post));
     }
   };
@@ -62,8 +70,9 @@ class PostListPage extends Component {
     }
   };
 
-  handleDeleteComment = postIDAndCommentIDObj => {
-    if (confirm('Do you want to delete this comment')) {// eslint-disable-line
+  handleDeleteComment = (postIDAndCommentIDObj) => {
+    if (confirm('Do you want to delete this comment')) {
+      // eslint-disable-line
       this.props.dispatch(deleteCommentRequest(postIDAndCommentIDObj));
     }
   };
@@ -71,22 +80,32 @@ class PostListPage extends Component {
   render() {
     const { postId } = this.state;
     const { showAddPost, posts, showAddComment, showEditComment } = this.props;
+
+    let widget = null;
+
+    if (showAddPost) {
+      widget = (
+        <div>
+          <PostCreateWidget addPost={this.handleAddPost} showAddPost={showAddPost} />
+        </div>
+      );
+    }
+    if (showAddComment) {
+      widget = (
+        <div>
+          <CommentCreateWidget addComment={this.handleAddComment} showAddComment={showAddComment} postId={postId} />
+        </div>
+      );
+    }
+    if (showEditComment) {
+      widget = (
+        <CommentEditWidget editComment={this.handleEditComment} showEditComment={showEditComment} postId={postId} />
+      );
+    }
+
     return (
       <div>
-        <PostCreateWidget
-          addPost={this.handleAddPost}
-          showAddPost={showAddPost}
-        />
-        <CommentCreateWidget
-          addComment={this.handleAddComment}
-          showAddComment={showAddComment}
-          postId={postId}
-        />
-        <CommentEditWidget
-          editComment={this.handleEditComment}
-          showEditComment={showEditComment}
-          postId={postId}
-        />
+        {widget}
         <PostList
           handleDeletePost={this.handleDeletePost}
           posts={posts}
@@ -102,7 +121,11 @@ class PostListPage extends Component {
 }
 
 // Actions required to provide data for this component to render in sever side.
-PostListPage.need = [() => { return fetchPosts(); }];
+PostListPage.need = [
+  () => {
+    return fetchPosts();
+  },
+];
 
 // Retrieve data from store as props
 function mapStateToProps(state) {
@@ -115,11 +138,13 @@ function mapStateToProps(state) {
 }
 
 PostListPage.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-  })).isRequired,
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
   showAddComment: PropTypes.bool.isRequired,
