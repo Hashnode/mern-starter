@@ -1,0 +1,27 @@
+
+    {
+        "id": 1388534400000,
+        "author": "Petrenko",
+        "text": "Hey there!"
+    },
+    {
+        "id": 1420070400000,
+        "author": "Symonenko",
+        "text": "React is *great*!"
+    },
+    {
+        "id": 1464988635157,
+        "author": "Ivanov",
+        "text": "*abc*"
+    },
+    {
+        "id": 1464988636500,
+        "author": "Grushevskii",
+        "text": "*abc*"
+    },
+    {
+        "id": 1464988717637,
+        "author": "Jobs",
+        "text": "<a href=\"javascript:alert(1)\">alert(1)</a>"
+    }
+]
