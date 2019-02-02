@@ -22,6 +22,7 @@ export function PostDetailPage(props) {
         <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
         <p className={styles['post-desc']}>{props.post.content}</p>
       </div>
+
     </div>
   );
 }

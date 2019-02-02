@@ -6,6 +6,11 @@ import { FormattedMessage } from 'react-intl';
 // Import Style
 import styles from './PostListItem.css';
 
+// Import Component
+import CommentCreate from '../CommentCreate/CommentCreate';
+import CommentList from '../CommentList';
+
+
 function PostListItem(props) {
   return (
     <div className={styles['single-post']}>
@@ -18,9 +23,13 @@ function PostListItem(props) {
       <p className={styles['post-desc']}>{props.post.content}</p>
       <p className={styles['post-action']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deletePost" /></a></p>
       <hr className={styles.divider} />
+      <CommentCreate postId={props.post._id} />
+      <CommentList postId={props.post._id} />
+      <hr className={styles.divider} />
     </div>
   );
 }
+
 
 PostListItem.propTypes = {
   post: PropTypes.shape({
@@ -29,6 +38,7 @@ PostListItem.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
 };
