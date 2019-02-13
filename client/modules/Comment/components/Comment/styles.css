@@ -1,0 +1,23 @@
+.btn {
+  border:none;
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 18px;
+  color: #FFF;
+  background: #03A9F4;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.comment {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 32px;
+}
+
+.author {
+  font-size: 16px;
+  text-align: center;
+  padding-bottom: 10px;
+}

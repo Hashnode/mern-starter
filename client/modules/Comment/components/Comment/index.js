@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CommentForm from '../CommentForm';
 import { updateComment, deleteComment } from '../../CommentActions';
+import styles from './styles.css';
 
 class Comment extends PureComponent {
   static propTypes = {
@@ -45,17 +46,18 @@ class Comment extends PureComponent {
   render() {
     const { editFormVisible } = this.state;
     const { comment } = this.props;
+    const updateAction = true;
     return (
-      <div className="comment">
+      <div className={styles['comment']}>
         {
           editFormVisible ?
-            (<CommentForm comment={comment} onCancel={this.handleCancelBtnClick} onSubmit={this.handleSubmitBtnClick} />) : (
+            (<CommentForm comment={comment} onCancel={this.handleCancelBtnClick} onSubmit={this.handleSubmitBtnClick} isUpdate={updateAction} />) : (
               <Fragment>
-                <p>{comment.author}</p>
+                <p className={styles['author']}>Author: {comment.author}</p>
                 <p>{comment.text}</p>
                 <div className="actions">
-                  <button className="edit-btn" type="button" onClick={this.handleEditBtnClick}>Edit</button>
-                  <button className="delete-btn" type="button" onClick={this.handleDeleteBtnClick}>Delete</button>
+                  <button className={styles['btn']} type="button" onClick={this.handleEditBtnClick}>Edit</button>
+                  <button className={styles['btn']} type="button" onClick={this.handleDeleteBtnClick}>Delete</button>
                 </div>
               </Fragment>
             )

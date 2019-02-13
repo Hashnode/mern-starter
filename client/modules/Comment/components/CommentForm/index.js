@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
+import styles from './styles.css';
 class CommentForm extends PureComponent {
   static propTypes = {
     comment: PropTypes.shape({
@@ -11,10 +11,12 @@ class CommentForm extends PureComponent {
     onSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func,
     clearStateOnSubmit: PropTypes.bool,
+    isUpdate: PropTypes.bool,
   };
 
   static defaultProps = {
     clearStateOnSubmit: false,
+    isUpdate: false,
   };
 
   state = {
@@ -71,23 +73,24 @@ class CommentForm extends PureComponent {
       author,
     } = this.state;
 
-    const { comment, onCancel } = this.props;
+    const { comment, onCancel, isUpdate } = this.props;
 
     return (
-      <div className="form-wrapper">
+      <div className={styles['wrapper']}>
+        <h2 className={styles['form-title']}>{isUpdate ? 'Edit comment' : 'New comment'}</h2>
         <form className="comment-form" onSubmit={this.handleSubmit}>
           <div className="field-wrapper">
             <label htmlFor="author">Author</label>
-            <input type="text" name="author" value={author} onChange={this.handleAuthorChange} />
+            <input className={styles['form-field']} type="text" name="author" value={author} onChange={this.handleAuthorChange} />
           </div>
           <div className="field-wrapper">
             <label htmlFor="text">Comment</label>
-            <textarea type="text" name="text" value={text} onChange={this.handleTextChange} />
+            <textarea className={styles['form-field']} type="text" name="text" value={text} onChange={this.handleTextChange} />
           </div>
           <div className="form-actions">
-            <button type="submit" disabled={!text || !author}>Save</button>
+            <button type="submit" className={styles['btn']} disabled={!text || !author}>{isUpdate ? 'Update' : 'Create'}</button>
             {
-              comment && <button type="button" onClick={onCancel}>Cancel</button>
+              comment && <button type="button" className={styles['btn']} onClick={onCancel}>Cancel</button>
             }
           </div>
         </form>
