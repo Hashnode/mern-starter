@@ -9,7 +9,7 @@ router.route('/comments/:pid').get(CommentController.getComments);
 router.route('/comments/:cid').patch(CommentController.updateComment);
 
 // Add a new comment
-router.route('/comments/:pid').post(CommentController.addComment);
+router.route('/comments').post(CommentController.addComment);
 
 // Delete a comment
 router.route('/comments/:cid').delete(CommentController.deleteComment);

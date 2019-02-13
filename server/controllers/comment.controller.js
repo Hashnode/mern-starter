@@ -23,11 +23,14 @@ export function getComments(req, res) {
  * @returns void
  */
 export function updateComment(req, res) {
-  Comment.updateOne({ _id: req.params.cid }, { $set: { text: sanitizeHtml(req.body.patch.text) } }).exec((err, result) => {
+  const { author, text } = req.body.patch;
+
+  Comment.findOneAndUpdate({ _id: req.params.cid }, { $set: { text: sanitizeHtml(text), author: sanitizeHtml(author) } }, { new: true }).exec((err, result) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json(result);
+
+    res.json({ comment: result.toObject() });
   });
 }
 
@@ -38,16 +41,16 @@ export function updateComment(req, res) {
  * @returns void
  */
 export function addComment(req, res) {
-  const { author = '', text = '' } = req.body.post;
+  const { author = '', text = '', relatedPost = '' } = req.body.comment;
 
-  if (!author || !text) {
+  if (!author || !text || !relatedPost) {
     res.status(403).end();
   }
 
   const newComment = new Comment({
     author: sanitizeHtml(author),
     text: sanitizeHtml(text),
-    relatedPost: req.params.pid,
+    relatedPost,
   });
 
   newComment.save((err, saved) => {
