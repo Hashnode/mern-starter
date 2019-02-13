@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
+import CommentsWidget from '../../../Comment/components/CommentsWidget';
 
 // Import Style
 import styles from '../../components/PostListItem/PostListItem.css';
@@ -22,6 +23,7 @@ export function PostDetailPage(props) {
         <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
         <p className={styles['post-desc']}>{props.post.content}</p>
       </div>
+      <CommentsWidget postId={props.post._id} />
     </div>
   );
 }
@@ -40,6 +42,7 @@ function mapStateToProps(state, props) {
 
 PostDetailPage.propTypes = {
   post: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
