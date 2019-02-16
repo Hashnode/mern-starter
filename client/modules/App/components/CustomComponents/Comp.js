@@ -50,7 +50,27 @@ export class Comp extends React.Component{
 		})
 	}
 
+	editPost(index){
 
+		let arr = this.arr;
+		let name =  this.refs.userName;
+		let title =  this.refs.title;
+		let post =  this.refs.post;
+		let form = document.getElementById('inputForm');
+
+
+		let currentIndex = this.state.arr[index];
+		name.setAttribute('value', currentIndex.name);
+		title.setAttribute('value', currentIndex.title);
+		post.textContent = currentIndex.post;
+
+		arr[index].name = name.value;
+		arr[index].title = title.value;
+		arr[index].post = post.value;
+
+		this.addState();
+		form.reset();
+	}
 
 	render(){
 		const {arr} = this;
@@ -87,7 +107,7 @@ export class Comp extends React.Component{
 				{arr.map((elem,index)=>(
 					<div
 						className={`${styles['list']}`}
-
+						onClick={()=>this.editPost(index)}
 					>
 						<ul>
 							<li>
