@@ -2,23 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-// Import Style
-import styles from './App.css';
 
 // Import Components
-import Helmet from 'react-helmet';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import Comp from './components/CustomComponents/Comp';
 
 // Import Actions
 import { toggleAddPost } from './AppActions';
-import { switchLanguage } from '../../modules/Intl/IntlActions';
 
-let DevTools;
-if (process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line global-require
-  DevTools = require('./components/DevTools').default;
-}
+// let DevTools;
+// if (process.env.NODE_ENV === 'development') {
+//   // eslint-disable-next-line global-require
+//   DevTools = require('./components/DevTools').default;
+// }
 
 export class App extends Component {
   constructor(props) {
@@ -37,7 +32,7 @@ export class App extends Component {
   render() {
     return (
       <div>
-				<Comp/>
+				<Comp />
       </div>
     );
   }
