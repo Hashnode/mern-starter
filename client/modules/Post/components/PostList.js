@@ -27,6 +27,12 @@ PostList.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    comments: PropTypes.arrayOf(PropTypes.shape({
+      authorName: PropTypes.string.isRequired,
+      comment: PropTypes.string.isRequired,
+      postId: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+    })).isRequired,
   })).isRequired,
   handleDeletePost: PropTypes.func.isRequired,
 };
