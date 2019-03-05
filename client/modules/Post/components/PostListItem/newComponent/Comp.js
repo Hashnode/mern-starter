@@ -40,10 +40,12 @@ class Comp extends React.Component {
       });
       this.setState({ arr });
       this.formRef.current.reset();
+      this.formRef.current.style.display = 'none';
     }
   }
 
   editComment = (index) => {
+    this.formRef.current.style.display = 'block';
     if (this.state.isOpen) {
       let name = this.inputName.current;
       let comment = this.textArea.current;
@@ -61,20 +63,20 @@ class Comp extends React.Component {
   };
 
   saveComment = (index) => {
-    let name = this.inputName.current;
-        // let title = this.inputTitle.current;
-    let comment = this.textArea.current;
-    let currentIndex = this.arr[index];
+    const name = this.inputName.current;
+    const comment = this.textArea.current;
+    const currentIndex = this.arr[index];
 
-		if (name.value.length > 0 && title.value.length > 0 && comment.value.length > 0) {
-			currentIndex.name = name.value;
-			currentIndex.comment = comment.value;
+    if (name.value.length > 0 && comment.value.length > 0) {
+      currentIndex.name = name.value;
+      currentIndex.comment = comment.value;
 
-			name.value = '';
-			comment.value = '';
+      name.value = '';
+      comment.value = '';
 
-			this.setState({ click: !this.state.click });
-		}
+      this.setState({ click: !this.state.click });
+    }
+    this.formRef.current.style.display = 'none';
   };
 
   removeComment = (index) => {
@@ -107,28 +109,28 @@ class Comp extends React.Component {
     const { arr, inputName, changeInput, textArea, addComment, removeComment, editComment, saveComment, formRef } = this;
     const { click, indexNum, isOpen } = this.state;
     return (
-			<div className={styles['parent']}>
-			 {arr.map((elem, index) => (
-					<CommentLists
-						elem={elem}
-						index={index}
-						removeComment={removeComment}
-						editComment={editComment}
-						saveComment={saveComment}
-						click={click}
-						indexNum={indexNum}
-						isOpen={isOpen}
+      <div className={styles['parent']}>
+			{arr.map((elem, index) => (
+				<CommentLists
+  elem={elem}
+  index={index}
+  removeComment={removeComment}
+  editComment={editComment}
+  saveComment={saveComment}
+  click={click}
+  indexNum={indexNum}
+  isOpen={isOpen}
 					/>
 				))}
 					{isOpen && <form id="inputForm" ref={formRef}>
 							< InputName
-								inputName={inputName}
-								changeInput={changeInput}
+  inputName={inputName}
+  changeInput={changeInput}
 							/>
 
 							< TextArea
-								textArea={textArea}
-								changeInput={changeInput}
+  textArea={textArea}
+  changeInput={changeInput}
 							/>
 							{click && <AddComment addComment={addComment} />}
 					</form>}
