@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
@@ -7,13 +7,28 @@ import { FormattedMessage } from 'react-intl';
 // Import Style
 import styles from '../../components/PostListItem/PostListItem.css';
 
+// Import components
+import CommentList from '../../../Comment/components/CommentList';
+import CommentCreator from '../../../Comment/components/CommentCreator/CommentCreator';
+
 // Import Actions
 import { fetchPost } from '../../PostActions';
+import { getCommentsByPost, addComment, deleteComment } from '../../../Comment/CommentActions';
 
 // Import Selectors
 import { getPost } from '../../PostReducer';
+import { getComments } from '../../../Comment/CommentReducer';
 
 export function PostDetailPage(props) {
+  function fetchComments() {
+    // eslint-disable-next-line react/prop-types
+    return props.getCommentsByPost(props.post.cuid);
+  }
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
   return (
     <div>
       <Helmet title={props.post.title} />
@@ -22,6 +37,8 @@ export function PostDetailPage(props) {
         <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
         <p className={styles['post-desc']}>{props.post.content}</p>
       </div>
+      <CommentCreator handleAdd={props.addComment} post={props.post.cuid} />
+      <CommentList data={props.comments} handleDelete={props.deleteComment} />
     </div>
   );
 }
@@ -35,6 +52,7 @@ PostDetailPage.need = [params => {
 function mapStateToProps(state, props) {
   return {
     post: getPost(state, props.params.cuid),
+    comments: getComments(state),
   };
 }
 
@@ -46,6 +64,14 @@ PostDetailPage.propTypes = {
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   }).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    cuid: PropTypes.string.isRequired,
+    post: PropTypes.string.isRequired,
+  })),
+  addComment: PropTypes.func.isRequired,
+  deleteComment: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(PostDetailPage);
+export default connect(mapStateToProps, { getCommentsByPost, addComment, deleteComment })(PostDetailPage);
