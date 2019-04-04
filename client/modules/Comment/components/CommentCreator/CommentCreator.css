@@ -1,0 +1,49 @@
+.creator-container {
+  max-width: 300px;
+  margin-left: 15px;
+}
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-area input,
+.input-area textarea {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 17px;
+}
+
+.input-area textarea {
+  resize: none;
+}
+
+.input-area input:focus,
+.input-area textarea:focus,
+.btn-send:focus {
+  outline: none;
+  border: 2px solid #555;
+}
+
+.input-area input::-webkit-input-placeholder,
+.input-area textarea::-webkit-input-placeholder {
+  font-size: 17px;
+  letter-spacing: 1.5px;
+}
+
+.input-area input:hover::-webkit-input-placeholder,
+.input-area input:focus::-webkit-input-placeholder,
+.input-area textarea:hover::-webkit-input-placeholder,
+.input-area textarea:focus::-webkit-input-placeholder {
+  color: #555;
+}
+
+.btn-send {
+  margin-top: 5px;
+  padding: 7px;
+  width: 100%;
+
+  font-size: 17px;
+  letter-spacing: 2px;
+}
