@@ -37,6 +37,15 @@ export default function () {
     const post1 = new Post({ name: 'Admin', title: 'Hello MERN', slug: 'hello-mern', cuid: 'cikqgkv4q01ck7453ualdn3hd', content: content1 });
     const post2 = new Post({ name: 'Admin', title: 'Lorem Ipsum', slug: 'lorem-ipsum', cuid: 'cikqgkv4q01ck7453ualdn3hf', content: content2 });
 
+    const comment1 = new Comment({ name: 'Alex', text: 'Nice article', cuid: 'cikqgkv4q01ck7453ualdn3hf', post: 'cikqgkv4q01ck7453ualdn3hd' });
+    const comment2 = new Comment({ name: 'Oleg', text: 'Great', cuid: 'cikqgkv4q01ck7453ualdn3hg', post: 'cikqgkv4q01ck7453ualdn3hd' });
+
+    Comment.create([comment1, comment2], (error) => {
+      if (!error) {
+        // console.log('ready to go....');
+      }
+    });
+
     Post.create([post1, post2], (error) => {
       if (!error) {
         // console.log('ready to go....');

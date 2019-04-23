@@ -1,0 +1,68 @@
+.comment-single {
+  position: relative;
+  display: flex;
+  margin: 15px;
+  padding: 15px;
+
+  background-color: #ccc;
+
+  border-radius: 20px;
+}
+
+.btn-delete {
+  position: absolute;
+
+  width: 20px;
+  height: 20px;
+  right: 20px;
+  top: 10px;
+
+  font-size: 15px;
+
+  border: 0;
+  background-color: transparent;
+}
+
+.btn-delete:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.comment-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-single:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.comment-single h3 {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.comment-date {
+  margin-bottom: 6px;
+
+  font-size: 12px;
+}
+
+.comment-text {
+  padding-bottom: 6px;
+}
+
+.btn-edit {
+  width: fit-content;
+  background-color: transparent;
+  border: 0;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.btn-edit:hover {
+  font-weight: bold;
+}
