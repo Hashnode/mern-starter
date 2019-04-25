@@ -2,6 +2,7 @@
  * Root Reducer
  */
 import { combineReducers } from 'redux';
+import { reducer as reduxFormReducer } from 'redux-form';
 
 // Import Reducers
 import app from './modules/App/AppReducer';
@@ -13,4 +14,5 @@ export default combineReducers({
   app,
   posts,
   intl,
+  form: reduxFormReducer,
 });

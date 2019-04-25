@@ -56,3 +56,29 @@
   font-size: 16px;
   color: #555;
 }
+
+.post-item--add-comment{
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.comment-block{
+  position: relative;
+  width: 300px;
+  margin-top: 12px;
+  padding: 15px;
+  border: 1px solid #eee;
+}
+
+.comment-content{
+  margin-bottom: 12px;
+}
+
+.comment-remove{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 3px;
+  cursor: pointer;
+  color: #F33;
+}
