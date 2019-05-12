@@ -36,7 +36,7 @@
 }
 
 .post-action a:hover{
-  color: #EF5350;
+  color: #03A9F4;
 }
 
 .divider{
@@ -55,4 +55,30 @@
 .post-detail .post-desc{
   font-size: 16px;
   color: #555;
+}
+
+.form-button{
+  margin-top: 15px;
+  padding: 8px 16px;
+  box-shadow: 0 0 5px 1px black;
+  outline-style: none;
+  background: #03A9F4 !important;
+  border: 1px solid #03A9F4 !important;
+  color: white;
+  border-radius: 4px;
+}
+.add-comment{
+  color : white;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14px;
+  font-style: italic;
+  margin-left: 10px;
+}
+.add-comment:hover{
+  cursor: pointer;
+  color: #03A9F4;
+}
+.post-action{
+  display: inline-block !important;
 }

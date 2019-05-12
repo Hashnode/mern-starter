@@ -1,0 +1,39 @@
+.button-div{
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 18px;
+    color: #FFF;
+    background: #03A9F4;
+    border: 1px solid #03A9F4;
+    text-decoration: none;
+    border-radius: 4px;
+    width: 20%;
+}
+.button-div:hover{
+    cursor: pointer;
+}
+.input-div{
+    margin-bottom: 4px;
+    font-size: 16px;
+    line-height: normal;
+    padding: 12px 16px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    outline: none;
+    color: #212121;
+}
+
+.input-parent{
+    display: block;
+    margin-right: 20px;
+}
+.textarea-div{
+    min-height: 50px;
+    min-width: 200px;
+    max-width: 480px;
+    max-height: 300px;
+    border-radius: 5px;
+    outline-style: none;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}

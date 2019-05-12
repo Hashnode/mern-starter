@@ -1,0 +1,83 @@
+*{
+    font-size: 20px;
+}
+body {
+    background-color: #8D9440 !important;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    width: 400px;
+    margin: auto;
+
+}
+input{
+    margin-top: 15px;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    outline-style: none;
+    border: 2px solid #b4b4b4;
+}
+textarea{
+    border-radius: 5px;
+    outline-style: none;
+    border: 2px solid #b4b4b4;
+    margin-top: 10px;
+}
+.button{
+    margin-top: 15px;
+    box-shadow: 0 0 5px 1px black;
+    outline-style: none;
+    background-color: #616247;
+    border: 1px solid #616247;
+    color: white;
+}
+.button:hover{
+    cursor: pointer;
+}
+body{
+    background-color: red;
+}
+.list{
+    margin: 40px 200px;
+}
+.list li{
+    list-style-type: none;
+    margin: 15px;
+}
+.list-button{
+    padding: 6px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 1px black;
+    outline-style: none;
+    background-color: #616247;
+    border: 1px solid #616247;
+    color: white;
+    font-size: 16px;
+}
+.list-button:hover{
+    cursor: pointer;
+}
+.list li span{
+    color: white;
+}
+.change-button{
+    margin-left: 10px;
+    padding: 6px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 1px black;
+    outline-style: none;
+    background-color: #616247;
+    border: 1px solid #616247;
+    color: white;
+    font-size: 16px;
+}
+
+div[class*='Comp']:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
