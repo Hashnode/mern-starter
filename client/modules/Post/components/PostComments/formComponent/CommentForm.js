@@ -5,31 +5,27 @@ import { connect } from 'react-redux';
 import styles from '../PostComments.css';
 
 export class CommentForm extends Component {
-  constructor(props) {
-    super(props);
-    this.addComment = this.addComment.bind(this);
-  }
 
-  addComment() {
-    const author = this.refs.name.value;
-    const text = this.refs.comment.value;
-    if (author || text) {
-      this.props.addComment({ author, text });
+  addComment = () => {
+    const author = this.refs.name;
+    const text = this.refs.comment;
+    if (author.value && text.value) {
+      this.props.addComment(author.value, text.value);
       this.refs.name.value = '';
       this.refs.comment.value = '';
     } else {
-      alert('All the fields should be filled!');
+      alert('No, pls fill all inputs ');
     }
   }
 
   render() {
     return (
       <div className={`${styles['comment-form']}`}>
-        <h4>Add yor comment</h4>
+        <h4>New comment</h4>
         <div>
           <input
             type="text"
-            placeholder="Your name"
+            placeholder="Author name"
             required="required"
             className={`${styles['author-input']}`}
             ref="name"

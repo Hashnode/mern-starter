@@ -9,14 +9,11 @@ import styles from '../PostComments/PostComments.css';
 import { addCommentRequest } from '../../components/PostComments/CommentActions';
 
 export class PostComments extends Component {
-  constructor(props) {
-    super(props);
+  addComment = (author, text) => {
+    console.log(`${author}  ${text}`);
+    const comment = { author, text };
+    console.log(comment);
 
-    this.addComment = this.addComment.bind(this);
-  }
-
-  addComment(data) {
-    const comment = data;
     comment.postCuid = this.props.post;
     return this.props.dispatch(addCommentRequest(comment));
   }
@@ -29,7 +26,7 @@ export class PostComments extends Component {
         {
           comments.length ?
             comments.map((comment) => (<CommentsUser comment={comment} key={comment.cuid} />)) :
-            <span>There is no any comments yet!<br />You can write the first comment!</span>
+            <span>PLease, leave your comment, be first !</span>
         }
       </div>
     );

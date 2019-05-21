@@ -18,7 +18,7 @@ export function UserComment(props) {
       <div className={`${styles['comment-content']}`}>
         <p>{`${text}`}</p>
       </div>
-      <p className={postStyles['post-action']}><span onClick={() => deleteComment(cuid, props.dispatch)}>Delete Comment</span></p>
+      <p className={postStyles['post-action']}><span onClick={() => deleteComment(cuid, props.dispatch)}>Destroy</span></p>
     </div>
   );
 }
