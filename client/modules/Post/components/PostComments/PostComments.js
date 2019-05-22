@@ -2,27 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CommentForm from '../PostComments/formComponent/CommentForm';
-import CommentsUser from '../PostComments/formComponent/CommentsUser';
+import CommentsUser from './formComponent/CommentUser';
 
 import styles from '../PostComments/PostComments.css';
 
-import { addCommentRequest } from '../../components/PostComments/CommentActions';
+import { addCommentRequestAPI } from '../../components/PostComments/CommentActions';
 
 export class PostComments extends Component {
-  addComment = (author, text) => {
+
+  toAddCommentToStore = (author, text) => {
     console.log(`${author}  ${text}`);
     const comment = { author, text };
     console.log(comment);
 
     comment.postCuid = this.props.post;
-    return this.props.dispatch(addCommentRequest(comment));
+    return this.props.dispatch(addCommentRequestAPI(comment));
   }
 
   render() {
     const { comments } = this.props;
     return (
       <div className={`${styles['comments-list']}`}>
-        <CommentForm addComment={this.addComment} />
+        <CommentForm addComment={this.toAddCommentToStore} />
         {
           comments.length ?
             comments.map((comment) => (<CommentsUser comment={comment} key={comment.cuid} />)) :

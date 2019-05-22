@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import PostComments from '../../components/PostComments/PostComments';
-import { getCommentsRequest } from '../../components/PostComments/CommentActions';
+import { getCommentsRequestAPI } from '../../components/PostComments/CommentActions';
 // Import Style
 import styles from '../../components/PostListItem/PostListItem.css';
 
@@ -32,7 +32,7 @@ export function PostDetailPage(props) {
 PostDetailPage.need = [params => {
   return fetchPost(params.cuid);
 }, () => {
-  return getCommentsRequest();
+  return getCommentsRequestAPI();
 }];
 
 // Retrieve data from store as props

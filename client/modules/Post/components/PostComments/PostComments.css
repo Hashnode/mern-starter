@@ -1,0 +1,106 @@
+.comment-form {
+  margin: 30px 0 30px 0;
+}
+
+.comment-form h3{
+  display: inline-block;
+  margin-bottom: 15px;
+  color: #fb2637;
+  box-shadow: 4px 4px 3px 0 rgba(0, 0, 255, .2);
+}
+
+.author-input {
+  padding: 7px;
+  border-radius: 5px;
+  border: solid 1px #999;
+  font-size: 15px;
+  outline: none;
+  width: 30%;
+}
+
+.comment-input {
+  min-height: 110px;
+  width: 100%;
+  border-radius: 10px;
+  resize: none;
+  outline: none;
+  padding: 10px;
+}
+
+.sent-comment-button {
+  width: 200px;
+  height: 40px;
+  border: none;
+  color: #FFF;
+  background: tomato;
+  border-radius: 1000px;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+}
+
+.form-item {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.form-user-comment {
+  width: 100%;
+  margin-top: 10px;
+  border: solid 1px #cccccc;
+  padding: 5px 10px 10px 10px;
+  border-radius: 5px;
+}
+
+.form-user-comment > p {
+  margin: 10px 10px 0 10px;
+  text-align: right;
+
+}
+
+.form-user-comment > p > span {
+  color: #555;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  transition: color 1.5s, font-size 1.2s, font-weight 1.2s;
+  margin: 10px;
+
+}
+
+.form-user-comment > p > span:hover {
+  color: tomato;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+
+}
+
+.comment-info {
+  position: relative;
+  padding: 5px;
+  border-bottom: solid 1px #ccc;
+}
+
+.comment-info span {
+  font-size: 17px;
+  font-weight: 200;
+}
+
+.comments-list span{
+  font-size: 16px;
+  font-style: italic;
+  color: rgb(35, 15, 255);
+}
+
+.comment-date {
+  position: absolute;
+  right: 10px;
+
+}
+
+.comment-content p{
+  padding-top: 5px;
+  text-indent: 20px;
+  text-align: justify;
+}
