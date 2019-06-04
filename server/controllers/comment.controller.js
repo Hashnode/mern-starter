@@ -9,12 +9,17 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getComments(req, res) {
-  Post.findOne({ _id: req.params.id }).populate('comments').exec((err, post) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ comments: post.comments });
-  });
+  Post.findOne({ _id: req.params.id })
+    .populate(
+      'comments',
+      'username content dateAdded',
+      null,
+      { sort: '-dateAdded' }).exec((err, post) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+        res.json({ comments: post.comments });
+      });
 }
 
 /**
