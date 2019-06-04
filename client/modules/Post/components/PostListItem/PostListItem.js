@@ -10,7 +10,7 @@ function PostListItem(props) {
   return (
     <div className={styles['single-post']}>
       <h3 className={styles['post-title']}>
-        <Link to={`/posts/${props.post.slug}-${props.post.cuid}`} >
+        <Link to={`/posts/${props.post.slug}-${props.post._id}`} >
           {props.post.title}
         </Link>
       </h3>
@@ -28,7 +28,7 @@ PostListItem.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
 };

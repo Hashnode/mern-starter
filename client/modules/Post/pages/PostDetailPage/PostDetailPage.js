@@ -13,6 +13,9 @@ import { fetchPost } from '../../PostActions';
 // Import Selectors
 import { getPost } from '../../PostReducer';
 
+// Import Components
+import CommentList from '../../../Comment/components/CommentList/CommentList';
+
 export function PostDetailPage(props) {
   return (
     <div>
@@ -21,6 +24,7 @@ export function PostDetailPage(props) {
         <h3 className={styles['post-title']}>{props.post.title}</h3>
         <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
         <p className={styles['post-desc']}>{props.post.content}</p>
+        <CommentList postId={props.post._id} />
       </div>
     </div>
   );
@@ -28,13 +32,13 @@ export function PostDetailPage(props) {
 
 // Actions required to provide data for this component to render in server side.
 PostDetailPage.need = [params => {
-  return fetchPost(params.cuid);
+  return fetchPost(params._id);
 }];
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
   return {
-    post: getPost(state, props.params.cuid),
+    post: getPost(state, props.params._id),
   };
 }
 
@@ -44,7 +48,8 @@ PostDetailPage.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    comments: PropTypes.arrayOf(PropTypes.string),
+    _id: PropTypes.string.isRequired,
   }).isRequired,
 };
 
