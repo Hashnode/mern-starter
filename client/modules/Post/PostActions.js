@@ -40,21 +40,21 @@ export function fetchPosts() {
   };
 }
 
-export function fetchPost(cuid) {
+export function fetchPost(_id) {
   return (dispatch) => {
-    return callApi(`posts/${cuid}`).then(res => dispatch(addPost(res.post)));
+    return callApi(`posts/${_id}`).then(res => dispatch(addPost(res.post)));
   };
 }
 
-export function deletePost(cuid) {
+export function deletePost(_id) {
   return {
     type: DELETE_POST,
-    cuid,
+    _id,
   };
 }
 
-export function deletePostRequest(cuid) {
+export function deletePostRequest(_id) {
   return (dispatch) => {
-    return callApi(`posts/${cuid}`, 'delete').then(() => dispatch(deletePost(cuid)));
+    return callApi(`posts/${_id}`, 'delete').then(() => dispatch(deletePost(_id)));
   };
 }

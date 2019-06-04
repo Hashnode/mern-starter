@@ -1,5 +1,4 @@
 import Post from '../models/post';
-import cuid from 'cuid';
 import slug from 'limax';
 import sanitizeHtml from 'sanitize-html';
 
@@ -37,7 +36,6 @@ export function addPost(req, res) {
   newPost.content = sanitizeHtml(newPost.content);
 
   newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
-  newPost.cuid = cuid();
   newPost.save((err, saved) => {
     if (err) {
       res.status(500).send(err);
@@ -53,7 +51,7 @@ export function addPost(req, res) {
  * @returns void
  */
 export function getPost(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+  Post.findOne({ _id: req.params.id }).exec((err, post) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -68,7 +66,7 @@ export function getPost(req, res) {
  * @returns void
  */
 export function deletePost(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+  Post.findOne({ _id: req.params.id }).exec((err, post) => {
     if (err) {
       res.status(500).send(err);
     }

@@ -28,13 +28,13 @@ export function PostDetailPage(props) {
 
 // Actions required to provide data for this component to render in server side.
 PostDetailPage.need = [params => {
-  return fetchPost(params.cuid);
+  return fetchPost(params._id);
 }];
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
   return {
-    post: getPost(state, props.params.cuid),
+    post: getPost(state, props.params._id),
   };
 }
 
@@ -44,7 +44,7 @@ PostDetailPage.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
 };
 
