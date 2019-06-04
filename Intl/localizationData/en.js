@@ -12,6 +12,13 @@ export default {
     postTitle: 'Post Title',
     postContent: 'Post Content',
     submit: 'Submit',
+    addComment: 'Add Comment',
+    deleteComment: 'Delete Comment',
+    editComment: 'Edit Comment',
+    createNewComment: 'Create new Comment',
+    username: 'User Name',
+    commentContent: 'Comment Content',
+    Comments: 'Comments',
     comment: `user {name} {value, plural,
     	  =0 {does not have any comments}
     	  =1 {has # comment}
