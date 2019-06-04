@@ -64,6 +64,36 @@ export function addComment(req, res) {
 }
 
 /**
+ * update a single comment
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function updateComment(req, res) {
+  if (!req.body.comment) {
+    res.status(403).end();
+  }
+
+  const sanitizeComment = {};
+  // Sanitize inputs
+  Object.entries(req.body.comment).map(filed => (
+    sanitizeComment[filed[0]] = sanitizeHtml(filed[1])
+  ));
+
+  Comment.findOne({ _id: req.params.id }).exec((err, comment) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    Object.assign(comment, sanitizeComment).save((error, saved) => {
+      if (error) {
+        res.status(500).send(error);
+      }
+      res.json({ comment: saved });
+    });
+  });
+}
+
+/**
  * Get a single comment
  * @param req
  * @param res
