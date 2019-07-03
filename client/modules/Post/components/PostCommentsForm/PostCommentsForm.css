@@ -1,0 +1,41 @@
+.comment-author input {
+    padding: 5px;
+    margin-top: 10px;
+    margin-right: 5px;
+    border-radius: 2px;
+    border: 1px solid #888;
+    color: #555;
+    outline: none;
+}
+
+.comment-author span {
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.comment-text {
+    padding: 5px;
+    margin-top: 10px;
+    margin-right: 5px;
+    border-radius: 2px;
+    border: 1px solid #888;
+    color: #555;
+    min-height: auto;
+    resize: none;
+    outline: none;
+}
+
+.comment-button {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    color: #454545;
+    border-radius: 2px;
+    border: 1px solid #888;
+    background: #eee;
+    outline: none;
+}
+
+.comment-button:hover {
+    cursor: pointer;
+}
