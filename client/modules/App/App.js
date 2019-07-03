@@ -32,7 +32,7 @@ export class App extends Component {
 
   toggleAddPostSection = () => {
     this.props.dispatch(toggleAddPost());
-  };
+  }
 
   render() {
     return (

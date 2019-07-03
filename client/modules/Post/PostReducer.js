@@ -1,7 +1,7 @@
 import { ADD_POST, ADD_POSTS, DELETE_POST } from './PostActions';
 
 // Initial State
-const initialState = { data: [] };
+const initialState = { data: [], comments: [] };
 
 const PostReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -19,7 +19,6 @@ const PostReducer = (state = initialState, action) => {
       return {
         data: state.data.filter(post => post.cuid !== action.cuid),
       };
-
     default:
       return state;
   }
