@@ -41,7 +41,7 @@
     "intl-locales-supported": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "limax": "^1.3.0",
-    "mongoose": "^4.4.20",
+    "mongoose": "^5.7.5",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
