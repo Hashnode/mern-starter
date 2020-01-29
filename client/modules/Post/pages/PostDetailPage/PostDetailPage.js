@@ -8,23 +8,27 @@ import { FormattedMessage } from 'react-intl';
 import styles from '../../components/PostListItem/PostListItem.css';
 
 // Import Components
-import CommentList from '../../components/CommentList/CommentList';
+import CommentList from '../../../Comment/CommentList/CommentList';
 // Import Actions
 import { fetchPost } from '../../PostActions';
 
 // Import Selectors
 import { getPost } from '../../PostReducer';
+import CommentFormWidget from '../../../Comment/CommentFormWidget/CommentFormWidget';
 
-export function PostDetailPage(props) {
+export function PostDetailPage({ post }) {
   return (
     <div>
-      <Helmet title={props.post.title} />
+      <Helmet title={post.title} />
       <div className={`${styles['single-post']} ${styles['post-detail']}`}>
-        <h3 className={styles['post-title']}>{props.post.title}</h3>
-        <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
-        <p className={styles['post-desc']}>{props.post.content}</p>
+        <h3 className={styles['post-title']}>{post.title}</h3>
+        <p className={styles['author-name']}>
+          <FormattedMessage id="by" /> {post.name}
+        </p>
+        <p className={styles['post-desc']}>{post.content}</p>
       </div>
-      <CommentList comments={props.post.comments} />
+      <CommentFormWidget />
+      <CommentList comments={post.comments} />
     </div>
   );
 }
@@ -48,7 +52,11 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
-    comments: PropTypes.array.isRequired,
+    comments: PropTypes.arrayOf(PropTypes.shape({
+      cuid: PropTypes.string,
+      author: PropTypes.string,
+      content: PropTypes.string,
+    })),
   }).isRequired,
 };
 

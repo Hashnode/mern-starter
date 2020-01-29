@@ -1,9 +1,10 @@
 // Import Actions
-import { TOGGLE_ADD_POST } from './AppActions';
+import { TOGGLE_ADD_COMMENT, TOGGLE_ADD_POST } from './AppActions';
 
 // Initial State
 const initialState = {
   showAddPost: false,
+  showAddComment: false,
 };
 
 const AppReducer = (state = initialState, action) => {
@@ -11,6 +12,10 @@ const AppReducer = (state = initialState, action) => {
     case TOGGLE_ADD_POST:
       return {
         showAddPost: !state.showAddPost,
+      };
+    case TOGGLE_ADD_COMMENT:
+      return {
+        showAddComment: !state.showAddComment,
       };
 
     default:
@@ -22,6 +27,9 @@ const AppReducer = (state = initialState, action) => {
 
 // Get showAddPost
 export const getShowAddPost = state => state.app.showAddPost;
+
+// Select isCommentFormShown
+export const selectIsCommentFormShown = state => state.app.showAddComment;
 
 // Export Reducer
 export default AppReducer;
