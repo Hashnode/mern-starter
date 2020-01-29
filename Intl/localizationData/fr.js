@@ -12,6 +12,10 @@ export default {
     postTitle: 'Titre de l\'article',
     postContent: 'Contenu après',
     submit: 'Soumettre',
+    addComent: 'Ajouter un commentaire',
+    editComment: 'Modifier le commentaire',
+    replyComment: 'Répondre',
+    deleteComment: 'Supprimer le commentaire',
     comment: `user {name} {value, plural,
     	  =0 {does not have any comments}
     	  =1 {has # comment}

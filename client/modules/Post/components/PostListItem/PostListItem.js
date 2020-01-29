@@ -16,6 +16,15 @@ function PostListItem(props) {
       </h3>
       <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
       <p className={styles['post-desc']}>{props.post.content}</p>
+      <p className={styles['post-comments']}>
+        <FormattedMessage
+          id={'comment'}
+          values={{
+            name: props.post.name,
+            value: props.post.comments ? props.post.comments.length : 0,
+          }}
+        />
+      </p>
       <p className={styles['post-action']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deletePost" /></a></p>
       <hr className={styles.divider} />
     </div>
@@ -29,6 +38,7 @@ PostListItem.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    comments: PropTypes.array.isRequired,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
 };

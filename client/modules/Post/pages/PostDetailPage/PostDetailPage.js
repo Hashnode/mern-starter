@@ -7,6 +7,8 @@ import { FormattedMessage } from 'react-intl';
 // Import Style
 import styles from '../../components/PostListItem/PostListItem.css';
 
+// Import Components
+import CommentList from '../../components/CommentList/CommentList';
 // Import Actions
 import { fetchPost } from '../../PostActions';
 
@@ -22,6 +24,7 @@ export function PostDetailPage(props) {
         <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
         <p className={styles['post-desc']}>{props.post.content}</p>
       </div>
+      <CommentList comments={props.post.comments} />
     </div>
   );
 }
@@ -45,6 +48,7 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    comments: PropTypes.array.isRequired,
   }).isRequired,
 };
 
