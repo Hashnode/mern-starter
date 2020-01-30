@@ -42,15 +42,20 @@ test('has correct props', t => {
 
 test('calls addPost', t => {
   const addPost = sinon.spy();
-  const wrapper = mountWithIntl(
+  const wrapper = shallowWithIntl(
     <PostCreateWidget addPost={addPost} showAddPost />
   );
 
-  wrapper.ref('name').value = 'David';
-  wrapper.ref('title').value = 'Some Title';
-  wrapper.ref('content').value = 'Bla Bla Bla';
+  const name = wrapper.find('#name');
+  const title = wrapper.find('#title');
+  const content = wrapper.find('#content');
+  const submitBtn = wrapper.find('a').first();
 
-  wrapper.find('a').first().simulate('click');
+  name.simulate('change', { target: { name: 'name', value: 'David' } });
+  title.simulate('change', { target: { name: 'title', value: 'Some Title' } });
+  content.simulate('change', { target: { name: 'content', value: 'Bla Bla Bla' } });
+
+  submitBtn.simulate('click');
   t.truthy(addPost.calledOnce);
   t.truthy(addPost.calledWith('David', 'Some Title', 'Bla Bla Bla'));
 });

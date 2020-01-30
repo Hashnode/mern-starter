@@ -32,3 +32,32 @@ body {
 	font-family: 'Lato', sans-serif;
 	font-size: 16px;
 }
+
+:global(.btn) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto 0;
+  background: #41c3fa;
+  border: 1px solid #fafafa;
+  outline: none;
+  border-radius: 12px;
+  max-width: 240px;
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  color: #fff;
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15), inset 1px 2px rgba(255, 255, 255, 0.3);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+:global(.btn:hover:not(:disabled)) {
+  background: #548bfa;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), inset 0 0 transparent;
+}
+
+:global(.btn:disabled) {
+  background: #6bdcfa;
+  box-shadow: none;
+}
