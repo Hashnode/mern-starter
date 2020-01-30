@@ -1,3 +1,11 @@
 .container {
+  padding: 50px;
+  margin: 0 -15px;
+  position: relative;
+}
 
+.container.inline {
+  background: transparent;
+  padding-bottom: 15px;
+  padding-top: 25px;
 }

@@ -6,79 +6,85 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 // Import styles
 import styles from './CommentFormWidget.css';
 
+// Import components
+import CommentForm from '../components/CommentForm/CommentForm';
+
 // Import actions
 import { addCommentRequest, deleteCommentRequest, editCommentRequest } from '../CommentsActions';
-import { toggleCommentForm } from '../../App/AppActions';
-
-// import selectors
-import { selectIsCommentFormShown } from '../../App/AppReducer';
-
+import { withRouter } from 'react-router';
 
 class CommentFormWidget extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      editMode: !!props.initialValues,
       isFormShown: false,
+      comment: props.initialValues,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.initialValues && this.props.initialValues &&
+      (prevProps.initialValues.author !== this.props.initialValues.author ||
+        prevProps.initialValues.content !== this.props.initialValues.content)
+    ) {
+      this.refreshComment();
+    }
   }
 
   showForm = () => this.setState({ isFormShown: true });
 
-  closeForm = () => this.setState({ isFormShown: false });
+  closeForm = () => this.setState(
+    { isFormShown: false },
+    () => {
+      if (this.props.onClose) {
+        this.props.onClose();
+      }
+    },
+  );
 
-  renderForm = () => {
-    const { intl } = this.context;
-    const { initialValues, onChange, onSubmit } = this.props;
-    const { author, content } = initialValues || {};
+  refreshComment = () => this.setState({ comment: this.props.initialValues });
 
-    return (
-      <form onSubmit={onSubmit} className={styles.container}>
-        <label htmlFor="author">
-          <FormattedMessage id="commentForm.author.label" />
-        </label>
-        <input
-          type="text"
-          name="author"
-          value={author || ''}
-          placeholder={intl.formatMessage({ id: 'commentForm.author.placeholder' })}
-          onChange={e => onChange(e)}
-        />
-        <label htmlFor="content">
-          <FormattedMessage id="commentForm.content.label" />
-        </label>
-        <textarea
-          name="content"
-          value={content || ''}
-          placeholder={intl.formatMessage({ id: 'commentForm.content.placeholder' })}
-          onChange={e => onChange(e)}
-        />
-        <button type="submit">
-          <FormattedMessage id="submit" />
-        </button>
-      </form>
-    );
+  handleFormSubmit = (formData) => {
+    const { editComment, addComment, submitCallback, params } = this.props;
+    const { cuid: postId } = params;
+    if (!postId) {
+      formData.reject('PostId should be specified.');
+    }
+
+    const payload = { ...formData, postId };
+
+    if (submitCallback) {
+      submitCallback();
+    }
+    this.closeForm();
+    if (this.state.editMode) {
+      editComment(payload);
+    } else if (params.cuid) {
+      addComment(payload);
+    } else {
+      formData.reject('Something went wrong during form submit.');
+    }
   };
 
   render() {
-    return this.state.isFormShown ? (
-      <div className={styles['comment-form-wrapper']}>
-        <span className={styles['close-btn']} onClick={this.closeForm} />
-        {this.renderForm()}
+    const initialValues = this.state.comment || { author: '', content: '' };
+    return this.props.inline || this.state.isFormShown ? (
+      <div className={`${styles.container} ${this.props.inline ? styles.inline : ''}`}>
+        <CommentForm
+          inline={this.props.inline}
+          onClose={this.closeForm}
+          initialValues={initialValues}
+          onSubmit={this.handleFormSubmit}
+        />
       </div>
-    ) : <button className={styles['add-comment']} onClick={this.showForm}>
-      Add comment
+    ) : <button className={`btn ${styles['show-btn']}`} onClick={this.showForm}>
+      <FormattedMessage id={this.state.editMode ? 'editComment' : 'addComment'} />
     </button>;
   }
 }
-
-CommentFormWidget.defaultProps = {
-  initialValues: {
-    author: '',
-    content: '',
-    commentId: '',
-  },
-};
 
 CommentFormWidget.propTypes = {
   initialValues: PropTypes.shape({
@@ -86,27 +92,21 @@ CommentFormWidget.propTypes = {
     content: PropTypes.string,
     commentId: PropTypes.string,
   }),
-  onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  toggleForm: PropTypes.func,
+  onClose: PropTypes.func,
+  inline: PropTypes.bool,
   addComment: PropTypes.func,
   editComment: PropTypes.func,
   deleteComment: PropTypes.func,
+  submitCallback: PropTypes.func,
+  params: PropTypes.object,
 };
 
-CommentFormWidget.contextTypes = {
-  intl: PropTypes.object,
-};
-
-const mapStateToProps = state => ({
-  showCommentForm: selectIsCommentFormShown(state),
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-  toggleForm: () => dispatch(toggleCommentForm()),
   addComment: (comment) => dispatch(addCommentRequest(comment)),
   editComment: (comment) => dispatch(editCommentRequest(comment)),
   deleteComment: (commentId) => dispatch(deleteCommentRequest(commentId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(CommentFormWidget));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(withRouter(CommentFormWidget)));

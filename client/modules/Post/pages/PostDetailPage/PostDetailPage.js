@@ -9,14 +9,16 @@ import styles from '../../components/PostListItem/PostListItem.css';
 
 // Import Components
 import CommentList from '../../../Comment/CommentList/CommentList';
+import CommentFormWidget from '../../../Comment/CommentFormWidget/CommentFormWidget';
+
 // Import Actions
 import { fetchPost } from '../../PostActions';
+import { deleteCommentRequest } from '../../../Comment/CommentsActions';
 
 // Import Selectors
 import { getPost } from '../../PostReducer';
-import CommentFormWidget from '../../../Comment/CommentFormWidget/CommentFormWidget';
 
-export function PostDetailPage({ post }) {
+export function PostDetailPage({ post, deleteComment }) {
   return (
     <div>
       <Helmet title={post.title} />
@@ -28,7 +30,7 @@ export function PostDetailPage({ post }) {
         <p className={styles['post-desc']}>{post.content}</p>
       </div>
       <CommentFormWidget />
-      <CommentList comments={post.comments} />
+      <CommentList comments={post.comments} deleteComment={deleteComment} />
     </div>
   );
 }
@@ -45,6 +47,12 @@ function mapStateToProps(state, props) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    deleteComment: (commentId) => dispatch(deleteCommentRequest(commentId)),
+  };
+}
+
 PostDetailPage.propTypes = {
   post: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -58,6 +66,7 @@ PostDetailPage.propTypes = {
       content: PropTypes.string,
     })),
   }).isRequired,
+  deleteComment: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(PostDetailPage);
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetailPage);

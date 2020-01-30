@@ -14,8 +14,22 @@ export default {
     submit: 'Soumettre',
     addComent: 'Ajouter un commentaire',
     editComment: 'Modifier le commentaire',
-    replyComment: 'Répondre',
     deleteComment: 'Supprimer le commentaire',
+    emptyComments: 'No comments added yet. Let\'s write something awesome!',
+    makeComment: `{count, plural,
+    	  =0 {Add first comment}
+    	  other {See all}
+    	}`,
+    commentForm: {
+      author: {
+        label: 'Comment Author',
+        placeholder: 'Write your name here',
+      },
+      content: {
+        label: 'Comment body',
+        placeholder: 'Place your thoughts here',
+      },
+    },
     comment: `user {name} {value, plural,
     	  =0 {does not have any comments}
     	  =1 {has # comment}

@@ -12,7 +12,7 @@ router.route('/comments/:postId').get(CommentController.getComments);
 router.route('/comments/:postId').post(CommentController.addComment);
 
 // Edit a comment
-router.route('/comments/:cuid').patch(CommentController.editComment);
+router.route('/comments/:cuid').put(CommentController.editComment);
 
 // Delete a comment by cuid
 router.route('/comments/:cuid').delete(CommentController.deleteComment);

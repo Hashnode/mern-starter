@@ -58,5 +58,22 @@
 }
 
 .post-comments {
+  margin-bottom: 15px;
+}
 
+.post-comments a {
+  color: #a1a1a1;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin-left: 8px;
+}
+
+.post-comments a:hover {
+  color: #777;
+  text-decoration: underline;
 }

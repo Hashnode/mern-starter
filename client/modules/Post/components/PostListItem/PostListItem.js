@@ -24,6 +24,9 @@ function PostListItem(props) {
             value: props.post.comments ? props.post.comments.length : 0,
           }}
         />
+        <Link to={`/posts/${props.post.slug}-${props.post.cuid}`} >
+          <FormattedMessage id="makeComment" values={{ count: props.post.comments ? props.post.comments.length : 0 }} />
+        </Link>
       </p>
       <p className={styles['post-action']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deletePost" /></a></p>
       <hr className={styles.divider} />
@@ -38,7 +41,7 @@ PostListItem.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
-    comments: PropTypes.array.isRequired,
+    comments: PropTypes.array,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
 };

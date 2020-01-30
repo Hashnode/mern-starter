@@ -25,13 +25,17 @@ export function addCommentFailure(error) {
   };
 }
 
-export function addCommentRequest(comment) {
+export function addCommentRequest({ comment, resolve, reject, postId }) {
   return (dispatch) => {
-    return callApi('comments', 'post', {
-      ...comment,
-    })
-      .then(res => dispatch(addCommentSuccess(res.comment)))
-      .catch(error => dispatch(addCommentFailure(error)));
+    return callApi(`comments/${postId}`, 'post', { comment })
+      .then(res => {
+        if (resolve) resolve();
+        dispatch(addCommentSuccess(res.comment));
+      })
+      .catch(error => {
+        if (reject) reject(error);
+        dispatch(addCommentFailure(error));
+      });
   };
 }
 
@@ -49,13 +53,17 @@ export function editCommentFailure(error) {
   };
 }
 
-export function editCommentRequest(comment) {
+export function editCommentRequest({ comment, resolve, reject }) {
   return (dispatch) => {
-    return callApi('comments', 'patch', {
-      ...comment,
-    })
-      .then(res => dispatch(editCommentSuccess(res.comment)))
-      .catch(error => dispatch(editCommentFailure(error)));
+    return callApi(`comments/${comment.cuid}`, 'put', { comment })
+      .then(res => {
+        if (resolve) resolve();
+        dispatch(editCommentSuccess(res.comment));
+      })
+      .catch(error => {
+        if (reject) reject(error);
+        dispatch(editCommentFailure(error));
+      });
   };
 }
 
@@ -74,10 +82,10 @@ export function deleteCommentFailure(error) {
   };
 }
 
-export function deleteCommentRequest(commentId) {
+export function deleteCommentRequest(comment) {
   return (dispatch) => {
-    return callApi(`comments/${commentId}`, 'delete')
-      .then(res => dispatch(deleteCommentSuccess(res.comment)))
+    return callApi(`comments/${comment.cuid}`, 'delete')
+      .then(() => dispatch(deleteCommentSuccess(comment)))
       .catch(error => dispatch(deleteCommentFailure(error)));
   };
 }

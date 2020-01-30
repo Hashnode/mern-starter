@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import PostListItem from '../../components/PostListItem/PostListItem';
 import { mountWithIntl, shallowWithIntl } from '../../../../util/react-intl-test-helper';
 
-const post = { name: 'Prashant', title: 'Hello Mern', slug: 'hello-mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'" };
+const post = { name: 'Prashant', title: 'Hello Mern', slug: 'hello-mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'", comments: [] };
 const props = {
   post,
   onDelete: () => {},

@@ -1,0 +1,86 @@
+.container {
+  position: relative;
+  padding: 14px;
+  outline: none;
+  background: #faf6c0;
+  border-radius: 20px;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.07);
+}
+
+.container:not(:first-of-type) {
+  margin-top: 30px;
+}
+
+.comment {
+  padding: 20px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+
+.content {
+  font-size: 16px;
+}
+
+.content:before,
+.content:after {
+  font-size: 26px;
+}
+
+.content:before {
+  content: "“";
+}
+
+.content:after {
+  content: "”";
+}
+
+.author {
+  margin-top: 15px;
+  align-self: flex-end;
+  font-style: italic;
+  font-size: 14px;
+  color: #545454;
+}
+
+.author:before {
+  content: '—';
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.actions {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+
+.container:hover .actions,
+.container:focus .actions {
+  opacity: 1;
+}
+
+.action-btn {
+  color: #a1a1a1;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
+}
+
+.action-btn:not(:first-of-type) {
+  margin-left: 8px;
+}
+
+.action-btn:hover {
+  color: #777;
+  text-decoration: underline;
+}

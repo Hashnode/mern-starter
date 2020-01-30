@@ -1,7 +1,14 @@
 .container {
-
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin: 25px auto 0;
+  max-width: 600px;
+  width: 100%;
 }
 
-.actions {
-
+.no-comments {
+  margin-top: 20px;
+  text-align: center;
 }

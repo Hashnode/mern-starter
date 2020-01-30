@@ -45,7 +45,7 @@ export function getComments(req, res) {
  * @returns void
  */
 export function addComment(req, res) {
-  if (!req.body.comment.author || !req.body.comment.content) {
+  if (!req.body.comment.author || !req.body.comment.content || !req.params.postId) {
     res.status(403).end();
   }
 
@@ -61,11 +61,11 @@ export function addComment(req, res) {
 
     newComment.cuid = cuid();
 
-    newComment.save((error, savedComment) => {
+    newComment.save((error, comment) => {
       if (error) {
         res.status(500).send(error);
       }
-      res.status(201).json(savedComment);
+      res.status(201).json({ comment });
     });
   });
 }
@@ -81,15 +81,22 @@ export function editComment(req, res) {
     res.status(403).end();
   }
 
-  Comment.updateOne({ cuid: req.params.cuid }, {
-    author: sanitizeHtml(req.body.comment.author),
-    content: sanitizeHtml(req.body.comment.content),
-  }).exec((err, updated) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ comment: updated });
-  });
+  // const fieldsToUpdate = {
+  //   author: sanitizeHtml(req.body.comment.author),
+  //   content: sanitizeHtml(req.body.comment.content),
+  // };
+
+  Comment
+    .findOne({ cuid: req.params.cuid })
+    .exec((err, comment) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+      comment.author = sanitizeHtml(req.body.comment.author); // eslint-disable-line no-param-reassign
+      comment.content = sanitizeHtml(req.body.comment.content); // eslint-disable-line no-param-reassign
+      comment.save();
+      res.json({ comment });
+    });
 }
 
 /**

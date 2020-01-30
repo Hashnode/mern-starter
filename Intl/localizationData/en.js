@@ -14,9 +14,12 @@ export default {
     submit: 'Submit',
     addComment: 'Add comment',
     editComment: 'Edit comment',
-    replyComment: 'Reply',
     deleteComment: 'Delete comment',
     emptyComments: 'No comments added yet. Let\'s write something awesome!',
+    makeComment: `{count, plural,
+    	  =0 {Add first comment}
+    	  other {See all}
+    	}`,
     commentForm: {
       author: {
         label: 'Comment Author',
