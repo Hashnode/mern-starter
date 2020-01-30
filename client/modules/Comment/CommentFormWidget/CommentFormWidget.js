@@ -13,7 +13,7 @@ import CommentForm from '../components/CommentForm/CommentForm';
 import { addCommentRequest, deleteCommentRequest, editCommentRequest } from '../CommentsActions';
 import { withRouter } from 'react-router';
 
-class CommentFormWidget extends React.Component {
+export class CommentFormWidget extends React.Component {
   constructor(props) {
     super(props);
 
@@ -52,21 +52,20 @@ class CommentFormWidget extends React.Component {
     const { cuid: postId } = params;
     if (!postId) {
       formData.reject('PostId should be specified.');
+      return;
     }
 
     const payload = { ...formData, postId };
 
+    if (this.state.editMode) {
+      editComment(payload);
+    } else {
+      addComment(payload);
+    }
     if (submitCallback) {
       submitCallback();
     }
     this.closeForm();
-    if (this.state.editMode) {
-      editComment(payload);
-    } else if (params.cuid) {
-      addComment(payload);
-    } else {
-      formData.reject('Something went wrong during form submit.');
-    }
   };
 
   render() {
@@ -96,7 +95,6 @@ CommentFormWidget.propTypes = {
   inline: PropTypes.bool,
   addComment: PropTypes.func,
   editComment: PropTypes.func,
-  deleteComment: PropTypes.func,
   submitCallback: PropTypes.func,
   params: PropTypes.object,
 };
