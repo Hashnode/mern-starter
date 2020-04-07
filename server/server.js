@@ -49,6 +49,9 @@ import posts from './routes/post.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 
+// NEW: Import module for emails
+import emails from './routes/email.routes';
+
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
 
@@ -71,6 +74,9 @@ app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist/client')));
 app.use('/api', posts);
+
+// NEW: Apply body Parser and server public assets and routes for emails
+app.use('/api', emails);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
