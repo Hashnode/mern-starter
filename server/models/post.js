@@ -8,6 +8,7 @@ const postSchema = new Schema({
   slug: { type: 'String', required: true },
   cuid: { type: 'String', required: true },
   dateAdded: { type: 'Date', default: Date.now, required: true },
-});
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment', default: [], required: true }],
+}, { usePushEach: true });
 
 export default mongoose.model('Post', postSchema);
