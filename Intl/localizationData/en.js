@@ -12,6 +12,7 @@ export default {
     postTitle: 'Post Title',
     postContent: 'Post Content',
     submit: 'Submit',
+    cancel: 'Cancel',
     comment: `user {name} {value, plural,
     	  =0 {does not have any comments}
     	  =1 {has # comment}
@@ -27,5 +28,8 @@ export default {
     	  =1 {has # comment}
     	  other {has # comments}
     	} as of {date}`,
+    editComment: 'Edit comment',
+    deleteComment: 'Delete comment',
+    addComment: 'Add comment',
   },
 };
