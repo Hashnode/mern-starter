@@ -4,6 +4,9 @@ import callApi from '../../util/apiCaller';
 export const ADD_POST = 'ADD_POST';
 export const ADD_POSTS = 'ADD_POSTS';
 export const DELETE_POST = 'DELETE_POST';
+export const ADD_COMMENT_TO_POST = 'ADD_COMMENT_TO_POST';
+export const EDIT_POST_COMMENT = 'EDIT_POST_COMMENT';
+export const DELETE_COMMENT_FROM_POST = 'DELETE_COMMENT_FROM_POST';
 
 // Export Actions
 export function addPost(post) {
