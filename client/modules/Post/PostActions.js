@@ -16,6 +16,30 @@ export function addPost(post) {
   };
 }
 
+export function addPostComment(comment, postId) {
+  return {
+    type: ADD_COMMENT_TO_POST,
+    postId,
+    comment,
+  };
+}
+
+export function editPostComment(comment, postId) {
+  return {
+    type: EDIT_POST_COMMENT,
+    postId,
+    comment,
+  };
+}
+
+export function deletePostComment(commentId, postId) {
+  return {
+    type: DELETE_COMMENT_FROM_POST,
+    postId,
+    commentId,
+  };
+}
+
 export function addPostRequest(post) {
   return (dispatch) => {
     return callApi('posts', 'post', {
@@ -25,6 +49,29 @@ export function addPostRequest(post) {
         content: post.content,
       },
     }).then(res => dispatch(addPost(res.post)));
+  };
+}
+
+export function addCommentToPostRequest(comment, postId) {
+  return (dispatch) => {
+    return callApi(`posts/${postId}/comment`, 'post', {
+      comment,
+    }).then(res => dispatch(addPostComment(res.comment, postId)));
+  };
+}
+
+export function editPostCommentRequest(comment, postId) {
+  return (dispatch) => {
+    return callApi(`/posts/${postId}/comment/${comment.cuid}`, 'put', {
+      comment,
+    }).then(res => dispatch(editPostComment(res.comment, postId)));
+  };
+}
+
+export function deletePostCommentRequest(commentId, postId) {
+  return (dispatch) => {
+    return callApi(`posts/${postId}/comment/${commentId}`, 'delete')
+      .then(() => dispatch(deletePostComment(commentId, postId)));
   };
 }
 
