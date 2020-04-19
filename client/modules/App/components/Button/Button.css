@@ -1,0 +1,20 @@
+.button {
+  text-decoration: none;
+  font-size: 14px;
+  font-style: italic;
+  background: none;
+  margin: 10px;
+  border: none;
+}
+
+.default {
+  color: #555;
+}
+
+.primary {
+  color: #03A9F4;
+}
+
+.button:hover {
+  color: #EF5350;
+}
