@@ -45,6 +45,33 @@ export function addPost(req, res) {
     res.json({ post: saved });
   });
 }
+export function addCommit(req,res){
+  if (!req.params.cuid || !req.body.userName ||!req.body.text) {
+    res.status(403).end();
+  }
+  const {cuid } = req.body
+
+
+  const commit = {
+    userName:req.body.userName,
+    text:req.body.text,
+}
+bulkUpdateOps.push({
+  updateOne: {
+    filter: { cuid },
+    update: { $set: { commit } },
+  }
+})
+
+
+  Post.bulkWrite(bulkUpdateOps).exec((err, post)=>{
+    if(err){
+      res.status(500).send(err);
+    }
+    res.status(200).end();
+  })
+}
+
 
 /**
  * Get a single post
