@@ -45,21 +45,22 @@ export function addPost(req, res) {
     res.json({ post: saved });
   });
 }
-export function addCommit(req,res){
+export function addComment(req,res){
   if (!req.params.cuid || !req.body.userName ||!req.body.text) {
     res.status(403).end();
   }
   const {cuid } = req.body
 
 
-  const commit = {
+  const comment = {
+    _id:new Date(),
     userName:req.body.userName,
     text:req.body.text,
 }
 bulkUpdateOps.push({
   updateOne: {
     filter: { cuid },
-    update: { $set: { commit } },
+    update: { $set: { comment } },
   }
 })
 
@@ -71,7 +72,36 @@ bulkUpdateOps.push({
     res.status(200).end();
   })
 }
+export function editComment(req,res){
+  if (!req.params.cuid || !req.body.userName ||!req.body.text||!req.body._id) {
+    res.status(403).end();
+  }
+  const {cuid,_id} = req.body
+  const comment = {
+    _id:_id,
+    userName:req.body.userName,
+    text:req.body.text,
+}
+  Post.findOneAndUpdate({cuid,comment:{_id}},{comment},{upsert:true}).exec((err)=>{
+    if(err){
+      res.status(500).send(err);
+    }
+    res.status(200).end();
+  })
+}
+export function deleteComment(req,res){
+  if(!req.params.cuid||!req.body._id){
+    res.status(403).end();
+  }
+  const {cuid,_id} = req.body
+  Post.deleteOne({cuid,comment:{_id}}).exec((err)=>{
+    if(err){
+      res.status(500).send(err);
+    }
+    res.status(200).end();
+  })
 
+}
 
 /**
  * Get a single post
