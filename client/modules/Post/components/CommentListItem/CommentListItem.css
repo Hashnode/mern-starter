@@ -1,0 +1,39 @@
+.comment-item-container {
+  margin: 1rem 0 1rem 0;
+  background-color: whitesmoke;
+  padding: 1rem;
+  border-radius: 10px;
+  position: relative;
+}
+.author-name {
+  margin: 0.5rem 0 0 0.5rem;
+  font-family: 'Lato', sans-serif;
+}
+.comment-content {
+  margin: 0 0 0 0.5rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: #424242;
+}
+.comment-delete-button {
+  position: absolute;
+  right: 0;
+  margin: 0.2rem 1rem 0 0;
+  top: 0;
+  font-size: 26px;
+  cursor: pointer;
+}
+.comment-delete-button:hover {
+  color: red;
+}
+.comment-edit-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem 2.5rem 0 0;
+  font-size: 18px;
+  cursor: pointer;
+}
+.comment-edit-button:hover {
+  color: green;
+}

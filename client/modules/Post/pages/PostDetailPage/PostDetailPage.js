@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
-import AddCommentWidget from '../../components/AddCommentWidget/AddCommentWidget';
 
+// Import Components
+import AddCommentWidget from '../../components/AddCommentWidget/AddCommentWidget';
 
 // Import Style
 import styles from '../../components/PostListItem/PostListItem.css';
