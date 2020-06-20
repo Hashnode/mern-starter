@@ -1,0 +1,13 @@
+.wrapper-block {
+  margin-top: 10px;
+}
+
+.open-comments {
+  background-color: #03a9f4;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+}
+

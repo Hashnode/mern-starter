@@ -1,0 +1,33 @@
+.add-comment-form {
+  margin-top: 10px;
+  background-color: #bec2bf;
+  border: 1px solid #000;
+  padding: 10px;
+}
+
+.comment-filed {
+  display: block;
+  width: 100%;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+.name-field {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.btn-add-comment {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #000;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-add-comment:disabled{
+  opacity: 0.5;
+}

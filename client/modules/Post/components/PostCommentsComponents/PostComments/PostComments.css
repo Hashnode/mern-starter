@@ -1,0 +1,9 @@
+.collapse-comments {
+  background-color: #03a9f4;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 20px;
+}
