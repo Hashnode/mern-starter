@@ -1,0 +1,35 @@
+.comment-block {
+  border: 1px solid #000;
+  padding: 20px 10px;
+  margin: 10px 0;
+}
+.comment-text {
+  margin-bottom: 10px;
+  background-color: #edf0ee;
+  border-radius: 10px;
+  padding: 5px;
+  line-height: 1.5;
+}
+.comment-data-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-data {
+  display: inline-block;
+}
+
+.comment-btns-block {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+.comment-btn {
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #404241;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
