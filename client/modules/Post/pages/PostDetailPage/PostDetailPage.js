@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import AddCommentWidget from '../../components/AddCommentWidget/AddCommentWidget';
+
 
 // Import Style
 import styles from '../../components/PostListItem/PostListItem.css';
@@ -21,6 +23,7 @@ export function PostDetailPage(props) {
         <h3 className={styles['post-title']}>{props.post.title}</h3>
         <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
         <p className={styles['post-desc']}>{props.post.content}</p>
+        <AddCommentWidget />
       </div>
     </div>
   );
@@ -45,7 +48,9 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    intl: intlShape.isRequired,
   }).isRequired,
 };
 
-export default connect(mapStateToProps)(PostDetailPage);
+const postDetailWithInjectionIntl = injectIntl(PostDetailPage);
+export default connect(mapStateToProps)(postDetailWithInjectionIntl);
