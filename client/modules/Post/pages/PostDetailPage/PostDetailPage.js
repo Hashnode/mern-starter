@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 // Import Components
 import AddCommentWidget from '../../components/AddCommentWidget/AddCommentWidget';
@@ -49,9 +49,7 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
-    intl: intlShape.isRequired,
   }).isRequired,
 };
 
-const postDetailWithInjectionIntl = injectIntl(PostDetailPage);
-export default connect(mapStateToProps)(postDetailWithInjectionIntl);
+export default connect(mapStateToProps)(PostDetailPage);

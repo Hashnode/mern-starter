@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 // Import Components
 import CommentListItem from './CommentListItem/CommentListItem';
@@ -25,15 +25,15 @@ const CommentList = () => {
   );
 };
 
-CommentList.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
-  })).isRequired,
-  handleDeletePost: PropTypes.func.isRequired,
-};
+// CommentList.propTypes = {
+//   posts: PropTypes.arrayOf(PropTypes.shape({
+//     name: PropTypes.string.isRequired,
+//     title: PropTypes.string.isRequired,
+//     content: PropTypes.string.isRequired,
+//     slug: PropTypes.string.isRequired,
+//     cuid: PropTypes.string.isRequired,
+//   })).isRequired,
+//   handleDeletePost: PropTypes.func.isRequired,
+// };
 
 export default CommentList;
