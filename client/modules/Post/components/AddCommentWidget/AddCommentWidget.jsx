@@ -7,10 +7,10 @@ import styles from './AddCommentWidget.css';
 
 const AddCommentWidget = (props) => {
   return (
-    <div>
-      <h4><FormattedMessage id="addComment" /></h4>
-      <input placeholder={props.intl.messages.authorName}></input>
-      <textarea placeholder={props.intl.messages.commentContent}></textarea>
+    <div className={styles['comment-form']}>
+      <h4 className={styles['comment-form-title']}><FormattedMessage id="addComment" /></h4>
+      <input placeholder={props.intl.messages.authorName} className={styles['comment-form-field']}></input>
+      <textarea placeholder={props.intl.messages.commentContent} className={styles['comment-form-field']}></textarea>
       <a className={styles['comment-submit-button']} href="#"><FormattedMessage id="submit" /></a>
     </div>
   );
