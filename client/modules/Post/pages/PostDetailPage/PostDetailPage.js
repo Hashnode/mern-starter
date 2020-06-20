@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 
 // Import Components
-import AddCommentWidget from '../../components/AddCommentWidget/AddCommentWidget';
+import AddCommentWidget from '../../../Comment/AddCommentWidget/AddCommentWidget';
 
 // Import Style
 import styles from '../../components/PostListItem/PostListItem.css';

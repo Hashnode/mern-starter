@@ -4,6 +4,8 @@ export default {
     siteTitle: 'MERN Starter Blog',
     addPost: 'Add Post',
     addComment: 'Add comment',
+    singleComment: 'Comment',
+    confirmDeleteComment: 'Are you sure you want to delete this comment?',
     switchLanguage: 'Switch Language',
     twitterMessage: 'We are on Twitter',
     by: 'By',

@@ -9,6 +9,7 @@
   background: #03A9F4;
   text-decoration: none;
   border-radius: 4px;
+  cursor: pointer;
 }
 .comment-form-title {
   font-size: 16px;
