@@ -1,0 +1,16 @@
+.comments {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 2px;
+}
+
+.comments_header {
+  font-size: 42px;
+  font-weight: 400;
+  color: #454545;
+  margin-bottom: 16px;
+}
+
+.comments_body {
+
+}

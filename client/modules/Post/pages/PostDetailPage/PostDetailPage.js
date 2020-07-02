@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 
+import Comments from '../../components/CommentList/CommentList';
+
 // Import Style
 import styles from '../../components/PostListItem/PostListItem.css';
 
@@ -22,6 +24,7 @@ export function PostDetailPage(props) {
         <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
         <p className={styles['post-desc']}>{props.post.content}</p>
       </div>
+      <Comments cuid={props.params.cuid} />
     </div>
   );
 }
@@ -46,6 +49,7 @@ PostDetailPage.propTypes = {
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   }).isRequired,
+  params: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps)(PostDetailPage);
