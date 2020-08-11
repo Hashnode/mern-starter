@@ -16,6 +16,21 @@
   color: #616161;
 }
 
+.post-main-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-create-button {
+  height: fit-content;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #FFF;
+  background: #03A9F4;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
 .author-name{
   font-size: 16px;
   margin-bottom: 16px;
@@ -28,6 +43,11 @@
   margin-bottom: 8px;
 }
 
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
 .post-action a{
   color: #555;
   text-decoration: none;
@@ -36,6 +56,10 @@
 }
 
 .post-action a:hover{
+  color: #03A9F4;
+}
+
+.post-delete a:hover{
   color: #EF5350;
 }
 

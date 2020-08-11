@@ -13,6 +13,9 @@ function PostList(props) {
             post={post}
             key={post.cuid}
             onDelete={() => props.handleDeletePost(post.cuid)}
+            handleAddComment={(authorName, content, id) => props.handleAddComment(authorName, content, id)}
+            handleFetchComments={id => props.handleFetchComments(id)}
+            comments={props.comments.filter(el => el.postId === post.cuid)}
           />
         ))
       }
@@ -28,7 +31,13 @@ PostList.propTypes = {
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   })).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    createdBy: PropTypes.string.isRequired,
+  })),
   handleDeletePost: PropTypes.func.isRequired,
+  handleAddComment: PropTypes.func.isRequired,
+  handleFetchComments: PropTypes.func.isRequired,
 };
 
 export default PostList;
