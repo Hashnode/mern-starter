@@ -44,39 +44,40 @@ export const addComment = (req, res) => {
 };
 
 /**
- * Get a single comment
- * @param req
- * @param res
- * @returns void
- */
-export const getComment = (req, res) => {
-  Comment.findOne({ postId: req.params.id })
-    .exec((err, comment) => {
-      if (err) {
-        res.status(500)
-          .send(err);
-      }
-      res.json({ comment });
-    });
-};
-
-/**
  * Delete a post
  * @param req
  * @param res
  * @returns void
  */
 export function deleteComment(req, res) {
-  Comment.findOne({ postId: req.params.id })
+  Comment.findOne({ _id: req.params.id })
     .exec((err, comment) => {
       if (err || !comment) {
-        res.status(500)
-          .send(err);
+        res.status(500).send(err);
       }
 
       comment.remove(() => {
-        res.status(200)
-          .end();
+        res.status(200).end();
       });
+    });
+}
+
+/**
+ * Edit a post
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function editComment(req, res) {
+  if (!req.body.content) {
+    res.status(403).send();
+  }
+
+  Comment.updateOne({ _id: req.params.id }, { content: sanitizeHtml(req.body.content) })
+    .exec((err, comment) => {
+      if (err || !comment) {
+        res.status(500).send(err);
+      }
+      res.status(200).end();
     });
 }
