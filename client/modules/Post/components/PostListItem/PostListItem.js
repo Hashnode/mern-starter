@@ -10,18 +10,8 @@ import styles from './PostListItem.css';
 import CommentCreateWidget from '../../../Comment/components/CommentCreateWidget/CommentCreateWidget';
 
 const PostListItem = props => {
-  const [openedCommentId, openComments] = useState(null);
   const [isCommentAddingFormOpen, openCommentsForm] = useState(false);
-
-  const showComments = id => {
-    props.handleFetchComments(id);
-
-    if (openedCommentId === id) {
-      openComments(null);
-    } else {
-      openComments(id);
-    }
-  };
+  const currentComments = props.comments && props.comments.filter(el => el.postId === props.post.cuid);
 
   return (
     <div className={styles['single-post']}>
@@ -50,19 +40,27 @@ const PostListItem = props => {
           </a>
         </p>
         <p className={styles['post-action']}>
-          <a href="#" onClick={() => showComments(props.post.cuid)}>
-            <FormattedMessage id={props.post.cuid === openedCommentId ? 'hideComments' : 'showComments'} />
+          <a href="#" onClick={() => props.showComments(props.post.cuid)}>
+            <FormattedMessage id={props.isCommentsOpened ? 'hideComments' : 'showComments'} />
           </a>
         </p>
       </div>
       {
-        isCommentAddingFormOpen === true && <CommentCreateWidget
-          addComment={(authorName, content) => props.handleAddComment(authorName, content, props.post.cuid)}
-          closeForm={() => openCommentsForm(false)}
-        />
+        isCommentAddingFormOpen === true && (
+          <CommentCreateWidget
+            addComment={(authorName, content) => props.handleAddComment(authorName, content, props.post.cuid)}
+            closeForm={() => openCommentsForm(false)}
+          />
+        )
       }
       {
-        props.post.cuid === openedCommentId && <CommentsList comments={props.comments} />
+        props.isCommentsOpened && (
+          <CommentsList
+            comments={currentComments}
+            handleDeleteComment={id => props.handleDeleteComment(id)}
+            handleEditComment={(id, content) => props.handleEditComment(id, content)}
+          />
+        )
       }
       <hr className={styles.divider} />
     </div>
@@ -84,6 +82,10 @@ PostListItem.propTypes = {
   onDelete: PropTypes.func.isRequired,
   handleAddComment: PropTypes.func.isRequired,
   handleFetchComments: PropTypes.func.isRequired,
+  showComments: PropTypes.func.isRequired,
+  isCommentsOpened: PropTypes.bool.isRequired,
+  handleDeleteComment: PropTypes.func.isRequired,
+  handleEditComment: PropTypes.func.isRequired,
 };
 
 export default PostListItem;

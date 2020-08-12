@@ -8,7 +8,7 @@ import PostCreateWidget from '../../components/PostCreateWidget/PostCreateWidget
 
 // Import Actions
 import { addPostRequest, fetchPosts, deletePostRequest } from '../../PostActions';
-import { addCommentRequest, fetchComments } from '../../../Comment/CommentActions';
+import { addCommentRequest, deleteCommentRequest, editCommentRequest, fetchComments } from '../../../Comment/CommentActions';
 import { toggleAddPost } from '../../../App/AppActions';
 
 // Import Selectors
@@ -39,6 +39,14 @@ class PostListPage extends Component {
     this.props.dispatch(addCommentRequest({ createdBy: authorName, content }, id));
   };
 
+  handleDeleteComment = id => {
+    this.props.dispatch(deleteCommentRequest(id));
+  };
+
+  handleEditComment = (id, content) => {
+    this.props.dispatch(editCommentRequest(id, content));
+  };
+
   render() {
     return (
       <div>
@@ -48,6 +56,8 @@ class PostListPage extends Component {
           posts={this.props.posts}
           handleAddComment={(authorName, content, id) => this.handleAddComment(authorName, content, id)}
           handleFetchComments={id => this.handleFetchComments(id)}
+          handleDeleteComment={id => this.handleDeleteComment(id)}
+          handleEditComment={(id, content) => this.handleEditComment(id, content)}
           comments={this.props.comments}
         />
       </div>

@@ -8,11 +8,12 @@ const CommentsList = props => {
   return (
     <div className="listView">
       {
-        props.comments.map(comment => (
+        props.comments && props.comments.map(comment => (
           <CommentListItem
             comment={comment}
-            key={comment.postId}
-            onDelete={() => {}}
+            key={comment._id}
+            onDelete={id => props.handleDeleteComment(id)}
+            handleEditComment={(id, content) => props.handleEditComment(id, content)}
           />
         ))
       }
@@ -24,7 +25,9 @@ CommentsList.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape({
     content: PropTypes.string.isRequired,
     createdBy: PropTypes.string.isRequired,
-  })).isRequired,
+  })),
+  handleDeleteComment: PropTypes.func.isRequired,
+  handleEditComment: PropTypes.func.isRequired,
 };
 
 export default CommentsList;
