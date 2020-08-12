@@ -8,6 +8,7 @@ import PostCreateWidget from '../../components/PostCreateWidget/PostCreateWidget
 
 // Import Actions
 import { addPostRequest, fetchPosts, deletePostRequest } from '../../PostActions';
+import { addCommentRequest, deleteCommentRequest, editCommentRequest, fetchComments } from '../../../Comment/CommentActions';
 import { toggleAddPost } from '../../../App/AppActions';
 
 // Import Selectors
@@ -30,11 +31,35 @@ class PostListPage extends Component {
     this.props.dispatch(addPostRequest({ name, title, content }));
   };
 
+  handleFetchComments = (id) => {
+    this.props.dispatch(fetchComments(id));
+  };
+
+  handleAddComment = (authorName, content, id) => {
+    this.props.dispatch(addCommentRequest({ createdBy: authorName, content }, id));
+  };
+
+  handleDeleteComment = id => {
+    this.props.dispatch(deleteCommentRequest(id));
+  };
+
+  handleEditComment = (id, content) => {
+    this.props.dispatch(editCommentRequest(id, content));
+  };
+
   render() {
     return (
       <div>
         <PostCreateWidget addPost={this.handleAddPost} showAddPost={this.props.showAddPost} />
-        <PostList handleDeletePost={this.handleDeletePost} posts={this.props.posts} />
+        <PostList
+          handleDeletePost={this.handleDeletePost}
+          posts={this.props.posts}
+          handleAddComment={(authorName, content, id) => this.handleAddComment(authorName, content, id)}
+          handleFetchComments={id => this.handleFetchComments(id)}
+          handleDeleteComment={id => this.handleDeleteComment(id)}
+          handleEditComment={(id, content) => this.handleEditComment(id, content)}
+          comments={this.props.comments}
+        />
       </div>
     );
   }
@@ -48,6 +73,7 @@ function mapStateToProps(state) {
   return {
     showAddPost: getShowAddPost(state),
     posts: getPosts(state),
+    comments: state.comments.comments,
   };
 }
 
@@ -56,6 +82,10 @@ PostListPage.propTypes = {
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
+  })).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    createdBy: PropTypes.string.isRequired,
   })).isRequired,
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,

@@ -1,0 +1,81 @@
+.single-comment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 20px 0;
+  padding: 10px 25px;
+  border-radius: 2px;
+  color: #757575;
+}
+
+.single-comment div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.comment-date {
+  font-size: 16px;
+}
+
+.author-name {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.form-field{
+  width: 100%;
+  min-height: 120px;
+  margin-bottom: 12px;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  line-height: normal;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  outline: none;
+  color: #212121;
+}
+
+.comment-button {
+  display: inline-block;
+  padding: 6px 10px;
+  font-size: 14px;
+  color: #FFF;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.comment-submit-button {
+  background: #03A9F4;
+}
+
+.comment-cancel-button {
+  background: #9a533c;
+}
+
+.comment-desc {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-action a{
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.comment-delete a:hover{
+  color: #EF5350;
+}
+
+.comment-edit a:hover{
+  color: #4db258;
+}
