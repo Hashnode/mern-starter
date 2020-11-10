@@ -7,11 +7,17 @@ export default {
     twitterMessage: 'We are on Twitter',
     by: 'By',
     deletePost: 'Delete Post',
+    deleteComment: 'Delete Comment',
+    addComment: 'Add Comment',
+    editComment: 'Edit Comment',
+    createComment: 'Create comment',
+    commentContent: 'Comment Content',
     createNewPost: 'Create new post',
     authorName: 'Author\'s Name',
     postTitle: 'Post Title',
     postContent: 'Post Content',
     submit: 'Submit',
+    cancel: 'Cancel',
     comment: `user {name} {value, plural,
     	  =0 {does not have any comments}
     	  =1 {has # comment}
