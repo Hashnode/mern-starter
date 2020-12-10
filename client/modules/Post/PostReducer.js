@@ -1,7 +1,7 @@
 import { ADD_COMMENT, ADD_COMMENTS, ADD_POST, ADD_POSTS, DELETE_COMMENT, DELETE_POST, EDIT_COMMENT } from './PostActions';
 
 // Initial State
-const initialState = { data: [], comments: []};
+const initialState = { data: [], comments: [] };
 
 const PostReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -35,12 +35,12 @@ const PostReducer = (state = initialState, action) => {
     case DELETE_COMMENT :
       return {
         ...state,
-        comments: state.comments.filter(comment => comment.cuid !== action.cuid)
+        comments: state.comments.filter(comment => comment.cuid !== action.cuid),
       };
     case EDIT_COMMENT :
       return {
         ...state,
-        comments: state.comments.map((comment) => (comment.cuid === action.comment.cuid ? action.comment : comment))
+        comments: state.comments.map((comment) => (comment.cuid === action.comment.cuid ? action.comment : comment)),
       };
     default:
       return state;

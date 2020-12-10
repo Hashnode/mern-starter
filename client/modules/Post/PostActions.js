@@ -31,7 +31,7 @@ export function addPostRequest(post) {
 export function addComment(comment) {
   return {
     type: ADD_COMMENT,
-    comment
+    comment,
   };
 }
 
@@ -41,8 +41,8 @@ export function addCommentRequest(comment) {
       comment: {
         name: comment.name,
         content: comment.content,
-        postId: comment.postId
-      }
+        postId: comment.postId,
+      },
     }).then(res => dispatch(addComment(res.comment)));
   };
 }
@@ -65,7 +65,7 @@ export function fetchPosts() {
 export function addComments(comments) {
   return {
     type: ADD_COMMENTS,
-    comments
+    comments,
   };
 }
 export function fetchComments(postId) {
@@ -99,12 +99,12 @@ export function deletePostRequest(cuid) {
 export function deleteComment(cuid) {
   return {
     type: DELETE_COMMENT,
-    cuid
+    cuid,
   };
 }
 export function deleteCommentRequest(cuid) {
   return (dispatch) => {
-    return callApi(`comments/${cuid}`, 'delete').then(() => dispatch(deleteComment(cuid)))
+    return callApi(`comments/${cuid}`, 'delete').then(() => dispatch(deleteComment(cuid)));
   };
 }
 
@@ -121,7 +121,7 @@ export function editCommentRequest(comment) {
       comment: {
         name: comment.name,
         content: comment.content,
-      }
+      },
     }).then(res => dispatch(editComment(res.comment)));
   };
 }

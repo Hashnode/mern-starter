@@ -1,7 +1,6 @@
 import Comment from '../models/comment';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
-import {ObjectId} from "mongodb";
 /**
  * Get all comments
  * @param req
@@ -85,9 +84,6 @@ export async function editComment(req, res) {
     content: content || buffComment.content,
   };
 
-  try {
-    const comment = await Comment.findByIdAndUpdate( req.params.id, { $set: updated }, { useFindAndModify: false, new: true });
-    res.status(200).json({ comment });
-  } catch (e) {
-  }
+  const comment = await Comment.findByIdAndUpdate(req.params.id, { $set: updated }, { useFindAndModify: false, new: true });
+  res.status(200).json({ comment });
 }

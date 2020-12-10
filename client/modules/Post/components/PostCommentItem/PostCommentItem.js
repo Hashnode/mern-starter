@@ -25,11 +25,10 @@ PostCommentItem.propTypes = {
   name: PropTypes.string,
   content: PropTypes.string,
   deleteComment: PropTypes.func,
-  editComment: PropTypes.func
+  editComment: PropTypes.func,
 };
 
 PostCommentItem.defaultProps = {
   name: '',
   content: '',
-  deleteComment: () => {},
 };

@@ -8,7 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import styles from '../../components/PostListItem/PostListItem.css';
 
 // Import Actions
-import { addCommentRequest, fetchPost, fetchComments, deleteCommentRequest,editCommentRequest } from '../../PostActions';
+import { addCommentRequest, fetchPost, fetchComments, deleteCommentRequest, editCommentRequest } from '../../PostActions';
 
 // Import Selectors
 import { getPost } from '../../PostReducer';
