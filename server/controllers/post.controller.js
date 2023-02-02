@@ -24,9 +24,18 @@ export function getPosts(req, res) {
  * @param res
  * @returns void
  */
-export function addPost(req, res) {
+export async function addPost(req, res) {
   if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
     res.status(403).end();
+  }
+  
+  const Name = req.body.post.name;
+  const Title = req.bosy.post.title;
+  
+  const match = await Post.findOne({ Name, Title});
+  
+  if(match) {
+    return res.status(409).json("duplicate record");
   }
 
   const newPost = new Post(req.body.post);
